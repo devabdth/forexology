@@ -17,9 +17,9 @@ class Config:
 		self.db_url= environ['DB_URL'] if 'DB_URL' in environ.keys() else None
 
 		# Social Media Links
-		self.facebook= environ['FACEBOOK'] if 'FACEBOOK' in environ.keys() else 1010
-		self.linkedin= environ['LINKEDIN'] if 'LINKEDIN' in environ.keys() else 1010
-		self.twitter= environ['TWITTER'] if 'TWITTER' in environ.keys() else 1010
-		self.instagram= environ['INSTAGRAM'] if 'INSTAGRAM' in environ.keys() else 1010
-		self.tiktok= environ['TIKTOK'] if 'TIKTOK' in environ.keys() else 1010
-		self.vimeo= environ['VIMEO'] if 'VIMEO' in environ.keys() else 1010
+		self.facebook= environ['FACEBOOK'] if 'FACEBOOK' in environ.keys() else ''
+		self.linkedin= environ['LINKEDIN'] if 'LINKEDIN' in environ.keys() else ''
+		self.twitter= environ['TWITTER'] if 'TWITTER' in environ.keys() else ''
+		self.instagram= environ['INSTAGRAM'] if 'INSTAGRAM' in environ.keys() else ''
+		self.tiktok= environ['TIKTOK'] if 'TIKTOK' in environ.keys() else ''
+		self.vimeo= environ['VIMEO'] if 'VIMEO' in environ.keys() else ''

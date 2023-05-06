@@ -1,1 +1,30 @@
-{}
+{
+	"ADMIN_PUBLISH_ROUTE": "/webapp/adminstration/publish/",
+	"WEBSITE_INDEX_ROUTE": "/",
+	"WEBSITE_HOME_ROUTE": "/home/",
+	"WEBSITE_MAIN_PAGE_ROUTE": "/mainPage/",
+	"WEBSITE_MAIN_ROUTE": "/main/",
+	"WEBSITE_ARTICLES_ROUTE": "/articles/",
+	"WEBSITE_COURSES_ROUTE": "/courses/",
+	"WEBSITE_TOOLS_ROUTE": "/tools/",
+	"WEBSITE_SEARCH_ROUTE": "/search/",
+	"WEBSITE_LOGIN_ROUTE": "/login/",
+	"WEBSITE_SIGNUP_ROUTE": "/signup/",
+	"WEBSITE_JOIN_ROUTE": "/join/",
+	"WEBSITE_ASSETS_ARTICLES_COVERS_ROUTE": "/assets/articles/covers/<article_id>/",
+	"WEBSITE_ASSETS_CATEGORIES_COVERS_ROUTE": "/assets/categories/covers/<category_id>/",
+	"WEBSITE_ASSETS_WRITERS_BGREE_ROUTE": "/assets/writers/bgFree/<writer_id>/",
+	"WEBSITE_ASSETS_WRITERS_ROUTE": "/assets/writers/<writer_id>/",
+	"WEBSITE_ARTICLE_ROUTE": "/articles/<article_id>/",
+	"WEBSITE_READ_ROUTE": "/read/<article_id>/",
+	"WEBSITE_JOURNAL_ROUTE": "/journal/<article_id>/",
+	"WEBSITE_ARTICLEs_ROUTE": "/articles/",
+	"WEBSITE_ARTICLES_READ_ROUTE": "/read/",
+	"WEBSITE_ARTICLES_JOURNAL_ROUTE": "/journal/",
+	"WEBSITE_READTIME_ROUTE": "/articles/readtime/",
+	"WEBSITE_ARTICLE_PODCAST_ROUTE": "/assets/articles/podcast/<article_id>/",
+	"WEBSITE_SESSION_HANDLER": "/config/",
+	"WEBSITE_CATEGORIES_ROUTE": "/categories/",
+
+	"ADMIN_LAYOUT_ROUTE": "/webapp/adminstration/layout/"
+}

@@ -1,0 +1,45 @@
+{
+  "HOME_PAGE": {
+    "entrySectionAd": "HOME_SCREEN_AD",
+    "adSpaceOne": "HOME_SCREEN_AD_One",
+    "adSpaceTwo": "HOME_SCREEN_AD_Two",
+    "adSpaceThree": "HOME_SCREEN_AD_Three",
+    "adSpaceFour": "HOME_SCREEN_AD_Four",
+    "adSpaceFive": "HOME_SCREEN_AD_Five",
+    "adSpaceSix": "HOME_SCREEN_AD_Six",
+    "adSpaceSeven": "HOME_SCREEN_AD_Seven",
+    "adSpaceEight": "HOME_SCREEN_AD_Eight",
+    "adSpaceNine": "HOME_SCREEN_AD_Nine",
+    "adSpaceTen": "HOME_SCREEN_AD_Ten",
+    "adSpaceEleven": "HOME_SCREEN_AD_Eleven",
+    "adSpaceTwelve": "HOME_SCREEN_AD_Twelve",
+    "featuredJobs": [],
+    "featuredMissedArticles": [],
+    "featuredRandomArticles": [],
+    "featuredArticles": [
+      "dcsdfsdfgsdsd",
+      "dcsdfsdfgsdsd",
+      "dcsdfsdfgsdsd",
+      "dcsdfsdfgsdsd",
+      "dcsdfsdfgsdsd",
+      "dcsdfsdfgsdsd",
+      "dcsdfsdfgsdsd"
+    ],
+    "featuredWriters": [
+      "dfsdfsdfsdf0",
+      "dfsdfsdfsdf1",
+      "dfsdfsdfsdf2",
+      "dfsdfsdfsdf3",
+      "dfsdfsdfsdf4",
+      "dfsdfsdfsdf5"
+    ]
+  },
+  "CATEGORIES_PAGE": {
+    "featuredCategories": [
+      "cvsdfsdfsdfsdfsdf1",
+      "cvsdfsdfsdfsdfsdf2",
+      "cvsdfsdfsdfsdfsdf3",
+      "cvsdfsdfsdfsdfsdf4"
+    ]
+  }
+}

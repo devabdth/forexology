@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FOREXology - Layout</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='admin/layout/styles/computer.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='website/global/styles/computer.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='admin/layout/scripts/main.js')}}"></script>
+</head>
+<body>
+	<style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+	<section>
+		<div id="left-section"></div>
+		<div id="right-section">
+			<div id="fragments-controllers">
+				<div onclick="manageFragments(this);" class="fragment-controller active" id="home">Home Page</div>
+				<div onclick="manageFragments(this);" class="fragment-controller" id="login">Login Page</div>
+				<div onclick="manageFragments(this);" class="fragment-controller" id="signup">SignUp Page</div>
+				<div onclick="manageFragments(this);" class="fragment-controller" id="complete-signup">Complete SignUp Page</div>
+				<div onclick="manageFragments(this);" class="fragment-controller" id="tools">Tools Page</div>
+				<div onclick="manageFragments(this);" class="fragment-controller" id="articles">Articles Page</div>
+			</div>
+			<div id="fragments">
+				<div id="home" class="fragment active">
+					<div class="collabsable active" id="featured-articles">
+						<div onclick="toggleCollapsable(this)" class="title">
+							<h2 class="title">Featured Articles</h2>
+							<p class="subtitle">Edit, or Disable Featured Articles that appears in the Entry Section<br>Minimum Selection: (2), Maximum Selection: (6)</p>
+						</div>
+						<div class="content">
+							<div class="options">
+								<button class="shadow-button">Random</button>
+								{% if layout.hme_featured_article | length == 0 %}
+									<button class="shadow-button" style="color: red;">Disable</button>
+								{%else%}
+									<button class="shadow-button">Enable</button>
+								{%endif%}
+							</div>
+							<div id="articles">
+								{% for article in db_helper.articles.multiple_articles_by_ads(layout.home_featured_articles)[:6] %}
+								<div class="article-card" id="{{article.id}}">
+									<div class="cover" style="background-image: url('/assets/articles/covers/{{article.id}}');"></div>
+									<div class="content">
+										<h3>{{article.title['EN']}}</h3>
+										<p>{{article.short_brief['EN'][:100]}}</p>
+										<div class="options">
+											<button class="shadow-button">Replace</button>
+										</div>
+									</div>
+								</div>
+								{%endfor%}
+							</div>
+							<div class="options">
+								<button class="shadow-button" onclick="window.open('./', '_self');" style="color: red"> Cancel</button>
+								<button class="main-button">Submit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="login" class="fragment"></div>
+				<div id="signup" class="fragment"></div>
+				<div id="complete-signup" class="fragment"></div>
+				<div id="tools" class="fragment"></div>
+				<div id="articles" class="fragment"></div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

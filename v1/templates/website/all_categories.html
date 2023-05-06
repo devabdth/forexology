@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {{content.global_[lang]['platformTitle']}} -
+      {{content.tabs[lang]['categories']}}
+    </title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/categories/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/categories/styles/largeTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/categories/styles/smallTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/categories/styles/mobile.css')}}"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
+    />
+
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/categories/scripts/main.js')}}"
+    ></script>
+  </head>
+  <body>
+    <style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+    <header>
+      <div
+        onclick="window.open('{{consts.index_route}}', `_self`);"
+        id="logo"
+      ></div>
+      <div id="tabs">
+        <a href="{{consts.index_route}}" class="header-tab"
+          >{{content.tabs[lang]['home']}}</a
+        >
+        <a href="{{consts.articles_route}}" class="header-tab"
+          >{{content.tabs[lang]['articles']}}</a
+        >
+        <a href="{{consts.categories_route}}" class="header-tab active"
+          >{{content.tabs[lang]['categories']}}</a
+        >
+        <a href="{{consts.tools_route}}" class="header-tab"
+          >{{content.tabs[lang]['tools']}}</a
+        >
+      </div>
+      <div id="options">
+        <button onclick="openSearcDFhDialog();" class="main-icon-button">
+          <i onclick="openSearchDialog();" class="search"></i>
+        </button>
+        <button onclick="window.open('/login/', '_self');" class="main-button">
+          {{content.actions[lang]['login']}}
+        </button>
+        |
+        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
+          <i class="theme"></i>
+        </button>
+      </div>
+    </header>
+    <section id="entry">
+      <div id="overlay">
+        <h1>{{content.global_[lang]['discoverCategories'] | safe}}</h1>
+        <p>{{content.global_[lang]['discoverCategoriesMsg']}}</p>
+      </div>
+    </section>
+    <section id="all-categories">
+      {% for cat in db_helper.categories.active_cats %}
+      <div
+        onclick="window.open('/categories/{{cat.id}}/', '_self', '_self')"
+        class="category-small-card"
+      >
+        <div
+          class="cover"
+          style="background-image: url('{{consts.categories_icons}}/{{cat.id}}');"
+        ></div>
+        <div class="content">
+          <h3>{{cat.name[lang]}}</h3>
+          <p>{{cat.bio[lang][:75]}}</p>
+        </div>
+      </div>
+      {%endfor%}
+    </section>
+    <section id="counts">
+      <div class="count">
+        <h3>{{db_helper.categories.parent_cats | length}}</h3>
+        <p>{{content.global_[lang]['classification']}}</p>
+      </div>
+      <div class="count">
+        <h3>{{db_helper.categories.active_cats | length}}</h3>
+        <p>{{content.global_[lang]['categories']}}</p>
+      </div>
+      <div class="count">
+        <h3>{{db_helper.articles.get_all_articles() | length}}</h3>
+        <p>{{content.global_[lang]['articles']}}</p>
+      </div>
+      <div class="count">
+        <h3>{{db_helper.writers.all_writers | length}}</h3>
+        <p>{{content.global_[lang]['writers']}}</p>
+      </div>
+    </section>
+    <section id="featured">
+      {% if layout.categories_featured_categories %} {% set featured_categories=
+      db_helper.categories.multiple_categories_by_id(layout.categories_featured_categories)
+      %} {% else %} {% set featured_categories=
+      db_helper.categories.active_cats[:3] %} {% endif %}
+      <h2>{{content.global_[lang]['featuredCategories']}}</h2>
+      <p>{{content.global_[lang]['featuredCategoriesMsg']}}</p>
+      <div id="cards">
+        {% for cat in featured_categories %}
+        <div
+          class="featured_category_card"
+          id="{{cat.id}}"
+          onclick="window.open('/categories/{{cat.id}}/', '_self')"
+        >
+          <div
+            class="cover"
+            style="background-image: url('/assets/categories/covers/{{cat.id}}/');"
+          ></div>
+          <div class="content">
+            <h3>{{cat.name[lang]}}</h3>
+            <p>{{cat.bio[lang]}}</p>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </section>
+    <section id="all-categories-cards">
+      <h2>{{content.global_[lang]['allCategories']}}</h2>
+      <p>{{content.global_[lang]['allCategoriesMsg']}}</p>
+      <div id="cards">
+        {% for cat in db_helper.categories.active_cats %}
+        <div
+          class="featured_category_card"
+          id="{{cat.id}}"
+          onclick="window.open('/categories/{{cat.id}}/', '_self')"
+        >
+          <div
+            class="cover"
+            style="background-image: url('/assets/categories/covers/{{cat.id}}/');"
+          ></div>
+          <div class="content">
+            <h3>{{cat.name[lang]}}</h3>
+            <p>{{cat.bio[lang]}}</p>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </section>
+    <footer>
+      <div class="footer-row" id="categories">
+        {% for pcat in db_helper.categories.parent_cats %}
+        <div class="categories-column">
+          <label><strong>{{pcat.name[lang]}}</strong></label>
+          <p>{{pcat.bio[lang][:50]}}...</p>
+          <div class="categories-column-tabs">
+            {% for cat in pcat.categories %}
+            <a href="/categories/{{cat.id}}/">{{cat.name[lang]}}</a>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="footer-row" id="info">
+        <div id="information">
+          <div id="logo" class="symbol"></div>
+          <h3 onclick="window.open('/', '_self');" style="cursor: pointer">
+            {{content.global_[lang]['platformTitle']}}
+          </h3>
+          <p>{{content.global_[lang]['footerMsg']}}</p>
+        </div>
+        <div id="findUs">
+          <h3>{{content.global_[lang]['lightToFindUs']}}</h3>
+          <div id="social-media-icons">
+            {% if cfg.facebook != '' %}
+            <a
+              href="{{cfg.facebook}}"
+              class="facebook main-icon-button"
+              id="facebook"
+              ><i class="facebook"></i
+            ></a>
+            {%endif%} {% if cfg.instagram != '' %}
+            <a
+              href="{{cfg.instagram}}"
+              class="instagram main-icon-button"
+              id="instagram"
+              ><i class="instagram"></i
+            ></a>
+            {%endif%} {% if cfg.twitter != '' %}
+            <a
+              href="{{cfg.twitter}}"
+              class="twitter main-icon-button"
+              id="twitter"
+              ><i class="twitter"></i
+            ></a>
+            {%endif%} {% if cfg.linkedin != '' %}
+            <a
+              href="{{cfg.linkedin}}"
+              class="linkedin main-icon-button"
+              id="linkedin"
+              ><i class="linkedin"></i
+            ></a>
+            {%endif%} {% if cfg.tiktok != '' %}
+            <a href="{{cfg.tiktok}}" class="tiktok main-icon-button" id="tiktok"
+              ><i class="tiktok"></i
+            ></a>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+      <div class="footer-row">
+        <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
+      </div>
+    </footer>
+    <script type="text/javascript">
+      const init = () => {
+        changeHeaderLogoOnScroll = true;
+        document.firstElementChild.setAttribute(
+          "data-theme",
+          "{{mode | lower}}"
+        );
+      };
+
+      if (window.attachEvent) window.attachEvent("load", init);
+      if (window.addEventListener) window.addEventListener("load", init);
+    </script>
+  </body>
+</html>

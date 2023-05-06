@@ -1,0 +1,214 @@
+@media screen and (min-width: 1024px) {
+	section {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		background: white;
+		overflow: hidden;
+	}
+
+	div#left-section {
+		width: 15%;
+		height: 100%;
+		display: flex;
+		background-color: var(--accentColor);
+	}
+
+	div#right-section {
+		width: 85%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.1);
+		display: flex;
+		padding: 1vw 2vw;
+		flex-direction: column;
+		align-items: start;
+		justify-content: start;
+	}
+
+	div#fragments-controllers {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: start;
+		max-height: 2.4vw;
+		min-height: 2.4vw;
+		/*gap: 1vw;*/
+		overflow-y: visible;
+		overflow-x: auto;
+		padding: 0 1vw;
+	}
+
+	.fragment-controller {
+		min-width: 12vw;
+		padding: 8px 16px;
+		border-radius: 12px 25px 0 0;
+		background-color: rgba(0, 0, 0, 0.1);
+		font-family: var(--pff);
+		font-size: 1vw;
+		color: var(--primaryColor);
+		font-weight: 500;
+		transition: 250ms ease;
+		cursor: pointer;
+	}
+
+	.fragment-controller:hover {
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+
+	.fragment-controller.active {
+		font-weight: 700;
+		background-color: white;
+	}
+
+	#fragments {
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+
+	.fragment {
+		display: none;
+	}
+
+	.fragment.active {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.5);
+		display: flex;
+		border-radius: 12px;
+		padding: 8px 16px;
+		flex-direction: column;
+		align-items: start;
+		justify-content: start;
+		overflow: auto;
+	}
+
+	#right-section h2.title {
+		font-family: var(--pff);
+		font-size: 1.5vw;
+		color: var(--primaryColor);
+		font-weight: 700;
+	}
+
+	#right-section p.subtitle {
+		font-family: var(--sff);
+		font-size: 1vw;
+		font-weight: 300;
+	}
+
+	.collabsable {
+		width: 100%;
+		border-radius: 12px;
+		flex-direction: column;
+		display: flex;
+		align-items: start;
+		justify-content: start;
+		transition: 500ms ease;
+		padding: 8px 16px;
+		border-radius: 12px;
+		transition: 500ms ease;
+	}
+
+	.collabsable.active {
+		background-color: white;
+	}
+
+	.collabsable div.title {
+		width: 100%;
+		display: flex;
+		align-items: start;
+		justify-content: start;
+		flex-direction: column;
+		transition: 500ms ease;
+		padding: 8px 16px;
+		border-radius: 12px;
+		cursor: pointer;
+	}
+
+	.collabsable.active div.title:hover {
+		background-color: transparent;
+	}
+
+	.collabsable div.title:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.collabsable .content {
+		width: 100%;
+		display: none;
+		align-items: start;
+		justify-content: start;
+		flex-direction: column;
+		padding: 8px 16px;
+	}
+
+	.collabsable.active .content {
+		display: flex;
+	}
+
+	.collabsable .options {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: end;
+		flex-direction: row;
+		gap: 8px;
+		margin: 8px 0;
+	}
+
+	.collabsable#featured-articles #articles {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		row-gap: 4px;
+		column-gap: 8px;
+	}
+
+	.collabsable#featured-articles .article-card {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+		border-radius: 12px;
+		padding: 4px 8px;
+		background-color: rgba(0, 0, 0, 0.05);
+	}
+
+	.collabsable#featured-articles .article-card .cover {
+		width: 30%;
+		height: 100%;
+		max-height: 5vw;
+		border-radius: 12px;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.collabsable#featured-articles .article-card .content {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: start;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	.collabsable#featured-articles .article-card .content h3 {
+		font-weight: 700;
+		font-size: 1.25vw;
+		font-family: var(--pff);
+		color: var(--primaryColor);
+	}
+
+	.collabsable#featured-articles .article-card .content p {
+		font-weight: 300;
+		font-size: 1vw;
+		font-family: var(--sff);
+		color: var(--primaryVarientColor);
+	}
+}

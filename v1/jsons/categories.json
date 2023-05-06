@@ -1,0 +1,127 @@
+{
+	"parentCategories": [
+		{"id": "cvsdfsdfsdfsdfssdsxxf1", "tags": [], "main_route": "/trading/", "name": {"EN": "Trading"}, "bio": {"EN": "This is the best articles about trading strategies in meta"}, "categories": ["cvsdfsdfsdfsdfsdf1", "cvsdfsdfsdfsdfsdf2", "cvsdfsdfsdfsdfsdf3", "cvsdfsdfsdfsdfsdf4"]},
+		{"id": "cvsdfsdfsdfsdfssdsxxf2", "tags": [], "main_route": "/trading/", "name": {"EN": "Parent Category Two"}, "bio": {"EN": "Parent Category Two Description"}, "categories": ["cvsdfsdfsdfsdfsdf5", "cvsdfsdfsdfsdfsdf6", "cvsdfsdfsdfsdfsdf7", "cvsdfsdfsdfsdfsdf8", "cvsdfsdfsdfsdfsdf9"]}
+	],
+	"activeCategories": [
+		
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf1",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf2",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf3",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf4",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf5",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf6",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf7",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf8",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		},
+		{
+			"name": {"EN": "Category Name"},
+			"bio": {"EN": "Category Description"},
+			"id": "cvsdfsdfsdfsdfsdf9",
+			"tags": [],
+			"main_route": "self.main_route",
+			"secondary_route": "self.secondary_route",
+			"prefered_keywords": [],
+			"main_color": "self.main_color",
+			"secondary_color": "self.secondary_color",
+			"gradient_colors": [],
+			"prefered_main_carousel_articles": []
+		}
+	],
+	"archivedCategories": []
+}
