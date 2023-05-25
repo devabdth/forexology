@@ -1,4 +1,5 @@
-from flask import Flask, session, render_template, url_for
+from flask import Flask, session, render_template, url_for, request, redirect
+from json import dumps, loads
 
 from sys import path
 path.insert(0, '../')
@@ -25,11 +26,32 @@ class LayoutAdminRouter:
 
 	def setup(self):
 		self.assign_index()
+		self.assign_update()
+
+	def assign_update(self):
+		@self.app.route(self.consts.admin_layout_route, methods=["PATCH"])
+		def admin_layout_update():
+			body= dict(loads(request.data))
+			if body['page'] == 'home':
+				res= self.layout.update_home_page(body)
+			elif body['page'] == 'headerTabs':
+				res= self.layout.update_header_tabs(body)
+
+			if res != None and res:
+				return self.app.response_class(status= 200)
+
+
+			return self.app.response_class(status= 500)
 
 
 	def assign_index(self):
 		@self.app.route(self.consts.admin_layout_route, methods=["GET"])
 		def admin_layout_index():
+			aid= session.get('ADMIN_ID')
+			if  aid == None:
+				return redirect(self.consts.admin_login_route)
+			self.layout.load()
+			self.helper.ads.load_data()
 			lang= session.get('LANG', 'EN')
 			mode= session.get('MODE', 'DARK')
 			return render_template(
@@ -41,5 +63,7 @@ class LayoutAdminRouter:
 				mode= mode,
 				db_helper= self.helper,
 				utils= self.utils,
-				layout= self.layout
+				layout= self.layout,
+				dumps= dumps,
+				admin_data= self.helper.admins.get_admin_by_username(aid)
 			)

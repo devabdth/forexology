@@ -8,11 +8,20 @@ class ArticlesDatabaseHelper:
         self.trending_articles: list = [
             Article({
                 "id": "sdfsdfcsdcsd{}".format(i),
-                "title": {"EN": "What happened in Gamasa pt {}".format(i)},
-                "short_brief": {"EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem."},
-                "cover_attached_msg": {"EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem."},
-                "parent_category": "cvsdfsdfsdfsdfssdsxxf2",
-                "category": "cvsdfsdfsdfsdfsdf2",
+                "title": {
+                    "EN": "What happened in Gamasa pt {}".format(i),
+                    "AR": "What happened in Gamasa pt {}".format(i),
+                },
+                "short_brief": {
+                    "EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
+                    "AR": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
+                },
+                "cover_attached_msg": {
+                    "EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
+                    "AR": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem."
+                },
+                "parent_category": "135cc6cdcfe4bd527eb4f956",
+                "category": "95a7cc16897a08b56ba4faf3",
                 "sections": [
                     {
                     "title": {"EN": "What happened in Gamasa pt {}".format(ii)},
@@ -47,7 +56,7 @@ class ArticlesDatabaseHelper:
     def get_all_articles(self, filter_by: str = None, arrangment: str = 'ascending'):
         return self.trending_articles
 
-    def multiple_articles_by_ads(self, ids: list):
+    def multiple_articles_by_ids(self, ids: list):
         return self.trending_articles
     
     def get_article_by_writer_id(self, writer_id):

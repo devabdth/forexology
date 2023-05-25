@@ -29,9 +29,6 @@ class Ad:
 				if payload[param['name']] is None:
 					setattr(self, param['name'], "None")
 				else:
-					if type(payload[param['name']]) != param['type']:
-						raise TypeError('"{}"" Expected Type: {} but got {}'.format(param['name'],  param['type'], type(payload[param['name']])))
-
 					setattr(self, param['name'], payload[param['name']])
 			else:
 				raise KeyError('Parameter "{}" not found'.format(param['name']))

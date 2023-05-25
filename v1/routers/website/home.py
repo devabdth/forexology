@@ -32,6 +32,9 @@ class HomeRouter:
         def home_index():
             lang = session.get('LANG', 'EN')
             mode = session.get('MODE', 'DARK')
+            self.helper.categories.load_data()
+            self.helper.ads.load_data()
+            self.layout.load()
             return render_template(
                 '/website/home.html',
                 content=self.content,

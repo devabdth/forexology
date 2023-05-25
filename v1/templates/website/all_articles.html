@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+{% if lang == 'AR' %}
+  <html dir="RTL">
+    {% else %}
+    <html dir="LTR">
+{% endif %}
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,6 +11,7 @@
       {{content.global_[lang]['platformTitle']}} -
       {{content.tabs[lang]['articles']}}
     </title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -57,13 +62,22 @@
       type="text/javascript"
       src="{{url_for('static', filename='website/articles/scripts/main.js')}}"
     ></script>
-  </head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
   <body>
     <style type="text/css">
+      {% if lang == 'AR' %}
+      :root {
+        --pff: "IBM Plex Sans Arabic";
+        --sff: "Cairo";
+      }
+      {% else %}
       :root {
         --pff: "Raleway";
         --sff: "Poppins";
       }
+      {% endif %}
     </style>
     <header>
       <div
@@ -71,19 +85,36 @@
         id="logo"
       ></div>
       <div id="tabs">
-        <a href="{{consts.index_route}}" class="header-tab"
-          >{{content.tabs[lang]['home']}}</a
-        >
-        <a href="{{consts.articles_route}}" class="header-tab active"
-          >{{content.tabs[lang]['articles']}}</a
-        >
-        <a href="{{consts.categories_route}}" class="header-tab"
-          >{{content.tabs[lang]['categories']}}</a
-        >
-        
-        <a href="{{consts.tools_route}}" class="header-tab"
-          >{{content.tabs[lang]['tools']}}</a
-        >
+        {% for tab in layout.header_tabs %}
+          {% if tab['mode'] == 'link' %}
+            <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
+          {%endif%}
+          {% if tab['mode'] == 'category' %}
+            <a href="/categories/{{tab['categoryId']}}" class="header-tab">{{db_helper.categories.get_category_by_id(tab['categoryId']).name[lang]}}</a>
+          {%endif%}
+          {% if tab['mode'] == 'classification' %}
+          {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
+            <div class="header-dropdown">
+              <button class="header-dropbtn">{{classification.name[lang]}}</button>
+              <div class="header-dropdown-content">
+                <div id="label">
+                  <h3>{{classification.name[lang]}}</h3>
+                  <p>{{classification.bio[lang]}}</p>
+                  <button onclick="window.open(`/classification/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                </div>
+                <div id="dropdown-tabs">
+                  {% for category in classification['categories'] %}
+                  <a class="header-tab" href="/categories/{{category.id}}">
+                    <div class="shadow-icon-button"><i style="background-image: url('/assets/categories/icons/{{category.id}}/');"></i></div>
+                    <p>{{category.name[lang]}}</p>
+                  </a>
+                  {%endfor%}
+                </div>
+              </div>
+          </div>
+
+          {%endif%}
+        {%endfor%}
       </div>
       <div id="options">
         <button onclick="openSearcDFhDialog();" class="main-icon-button">
@@ -96,6 +127,15 @@
         <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
           <i class="theme"></i>
         </button>
+        <div class="lang header-dropdown">
+          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
+          <div class="lang header-dropdown-content">
+            <div id="dropdown-tabs">
+              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+            </div>
+          </div>
+      </div>
       </div>
     </header>
     <section id="entry">

@@ -9,6 +9,7 @@ class Setup:
         self.socket = socket
 
     def initializiation(self):
+        self.setup_files_and_directories()
         self.setup_app()
         self.setup_routers()
         self.setup_adminstration_webapp_routes()
@@ -23,6 +24,35 @@ class Setup:
 
         Session(self.app)
 
+    def setup_files_and_directories(self):
+        from os.path import abspath, dirname, join, exists
+
+        files= [
+            {
+                'dir': '../jsons/jobs.json',
+                'initialData': {}
+            },
+            {
+                'dir': '../jsons/jobsApplications.json',
+                'initialData': {}
+            },
+            {
+                'dir': '../jsons/writers.json',
+                'initialData': {}
+            },
+            {
+                'dir': '../jsons/writersInvitations.json',
+                'initialData': {}
+            },
+        ]
+
+        for file_ in files:
+            path= abspath(join(dirname(__file__), file_['dir']))
+            if not exists(path):
+                with open(path, 'w') as f:
+                    f.write(f'{file_["initialData"]}')
+
+
     def setup_socket_handlers(self):
         # from socket_handlers.chatting import ChattingHandler
         # ChattingHandler(self.app, self.socket)
@@ -31,8 +61,30 @@ class Setup:
     def setup_adminstration_webapp_routes(self):
         from routers.admin.publish import PublishAdminRouter
         PublishAdminRouter(self.app).setup()
+
         from routers.admin.layout import LayoutAdminRouter
         LayoutAdminRouter(self.app).setup()
+
+        from routers.admin.admin import AdminRouter
+        AdminRouter(self.app).setup()
+
+        from routers.admin.home import HomeAdminRouter
+        HomeAdminRouter(self.app).setup()
+
+        from routers.admin.categories import CategoriesAdminRouter
+        CategoriesAdminRouter(self.app).setup()
+
+        from routers.admin.ads import AdsAdminRouter
+        AdsAdminRouter(self.app).setup()
+
+        from routers.admin.carrers import CarrersAdminRouter
+        CarrersAdminRouter(self.app).setup()
+        
+        from routers.admin.admins import AdminsManagemnetAdminRouter
+        AdminsManagemnetAdminRouter(self.app).setup()
+
+        from routers.admin.writers import WritersAdminRouter
+        WritersAdminRouter(self.app).setup()
 
     def setup_routers(self):
 
@@ -59,3 +111,6 @@ class Setup:
 
         from routers.website.categories import CategoriesRouter
         CategoriesRouter(self.app).setup()
+
+        from routers.website.writer import WriterRouter
+        WriterRouter(self.app).setup()

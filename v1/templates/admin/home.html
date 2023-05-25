@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FOREXology - Home</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='admin/home/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='admin/home/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+    <section class="admin">
+      <div id="left-section">
+        <div id="header">
+          <div id="logo"></div>
+          <p>{{admin_data['name']}}</p>
+        </div>
+        <div id="body">
+          <div
+            onclick="window.open(`/webapp/adminstration/`, '_self');"
+            class="active left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Home</p>
+          </div>
+          {% if "0" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/layout/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Layout</p>
+          </div>
+          {%endif%} {% if "2" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/categories/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon">
+              <i class="categories-white"></i>
+            </div>
+            <p>Categories</p>
+          </div>
+          {%endif%} {% if "3" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/jobs/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+            <p>Carrers</p>
+          </div>
+          {%endif%} {% if "4" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/ads/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+            <p>Ads Spaces</p>
+          </div>
+          {%endif%} {% if "5" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/writers/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+            <p>Writers</p>
+          </div>
+          {%endif%} {% if "6" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/admins/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+            <p>Admins</p>
+          </div>
+          {%endif%}
+        </div>
+        <div id="footer">
+          <div onclick="adminLogout();" class="left-menu-tile">
+            <div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+      <div id="right-section">
+        <h1>Welcome Back, <br /><span>{{admin_data['name']}}</span></h1>
+        <div class="card" id="entry">
+          <div id="icon"><div></div></div>
+          <div id="information">
+            <div class="information-row">
+              <p class="title">Name:</p>
+              <p class="value">{{admin_data['name']}}</p>
+            </div>
+            <div class="divider"></div>
+            <div class="information-row">
+              <p class="title">Username:</p>
+              <p class="value">{{admin_data['username']}}</p>
+            </div>
+            <div class="divider"></div>
+            <div class="information-row">
+              <p class="title">Email:</p>
+              <p class="value">{{admin_data['email']}}</p>
+            </div>
+            <div class="divider"></div>
+            <div class="information-row">
+              <p class="title">Access</p>
+              <p class="value">
+                {% for access in admin_data['accesses'] %} &nbsp;-
+                {{consts.admin_accesses[access]}}<br />
+                {%endfor%}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% if "0" in admin_data['accesses'] %}
+        <div class="card">
+          <div class="header">
+            <h3>Layout</h3>
+            <p>Edit the apperance that users see!</p>
+          </div>
+          <div class="body">
+            <div class="actions-cards">
+              <div class="action-card darkorange">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/ads1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit Ads Spaces</p>
+              </div>
+              <div class="action-card darkolivegreen">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/writers1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit Writers</p>
+              </div>
+              <div class="action-card maroon">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/articles2.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit Featured Articles</p>
+              </div>
+              <div class="action-card purple">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/job1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit Carrers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%} {% if "2" in admin_data['accesses'] %}
+        <div class="card">
+          <div class="header">
+            <h3>Categories</h3>
+            <p>Edit article's classification methods!</p>
+          </div>
+          <div class="body">
+            <div class="actions-cards">
+              <div class="action-card darkolivegreen">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/categories.png);
+                    "
+                  ></i>
+                </div>
+                <p>Create Category</p>
+              </div>
+              <div class="action-card darkgrey">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/categories.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit Category</p>
+              </div>
+              <div class="action-card purple">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/classification.png);
+                    "
+                  ></i>
+                </div>
+                <p>Create Classification</p>
+              </div>
+              <div class="action-card maroon">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/classification.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit Classification</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%} {% if "3" in admin_data['accesses'] %}
+        <div class="card">
+          <div class="header">
+            <h3>Carrers</h3>
+            <p>Publish your open positions and start recieve applications!</p>
+          </div>
+          <div class="body">
+            <div class="actions-cards">
+              <div class="action-card purple">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/job2.png);
+                    "
+                  ></i>
+                </div>
+                <p>Create Job</p>
+              </div>
+              <div class="action-card darkolivegreen">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/job1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit / Delete Job</p>
+              </div>
+              <div class="action-card darkgrey">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/job1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Review CVs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%} {% if "4" in admin_data['accesses'] %}
+        <div class="card">
+          <div class="header">
+            <h3>Ads Spaces</h3>
+            <p>Manage advertising spaces on the website</p>
+          </div>
+          <div class="body">
+            <div class="actions-cards">
+              <div class="action-card darkorange">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/ads2.png);
+                    "
+                  ></i>
+                </div>
+                <p>Create Ad Space</p>
+              </div>
+              <div class="action-card maroon">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/ads1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit / Delete Ad Space</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%} {% if "5" in admin_data['accesses'] %}
+        <div class="card">
+          <div class="header">
+            <h3>Writers</h3>
+            <p>Invite, Edit, Suspense writers!</p>
+          </div>
+          <div class="body">
+            <div class="actions-cards">
+              <div class="action-card darkblue">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/writers2.png);
+                    "
+                  ></i>
+                </div>
+                <p>Invite Writer</p>
+              </div>
+              <div class="action-card darkgrey">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/writers1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Edit / Suspense Writers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%} {% if "6" in admin_data['accesses'] %}
+        <div class="card">
+          <div class="header">
+            <h3>Admins</h3>
+            <p>
+              Create, Edit, Suspense, Delete admins that have access to edit
+              website content !
+            </p>
+          </div>
+          <div class="body">
+            <div class="actions-cards">
+              <div class="action-card maroon">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/admins2.png);
+                    "
+                  ></i>
+                </div>
+                <p>Create Admin</p>
+              </div>
+              <div class="action-card darkolivegreen">
+                <div class="icon">
+                  <i
+                    style="
+                      background-image: url(/static/admin/home/styles/icons/admins1.png);
+                    "
+                  ></i>
+                </div>
+                <p>Manage Admins</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endif%}
+      </div>
+    </section>
+  </body>
+</html>

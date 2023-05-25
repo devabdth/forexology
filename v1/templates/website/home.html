@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+{% if lang == 'AR' %}
+  <html dir="RTL">
+    {% else %}
+    <html dir="LTR">
+{% endif %}
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,6 +11,7 @@
       {{content.global_[lang]['platformTitle']}} -
       {{content.tabs[lang]['home']}}
     </title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -57,13 +62,22 @@
       type="text/javascript"
       src="{{url_for('static', filename='website/home/scripts/main.js')}}"
     ></script>
-  </head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
   <body>
     <style type="text/css">
+      {% if lang == 'AR' %}
+      :root {
+        --pff: "IBM Plex Sans Arabic";
+        --sff: "Cairo";
+      }
+      {% else %}
       :root {
         --pff: "Raleway";
         --sff: "Poppins";
       }
+      {% endif %}
     </style>
     <header>
       <div
@@ -71,19 +85,36 @@
         id="logo"
       ></div>
       <div id="tabs">
-        <a href="{{consts.index_route}}" class="header-tab active"
-          >{{content.tabs[lang]['home']}}</a
-        >
-        <a href="{{consts.articles_route}}" class="header-tab"
-          >{{content.tabs[lang]['articles']}}</a
-        >
-        <a href="{{consts.categories_route}}" class="header-tab"
-          >{{content.tabs[lang]['categories']}}</a
-        >
-        
-        <a href="{{consts.tools_route}}" class="header-tab"
-          >{{content.tabs[lang]['tools']}}</a
-        >
+        {% for tab in layout.header_tabs %}
+          {% if tab['mode'] == 'link' %}
+            <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
+          {%endif%}
+          {% if tab['mode'] == 'category' %}
+            <a href="/categories/{{tab['categoryId']}}" class="header-tab">{{db_helper.categories.get_category_by_id(tab['categoryId']).name[lang]}}</a>
+          {%endif%}
+          {% if tab['mode'] == 'classification' %}
+          {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
+            <div class="header-dropdown">
+              <button class="header-dropbtn">{{classification.name[lang]}}</button>
+              <div class="header-dropdown-content">
+                <div id="label">
+                  <h3>{{classification.name[lang]}}</h3>
+                  <p>{{classification.bio[lang]}}</p>
+                  <button onclick="window.open(`/classification/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                </div>
+                <div id="dropdown-tabs">
+                  {% for category in classification['categories'] %}
+                  <a class="header-tab" href="/categories/{{category.id}}">
+                    <div class="shadow-icon-button"><i style="background-image: url('/assets/categories/icons/{{category.id}}/');"></i></div>
+                    <p>{{category.name[lang]}}</p>
+                  </a>
+                  {%endfor%}
+                </div>
+              </div>
+          </div>
+
+          {%endif%}
+        {%endfor%}
       </div>
       <div id="options">
         <button onclick="openSearcDFhDialog();" class="main-icon-button">
@@ -96,6 +127,15 @@
         <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
           <i class="theme"></i>
         </button>
+        <div class="lang header-dropdown">
+          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
+          <div class="lang header-dropdown-content">
+            <div id="dropdown-tabs">
+              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+            </div>
+          </div>
+      </div>
       </div>
     </header>
     <section id="entry">
@@ -126,8 +166,18 @@
               style="background-image: url(/assets/articles/covers/{{article.id}});"
             >
               <div id="overlay">
-                <p class="category">{{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}} - {{db_helper.categories.get_category_by_id(article.category).name[lang]}}</p>
-                <h2><span>{{article.title[lang]}}</span></h2>
+                {%set parent_category= db_helper.categories.get_parent_category_by_id(article.parent_category) %}
+                {%set category= db_helper.categories.get_category_by_id(article.category) %}
+                {% if parent_category %}
+                {{parent_category.name[lang]}}
+                {%endif%}
+                {% if parent_category and category %}
+                - 
+                {% endif %}
+                {% if category %}
+                {{category.name[lang]}}
+                {%endif%}
+              <h2><span>{{article.title[lang]}}</span></h2>
                 <p class="short_brief">{{article.short_brief[lang]}}</p>
               </div>
               <p id="label">{{content.global_[lang]['mostRecent']}}</p>
@@ -145,24 +195,24 @@
     {% if not (layout.home_ad_space_one == None and layout.home_ad_space_two == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_one == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_one}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_one"></div>
         {%endif%}
         {% if not layout.home_ad_space_two == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_two}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_two"></div>
         {%endif%}
       </div>
     {% endif %}
     <section id="articles">
     	<h1>{{content.global_[lang]['ourLatestArticles']}}</h1>
     	<div id="categories">
-    		<button id="all" class="articles-category-tab active">{{content.global_[lang]['all']}}</button>
+    		<button id="tab-all" class="articles-category-tab active">{{content.global_[lang]['all']}}</button>
     		{% for cat in db_helper.categories.active_cats[:5] %}
-    			<button id="{{cat.id}}" class="articles-category-tab">{{cat.name[lang]}}</button>
+    			<button id="tab-{{cat.id}}" class="articles-category-tab">{{cat.name[lang]}}</button>
     		{% endfor %}
     			<a href="/categories/" class="articles-category-tab">{{content.actions[lang]['seeMore']}}</a>
     	</div>
     	<div id="fragments">
-    		<div id="all-fragment" class="articles-category-fragment active">
+    		<div id="fragment-all-fragment" class="articles-category-fragment active">
     			<div class="articles-fragment-column">
     				<div style="background-image: url(/assets/categories/covers/{{db_helper.categories.active_cats[0].id}}/);" class="cover">
     					<div class="overlay"></div>
@@ -214,7 +264,7 @@
     		</div>
     		{% for cat in db_helper.categories.active_cats[:5] %}
     			{% set articles= db_helper.articles.get_articles_by_category(cat.id) %}
-    			<div id="{{cat.id}}" class="articles-category-fragment">
+    			<div id="fragment-{{cat.id}}" class="articles-category-fragment">
 	    			<div class="articles-fragment-column">
 	    				<div style="background-image: url(/assets/categories/covers/{{cat.id}}/);" class="cover">
 	    					<div class="overlay"></div>
@@ -269,10 +319,10 @@
     {% if not (layout.home_ad_space_three == None and layout.home_ad_space_four == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_three == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_three}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_three"></div>
         {%endif%}
         {% if not layout.home_ad_space_four == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_four}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_four"></div>
         {%endif%}
       </div>
     {% endif %}
@@ -282,7 +332,7 @@
 	    	<a href="/writers/" class="main-button">{{content.actions[lang]['seeMore']}}</a>
     	</div>
     	<div id="cards">
-    	{%for writer in db_helper.writers.get_writers_by_id(layout.home_featured_writers)%}
+    	{%for writer in db_helper.writers.get_writers_by_ids(layout.home_featured_writers)%}
     	<div class="writer-card" onclick="window.open('/writers/{{writer.id}}', '_self');">
 			<div class="cover">
 				<div class="illustration"></div>
@@ -300,10 +350,10 @@
     {% if not (layout.home_ad_space_five == None and layout.home_ad_space_six == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_five == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_five}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_five"></div>
         {%endif%}
         {% if not layout.home_ad_space_six == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_six}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_six"></div>
         {%endif%}
       </div>
     {% endif %}
@@ -312,7 +362,7 @@
       <p>{{content.global_[lang]['incaseYouMissedMsg']}}</p>
       <div id="cards">
         {% if not (layout.home_featured_missed_articles | length) == 0 %}
-          {% for article in db_helper.articles.multiple_articles_by_ads(layout.home_featured_missed_articles) %}
+          {% for article in db_helper.articles.multiple_articles_by_ids(layout.home_featured_missed_articles) %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
                 <div
@@ -321,12 +371,16 @@
                 ></div>
                 <div class="content">
                   <div class="classification">
-                    <h4>
-                      {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
-                    </h4>
-                    <h4>
-                      {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
-                    </h4>
+                                      {% set parent_category=
+                  db_helper.categories.get_parent_category_by_id(article.parent_category)
+                  %} {% if parent_category %}
+                  <h4>{{parent_category.name[lang]}}</h4>
+                  {%endif%} {% set category=
+                  db_helper.categories.get_category_by_id(article.category)%} {%
+                  if category %}
+                  <h4>{{category.name[lang]}}</h4>
+                  {%endif%}
+
                   </div>
                   <h3>{{article.title[lang]}}</h3>
                   <p>{{article.short_brief[lang]}}</p>
@@ -344,12 +398,16 @@
                 ></div>
                 <div class="content">
                   <div class="classification">
-                    <h4>
-                      {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
-                    </h4>
-                    <h4>
-                      {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
-                    </h4>
+                  {% set parent_category=
+                  db_helper.categories.get_parent_category_by_id(article.parent_category)
+                  %} {% if parent_category %}
+                  <h4>{{parent_category.name[lang]}}</h4>
+                  {%endif%} {% set category=
+                  db_helper.categories.get_category_by_id(article.category)%} {%
+                  if category %}
+                  <h4>{{category.name[lang]}}</h4>
+                  {%endif%}
+
                   </div>
                   <h3>{{article.title[lang]}}</h3>
                   <p>{{article.short_brief[lang]}}</p>
@@ -363,42 +421,41 @@
     {% if not (layout.home_ad_space_seven == None and layout.home_ad_space_eight == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_seven == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_seven}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_seven"></div>
         {%endif%}
         {% if not layout.home_ad_space_eight == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_eight}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_eight"></div>
         {%endif%}
       </div>
     {% endif %}
-    <section id="carrers">
-      <div id="left-section">
-        <h2>{{content.global_[lang]['wannaJoinUs'] | safe}}</h2>
-        <a href="/writers/" class="main-button">{{content.actions[lang]['seeAllJobs']}}</a>
-      </div>
-      <div id="cards">
-        {% for job in db_helper.jobs.all_jobs[:6] %}
-        <div class="job-card">
-          <p class="subtitle">{{job.subtitle[lang]}}</p>
-          <h4 class="title">{{job.title[lang]}}</h4>
-          <p class="bio">{{job.bio[lang]}}</p>
-          <div class="options">
-            <p class="salary"><span>{{job.salaries_range[0]['rangePerUnit']}} {{content.global_[lang]['le']}}</span> {{content.salary_types[lang][job.salary_type]}}</p>
-          </div>
-          <div class="actions">
-            <p class="applications"><span>{{db_helper.jobs_applications.get_applications_for_job_by_id(job.id) | length }}</span> {{content.global_[lang]['applications']}}</p>
-            <a href="/jobs/{{job.id}}/apply/" class="main-button">{{content.actions[lang]['apply']}}</a>
-          </div>
+    {% if (layout.home_featured_jobs | length) != 0 %}
+      <section id="carrers">
+        <div id="left-section">
+          <h2>{{content.global_[lang]['wannaJoinUs'] | safe}}</h2>
+          <a href="/writers/" class="main-button">{{content.actions[lang]['seeAllJobs']}}</a>
         </div>
-        {% endfor %}
-      </div>
-    </section>
+        <div id="cards">
+          {% for job in db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs) %}
+          <div class="job-card">
+            <p class="subtitle">{{job.subtitle[lang]}}</p>
+            <h4 class="title">{{job.title[lang]}}</h4>
+            <p class="bio">{{job.bio[lang]}}</p>
+            <div class="actions">
+              <p class="applications"><span>{{db_helper.jobs_applications.get_applications_for_job_by_id(job.id) | length }}</span> {{content.global_[lang]['applications']}}</p>
+              <a href="/jobs/{{job.id}}/apply/" class="main-button">{{content.actions[lang]['apply']}}</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+    {%endif%}
     {% if not (layout.home_ad_space_nine == None and layout.home_ad_space_ten == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_nine == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_nine}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_nine"></div>
         {%endif%}
         {% if not layout.home_ad_space_ten == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_ten}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_ten"></div>
         {%endif%}
       </div>
     {% endif %}
@@ -407,7 +464,7 @@
       <p>{{content.global_[lang]['randomArticlesMsg']}}</p>
       <div id="cards">
         {% if not (layout.home_featured_random_articles | length) == 0 %}
-          {% for article in db_helper.articles.multiple_articles_by_ads(layout.home_featured_random_articles) %}
+          {% for article in db_helper.articles.multiple_articles_by_ids(layout.home_featured_random_articles) %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
                 <div
@@ -416,12 +473,16 @@
                 ></div>
                 <div class="content">
                   <div class="classification">
-                    <h4>
-                      {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
-                    </h4>
-                    <h4>
-                      {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
-                    </h4>
+                                      {% set parent_category=
+                  db_helper.categories.get_parent_category_by_id(article.parent_category)
+                  %} {% if parent_category %}
+                  <h4>{{parent_category.name[lang]}}</h4>
+                  {%endif%} {% set category=
+                  db_helper.categories.get_category_by_id(article.category)%} {%
+                  if category %}
+                  <h4>{{category.name[lang]}}</h4>
+                  {%endif%}
+
                   </div>
                   <h3>{{article.title[lang]}}</h3>
                   <p>{{article.short_brief[lang]}}</p>
@@ -439,12 +500,16 @@
                 ></div>
                 <div class="content">
                   <div class="classification">
-                    <h4>
-                      {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
-                    </h4>
-                    <h4>
-                      {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
-                    </h4>
+                                      {% set parent_category=
+                  db_helper.categories.get_parent_category_by_id(article.parent_category)
+                  %} {% if parent_category %}
+                  <h4>{{parent_category.name[lang]}}</h4>
+                  {%endif%} {% set category=
+                  db_helper.categories.get_category_by_id(article.category)%} {%
+                  if category %}
+                  <h4>{{category.name[lang]}}</h4>
+                  {%endif%}
+
                   </div>
                   <h3>{{article.title[lang]}}</h3>
                   <p>{{article.short_brief[lang]}}</p>
@@ -459,43 +524,13 @@
     {% if not (layout.home_ad_space_eleven == None and layout.home_ad_space_twelve == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_eleven == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_eleven}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_eleven"></div>
         {%endif%}
         {% if not layout.home_ad_space_twelve == None %}
-          <div class="between-sections-ad-space" id="{{layout.home_ad_space_twelve}}"></div>
+          <div class="between-sections-ad-space" id="home_ad_space_twelve"></div>
         {%endif%}
       </div>
     {% endif %}
-    {% for category in db_helper.categories.active_cats %}
-    <section class="category-articles" id="{{category.id}}">
-      <h1>{{category.name[lang]}}</h1>
-      <p>{{category.bio[lang]}}</p>
-      <div id="cards">
-        {% for article in db_helper.articles.get_articles_by_category(category.id)['trending'][:8] %}
-            <div class="search-dialog-article-card-border">
-              <div class="search-dialog-article-card">
-                <div
-                  class="cover"
-                  style="background-image: url(/assets/articles/covers/{{article.id}});"
-                ></div>
-                <div class="content">
-                  <div class="classification">
-                    <h4>
-                      {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
-                    </h4>
-                    <h4>
-                      {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
-                    </h4>
-                  </div>
-                  <h3>{{article.title[lang]}}</h3>
-                  <p>{{article.short_brief[lang]}}</p>
-                </div>
-              </div>
-            </div>
-          {%endfor%}
-      </div>
-    </section>
-    {% endfor %}
     <footer>
       <div class="footer-row" id="categories">
         {% for pcat in db_helper.categories.parent_cats %}
@@ -612,13 +647,18 @@
                   ></div>
                   <div class="content">
                     <div class="classification">
-                      <h4>
-                        {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
-                      </h4>
-                      <h4>
-                        {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
-                      </h4>
-                    </div>
+                      {%set parent_category= db_helper.categories.get_parent_category_by_id(article.parent_category) %}
+                      {%set category= db_helper.categories.get_category_by_id(article.category) %}
+                      {% if parent_category %}
+                      {{parent_category.name[lang]}}
+                      {%endif%}
+                      {% if parent_category and category %}
+                      - 
+                      {% endif %}
+                      {% if category %}
+                      {{category.name[lang]}}
+                      {%endif%}
+                        </div>
                     <h3>{{article.title[lang]}}</h3>
                     <p>{{article.short_brief[lang]}}</p>
                   </div>
@@ -634,7 +674,7 @@
       changeHeaderLogoOnScroll= true;
       const pageInit= async ()=> {
           {% if layout.home_featured_articles != None %}
-              initializeFragments({{dumps(utils.mutliple_to_dicts((db_helper.articles.multiple_articles_by_ads(layout.home_featured_articles)))) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
+              initializeFragments({{dumps(utils.mutliple_to_dicts((db_helper.articles.multiple_articles_by_ids(layout.home_featured_articles)))) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
           {% else %}
     		    initializeFragments({{utils.mutliple_to_dicts(db_helper.articles.trending_articles[:5]) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
           {% endif %}
@@ -648,40 +688,40 @@
     		initializeCategoriesFragments({{utils.mutliple_to_dicts(db_helper.categories.active_cats[:5]) | safe}});
 
         {% if not layout.home_ad_space_one == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_one}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_one).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_one'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_one).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_two == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_two}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_two).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_two'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_two).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_three == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_three}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_three).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_three'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_three).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_four == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_four}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_four).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_four'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_four).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_five == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_five}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_five).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_five'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_five).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_six == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_six}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_six).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_six'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_six).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_seven == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_seven}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_seven).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_seven'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_seven).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_eight == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_eight}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eight).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_eight'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eight).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_nine == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_nine}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_nine).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_nine'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_nine).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_ten == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_ten}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_ten).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_ten'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_ten).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_eleven == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_eleven}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_eleven'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         {% if not layout.home_ad_space_twelve == None %}
-          await initializeAdSpace(document.getElementById('{{layout.home_ad_space_twelve}}'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve).to_dict() | safe}}, '{{lang}}');
+          await initializeAdSpace(document.getElementById('home_ad_space_twelve'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve).to_dict() | safe}}, '{{lang}}');
         {% endif %}
         document.firstElementChild.setAttribute('data-theme', '{{mode | lower}}')
         

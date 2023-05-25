@@ -17,11 +17,13 @@ class Writer:
 			{"name": "id", "type": str},
 			{"name": "name", "type": dict},
 			{"name": "bio", "type": dict},
+			{"name": "email", "type": str},
 			{"name": "joined_in", "type": str},
 			{"name": "tags", "type": list},
 			{"name": "prefered_category", "type": list},
 			{"name": "prefered_parent_category", "type": list},
 			{"name": "social_media_links", "type": dict},
+			{"name": "suspensed", "type": bool},
 		]
 
 		for param in self.params:

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FOREXology - Carrers</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='admin/carrers/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='admin/carrers/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+    <section class="admin">
+      <div id="left-section">
+        <div id="header">
+          <div id="logo"></div>
+          <p>{{admin_data['name']}}</p>
+        </div>
+        <div id="body">
+          <div
+            onclick="window.open(`/webapp/adminstration/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Home</p>
+          </div>
+          {% if "0" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/layout/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Layout</p>
+          </div>
+          {%endif%} {% if "2" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/categories/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon">
+              <i class="categories-white"></i>
+            </div>
+            <p>Categories</p>
+          </div>
+          {%endif%} {% if "3" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/jobs/`, '_self');"
+            class="active left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+            <p>Carrers</p>
+          </div>
+          {%endif%} {% if "4" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/ads/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+            <p>Ads Spaces</p>
+          </div>
+          {%endif%} {% if "5" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/writers/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+            <p>Writers</p>
+          </div>
+          {%endif%} {% if "6" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/admins/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+            <p>Admins</p>
+          </div>
+          {%endif%}
+        </div>
+        <div id="footer">
+          <div onclick="adminLogout();" class="left-menu-tile">
+            <div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+      <div id="right-section">
+        <div class="body-card">
+          <div class="header">
+            <h3>Active Carrers</h3>
+            <p>Create / Update / Delete Jobs</p>
+            <div class="options">
+              <button
+                class="shadow-button"
+                onclick="openCarrerFormDialog('CREATE')"
+              >
+                Create
+              </button>
+            </div>
+          </div>
+          <div class="body">
+            {% for job in db_helper.jobs.all_jobs %}
+            <div class="carrer-card" id="{{job.id}}">
+              <p class="subtitle">{{job.subtitle['EN']}}</p>
+              <h3>{{job.title['EN']}}</h3>
+              <p class="bio">{{job.bio['EN']}}</p>
+              <div class="options">
+                <button
+                  class="shadow-button"
+                  onclick="openCarrerFormDialog(`EDIT`, {{dumps(job.to_dict())}});"
+                >
+                  Update</button
+                >|
+                <button class="shadow-button apps" id="{{job.id}}">
+                  Applications
+                </button>
+              </div>
+            </div>
+            {%endfor%}
+          </div>
+          <div class="options">
+            <button class="shadow-button">Reset</button>
+            <button class="main-button">Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="form-dialog-overlay" id="carrers-form-dialog-overlay"></div>
+    <div class="form-dialog" id="carrers-form-dialog">
+      <div class="header">
+        <h2></h2>
+        <div onclick="closeCarrerFormDialog();">x</div>
+      </div>
+      <div class="body">
+        <label for="en-title">English Title</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="en-title"
+          placeholder="English Title"
+        />
+        <label for="ar-title">Arabic Title</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="ar-title"
+          placeholder="Arabic Title"
+        />
+        <label for="en-subtitle">English Subtitle</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="en-subtitle"
+          placeholder="English Subtitle"
+        />
+        <label for="ar-subtitle">Arabic Subtitle</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="ar-subtitle"
+          placeholder="Arabic Subtitle"
+        />
+        <label for="en-bio">English Bio</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="en-bio"
+          placeholder="English Bio"
+        />
+        <label for="en-bio">Arabic Bio</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="ar-bio"
+          placeholder="Arabic Bio"
+        />
+        <label for="en-requirements">English Requirments</label>
+        <div class="multi-line-specs" id="en-requirements">
+          <div class="header">
+            <input
+              type="text"
+              class="single-line-field"
+              placeholder="English Requirments"
+            />
+            <button class="main-button">Add</button>
+          </div>
+          <div id="cards"></div>
+        </div>
+        <label for="ar-requirements">Arabic Requirments</label>
+        <div class="multi-line-specs" id="ar-requirements">
+          <div class="header">
+            <input
+              type="text"
+              class="single-line-field"
+              placeholder="Arabic Requirments"
+            />
+            <button class="main-button">Add</button>
+          </div>
+          <div id="cards"></div>
+        </div>
+        <label for="en-benefits">English Benefits</label>
+        <div class="multi-line-specs" id="en-benefits">
+          <div class="header">
+            <input
+              type="text"
+              class="single-line-field"
+              placeholder="English Benefits"
+            />
+            <button class="main-button">Add</button>
+          </div>
+          <div id="cards"></div>
+        </div>
+        <label for="ar-benefits">Arabic Benefits</label>
+        <div class="multi-line-specs" id="ar-benefits">
+          <div class="header">
+            <input
+              type="text"
+              class="single-line-field"
+              placeholder="Arabic Benefits"
+            />
+            <button class="main-button">Add</button>
+          </div>
+          <div id="cards"></div>
+        </div>
+        <label for="en-duties">English Duties</label>
+        <div class="multi-line-specs" id="en-duties">
+          <div class="header">
+            <input
+              type="text"
+              class="single-line-field"
+              placeholder="English Duties"
+            />
+            <button class="main-button">Add</button>
+          </div>
+          <div id="cards"></div>
+        </div>
+        <label for="ar-duties">Arabic Duties</label>
+        <div class="multi-line-specs" id="ar-duties">
+          <div class="header">
+            <input
+              type="text"
+              class="single-line-field"
+              placeholder="Arabic Duties"
+            />
+            <button class="main-button">Add</button>
+          </div>
+          <div id="cards"></div>
+        </div>
+        <label for="salaries">Salary Types</label>
+        <div id="salaries">
+          {% for salary_type in consts.salaries_types %}
+          <div class="salary-type-tile" id="{{salary_type}}">
+            {{content.salary_types['EN'][salary_type]}}
+          </div>
+          {%endfor%}
+        </div>
+        <label for="jobs">Job Types</label>
+        <div id="jobs">
+          {% for job_type in consts.job_types %}
+          <div class="job-type-tile" id="{{job_type}}">
+            {{content.job_types['EN'][job_type]}}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <div class="options">
+        <button class="shadow-button" id="delete" style="color: red">
+          Delete
+        </button>
+        <button
+          class="shadow-button"
+          id="clear"
+          onclick="clearCarrerFormDialog()"
+        >
+          Clear
+        </button>
+        <button
+          class="shadow-button"
+          id="cancel"
+          onclick="closeCarrerFormDialog()"
+        >
+          Cancel
+        </button>
+        <button class="main-button" id="submit">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+    <div class="form-dialog-overlay" id="application-form-dialog-overlay"></div>
+    <div class="form-dialog" id="application-form-dialog">
+      <div class="header">
+        <h2>Applications</h2>
+        <div onclick="closeApplicationsFormDialog();">x</div>
+      </div>
+      <div class="body">
+        <div class="carrer-card">
+          <p class="subtitle"></p>
+          <h3></h3>
+          <p class="bio"></p>
+          <p class="info"></p>
+        </div>
+        <div id="application-cards"></div>
+      </div>
+    </div>
+    <script>
+      const init = () => {
+        initCarrersData({{dumps(utils.mutliple_to_dicts(db_helper.jobs.all_jobs))|safe}});
+        const cards_= document.querySelectorAll('#right-section .body .carrer-card');
+        {% for job in db_helper.jobs.all_jobs %}
+          for (let card of cards_) {
+            if (card.id == '{{job.id}}') {
+              let action= card.querySelector('.shadow-button.apps');
+              action.onclick= ()=> {
+                openApplicationsFormDialog(
+                  {{dumps(job.to_dict()) | safe}},
+                  {{dumps(utils.mutliple_to_dicts(db_helper.jobs.get_application_by_job_id(job.id))) | safe}}
+                );
+              }
+            }
+          }
+
+        {%endfor%}
+      };
+
+      if (window.addEventListener) window.addEventListener('load', init);
+      if (window.attachEvent) window.attachEvent('load', init);
+    </script>
+  </body>
+</html>

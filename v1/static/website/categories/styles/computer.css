@@ -65,7 +65,9 @@
   .category-small-card .cover {
     min-width: 3vw;
     min-height: 3vw;
-    background: red;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .category-small-card .content {
@@ -93,7 +95,7 @@
 
   section#counts {
     width: 100%;
-    height: 20vw;
+    height: 15vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -112,14 +114,14 @@
   }
 
   .count h3 {
-    font-size: 8vw;
+    font-size: 6vw;
     font-family: var(--sff);
     font-weight: 700;
     color: white;
   }
 
   .count p {
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-family: var(--pff);
     font-weight: 500;
     color: ghostwhite;
@@ -173,7 +175,7 @@
   .featured_category_card {
     width: 100%;
     height: 100%;
-	max-height: 30vw;
+    max-height: 30vw;
     display: flex;
     align-items: start;
     justify-content: start;
@@ -182,7 +184,7 @@
     border-radius: 12px;
     transition: 500ms ease;
     padding: 0.5vw 1vw;
-	cursor: pointer;
+    cursor: pointer;
   }
 
   .featured_category_card:hover {

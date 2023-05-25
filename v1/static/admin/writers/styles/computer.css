@@ -1,0 +1,286 @@
+@media screen and (min-width: 1024px) {
+  .body-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    background-color: var(--body-bg-color);
+    border-radius: 12px;
+    padding: 0.5vw 1vw;
+    gap: 1vw;
+  }
+
+  .body-card .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 0.5vw;
+  }
+
+  .body-card .header h1 {
+    font-weight: 900;
+    font-size: 2vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  .body-card .header p {
+    font-weight: 300;
+    font-size: 1 vw;
+    font-family: var(--sff);
+    color: var(--primaryVareintColor);
+  }
+
+  .body-card .options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1vw;
+  }
+
+  .body-card .body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    max-height: 10000vw;
+    overflow-y: auto;
+  }
+
+  .writer-cards {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    row-gap: 0.5vw;
+  }
+
+  .writer-row:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .writer-row#header:hover {
+    background-color: transparent;
+  }
+
+  .writer-row {
+    transition: 250ms ease;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.5;
+    border-radius: 12px;
+  }
+  .writer-row-header {
+    border-radius: 12px;
+    transition: 250ms ease;
+    padding: 0 0.5vw;
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    gap: 0.5vw;
+  }
+  .writer-row-header#header {
+    max-height: 5vh;
+  }
+
+  .writer-row-cover {
+    min-width: 64px;
+    min-height: 64px;
+    display: flex;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #header .writer-row-cover {
+    opacity: 0;
+  }
+
+  .writer-row-code {
+    min-width: 10%;
+    max-width: 10%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: "Poppins";
+  }
+
+  .writer-row-title {
+    min-width: 25%;
+    max-width: 25%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: "Poppins";
+  }
+  .writer-row-email,
+  .writer-row-articles,
+  .writer-row-joinedin {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: "Poppins";
+  }
+
+  .writer-row-email,
+  .writer-row-articles {
+    min-width: 10%;
+    max-width: 10%;
+  }
+
+  .writer-row-email {
+    min-width: 25%;
+    max-width: 25%;
+  }
+
+  .writer-row-stock {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .writer-row-stock span {
+    font-weight: 500;
+    font-size: 0.75em;
+    font-family: "Poppins";
+  }
+
+  .writer-row-collapsable > * {
+    display: none;
+  }
+  .writer-row-collapsable {
+    width: 100%;
+    height: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    transition: 250ms ease;
+    max-height: 200vh;
+  }
+
+  .writer-row-collapsable-body {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 32px 1vw;
+  }
+
+  .writer-row-collapsable.active {
+    height: 40vh;
+    overflow-y: auto;
+  }
+
+  .writer-row-collapsable.active * {
+    display: flex;
+  }
+
+  .writer-row-collapsable-column {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    row-gap: 0.5;
+  }
+  .writer-row-collapsable-cover {
+    min-width: 8vw;
+    min-height: 8vw;
+    display: flex;
+    background-color: var(--bg-color);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 12px;
+    padding: 0.5 1vw;
+  }
+  .writer-row-collapsable-column-tile {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.2vw;
+  }
+
+  .writer-row-collapsable-column-tile > label {
+    font-weight: 300;
+    font-size: 0.7vw;
+    font-family: "Poppins";
+  }
+
+  .writer-row-collapsable-column-tile > h3 {
+    font-weight: 500;
+    font-size: 0.8vw;
+    font-family: "Poppins";
+  }
+
+  .writer-row-collapsable-column-tile > button {
+    font-weight: 500;
+    font-size: 0.5vw !important;
+    z-index: 5;
+    font-family: "Poppins";
+    color: #111;
+    text-decoration: underline;
+    /* padding-right: 4px; */
+    padding: 4px;
+  }
+
+  .form-dialog#invitations-dialog .body table {
+    font-family: var(--sff);
+    width: 100%;
+  }
+
+  .form-dialog#invitations-dialog .body table td,
+  .form-dialog#invitations-dialog .body table th {
+    border: 1px solid var(--bg-color);
+    padding: 0.5vw;
+  }
+
+  .form-dialog#invitations-dialog .body table tr:nth-child(even) {
+    background-color: var(--body-bg-color);
+  }
+
+  .form-dialog#invitations-dialog .body table tr:hover {
+    background-color: var(--bg-color);
+  }
+
+  .form-dialog#invitations-dialog .body table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--accentColor);
+    color: white;
+  }
+}

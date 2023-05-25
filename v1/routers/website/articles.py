@@ -31,6 +31,9 @@ class ArticlesRouter:
         def all_articles_index():
             lang = session.get('LANG', 'EN')
             mode = session.get('MODE', 'DARK')
+            self.helper.categories.load_data()
+            self.helper.ads.load_data()
+            self.layout.load()
             return render_template(
                 '/website/all_articles.html',
                 content=self.content,

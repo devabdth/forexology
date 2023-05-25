@@ -1,76 +1,807 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>FOREXology - Layout</title>
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='admin/layout/styles/computer.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='website/global/styles/computer.css')}}">
-	<script type="text/javascript" src="{{url_for('static', filename='admin/layout/scripts/main.js')}}"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FOREXology - Layout</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='admin/layout/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='admin/layout/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
-<body>
-	<style type="text/css">
+  <body>
+    <style type="text/css">
       :root {
         --pff: "Raleway";
         --sff: "Poppins";
       }
     </style>
 
-	<section>
-		<div id="left-section"></div>
-		<div id="right-section">
-			<div id="fragments-controllers">
-				<div onclick="manageFragments(this);" class="fragment-controller active" id="home">Home Page</div>
-				<div onclick="manageFragments(this);" class="fragment-controller" id="login">Login Page</div>
-				<div onclick="manageFragments(this);" class="fragment-controller" id="signup">SignUp Page</div>
-				<div onclick="manageFragments(this);" class="fragment-controller" id="complete-signup">Complete SignUp Page</div>
-				<div onclick="manageFragments(this);" class="fragment-controller" id="tools">Tools Page</div>
-				<div onclick="manageFragments(this);" class="fragment-controller" id="articles">Articles Page</div>
-			</div>
-			<div id="fragments">
-				<div id="home" class="fragment active">
-					<div class="collabsable active" id="featured-articles">
-						<div onclick="toggleCollapsable(this)" class="title">
-							<h2 class="title">Featured Articles</h2>
-							<p class="subtitle">Edit, or Disable Featured Articles that appears in the Entry Section<br>Minimum Selection: (2), Maximum Selection: (6)</p>
-						</div>
-						<div class="content">
-							<div class="options">
-								<button class="shadow-button">Random</button>
-								{% if layout.hme_featured_article | length == 0 %}
-									<button class="shadow-button" style="color: red;">Disable</button>
-								{%else%}
-									<button class="shadow-button">Enable</button>
-								{%endif%}
-							</div>
-							<div id="articles">
-								{% for article in db_helper.articles.multiple_articles_by_ads(layout.home_featured_articles)[:6] %}
-								<div class="article-card" id="{{article.id}}">
-									<div class="cover" style="background-image: url('/assets/articles/covers/{{article.id}}');"></div>
-									<div class="content">
-										<h3>{{article.title['EN']}}</h3>
-										<p>{{article.short_brief['EN'][:100]}}</p>
-										<div class="options">
-											<button class="shadow-button">Replace</button>
-										</div>
-									</div>
-								</div>
-								{%endfor%}
-							</div>
-							<div class="options">
-								<button class="shadow-button" onclick="window.open('./', '_self');" style="color: red"> Cancel</button>
-								<button class="main-button">Submit</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="login" class="fragment"></div>
-				<div id="signup" class="fragment"></div>
-				<div id="complete-signup" class="fragment"></div>
-				<div id="tools" class="fragment"></div>
-				<div id="articles" class="fragment"></div>
-			</div>
-		</div>
-	</section>
-</body>
+    <section class="admin">
+      <div id="left-section">
+        <div id="header">
+          <div id="logo"></div>
+          <p>{{admin_data['name']}}</p>
+        </div>
+        <div id="body">
+          <div
+            onclick="window.open(`/webapp/adminstration/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Home</p>
+          </div>
+          {% if "0" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/layout/`, '_self');"
+            class="active left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Layout</p>
+          </div>
+          {%endif%} {% if "2" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/categories/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon">
+              <i class="categories-white"></i>
+            </div>
+            <p>Categories</p>
+          </div>
+          {%endif%} {% if "3" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/jobs/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+            <p>Carrers</p>
+          </div>
+          {%endif%} {% if "4" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/ads/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+            <p>Ads Spaces</p>
+          </div>
+          {%endif%} {% if "5" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/writers/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+            <p>Writers</p>
+          </div>
+          {%endif%} {% if "6" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/admins/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+            <p>Admins</p>
+          </div>
+          {%endif%}
+        </div>
+        <div id="footer">
+          <div onclick="adminLogout();" class="left-menu-tile">
+            <div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+      <div id="right-section">
+        <div id="fragments-controllers">
+          <div
+            onclick="manageFragments(this);"
+            class="fragment-controller active"
+            id="home"
+          >
+            Home Page
+          </div>
+          <div
+            onclick="manageFragments(this);"
+            class="fragment-controller"
+            id="header"
+          >
+            Header Tabs
+          </div>
+        </div>
+        <div id="fragments">
+          <div id="home" class="fragment active">
+            <div class="collabsable" id="featured-articles">
+              <div onclick="toggleCollapsable(this)" class="title">
+                <h2 class="title">Featured Articles</h2>
+                <p class="subtitle">
+                  Edit, or Disable Featured Articles that appears in the Entry
+                  Section<br />Minimum Selection: (2), Maximum Selection: (6)
+                </p>
+              </div>
+              <div class="content">
+                <div class="options">
+                  <button class="shadow-button" id="select">Select</button>
+                </div>
+                <div id="articles">
+                  {% for article in
+                  db_helper.articles.multiple_articles_by_ids(layout.home_featured_articles)[:6]
+                  %}
+                  <div class="article-card" id="{{article.id}}">
+                    <div
+                      class="cover"
+                      style="background-image: url('/assets/articles/covers/{{article.id}}');"
+                    ></div>
+                    <div class="content">
+                      <h3>{{article.title['EN']}}</h3>
+                      <p>{{article.short_brief['EN'][:100]}}</p>
+                    </div>
+                  </div>
+                  {%endfor%}
+                </div>
+                <div class="options">
+                  <button
+                    class="shadow-button"
+                    onclick="window.open('./', '_self');"
+                    style="color: red"
+                  >
+                    Cancel
+                  </button>
+                  <button class="main-button">Submit</button>
+                </div>
+              </div>
+            </div>
+            <div class="collabsable" id="ads">
+              <div onclick="toggleCollapsable(this)" class="title">
+                <h2 class="title">Advertising</h2>
+                <p class="subtitle">
+                  Edit, or Remove Ads that appears in the Home Page<br />
+                </p>
+              </div>
+              <div class="content">
+                <div class="section">
+                  <div id="header">
+                    <p>Entry Section Ad</p>
+                    <button class="shadow-button" id="entry-section-ad">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space entrySectionAd"
+                      id="entry-section-ad"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space One</p>
+                    <button class="shadow-button" id="home_ad_space_one">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceOne"
+                      id="home_ad_space_one"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Two</p>
+                    <button class="shadow-button" id="home_ad_space_two">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceTwo"
+                      id="home_ad_space_two"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Three</p>
+                    <button class="shadow-button" id="home_ad_space_three">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceThree"
+                      id="home_ad_space_three"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Four</p>
+                    <button class="shadow-button" id="home_ad_space_four">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceFour"
+                      id="home_ad_space_four"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Five</p>
+                    <button class="shadow-button" id="home_ad_space_five">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceFive"
+                      id="home_ad_space_five"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Six</p>
+                    <button class="shadow-button" id="home_ad_space_six">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceSix"
+                      id="home_ad_space_six"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Seven</p>
+                    <button class="shadow-button" id="home_ad_space_seven">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceSeven"
+                      id="home_ad_space_seven"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Eight</p>
+                    <button class="shadow-button" id="home_ad_space_eight">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceEight"
+                      id="home_ad_space_eight"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Nine</p>
+                    <button class="shadow-button" id="home_ad_space_nine">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceNine"
+                      id="home_ad_space_nine"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Ten</p>
+                    <button class="shadow-button" id="home_ad_space_ten">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceTen"
+                      id="home_ad_space_ten"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Eleven</p>
+                    <button class="shadow-button" id="home_ad_space_eleven">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceEleven"
+                      id="home_ad_space_eleven"
+                    ></div>
+                  </div>
+                </div>
+                <div class="section">
+                  <div id="header">
+                    <p>AD Space Twelve</p>
+                    <button class="shadow-button" id="home_ad_space_twelve">
+                      Replace
+                    </button>
+                  </div>
+                  <div id="body">
+                    <div
+                      class="ad-space adSpaceTwelve"
+                      id="home_ad_space_twelve"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="collabsable" id="writers">
+              <div onclick="toggleCollapsable(this)" class="title">
+                <h2 class="title">Featured Writers</h2>
+                <p class="subtitle">
+                  Edit the writers that appears in the Home Page<br />
+                </p>
+              </div>
+              <div class="content">
+                <div class="options">
+                  <button class="shadow-button" id="select">Select</button>
+                </div>
+                <div id="writers">
+                  {%for writer in
+                  db_helper.writers.get_writers_by_ids(layout.home_featured_writers)%}
+                  <div class="writer-card" id="{{writer.id}}">
+                    <div
+                      class="cover"
+                      style="background-image: url('/assets/writers/bgFree/{{writer.id}}');"
+                    ></div>
+                    <div class="information">
+                      <h3>{{writer.name['EN']}}</h3>
+                      <p>{{writer.bio['EN'][:100]}}...</p>
+                    </div>
+                  </div>
+                  {%endfor%}
+                </div>
+              </div>
+            </div>
+            <div class="collabsable" id="carrers">
+              <div onclick="toggleCollapsable(this)" class="title">
+                <h2 class="title">Carrers</h2>
+                <p class="subtitle">
+                  Edit the carrers that appears in the Home Page<br />
+                </p>
+              </div>
+              <div class="content">
+                <div class="options">
+                  <button class="shadow-button" id="select">Select</button>
+                </div>
+                <div id="carrers">
+                  {%for carrer in db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs)%}
+                  <div class="carrer-card" id="{{carrer.id}}">
+                    <div class="information">
+                      <h3>{{carrer.title['EN']}}</h3>
+                      <p>{{carrer.bio['EN'][:100]}}...</p>
+                    </div>
+                  </div>
+                  {%endfor%}
+                </div>
+              </div>
+            </div>
+            <div id="options">
+              <button
+                class="shadow-button"
+                onclick="window.open('./', '_self');"
+              >
+                Reset
+              </button>
+              <button class="main-button" onclick="homeFragmentSave();">
+                Save
+              </button>
+            </div>
+          </div>
+          <div id="header" class="fragment">
+            <div class="header">
+              <h3>Header Tabs</h3>
+              <p>Add / Edit tabs that appears in header!</p>
+              <div class="options">
+                <button class="shadow-button" onclick="openHeaderTabsAddDialog()">Add</button>
+              </div>
+
+            </div>
+            <div id="cards">
+              {%for tab in layout.header_tabs %}
+                <div class="header-tab-card" id="{{tab['id']}}">
+                  {% if tab['mode'] == 'link'%}
+                    <p class="direction"><span>Direction:</span> {{content.tabs['EN'][tab['text']]}}</p>
+                    <p class="mode"><span>Mode:</span> {{tab['mode']}} - <span>Type:</span> Tab</p>
+                    <p onclick="window.open(`{{tab['redirect']}}`);" class="redirect"><span>Redirect: </span> {{tab['redirect']}}</p>
+                    <div class="options">
+                      <button class="shadow-button" onclick="deleteHeaderTab(`{{tab['id']}}`)">Remove</button>
+                    </div>
+                  {% elif tab['mode'] == 'category' %}
+                    <p class="direction"><span>Direction:</span> {{db_helper.categories.get_category_by_id(tab['categoryId']).name['EN']}}</p>
+                    <p class="mode"><span>Mode:</span> {{tab['mode']}} - <span>Type:</span> Tab</p>
+                    <p onclick="window.open(`/categories/{{tab['categoryId']}}`);" class="redirect"><span>Redirect: </span> /categories/{{tab['categoryId']}}</p>
+                    <div class="options">
+                      <button class="shadow-button" onclick="deleteHeaderTab(`{{tab['id']}}`)">Remove</button>
+                    </div>
+                  {% elif tab['mode'] == 'classification' %}
+                    <p class="direction"><span>Direction:</span> {{db_helper.categories.get_parent_category_by_id(tab['classificationId']).name['EN']}}</p>
+                    <p class="mode"><span>Mode:</span> {{tab['mode']}} - <span>Type:</span> Dropdown</p>
+                    <p onclick="window.open(`/classification/{{tab['classificationId']}}`);" class="redirect"><span>Redirect: </span> /classification/{{tab['classificationId']}}</p>
+                    <div class="options">
+                      <button class="shadow-button" onclick="deleteHeaderTab(`{{tab['id']}}`)">Remove</button>
+                    </div>
+                  {%endif%}
+                </div>
+              {%endfor%}
+            </div>
+            <div id="options">
+              <button
+                class="shadow-button"
+                onclick="window.open('./', '_self');"
+              >
+                Reset
+              </button>
+              <button class="main-button" onclick="headerTabsFragmentSave();">
+                Save
+              </button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="article-selection-dialog-overlay"></div>
+    <div id="ad-selection-dialog-overlay"></div>
+    <div id="writers-selection-dialog-overlay"></div>
+    <div id="tabs-selection-dialog-overlay"></div>
+    <div id="carrers-selection-dialog-overlay"></div>
+    <div id="tabs-selection-dialog">
+      <div id="header">
+        <h2>Header Tabs Selection</h2>
+        <div onclick="closeHeaderTabsAddDialog();">x</div>
+      </div>
+      <div id="body">
+        {%for tab in consts.header_fixed_tabs %}
+        {% if tab['mode'] == 'link'%}
+        <div class="header-tab-card" id="{{tab['id']}}">
+          <p class="direction"><span>Direction:</span> {{content.tabs['EN'][tab['text']]}}</p>
+            <p class="mode"><span>Mode:</span> {{tab['mode']}} - <span>Type:</span> Tab</p>
+            <p onclick="window.open(`{{tab['redirect']}}`);" class="redirect"><span>Redirect: </span> {{tab['redirect']}}</p>
+            <div class="options">
+              <button class="shadow-button">Select</button>
+            </div>
+          </div>
+          {%endif%}
+          {%endfor%}
+          {% for category in db_helper.categories.active_cats %}
+            <div class="header-tab-card" id="{{category.id}}">
+              <p class="direction"><span>Direction:</span> {{category.name['EN']}}</p>
+              <p class="mode"><span>Mode:</span> 'Category' - <span>Type:</span> Tab</p>
+              <p onclick="window.open(`/categories/{{category.id}}`);" class="redirect"><span>Redirect: </span> /categories/{{category.id}}</p>
+              <div class="options">
+                <button class="shadow-button">Select</button>
+              </div>
+            </div>
+          {%endfor%}
+          {% for classification in db_helper.categories.parent_cats %}
+            <div class="header-tab-card" id="{{classification.id}}">
+              <p class="direction"><span>Direction:</span> {{classification.name['EN']}}</p>
+              <p class="mode"><span>Mode:</span> 'Classification' - <span>Type:</span> Tab</p>
+              <p onclick="window.open(`/categories/{{classification.id}}`);" class="redirect"><span>Redirect: </span> /categories/{{classification.id}}</p>
+              <div class="options">
+                <button class="shadow-button">Select</button>
+              </div>
+            </div>
+          {%endfor%}
+      </div>
+      <div id="options">
+        <button class="shadow-button" onclick="closeHeaderTabsAddDialog();">
+          Cancel
+        </button>
+        <p id="status"></p>
+      </div>
+    </div>
+    <div id="writers-selection-dialog">
+      <div id="header">
+        <h2>Writers Selection</h2>
+        <div onclick="closeWritersSelectionDialog();">x</div>
+      </div>
+      <div id="body">
+        <p>Selected Writers</p>
+        <div id="selected-writers"></div>
+        <p>All Writers</p>
+        <div id="all-writers"></div>
+      </div>
+      <div id="options">
+        <button class="shadow-button" onclick="closeWritersSelectionDialog();">
+          Cancel
+        </button>
+        <button class="main-button">Confirm</button>
+        <p id="status"></p>
+      </div>
+    </div>
+    <div id="carrers-selection-dialog">
+      <div id="header">
+        <h2>Carrers Selection</h2>
+        <div onclick="closeCarrersSelectionDialog();">x</div>
+      </div>
+      <div id="body">
+        <p>Selected Carrers</p>
+        <div id="selected-carrers"></div>
+        <p>All Carrers</p>
+        <div id="all-carrers"></div>
+      </div>
+      <div id="options">
+        <button class="shadow-button" onclick="closeCarrersSelectionDialog();">
+          Cancel
+        </button>
+        <button class="main-button">Confirm</button>
+        <p id="status"></p>
+      </div>
+    </div>
+    <div id="ad-selection-dialog">
+      <div id="header">
+        <h2>ADs Selection</h2>
+        <div onclick="closeADSelectionDialog();">x</div>
+      </div>
+      <div id="body">
+        <p>Selected Ad</p>
+        <div id="selected-ad"></div>
+        <p>All Ads</p>
+        <div id="ads-cards"></div>
+      </div>
+      <div id="options">
+        <button class="shadow-button" onclick="closeADSelectionDialog();">
+          Cancel
+        </button>
+        <button class="main-button">Confirm</button>
+        <p id="status"></p>
+      </div>
+    </div>
+    <div id="article-selection-dialog">
+      <div id="header">
+        <h2>Article Selection</h2>
+        <div onclick="closeArticleSelectionDialog();">x</div>
+      </div>
+      <div id="body">
+        <div id="selected-articles"></div>
+        <div id="filter">
+          <input
+            type="name"
+            name="name"
+            class="single-line-field"
+            id="name-field"
+            placeholder="Article Title"
+          />
+          <button class="main-button">Search</button>
+        </div>
+        <div id="cards">
+          {% for article in db_helper.articles.get_all_articles() %}
+          <div class="search-dialog-article-card-border">
+            <div class="search-dialog-article-card" id="{{article.id}}">
+              <div
+                class="cover"
+                style="background-image: url(/assets/articles/covers/{{article.id}});"
+              ></div>
+              <div class="content">
+                <div class="classification">
+                  {% set parent_category=
+                  db_helper.categories.get_parent_category_by_id(article.parent_category)
+                  %} {% if parent_category %}
+                  <h4>{{parent_category.name[lang]}}</h4>
+                  {%endif%} {% set category=
+                  db_helper.categories.get_category_by_id(article.category)%} {%
+                  if category %}
+                  <h4>{{category.name[lang]}}</h4>
+                  {%endif%}
+                </div>
+                <h3>{{article.title[lang]}}</h3>
+                <p>{{article.short_brief[lang]}}</p>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <div id="options">
+        <button class="shadow-button" onclick="closeArticleSelectionDialog();">
+          Cancel
+        </button>
+        <button class="main-button">Confirm</button>
+        <p id="status"></p>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const init= async ()=> {
+      	initArticles({{dumps(utils.mutliple_to_dicts(db_helper.articles.get_all_articles())) | safe}});
+      	initAds({{dumps(utils.mutliple_to_dicts(db_helper.ads.active_ads)) | safe}});
+      	initCarreres({{dumps(utils.mutliple_to_dicts(db_helper.jobs.all_jobs)) | safe}});
+      	initWriters({{dumps(utils.mutliple_to_dicts(db_helper.writers.all_writers)) | safe}});
+        initHeaderTabs({{dumps(utils.mutliple_to_dicts(db_helper.categories.active_cats)) | safe }}, {{dumps(utils.mutliple_to_dicts(db_helper.categories.parent_cats))|safe}});
+        initSelectedTabs({{dumps(layout.header_tabs)|safe}});
+      	document.querySelector('div.fragment#home .options #select').onclick= ()=> {
+      		openArticleSelectionDialog({
+      			initiallySelectedArticles: {{dumps(utils.mutliple_to_dicts(db_helper.articles.multiple_articles_by_ids(layout.home_featured_articles)[:6])) | safe}},
+      			placementParent: document.querySelector('div.fragment#home div#articles'),
+      			limit: 6,
+      			minimum: 2,
+      		});
+      	}
+      	document.querySelector('.collabsable#writers #select').onclick= ()=> {
+      		openWritersSelectionDialog({
+      					initialillySelectedWriters: {{dumps(utils.mutliple_to_dicts(db_helper.writers.get_writers_by_ids(layout.home_featured_writers))) | safe}},
+      					lang: 'EN',
+      					limit: 6,
+      					minimum: 6,
+      					placementParent: document.querySelector('.collabsable#writers #writers')
+      				});
+      	}
+      	document.querySelector('.collabsable#carrers #select').onclick= ()=> {
+      		openCarrersSelectionDialog({
+      			lang: 'EN',
+      			minimum: 0,
+      			limit: 6,
+      			initialillySelectedCarrers: {{dumps(utils.mutliple_to_dicts(db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs))) | safe}},
+      				placementParent: document.querySelector('.collabsable#carrers #carrers')
+      		});
+      	}
+      	document.querySelector('.shadow-button#entry-section-ad').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_entry_section_ad).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#entry-section-ad'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_one').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_one).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_one'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_two').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_two).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_two'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_three').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_three).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_three'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_four').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_four).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_four'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_five').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_five).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_five'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_six').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_six).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_six'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_seven').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_seven).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_seven'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_eight').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_eight).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_eight'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_nine').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_nine).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_nine'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_ten').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_ten).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_ten'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_eleven').onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_eleven'),
+      		})
+
+      	}
+      	document.querySelector('.shadow-button#home_ad_space_twelve')			.onclick= ()=> {
+      		openADSelectionDialog({
+      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve).to_dict()) | safe}},
+      			placementParent: document.querySelector('.ad-space#home_ad_space_twelve'),
+      		})
+
+      	}
+              await initializeAdSpace(document.querySelector('.ad-space#entry-section-ad'), {{db_helper.ads.get_ad_by_id(layout.home_entry_section_ad).to_dict() | safe}}, 'EN');
+            {% if not layout.home_ad_space_one == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_one'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_one).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_two == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_two'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_two).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_three == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_three'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_three).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_four == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_four'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_four).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_five == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_five'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_five).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_six == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_six'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_six).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_seven == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_seven'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_seven).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_eight == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_eight'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eight).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_nine == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_nine'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_nine).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_ten == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_ten'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_ten).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_eleven == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_eleven'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not layout.home_ad_space_twelve == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_twelve'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+      }
+
+      if (window.attachEvent) window.attachEvent('load', init);
+      else if (window.addEventListener) window.addEventListener('load', init);
+    </script>
+  </body>
 </html>

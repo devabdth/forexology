@@ -4,9 +4,65 @@ from json import loads
 
 class Consts:
     def __init__(self):
+        self.salaries_types= [0, 1, 2, 3, 4, 5]
+
+        self.job_types= [0, 1, 2, 3]
+
         self.covers_supported_extenstions: list = [
             'png', 'jpg', 'jpeg', 'gif', 'jfjf'
         ]
+        self.cvs_supported_extenstions: list = [
+            'pdf'
+        ]
+        self.admin_accesses= {
+            "0": "Layout",
+            "1": "CRM",
+            "2": "Categories",
+            "3": "Carrers",
+            "4": "Ads Spaces",
+            "5": "Writers",
+            "6": "Admins"
+        }
+
+        self.header_fixed_tabs= [
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af0cb',
+                "mode": 'link',
+                "text": 'home',
+                "redirect": '/'
+            },
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af1cb',
+                "mode": 'link',
+                "text": 'aboutUs',
+                "redirect": '/about/'
+            },
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af2cb',
+                "mode": 'link',
+                "text": 'articles',
+                "redirect": '/articles/'
+            },
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af3cb',
+                "mode": 'link',
+                "text": 'carrers',
+                "redirect": '/carrers/'
+            },
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af4cb',
+                "mode": 'link',
+                "text": 'categories',
+                "redirect": '/categories/'
+            },
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af5cb',
+                "mode": 'link',
+                "text": 'classification',
+                "redirect": '/classification/'
+            }
+        ]
+
         self.podcast_supported_extenstions: list = ["mp3"]
         self.video_supported_extenstions: list = ["mp4"]
 
@@ -28,11 +84,16 @@ class Consts:
             self.signup_route = data['WEBSITE_SIGNUP_ROUTE']
             self.join_route = data['WEBSITE_JOIN_ROUTE']
             self.articles_covers = data['WEBSITE_ASSETS_ARTICLES_COVERS_ROUTE']
+            self.ads_covers = data['WEBSITE_ASSETS_ADS_COVERS_ROUTE']
             self.articles_podcast = data['WEBSITE_ARTICLE_PODCAST_ROUTE']
             self.categories_covers = data['WEBSITE_ASSETS_CATEGORIES_COVERS_ROUTE']
+            self.categories_icons = data['WEBSITE_ASSETS_CATEGORIES_ICONS_ROUTE']
             self.categories_route = data['WEBSITE_CATEGORIES_ROUTE']
+            self.single_category_route = data['WEBSITE_SINGLE_CATEGORY_ROUTE']
             self.writers_bg_free = data['WEBSITE_ASSETS_WRITERS_BGREE_ROUTE']
             self.writers_images = data['WEBSITE_ASSETS_WRITERS_ROUTE']
+            self.writers_covers = data['WEBSITE_ASSETS_WRITERS_COVERS_ROUTE']
+            self.applications_cvs = data['WEBSITE_ASSETS_JOB_APPLICATIONS_CVS_ROUTE']
             self.article_route = data['WEBSITE_ARTICLE_ROUTE']
             self.read_route = data['WEBSITE_READ_ROUTE']
             self.journal_route = data['WEBSITE_JOURNAL_ROUTE']
@@ -41,6 +102,16 @@ class Consts:
             self.all_articles_route = data['WEBSITE_ARTICLEs_ROUTE']
             self.all_articles_read_route = data['WEBSITE_ARTICLES_READ_ROUTE']
             self.all_articles_journal_route = data['WEBSITE_ARTICLES_JOURNAL_ROUTE']
+            self.writer_route = data['WEBSITE_WRITER_ROUTE']
 
             # Admin Routers
+            self.admin_login_route = data['ADMIN_LOGIN_ROUTE']
+            self.admin_logout_route = data['ADMIN_LOGOUT_ROUTE']
             self.admin_layout_route = data['ADMIN_LAYOUT_ROUTE']
+            self.admin_carrers_route = data['ADMIN_CARRERS_ROUTE']
+            self.admin_categories_route = data['ADMIN_CATEGORIES_ROUTE']
+            self.admin_parent_categories_route = data['ADMIN_PARENT_CATEGORIES_ROUTE']
+            self.admin_main_page = data['ADMIN_MAIN_ROUTE']
+            self.admins_management_page = data['ADMIN_MANAGEMENT_ROUTE']
+            self.admin_ads_route = data['ADMIN_ADS_ROUTE']
+            self.admin_writers_route = data['ADMIN_WRITERS_ROUTE']

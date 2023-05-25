@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FOREXology - ADs</title>
+	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='admin/ads/styles/computer.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='website/global/styles/computer.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='admin/ads/scripts/main.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='website/global/scripts/main.js')}}"></script>
+	
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+	<style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+	<section class="admin">
+		<div id="left-section">
+			<div id="header">
+				<div id="logo"></div>
+				<p>{{admin_data['name']}}</p>
+			</div>
+			<div id="body">
+				<div onclick="window.open(`/webapp/adminstration/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="home-white"></i></div>
+					<p>Home</p>
+				</div>				
+				{% if "0" in admin_data['accesses'] %}
+				<div onclick="window.open(`/webapp/adminstration/layout/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+					<p>Layout</p>
+				</div>
+				{%endif%} {% if "2" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/categories/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="categories-white"></i></div>
+					<p>Categories</p>
+				</div>
+				{%endif%} {% if "3" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/jobs/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+					<p>Carrers</p>
+				</div>
+				{%endif%} {% if "4" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/ads/`, '_self');" class="active left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+					<p>Ads Spaces</p>
+				</div>
+				{%endif%} {% if "5" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/writers/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+					<p>Writers</p>
+				</div>
+				{%endif%} {% if "6" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/admins/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+					<p>Admins</p>
+				</div>
+				{%endif%}
+			</div>
+			<div id="footer">
+			<div onclick="adminLogout();" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+					<p>Logout</p>
+				</div>
+			</div>
+		</div>
+		<div id="right-section">
+			<div class="body-card">
+				<div id="header">
+					<h1>AD Spaces</h1>
+					<button class="main-button" onclick="openAdsFormDialog('CREATE');">Create</button>
+				</div>
+				<div id="body">
+					{% for ad in db_helper.ads.active_ads %}
+						<div class="ad-space" id="{{ad.id}}"></div>
+					{%endfor%}
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="form-dialog-overlay" id="ads-form"></div>
+	<div class="form-dialog" id="ads-form">
+		<div class="header">
+			<h2></h2>
+			<div onclick="closeAdFormDialog();">x</div>
+		</div>
+		<div class="body">
+			<div id="form">
+				<h2>Form</h2>
+				<label>English Subtitle</label>
+				<input class="single-line-field" type="name" name="en-subtitle" id="en-subtitle" placeholder="English Subtitle">
+				<label>Arabic Subtitle</label>
+				<input class="single-line-field" type="name" name="ar-subtitle" id="ar-subtitle" placeholder="Arabic Subtitle">
+				<label>English Title</label>
+				<input class="single-line-field" type="name" name="en-title" id="en-title" placeholder="English Title">
+				<label>Arabic Title</label>
+				<input class="single-line-field" type="name" name="ar-title" id="ar-title" placeholder="Arabit Title">
+				<label>English Bio</label>
+				<textarea class="mutli-line-field" id="en-bio" placeholder="English Bio"></textarea>
+				<label>Arabic Bio</label>
+				<textarea class="mutli-line-field" id="ar-bio" placeholder="Arabic Bio"></textarea>
+				<label>Redirect</label>
+				<input class="single-line-field" type="url" name="redirect" id="redirect" placeholder="Redirect">
+				<label>Background Mode</label>
+				<div id="background-mode">
+					<div class="background-fragment" id="color">Color</div>
+					<div class="background-fragment" id="bg">Background Image</div>
+				</div>
+				<div id="background-mode-select"></div>
+			</div>
+			<div id="display">
+				<h2>Preview</h2>
+				<div class="ad-space" id="vertical-preview"></div>
+				<div class="ad-space" id="horizontal-preview"></div>
+			</div>
+		</div>
+		<div class="options">
+			<button class="shadow-button" id="delete" style="color: red;">Delete</button>
+			<button class="shadow-button" id="clear">Clear</button>
+			<button class="shadow-button" id="cancel" onclick="closeAdFormDialog();">Cancel</button>
+			<button class="main-button" id="submit">Submit</button>
+			<p id="status-msg"></p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const init= ()=> {
+			{% for ad in db_helper.ads.active_ads %}
+				initializeAdSpace(document.getElementById('{{ad.id}}'), {{dumps(ad.to_dict()) | safe}}, 'EN', ()=> {
+					openAdsFormDialog('EDIT', {{dumps(ad.to_dict()) | safe}});
+				});
+			{%endfor%}
+
+		}
+
+		if (window.attachEvent) window.attachEvent('load', init);
+		else if (window.addEventListener) window.addEventListener('load', init);
+	</script>
+</body>
+</html>

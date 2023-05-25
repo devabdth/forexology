@@ -4,6 +4,7 @@ from .ads import AdsDatabaseHelper
 from .writers import WritersDatabaseHelper
 from .jobs import JobsDatabaseHelper
 from .jobs_applications import JobApplicationDatabaseHelper
+from .admins import AdminsDatabaseHelper
 
 
 class DatabaseHelper:
@@ -14,3 +15,4 @@ class DatabaseHelper:
         self.writers = WritersDatabaseHelper()
         self.jobs = JobsDatabaseHelper()
         self.jobs_applications = JobApplicationDatabaseHelper()
+        self.admins= AdminsDatabaseHelper()

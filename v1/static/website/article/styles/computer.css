@@ -633,6 +633,10 @@
     height: 10vw;
   }
 
+  section.writer-section .writer-card .social-media-link .main-icon-button {
+    background-color: white;
+  }
+
   section.writer-section .writer-card .main-button {
     font-size: 0.75vw;
   }

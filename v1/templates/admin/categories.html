@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FOREXology - Categories</title>
+	<link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='admin/categories/styles/computer.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='website/global/styles/computer.css')}}">
+	<script type="text/javascript" src="{{url_for('static', filename='admin/categories/scripts/main.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='website/global/scripts/main.js')}}"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+	<style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+	<section class="admin">
+		<div id="left-section">
+			<div id="header">
+				<div id="logo"></div>
+				<p>{{admin_data['name']}}</p>
+			</div>
+			<div id="body">
+				<div onclick="window.open(`/webapp/adminstration/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="home-white"></i></div>
+					<p>Home</p>
+				</div>				
+				{% if "0" in admin_data['accesses'] %}
+				<div onclick="window.open(`/webapp/adminstration/layout/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+					<p>Layout</p>
+				</div>
+				{%endif%} {% if "2" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/categories/`, '_self');" class="active left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="categories-white"></i></div>
+					<p>Categories</p>
+				</div>
+				{%endif%} {% if "3" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/jobs/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+					<p>Carrers</p>
+				</div>
+				{%endif%} {% if "4" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/ads/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+					<p>Ads Spaces</p>
+				</div>
+				{%endif%} {% if "5" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/writers/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+					<p>Writers</p>
+				</div>
+				{%endif%} {% if "6" in admin_data['accesses'] %} 
+				<div onclick="window.open(`/webapp/adminstration/admins/`, '_self');" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+					<p>Admins</p>
+				</div>
+				{%endif%}
+			</div>
+			<div id="footer">
+			<div onclick="adminLogout();" class="left-menu-tile">
+					<div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+					<p>Logout</p>
+				</div>
+			</div>
+		</div>
+		<div id="right-section">
+			<div class="body-card">
+				<div class="header">
+					<h2>Categories</h2>
+					<button class="main-button" onclick="openFormDialog('CREATE')">Create</button>
+				</div>
+				<div class="cards">
+					{% for cat in db_helper.categories.active_cats %}
+						<div class="category-card" onclick='openFormDialog(`EDIT`, {{dumps(cat.to_dict()) |safe}});'>
+							<div class="cover" style="background-image: url('/assets/categories/covers/{{cat.id}}/');"></div>
+							<div class="icon" style="background-image: url('/assets/categories/icons/{{cat.id}}/');"></div>
+							<div class="information">
+								{% set pcat= db_helper.categories.get_parent_category_by_category_id(cat.id) %}
+								{%if pcat %}
+									<p class="classification">{{pcat.name['EN']}}</p>
+								{%endif%}
+								<h3>{{cat.name['EN']}}</h3>
+								<p class="bio">{{cat.bio['EN'][:200]}}...</p>
+							</div>
+						</div>
+					{%endfor%}
+				</div>
+			</div>
+			<div class="body-card">
+				<div class="header">
+					<h2>Classification (Parent Categories)</h2>
+					<button class="main-button" onclick="openParentFormDialog('CREATE')">Create</button>
+				</div>
+				<div class="cards">
+					{% for pcat in db_helper.categories.parent_cats %}
+						<div class="parent-category-card" onclick='openParentFormDialog(`EDIT`, {{dumps(pcat.to_dict(without_cats= True)) |safe}});'>
+							<h3>{{pcat.name['EN']}}</h3>
+							<p class="bio">{{pcat.bio['EN'][:200]}}...</p>
+							<p class="categories">{{pcat.categories | length}} Categories</p>
+						</div>
+					{%endfor%}
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="form-dialog-overlay" id="category"></div>
+	<div class="form-dialog" id="category">
+		<div class="header">
+			<h2>Create</h2>
+			<div onclick="closeFormDialog();">x</div>
+		</div>
+		<div class="body">
+			<label>English Name</label>
+			<input type="name" name="enName" id="cat-en-name" class="single-line-field" placeholder="English Name">
+			<label>Arabic Name</label>
+			<input type="name" name="arName" id="cat-ar-name" class="single-line-field" placeholder="Arabic Name">
+			<label>English Bio</label>
+			<textarea class="mutli-line-field" placeholder="English Bio" name="enBio" id="cat-en-bio"></textarea>
+			<label>Arabic Bio</label>
+			<textarea class="mutli-line-field" placeholder="Arabic Bio" name="arBio" id="cat-ar-bio"></textarea>
+			<label>Tags</label>
+			<div class="tags">
+				<div class="header">
+					<input type="name" name="tag" placeholder="Tag / Keyword" class="single-line-field" id="cat-tags">
+					<button class="main-button" id="tags-submit">Add</button>
+				</div>
+				<div class="body">
+				</div>
+			</div>
+			<label>Icon</label>
+			<div class="icon"></div>
+			<label>Cover</label>
+			<div class="cover"></div>
+		</div>
+		<div class="options">
+			<button class="shadow-button" style="color: red" id="delete-btn">Delete</button>
+			<button class="shadow-button" onclick="clearCategoryForm();">Clear</button>
+			<button class="shadow-button" onclick="closeFormDialog();">Cancel</button>
+			<button class="main-button">Confirm</button>
+			<p id="status-msg"></p>
+		</div>
+	</div>
+	<div class="form-dialog-overlay" id="parent-category"></div>
+	<div class="form-dialog" id="parent-category">
+		<div class="header">
+			<h2>Create</h2>
+			<div onclick="closeParentFormDialog();">x</div>
+		</div>
+		<div class="body">
+			<label>English Name</label>
+			<input type="name" name="enName" id="cat-en-name" class="single-line-field" placeholder="English Name">
+			<label>Arabic Name</label>
+			<input type="name" name="arName" id="cat-ar-name" class="single-line-field" placeholder="Arabic Name">
+			<label>English Bio</label>
+			<textarea class="mutli-line-field" placeholder="English Bio" name="enBio" id="cat-en-bio"></textarea>
+			<label>Arabic Bio</label>
+			<textarea class="mutli-line-field" placeholder="Arabic Bio" name="arBio" id="cat-ar-bio"></textarea>
+			<label>Tags</label>
+			<div class="tags">
+				<div class="header">
+					<input type="name" name="tag" placeholder="Tag / Keyword" class="single-line-field" id="cat-tags">
+					<button class="main-button" id="tags-submit">Add</button>
+				</div>
+				<div class="body">
+				</div>
+			</div>
+			<div class="categories"></div>
+		</div>
+		<div class="options">
+			<button class="shadow-button" style="color: red" id="delete-btn">Delete</button>
+			<button class="shadow-button" onclick="clearParentCategoryForm();">Clear</button>
+			<button class="shadow-button" onclick="closeParentFormDialog();">Cancel</button>
+			<button class="main-button">Confirm</button>
+			<p id="status-msg"></p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const init= ()=> {
+			initCategories({{dumps(utils.mutliple_to_dicts(db_helper.categories.active_cats)) | safe}})
+		}
+
+		if (window.attachEvent) window.attachEvent('load', init);
+		else if (window.addEventListener) window.addEventListener('load', init);
+	</script>
+</body>
+</html>

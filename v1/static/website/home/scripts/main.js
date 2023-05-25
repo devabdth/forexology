@@ -10,7 +10,7 @@ const initializeFragments = (articles, lang, categories) => {
 		articleCard.classList.add('fragment');
 		articleCard.setAttribute('id', `fragment-${articles.indexOf(article)}`);
 		articleCard.style.backgroundImage = `url(/assets/articles/covers/${article['id']})`;
-		articleCard.onclick= ()=> {
+		articleCard.onclick = () => {
 			window.open(`/articles/${article['id']}`, '_self');
 		}
 
@@ -22,7 +22,7 @@ const initializeFragments = (articles, lang, categories) => {
 
 		const dateLabel = document.createElement('p'), categoryLabel = document.createElement('p');
 		categoryLabel.classList.add('category');
-		let category= categories.filter(cat=> cat['id'] == article['category'])[0];
+		let category = categories.filter(cat => cat['id'] == article['category'])[0];
 		categoryLabel.innerText = category['name'][lang];
 		labellingSection.appendChild(categoryLabel);
 
@@ -106,88 +106,44 @@ const selectFragmentByTab = (i) => {
 
 const showArticleByIndex = (i) => { }
 
-let currentSelectedCategoryFragment= -1;
-const initializeCategoriesFragments= (categories)=> {
-	categories= categories.map(cat=> cat.id);
-	let categoriesTabs= categories.map(catId=> document.querySelector(`.articles-category-tab#${catId}`))
-	const allTab= document.querySelector('.articles-category-tab#all');
-	allTab.onclick= ()=> {
+let currentSelectedCategoryFragment = -1;
+const initializeCategoriesFragments = (categories) => {
+	categories = categories.map(cat => cat.id);
+	let categoriesTabs = categories.map(catId => document.querySelector(`#tab-${catId}`))
+	const allTab = document.querySelector('.articles-category-tab#tab-all');
+	allTab.onclick = () => {
 		if (currentSelectedCategoryFragment == -1) return;
 
-		const activeFragment= document.querySelector(`.articles-category-fragment#${categories[currentSelectedCategoryFragment]}`);
+		const activeFragment = document.querySelector(`#fragment-${categories[currentSelectedCategoryFragment]}`);
 		activeFragment.classList.remove('active');
 
-		const allFragment= document.querySelector(`.articles-category-fragment#all-fragment`);
+		const allFragment = document.querySelector(`#fragment-all-fragment`);
 		allFragment.classList.add('active');
-			
-		const activeTab= document.querySelector('.articles-category-tab.active');
+
+		const activeTab = document.querySelector('.articles-category-tab.active');
 		activeTab.classList.remove('active');
 
 		allTab.classList.add('active');
 
-		currentSelectedCategoryFragment= -1
+		currentSelectedCategoryFragment = -1
 	}
 
 	for (let i in categoriesTabs) {
-		categoriesTabs[i].onclick= ()=> {
+		categoriesTabs[i].onclick = () => {
 			if (currentSelectedCategoryFragment === i) return;
 
-			const activeFragment= document.querySelector(`.articles-category-fragment#${currentSelectedCategoryFragment==-1? 'all-fragment': categories[currentSelectedCategoryFragment]}`);
+			const activeFragment = document.querySelector(`#fragment-${currentSelectedCategoryFragment == -1 ? 'all-fragment' : categories[currentSelectedCategoryFragment]}`);
 			activeFragment.classList.remove('active');
 
-			const currentFragment= document.querySelector(`.articles-category-fragment#${categories[i]}`);
+			const currentFragment = document.querySelector(`#fragment-${categories[i]}`);
 			currentFragment.classList.add('active');
 
-			const activeTab= document.querySelector('.articles-category-tab.active');
+			const activeTab = document.querySelector('.articles-category-tab.active');
 			activeTab.classList.remove('active');
 
 			categoriesTabs[i].classList.add('active');
-			currentSelectedCategoryFragment= i;
+			currentSelectedCategoryFragment = i;
 
 		}
 	}
-}
-
-
-const initializeAdSpace= async (container, ad, lang)=> {
-	container.onclick= ()=> {
-		window.open(ad['redirect']);
-	}
-
-	if (ad['background_mode'] == 'IMAGE') {
-		container.style.backgroundImage= `url(/assets/ads/${ad['id']})`;
-	}
-	else if (ad['background_mode'] == 'COLOR') {
-		container.style.backgroundColor= ad['background'];
-
-	}
-
-	if (ad['title'] !== "None" && ad['subtitle'] !== "None" && ad['bio'] !== "None") {
-		const snippet= document.createElement('p');
-		snippet.classList.add('snippet');
-		snippet.innerHTML= lang == 'EN'? '> AD': '> إعلان';
-
-		const overlay= document.createElement('div');
-		overlay.setAttribute('id','overlay');
-		overlay.style.background= 'linear-gradient(180deg, transparent 10%, rgba(0, 0, 0, 0.15) 100%)';
-
-		const subtitle= document.createElement('p');
-		subtitle.classList.add('subtitle');
-		subtitle.innerHTML= ad['subtitle'][lang];
-
-		const title= document.createElement('h5');
-		title.classList.add('title');
-		title.innerHTML= ad['title'][lang];
-
-		const bio= document.createElement('p');
-		bio.classList.add('bio');
-		bio.innerHTML= ad['bio'][lang];
-		overlay.appendChild(snippet);
-		overlay.appendChild(subtitle);
-		overlay.appendChild(title);
-		overlay.appendChild(bio);
-
-		container.appendChild(overlay);
-	}
-
 }

@@ -50,6 +50,9 @@ class ArticleRouter:
             lang = session.get('LANG', 'EN')
             mode = session.get('MODE', 'DARK')
             article = self.helper.articles.get_article_by_id(article_id)
+            self.helper.categories.load_data()
+            self.helper.ads.load_data()
+            self.layout.load()
             return render_template(
                 '/website/article.html',
                 content=self.content,
