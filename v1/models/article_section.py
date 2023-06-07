@@ -21,14 +21,14 @@ class ArticleSection:
             {"name": "id", "type": str},
             {"name": "attachement_msg", "type": dict},
             {"name": "attachment_type", "type": str},
-            {"name": "action_text", "type": dict},
-            {"name": "action_link", "type": str},
             {"name": "attached_ad_id", "type": str},
             {"name": "audio_stop", "type": float},
         ]
 
         for param in self.params:
             if param['name'] in payload.keys():
+                if param['name'] == 'audio_stop':
+                    payload[param['name']]= float(payload[param['name']])
                 if type(payload[param['name']]) != param['type']:
                     raise TypeError('"{}"" Expected Type: {} but got {}'.format(
                         param['name'],  param['type'], type(payload[param['name']])))
@@ -46,7 +46,6 @@ class ArticleSection:
             "id": self.id,
             "attachement_msg": self.attachement_msg,
             "attachment_type": self.attachment_type,
-            "action_text": self.action_text,
-            "action_link": self.action_link,
             "attached_ad_id": self.attached_ad_id,
+            "audio_stop": self.audio_stop,
         }

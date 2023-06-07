@@ -27,6 +27,21 @@ class LayoutAdminRouter:
 	def setup(self):
 		self.assign_index()
 		self.assign_update()
+		self.assign_article_ads_update()
+
+	def assign_article_ads_update(self):
+		@self.app.route(self.consts.admin_layout_articles_ads_route, methods=["PATCH"])
+		def articles_ads_update():
+			try:
+				from models.article import Article
+				article= Article(dict(loads(request.data)))
+				res= self.helper.articles.update_article(article_id= article.id, payload= article.to_dict())
+				if res:
+					return self.app.response_class(status= 200)
+				return self.app.response_class(status= 500)
+			except Exception as e:
+				print(e)
+				return self.app.response_class(status= 500)
 
 	def assign_update(self):
 		@self.app.route(self.consts.admin_layout_route, methods=["PATCH"])

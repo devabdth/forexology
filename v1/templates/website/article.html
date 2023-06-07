@@ -66,6 +66,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
   <body>
+    {% set writers= db_helper.writers.get_writers_by_ids(article.published_by) %}
     <style type="text/css">
       {% if lang == 'AR' %}
       :root {
@@ -163,26 +164,18 @@
             </h3>
           </div>
           <div>
-            {% if article.published_by | length != 0 %}
+            {% if writers | length != 0 %}
             <h3>
               {{content.global_[lang]['writtenBy']}}: 
             </h3>
-            {% for writer in article.published_by %}
+            {% for writer in writers %}
               <a href="/writers/{{writer.id}}/" class="shadow-button">
                 <span>
-                  {{db_helper.writers.get_writer_by_id(writer).name[lang]}}
+                  {{writer.name[lang]}}
                 </span>
               </a>
               |
             {%endfor%}
-            {% else %}
-            <a href="/writers/{{writer.id}}/" class="shadow-button">
-              {{content.global_[lang]['writtenBy']}}:
-              <span>
-                {{db_helper.writers.get_writer_by_id(article.published_by[0]).name[lang]}}
-              </span>
-              {{'.'}}
-            </a>
             {% endif %}
           </div>
         </div>
@@ -222,15 +215,15 @@
     <section id="articles-sections">
       <div id="left-section">
         {% for section in article.sections%}
-          <div class="article-section" id="{{section.id}}">
+          <div class="article-section" id="sec-{{section.id[:6]}}">
             <p class="subtitle">{{section.subtitle[lang]}}</p>
             <h2>{{section.title[lang]}}</h2>
-            <div class="attachment" id="{{section.id}}"></div>
-              <div class="cover" id="{{section.id}}"></div>
+            <div class="attachment" id="sec-{{section.id[:6]}}"></div>
+              <div class="cover" id="sec-{{section.id[:6]}}"></div>
             <p class="bio">{{section.bio[lang]}}</p>
             {% if section.attached_ad_id != '' %}
               <div class="section-ad-container">
-                <div id="{{section.id}}" class="article-section-ad"></div>
+                <div id="sec-{{section.id[:6]}}" class="article-section-ad"></div>
               </div>
             {%endif%}
           </div>
@@ -245,7 +238,7 @@
         <div id="tabs-selector">
           <div id="body">
             {% for section in article.sections %}
-              <div class="tab" id="{{section.id}}">
+              <div class="tab" id="sec-{{section.id[:6]}}">
                 <p class="title">{{section.title[lang]}}</p>
                 <p class="subtitle">{{section.subtitle[lang]}}</p>
               </div>
@@ -258,12 +251,11 @@
       <button class="shadow-button" id="previous"></button>
       <div id="tabs">
         {% for section in article.sections %}
-          <div class="article-section-tab" id="{{section.id}}"></div>
+          <div class="article-section-tab" id="sec-{{section.id[:6]}}"></div>
         {%endfor%}
       </div>
       <button class="shadow-button" id="next"></button>
     </div>
-    {% set writers= db_helper.writers.get_writers_by_idss(article.published_by) %}
     {% for writer in writers %}
       <section class="writer-section">
         <div class="left-section">
@@ -618,19 +610,18 @@
           space: document.getElementById('entry-ad'),
           lang: '{{lang}}'
         });
-
         var attachmentSection;
         {% for section in article.sections %}
-           attachmentSection= document.querySelector('.attachment#{{section.id}}')
+           attachmentSection= document.querySelector('.attachment#sec-{{section.id[:6]}}')
           switch('{{section.attachment_type}}') {
             case 'image':
-              generateImageAttachment(attachmentSection, '{{section.id}}');
+              generateImageAttachment(attachmentSection, '#sec-{{section.id[:6]}}');
               break;
             case 'video':
-              generateVideoAttachment(attachmentSection, '{{section.id}}');
+              generateVideoAttachment(attachmentSection, '#sec-{{section.id[:6]}}');
               break;
             case 'audio':
-              generateAudioAttachment(attachmentSection, '{{section.id}}');
+              generateAudioAttachment(attachmentSection, '#sec-{{section.id[:6]}}');
               break;
             default:
             case 'None':
@@ -640,7 +631,7 @@
           {% if section.attached_ad_id != '' %}
             generateAdSpace({
               adData: {{json_parser(db_helper.ads.get_ad_by_id(section.attached_ad_id).to_dict()) | safe}},
-              space: document.querySelector('.article-section-ad#{{section.id}}'),
+              space: document.querySelector('.article-section-ad#sec-{{section.id[:6]}}'),
               lang: '{{lang}}'
             })
           {% endif %}

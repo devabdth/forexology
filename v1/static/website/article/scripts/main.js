@@ -51,26 +51,26 @@ let currentActiveSection;
 const initializeSections= (sections, lang) => {
 	const nextAction= document.getElementById('next');
 	const previousAction= document.getElementById('previous');
-	const tabsTitle= document.querySelector('#current-tab-title')
+	const tabsTitle= document.querySelector('#current-tab-title');
 	const tabsSubTitle= document.querySelector('#current-tab-subtitle')
 	const tabsindicator= document.querySelector('#tabs-indicator')
 
-	sectionsIds= sections.map(section => section.id)
+	sectionsIds= sections.map(section => section.id.substring(0, 6))
 	currentActiveSection= 0;
 
 	tabsTitle.innerHTML = sections[currentActiveSection].title[lang];
 	tabsSubTitle.innerHTML = sections[currentActiveSection].subtitle[lang];
 	tabsindicator.innerHTML= `${currentActiveSection+1} / ${sections.length}`;
-	document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.add('active');
+	document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
 	startTime= new Date();
 
 
 	nextAction.innerHTML= `${lang == 'EN' ? 'Next: ': 'التالي: '} ${sections[(currentActiveSection + 1)].title[lang]}`
 	nextAction.onclick= () => {
 		const currentArticle= sectionsIds[currentActiveSection];
-		document.querySelector(`.article-section#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-		document.querySelector(`.article-section-tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-		document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
+		document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+		document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+		document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
 
 		previousAction.innerHTML= `${lang == 'EN' ? 'Previous: ': 'السابق: '} ${sections[(currentActiveSection)].title[lang]}`
 		previousAction.style.pointerEvents= 'all';
@@ -78,9 +78,9 @@ const initializeSections= (sections, lang) => {
 		previousAction.style.color= 'var(--primaryColor)';
 
 		currentActiveSection+= 1;
-		document.querySelector(`.article-section#${sectionsIds[currentActiveSection]}`).classList.add('active');
-		document.querySelector(`.article-section-tab#${sectionsIds[currentActiveSection]}`).classList.add('active');
-		document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.add('active');
+		document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
+		document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
+		document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
 
 		tabsTitle.innerHTML = sections[currentActiveSection].title[lang];
 		tabsSubTitle.innerHTML = sections[currentActiveSection].subtitle[lang];
@@ -104,18 +104,18 @@ const initializeSections= (sections, lang) => {
 	previousAction.innerHTML= `${lang == 'EN' ? 'Previous: ': 'السابق: '} ${sections[(currentActiveSection)].title[lang]}`
 	previousAction.onclick= () => {
 		const currentArticle= sectionsIds[currentActiveSection];
-		document.querySelector(`.article-section#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-		document.querySelector(`.article-section-tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-		document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');		
+		document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+		document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+		document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');		
 		nextAction.innerHTML= `${lang == 'EN' ? 'Next: ': 'التالي: '} ${sections[(currentActiveSection)].title[lang]}`
 		nextAction.style.pointerEvents= 'all';
 		nextAction.style.userSelect= 'all';
 		nextAction.style.color= 'var(--primaryVarientColor';
 
 		currentActiveSection-= 1;
-		document.querySelector(`.article-section#${sectionsIds[currentActiveSection]}`).classList.add('active');
-		document.querySelector(`.article-section-tab#${sectionsIds[currentActiveSection]}`).classList.add('active');
-		document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.add('active');
+		document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
+		document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
+		document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.add('active');
 
 		tabsTitle.innerHTML = sections[currentActiveSection].title[lang];
 		tabsSubTitle.innerHTML = sections[currentActiveSection].subtitle[lang];
@@ -137,9 +137,9 @@ const initializeSections= (sections, lang) => {
 		indicator.onclick= ()=> {
 			const currentArticle= sectionsIds[currentActiveSection];
 			if (indicator.classList.contains('active')) return;
-			document.querySelector(`.article-section-tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-			document.querySelector(`.article-section#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-			document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
+			document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+			document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+			document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
 
 			currentActiveSection= sectionsIds.indexOf(indicator.id);
 			document.querySelector(`.article-section#${indicator.id}`).classList.add('active');
@@ -181,15 +181,13 @@ const initializeSections= (sections, lang) => {
 		tab.onclick= ()=> {
 			let currentArticle= sectionsIds[currentActiveSection];
 			if (tab.classList.contains('active')) return;
-			document.querySelector(`.article-section-tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-			document.querySelector(`#tabs-selector .tab#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-			document.querySelector(`.article-section#${sectionsIds[currentActiveSection]}`).classList.remove('active');
-
-			currentActiveSection= sectionsIds.indexOf(tab.id);
+			document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+			document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+			document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
+			currentActiveSection= sectionsIds.indexOf(tab.id.split('sec-')[1]);
 			document.querySelector(`.article-section#${tab.id}`).classList.add('active');
 			document.querySelector(`.article-section-tab#${tab.id}`).classList.add('active');
 			tab.classList.add('active');
-
 			tabsTitle.innerHTML = sections[currentActiveSection].title[lang];
 			tabsSubTitle.innerHTML = sections[currentActiveSection].subtitle[lang];
 			tabsindicator.innerHTML= `${currentActiveSection+1} / ${sections.length}`
@@ -222,8 +220,8 @@ const initializeSections= (sections, lang) => {
 
 
 
-	document.querySelector(`.article-section#${sectionsIds[0]}`).classList.add('active');
-	document.querySelector(`.article-section-tab#${sectionsIds[0]}`).classList.add('active');
+	document.querySelector(`.article-section#sec-${sectionsIds[0]}`).classList.add('active');
+	document.querySelector(`.article-section-tab#sec-${sectionsIds[0]}`).classList.add('active');
 }
 
 

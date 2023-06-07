@@ -13,7 +13,10 @@ class Setup:
         self.setup_app()
         self.setup_routers()
         self.setup_adminstration_webapp_routes()
+        self.setup_publish_webapp_routes()
         self.setup_socket_handlers()
+
+    
 
     def setup_app(self):
         from flask_session import Session
@@ -26,7 +29,16 @@ class Setup:
 
     def setup_files_and_directories(self):
         from os.path import abspath, dirname, join, exists
-
+        from os import mkdir
+        dirs= [
+            "../assets/articles/",
+            "../assets/articles/images",
+            "../assets/articles/audios",
+            "../assets/articles/videos",
+            "../assets/users/",
+            "../assets/users/images",
+            "../assets/users/covers",
+        ]
         files= [
             {
                 'dir': '../jsons/jobs.json',
@@ -45,6 +57,13 @@ class Setup:
                 'initialData': {}
             },
         ]
+
+        for dir_ in dirs:
+            path= abspath(join(dirname(__file__), dir_))
+            if not exists(path):
+                mkdir(path)
+            
+
 
         for file_ in files:
             path= abspath(join(dirname(__file__), file_['dir']))
@@ -100,11 +119,8 @@ class Setup:
         from routers.website.article import ArticleRouter
         ArticleRouter(self.app).setup()
 
-        from routers.website.login import LoginRouter
-        LoginRouter(self.app).setup()
-
-        from routers.website.signup import SignupRouter
-        SignupRouter(self.app).setup()
+        from routers.website.auth import AuthRouter
+        AuthRouter(self.app).setup()
 
         from routers.website.articles import ArticlesRouter
         ArticlesRouter(self.app).setup()
@@ -114,3 +130,19 @@ class Setup:
 
         from routers.website.writer import WriterRouter
         WriterRouter(self.app).setup()
+
+    def setup_publish_webapp_routes(self):
+        from routers.publish.login import LoginPublishRouter
+        LoginPublishRouter(self.app).setup()
+
+        from routers.publish.home import HomePublishRouter
+        HomePublishRouter(self.app).setup()
+
+        from routers.publish.create import CreatePublishRouter
+        CreatePublishRouter(self.app).setup()
+
+        from routers.publish.articles import ArticlesPublishRouter
+        ArticlesPublishRouter(self.app).setup()
+
+        from routers.publish.profile import ProfilePublishRouter
+        ProfilePublishRouter(self.app).setup()

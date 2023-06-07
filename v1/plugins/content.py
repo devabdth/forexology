@@ -59,7 +59,10 @@ class Content:
                 "allCategoriesMsg": "Check out all categories we have!",
                 "latestArticles": "Latest Articles",
                 "latestArticlesMsg": "Discover the latest articles now!",
-                "carrers": "Carrers"
+                "carrers": "Carrers",
+                "resetYourPassword": "Reset your password",
+                "profilePicture": "Profile Picture",
+                "coverPicture": "Cover Picture",
             },
             "AR": {
                 "platformTitle": "FOREXology",
@@ -116,7 +119,8 @@ class Content:
                 "allCategoriesMsg": "تفقد جميع الفئات التي نتناولها",
                 "latestArticles": "أحدث المقالات",
                 "latestArticlesMsg": "تفقد أخر المقالات المنشورة!",
-                "carrers": "الوظائف"
+                "carrers": "الوظائف",
+                "resetYourPassword": "إسترجع كلمة مرور حسابك",
             }
         }
 
@@ -131,6 +135,8 @@ class Content:
                 "audioArticles": "Audio Articles",
                 "aboutUs": "About Us",
                 "classification": "Classification",
+                "passwordReset": "Password Reset",
+                "profile": "Profile"
             },
             "AR": {
                 "home": "الرئيسية",
@@ -142,7 +148,7 @@ class Content:
                 "audioArticles": "المقالات الصوتية",
                 "aboutUs": "نبذة عنا",
                 "classification": "التصنيفات",
-
+                "passwordReset": "إستعادة كلمة المرور",
             }
         }
 
@@ -164,7 +170,15 @@ class Content:
                 "comment": "Comment",
                 "shareLinkVia": "Share article via...",
                 "shareLink": "Share article's link!",
-                "clear": "Clear"
+                "clear": "Clear",
+                "findEmail": "Find Email",
+                "sendCodeAgain": "Send code again",
+                "changeEmail": "Change Email",
+                "validateYourEmail": "Validate your email",
+                "Validate": "Validate",
+                "completeProfile": "Complete Profile",
+                "submit": "Submit",
+                "checkThisOut": "Check this out!"
             },
             "AR": {
                 "login": "تسجيل الدخول",

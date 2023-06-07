@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FOREXology - Articles</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='publish/articles/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='publish/articles/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+    <section class="admin">
+      <div id="left-section">
+        <div id="header">
+          <div id="logo"></div>
+          <p>{{writer.name['EN']}}</p>
+        </div>
+        <div id="body">
+          <div
+            onclick="window.open(`/webapp/publish/create/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Create</p>
+          </div>
+          <div
+            onclick="window.open(`/webapp/publish/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Home</p>
+          </div>
+          <div
+            onclick="window.open(`/webapp/publish/articles/`, '_self');"
+            class="active left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Articles</p>
+          </div>
+          <div
+            onclick="window.open(`/webapp/publish/profile/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Profile</p>
+          </div>
+        </div>
+        <div id="footer">
+          <div onclick="writerLogout();" class="left-menu-tile">
+            <div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+      <div id="right-section">
+        <div class="body-card">
+          <h1>Articles</h1>
+          <div id="fragments-controllers">
+            <div
+              class="fragment-controller"
+              id="articles"
+              onclick="toggleFragment(this)"
+            >
+              Articles ({{db_helper.articles.get_article_by_writer_id(writer_id)
+              | length}})
+            </div>
+            <div
+              class="fragment-controller active"
+              id="drafts"
+              onclick="toggleFragment(this)"
+            >
+              Drafts ({{db_helper.articles.get_drafts_by_writer_id(writer_id) |
+              length}})
+            </div>
+          </div>
+          <div class="fragments">
+            <div class="fragment" id="articles">
+              <div class="articles-rows">
+                <div class="article-row" id="header">
+                  <div class="article-row-header">
+                    <div class="article-row-cover"></div>
+                    <div class="article-row-code">#</div>
+                    <div class="article-row-title">Name</div>
+                    <div class="article-row-labelling">Labelling</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fragment active" id="drafts">
+              <div class="articles-rows">
+                <div class="article-row" id="header">
+                  <div class="article-row-header">
+                    <div class="article-row-cover"></div>
+                    <div class="article-row-code">#</div>
+                    <div class="article-row-title">Name</div>
+                    <div class="article-row-labelling">Labelling</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="msg-dialog-overlay" id="confirmation-dialog"></div>
+    <div class="msg-dialog" id="confirmation-dialog">
+      <div class="header">
+        <h3>Confirmation</h3>
+        <div onclick="closeConfirmationDialog();">x</div>
+      </div>
+      <p></p>
+      <div class="options">
+        <button class="shadow-button" id="close">Close</button>
+        <button class="main-button" id="submit">Submit</button>
+        <p class="status-msg" id="confirmation-status-msg"></p>
+      </div>
+    </div>
+    <div class="form-dialog-overlay" id="edit-dialog"></div>
+    <div class="form-dialog" id="edit-dialog">
+      <div class="header">
+        <h2>Edit</h2>
+        <div onclick="closeEditDialog();">x</div>
+      </div>
+      <div class="body"></div>
+      <div class="options">
+        <button class="shadow-button" id="close" onclick="closeEditDialog();">
+          Close
+        </button>
+        <button class="main-button" id="submit">Submit</button>
+        <p class="status-msg" id="confirmation-status-msg"></p>
+      </div>
+    </div>
+    <div id="toast"></div>
+    <script>
+      const init= ()=> {
+          initData({
+            articles: {{dumps(utils.mutliple_to_dicts(db_helper.articles.get_article_by_writer_id(writer_id))) | safe}},
+            drafts: {{dumps(utils.mutliple_to_dicts(db_helper.articles.get_drafts_by_writer_id(writer_id))) | safe}},
+            categories: {{dumps(utils.mutliple_to_dicts(db_helper.categories.active_cats)) | safe}},
+            classifications: {{dumps(utils.mutliple_to_dicts(db_helper.categories.parent_cats)) | safe}},
+          });
+
+          initUI();
+      }
+
+      if (window.attachEvent) window.attachEvent('load', init);
+      else if (window.addEventListener) window.addEventListener('load', init);
+    </script>
+  </body>
+</html>

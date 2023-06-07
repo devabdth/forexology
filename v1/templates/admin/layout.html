@@ -123,6 +123,13 @@
           >
             Header Tabs
           </div>
+          <div
+            onclick="manageFragments(this);"
+            class="fragment-controller"
+            id="articles-ads"
+          >
+            Articles' Ads
+          </div>
         </div>
         <div id="fragments">
           <div id="home" class="fragment active">
@@ -470,6 +477,34 @@
               </button>
             </div>
           </div>
+            <div id="articles-ads" class="fragment">
+              <div class="header">
+                <h3>Articles' Ads</h3>
+                <p>Manage the ads that appears on articles and articles' sections!</p>
+              </div>            
+              <div class="body">
+                <div id="articles-cards">
+                  {% for article in db_helper.articles.get_all_articles() %}
+                    <div class="article-card"  onclick='openArticleAdsPicker({{dumps(article.to_dict()) | safe}});'>
+                      <div class="cover" style="background-image: url('/assets/articles/covers/{{article.id}}');"></div>
+                      <div class="info">
+                        <h4>{{article.title['EN']}}</h4>
+                        <p>{{article.short_brief['EN'][:50]}}...</p>
+                        <p>Cover AD Status: <span>
+                          {% if article.attached_ad != None and article.attached_ad != '' %}
+                            {{"Active"}}
+                          {%else%}
+                            {{"Not Active"}}
+                          {%endif%}
+                        </span></p>
+                        <p>Articles Sections: <span>{{article.sections | length}}</span></p>
+                        <p>Sections Ads: <span>{{utils.calculate_sections_with_ads(article.sections)}}</span></p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -480,6 +515,19 @@
     <div id="writers-selection-dialog-overlay"></div>
     <div id="tabs-selection-dialog-overlay"></div>
     <div id="carrers-selection-dialog-overlay"></div>
+    <div class="form-dialog-overlay" id="article-ads-picker-dialog-overlay"></div>
+    <div id="article-ads-picker-dialog" class="form-dialog">
+      <div class="header">
+        <h2>Article ADs Selection</h2>
+        <div onclick="closeArticleAdsPicker();">x</div>
+      </div>
+      <div class="body"></div>
+      <div class="options">
+        <button class="shadow-button" id="cancel" onclick="closeArticleAdsPicker()">Cancel</button>
+        <button class="main-button" id="submit">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
     <div id="tabs-selection-dialog">
       <div id="header">
         <h2>Header Tabs Selection</h2>

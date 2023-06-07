@@ -8,8 +8,28 @@ const headerTabsConfig = () => {
 	}
 }
 
-if (window.addEventListener) window.addEventListener('load', headerTabsConfig);
-else if (window.attachEvent) window.attachEvent('load', headerTabsConfig);
+const openNewsBottomSheet= ()=> {
+	document.querySelector('#news-bottom-sheet').classList.add('active');
+	document.querySelector('#news-bottom-sheet #header div').innerHTML= '-';
+	document.querySelector('#news-bottom-sheet #header div').onclick= closeNewsBottomSheet;
+}
+
+const closeNewsBottomSheet= ()=> {
+	document.querySelector('#news-bottom-sheet').classList.remove('active');
+	document.querySelector('#news-bottom-sheet #header div').innerHTML= '+';
+	document.querySelector('#news-bottom-sheet #header div').onclick= openNewsBottomSheet;
+}
+
+if (window.addEventListener) window.addEventListener('load', ()=> {
+	headerTabsConfig();
+	openNewsBottomSheet();
+});
+
+else if (window.attachEvent) window.attachEvent('load', ()=> {
+	headerTabsConfig();
+	openNewsBottomSheet();
+});
+
 let changeHeaderLogoOnScroll;
 const toggleTheme = async (mode) => {
 	switch (mode) {
@@ -101,7 +121,11 @@ window.addEventListener('scroll', () => {
 const adminLogout = async () => {
 	const res = await fetch('/webapp/adminstration/logout/');
 	if (res.status == 200) window.open('./', '_self');
+}
 
+const writerLogout = async () => {
+	const res = await fetch('/webapp/publish/logout/');
+	if (res.status == 200) window.open('./', '_self');
 }
 
 const initializeAdSpace = async (container, ad, lang, customCallback) => {

@@ -11,6 +11,8 @@ class Consts:
         self.covers_supported_extenstions: list = [
             'png', 'jpg', 'jpeg', 'gif', 'jfjf'
         ]
+        self.audios_supported_extenstions: list= ['mp3', 'aac']
+        self.videos_supported_extenstions: list= ['mp4', 'mpg', 'mpeg', 'flv', 'm2v']
         self.cvs_supported_extenstions: list = [
             'pdf'
         ]
@@ -84,6 +86,9 @@ class Consts:
             self.signup_route = data['WEBSITE_SIGNUP_ROUTE']
             self.join_route = data['WEBSITE_JOIN_ROUTE']
             self.articles_covers = data['WEBSITE_ASSETS_ARTICLES_COVERS_ROUTE']
+            self.article_section_covers = data['WEBSITE_ASSETS_ARTICLES_SECTIONS_COVERS_ROUTE']
+            self.article_section_audios = data['WEBSITE_ASSETS_ARTICLES_SECTIONS_AUDIOS_ROUTE']
+            self.article_section_videos = data['WEBSITE_ASSETS_ARTICLES_SECTIONS_VIDEOS_ROUTE']
             self.ads_covers = data['WEBSITE_ASSETS_ADS_COVERS_ROUTE']
             self.articles_podcast = data['WEBSITE_ARTICLE_PODCAST_ROUTE']
             self.categories_covers = data['WEBSITE_ASSETS_CATEGORIES_COVERS_ROUTE']
@@ -103,11 +108,13 @@ class Consts:
             self.all_articles_read_route = data['WEBSITE_ARTICLES_READ_ROUTE']
             self.all_articles_journal_route = data['WEBSITE_ARTICLES_JOURNAL_ROUTE']
             self.writer_route = data['WEBSITE_WRITER_ROUTE']
+            self.password_reset = data['WEBSITE_PASSWORD_RESET']
 
             # Admin Routers
             self.admin_login_route = data['ADMIN_LOGIN_ROUTE']
             self.admin_logout_route = data['ADMIN_LOGOUT_ROUTE']
             self.admin_layout_route = data['ADMIN_LAYOUT_ROUTE']
+            self.admin_layout_articles_ads_route = data['ADMIN_LAYOUT_ARTICLES_ADS_ROUTE']
             self.admin_carrers_route = data['ADMIN_CARRERS_ROUTE']
             self.admin_categories_route = data['ADMIN_CATEGORIES_ROUTE']
             self.admin_parent_categories_route = data['ADMIN_PARENT_CATEGORIES_ROUTE']
@@ -115,3 +122,12 @@ class Consts:
             self.admins_management_page = data['ADMIN_MANAGEMENT_ROUTE']
             self.admin_ads_route = data['ADMIN_ADS_ROUTE']
             self.admin_writers_route = data['ADMIN_WRITERS_ROUTE']
+
+            # Publishing Panel Routers:
+            self.publisher_login_route= data['PUBLISHER_LOGIN_ROUTE']
+            self.publisher_logout_route= data['PUBLISHER_LOGOUT_ROUTE']
+            self.publisher_main_page= data['PUBLISHER_HOME_ROUTE']
+            self.publisher_create_page= data['PUBLISHER_CREATE_ROUTE']
+            self.publisher_articles_page= data['PUBLISHER_ARTICLES_ROUTE']
+            self.publisher_profile_page= data['PUBLISHER_PROFILE_ROUTE']
+            self.publisher_publish_draft_page= data['PUBLISHER_PUBLISH_DRAFT_ROUTE']

@@ -22,3 +22,10 @@ class Utils:
 				date.split('-')[1],
 				date.split('-')[2]
 			)
+
+	def calculate_sections_with_ads(self, sections: list):
+		count= 0
+		for section in sections:
+			if section.attached_ad_id != None and section.attached_ad_id != '':
+				count+= 1
+		return count

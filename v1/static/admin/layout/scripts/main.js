@@ -87,11 +87,13 @@ const openADSelectionDialog = (props) => {
 
 	const selection = document.querySelector('div#ad-selection-dialog div#selected-ad');
 	selection.innerHTML = '';
-	const ad = document.createElement('div');
-	selection.appendChild(ad);
-	ad.classList.add('ad-space');
-	selectedAd = props.initiallySelectedAd.id;
-	initializeAdSpace(ad, props.initiallySelectedAd, 'EN');
+	if (props.initiallySelectedAd !== undefined) {
+		const ad = document.createElement('div');
+		selection.appendChild(ad);
+		ad.classList.add('ad-space');
+		selectedAd = props.initiallySelectedAd.id;
+		initializeAdSpace(ad, props.initiallySelectedAd, 'EN');
+	}
 
 	cardsContainer.innerHTML = '';
 	for (let ad of ads) {
@@ -114,7 +116,11 @@ const openADSelectionDialog = (props) => {
 	confirmOption.onclick = () => {
 		props.placementParent.innerHTML = '';
 		initializeAdSpace(props.placementParent, ads.filter(ad => ad.id == selectedAd)[0], 'EN')
-		adsData[props.placementParent.classList[1]] = selectedAd;
+		if (props.customListener !== undefined) {
+			props.customListener(selectedAd);
+		} else {
+			adsData[props.placementParent.classList[1]] = selectedAd;
+		}
 		document.querySelector('div#ad-selection-dialog-overlay').style.display = 'none';
 		document.querySelector('div#ad-selection-dialog').style.display = 'none';
 	}
@@ -228,7 +234,14 @@ const openWritersSelectionDialog = (props) => {
 		writerCard.style.cursor = 'pointer';
 		writerCard.onclick = () => {
 			if (selectedWritersContainer.childNodes.length < props.limit) {
-				if (document.querySelector(`#writers-selection-dialog #selected-writers .writer-card#${writer.id}`) == undefined) {
+				let existWriterCard;
+				const writersCards = document.querySelectorAll(`#writers-selection-dialog #selected-writers .writer-card`)
+				for (let writerCard of writersCards) {
+					if (writerCard.id == writer.id) {
+						existWriterCard = writerCard;
+					}
+				}
+				if (existWriterCard == undefined) {
 					const writerCard_ = document.createElement('div');
 					writerCard_.classList.add('writer-card');
 					writerCard_.setAttribute('id', writer.id);
@@ -360,8 +373,14 @@ const openCarrersSelectionDialog = (props) => {
 			if (selectedCarrersContainer.childNodes.length < props.limit) {
 				let _card;
 				try {
-					_card = document.querySelector(`#carrers-selection-dialog #selected-carrers .carrer-card#${carrer.id}`);
+					const cards = document.querySelectorAll(`#carrers-selection-dialog #selected-carrers .carrer-card`);
+					for (let card of cards) {
+						if (card.id == carrer.id) {
+							_card = card;
+						}
+					}
 				} catch (e) {
+					console.log(e)
 					_card = null;
 				}
 				if (_card == null) {
@@ -657,4 +676,238 @@ const headerTabsFragmentSave = async () => {
 			cancelBtn.style.pointerEvents = 'all';
 		}, 3000);
 	}
+}
+
+
+const closeArticleAdsPicker = () => {
+	document.querySelector('.form-dialog#article-ads-picker-dialog').style.display = 'none';
+	document.querySelector('.form-dialog-overlay#article-ads-picker-dialog-overlay').style.display = 'none';
+}
+
+const openArticleAdsPicker = (article_) => {
+	let article = article_;
+	const dialogBody = document.querySelector('.form-dialog#article-ads-picker-dialog .body');
+	dialogBody.innerHTML = '';
+	const statusMsg = document.querySelector('.form-dialog#article-ads-picker-dialog .options p#status-msg')
+
+	// Init Cover
+	const coverTile = document.createElement('div');
+	coverTile.classList.add('tile');
+
+	coverTile.innerHTML = `
+	<h3>Cover</h3>
+	`;
+
+	const covreTileAdSpace = document.createElement('div');
+	covreTileAdSpace.classList.add('ad-space');
+	covreTileAdSpace.style.backgroundPosition = 'center';
+	covreTileAdSpace.style.backgroundRepeat = 'no-repeat';
+	covreTileAdSpace.style.backgroundSize = 'cover';
+	covreTileAdSpace.setAttribute('id', '-1');
+	coverTile.appendChild(covreTileAdSpace);
+
+	coverTile.innerHTML += `
+	<div class="options">
+		<button class="shadow-button" id="remove" style="color: red">Remove</button>
+		<button class="shadow-button" id="replace">Replace</button>
+		<button class="shadow-button" id="select">Select</button>
+	</div>
+	`;
+
+	const coverSelectBtn = coverTile.querySelector('div.options .shadow-button#select');
+	const coverRemoveBtn = coverTile.querySelector('div.options .shadow-button#remove');
+	const coverReplaceBtn = coverTile.querySelector('div.options .shadow-button#replace');
+
+	coverRemoveBtn.onclick = () => {
+		coverTile.querySelector('div.ad-space').innerHTML = '';
+		coverTile.querySelector('div.ad-space').style.backgroundImage = 'none';
+		coverTile.querySelector('div.ad-space').style.backgroundColor = 'none';
+		coverRemoveBtn.style.display = 'none';
+		coverReplaceBtn.style.display = 'none';
+		coverSelectBtn.style.display = 'flex';
+		article.attached_ad = '';
+		statusMsg.innerHTML = 'Press submit to complete removing ad!';
+		setTimeout(() => { statusMsg.innerHTML = ''; }, 5000);
+	}
+
+	coverReplaceBtn.onclick = () => {
+		openADSelectionDialog({
+			initiallySelectedAd: coverAdData[0],
+			placementParent: coverTile.querySelector('div.ad-space'),
+			customListener: (selectedAdId) => {
+				if (selectedAdId != undefined) {
+					article.attached_ad = selectedAdId;
+					coverSelectBtn.style.display = 'none';
+					coverRemoveBtn.style.display = 'flex';
+					coverReplaceBtn.style.display = 'flex';
+				}
+			}
+		})
+	}
+
+	coverSelectBtn.onclick = () => {
+		openADSelectionDialog({
+			initiallySelectedAd: undefined,
+			placementParent: coverTile.querySelector('div.ad-space'),
+			customListener: (selectedAdId) => {
+				if (selectedAdId != undefined) {
+					article.attached_ad = selectedAdId;
+					coverSelectBtn.style.display = 'none';
+					coverRemoveBtn.style.display = 'flex';
+					coverReplaceBtn.style.display = 'flex';
+				}
+			}
+		})
+	}
+
+	const coverAdData = ads.filter(ad => ad.id == article.attached_ad);
+	if (!(coverAdData == undefined || coverAdData.length == 0)) {
+		coverSelectBtn.style.display = 'none';
+		initializeAdSpace(coverTile.querySelector('div.ad-space'), coverAdData[0], 'EN')
+	} else {
+		coverRemoveBtn.style.display = 'none';
+		coverReplaceBtn.style.display = 'none';
+
+	}
+
+	dialogBody.appendChild(coverTile);
+
+
+	// Init Sections
+	for (let section of article.sections) {
+		const sectionTile = document.createElement('div');
+		sectionTile.classList.add('tile');
+
+		sectionTile.innerHTML = `
+		<h3>Section ${article.sections.indexOf(section)}</h3>
+		`;
+
+		const covreTileAdSpace = document.createElement('div');
+		covreTileAdSpace.classList.add('ad-space');
+		covreTileAdSpace.style.backgroundPosition = 'center';
+		covreTileAdSpace.style.backgroundRepeat = 'no-repeat';
+		covreTileAdSpace.style.backgroundSize = 'cover';
+		covreTileAdSpace.setAttribute('id', '-1');
+		sectionTile.appendChild(covreTileAdSpace);
+
+		sectionTile.innerHTML += `
+		<div class="options">
+			<button class="shadow-button" id="remove" style="color: red">Remove</button>
+			<button class="shadow-button" id="replace">Replace</button>
+			<button class="shadow-button" id="select">Select</button>
+		</div>
+		`;
+
+		const sectionSelectBtn = sectionTile.querySelector('div.options .shadow-button#select');
+		const sectionRemoveBtn = sectionTile.querySelector('div.options .shadow-button#remove');
+		const sectionReplaceBtn = sectionTile.querySelector('div.options .shadow-button#replace');
+
+		sectionRemoveBtn.onclick = () => {
+			sectionTile.querySelector('div.ad-space').innerHTML = '';
+			sectionTile.querySelector('div.ad-space').style.backgroundImage = 'none';
+			sectionTile.querySelector('div.ad-space').style.backgroundColor = 'none';
+			sectionRemoveBtn.style.display = 'none';
+			sectionReplaceBtn.style.display = 'none';
+			sectionSelectBtn.style.display = 'flex';
+			section.attached_ad_id = '';
+			statusMsg.innerHTML = 'Press submit to complete removing ad!';
+			setTimeout(() => { statusMsg.innerHTML = ''; }, 5000);
+		}
+
+		sectionReplaceBtn.onclick = () => {
+			openADSelectionDialog({
+				initiallySelectedAd: sectionAdData[0],
+				placementParent: sectionTile.querySelector('div.ad-space'),
+				customListener: (selectedAdId) => {
+					if (selectedAdId != undefined) {
+						section.attached_ad_id = selectedAdId;
+						sectionSelectBtn.style.display = 'none';
+						sectionRemoveBtn.style.display = 'flex';
+						sectionReplaceBtn.style.display = 'flex';
+					}
+				}
+			})
+		}
+
+		sectionSelectBtn.onclick = () => {
+			openADSelectionDialog({
+				initiallySelectedAd: undefined,
+				placementParent: sectionTile.querySelector('div.ad-space'),
+				customListener: (selectedAdId) => {
+					if (selectedAdId != undefined) {
+						section.attached_ad_id = selectedAdId;
+						sectionSelectBtn.style.display = 'none';
+						sectionRemoveBtn.style.display = 'flex';
+						sectionReplaceBtn.style.display = 'flex';
+					}
+				}
+			})
+		}
+
+		const sectionAdData = ads.filter(ad => ad.id == section.attached_ad_id);
+		if (!(sectionAdData == undefined || sectionAdData.length == 0)) {
+			sectionSelectBtn.style.display = 'none';
+			initializeAdSpace(sectionTile.querySelector('div.ad-space'), sectionAdData[0], 'EN')
+		} else {
+			sectionRemoveBtn.style.display = 'none';
+			sectionReplaceBtn.style.display = 'none';
+
+		}
+
+		dialogBody.appendChild(sectionTile);
+
+	}
+
+
+	document.querySelector('.form-dialog#article-ads-picker-dialog .options .main-button').onclick = () => { saveArticleAds(article) };
+	document.querySelector('.form-dialog#article-ads-picker-dialog').style.display = 'flex';
+	document.querySelector('.form-dialog-overlay#article-ads-picker-dialog-overlay').style.display = 'flex';
+}
+
+
+const saveArticleAds = async (article) => {
+	const submit = document.querySelector('.form-dialog#article-ads-picker-dialog .options .main-button');
+	const cancel = document.querySelector('.form-dialog#article-ads-picker-dialog .options .shadow-button');
+	const statusMsg = document.querySelector('.form-dialog#article-ads-picker-dialog .options p#status-msg');
+
+	try {
+		statusMsg.innerHTML = 'Loading...';
+		submit.style.pointerEvents = 'all';
+		cancel.style.pointerEvents = 'all';
+
+
+		const res = await fetch('./articlesAds/', {
+			method: 'PATCH',
+			body: JSON.stringify(article),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		});
+
+		if (res.status == 200) {
+			window.open('./', '_self');
+			return;
+		}
+
+		submit.innerHTML = 'Failed';
+		statusMsg.innerHTML = 'Try again later!';
+		setTimeout(() => {
+			statusMsg.innerHTML = '';
+			submit.innerHTML = 'Submit';
+			submit.style.pointerEvents = 'all';
+			cancel.style.pointerEvents = 'all';
+		}, 3000);
+	} catch (e) {
+		console.log(e);
+		submit.innerHTML = 'Failed';
+		statusMsg.innerHTML = 'Try again later!';
+		setTimeout(() => {
+			statusMsg.innerHTML = '';
+			submit.innerHTML = 'Submit';
+			submit.style.pointerEvents = 'all';
+			cancel.style.pointerEvents = 'all';
+		}, 3000);
+
+	}
+
 }

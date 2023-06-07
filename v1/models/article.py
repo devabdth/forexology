@@ -40,8 +40,10 @@ class Article:
             {'name': "attached_ad", 'type': str},
             {'name': "saves", 'type': int},
             {'name': "mode", 'type': int},
+            {'name': "views", 'type': int},
             {'name': "tags", 'type': list},
             {'name': "record_available", 'type': bool},
+            {'name': "read_time", 'type': dict},
         ]
 
         for param in self.params:
@@ -71,9 +73,11 @@ class Article:
             "thread": self.thread,
             "published_in": self.published_in,
             "published_by": self.published_by,
-            "attached_ad": "",
+            "attached_ad": self.attached_ad,
             "saves": self.saves,
             "mode": self.mode,
-            "tags": self.mode,
+            "tags": self.tags,
             "record_available": self.record_available,
+            "read_time": self.read_time,
+            "views": self.views,
         }

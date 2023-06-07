@@ -1,80 +1,84 @@
 @media screen and (min-width: 1024px) {
-	section {
-		width: 100%;
-		min-height: 50vw;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		background-color: var(--overlay-color);
-	}
+  section {
+    width: 100%;
+    min-height: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--overlay-color);
+  }
 
-	  #overlay {
-	    background: var(--overlay-color);
-	    width: 100%;
-	    height: 100%;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    flex-direction: column;
-	    padding: 8px 16px;
-	  }
+  #overlay {
+    background: var(--overlay-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px 16px;
+  }
 
-	     #form {
-	    width: 25%;
-	    height: 40vw;
-	    display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	    flex-direction: column;
-	    background-color: var(--body-bg-color);
-	    border-radius: 12px;
-	    padding: 48px 16px;
-	  }
+  #form {
+    width: 25%;
+    height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: var(--body-bg-color);
+    border-radius: 12px;
+    padding: 48px 16px;
+  }
 
-	   .field-border:focus-within {
-	    background: var(--bg-gradient);
-	  }
+  .field-border:focus-within {
+    background: var(--bg-gradient);
+  }
 
-	   .field-border {
-	    background: transparent;
-	    border-radius: 12px;
-	    padding: 2px;
-	    width: 100%;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    transition: 5000ms ease !important;
-	  }
+  .field-border {
+    background: transparent;
+    border-radius: 12px;
+    padding: 2px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 5000ms ease !important;
+  }
 
-	   #form h3 {
-	    font-family: var(--pff);
-	    color: var(--primaryColor);
-	    text-decoration: none;
-	    font-weight: 900;
-	    font-size: 2.5vw;
-	  }
+  #form h3 {
+    font-family: var(--pff);
+    color: var(--primaryColor);
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 2.5vw;
+  }
 
-	   #form #options {
-	    width: 100%;
-	    display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	  }
+  #form #options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-	   #form #actions {
-	    width: 100%;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    flex-direction: column;
-	    gap: 8px;
-	  }
+  #form #actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-	   .main-button {
-	    width: 100%;
-	  }
+  #form p#status-msg {
+    font-weight: 500;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+  }
 
-
-
+  .main-button {
+    width: 100%;
+  }
 }

@@ -19,6 +19,7 @@ class Writer:
 			{"name": "bio", "type": dict},
 			{"name": "email", "type": str},
 			{"name": "joined_in", "type": str},
+			{"name": "password", "type": str},
 			{"name": "tags", "type": list},
 			{"name": "prefered_category", "type": list},
 			{"name": "prefered_parent_category", "type": list},
@@ -45,5 +46,8 @@ class Writer:
 			"tags": self.tags,
 			"prefered_category": self.prefered_category,
 			"prefered_parent_category": self.prefered_parent_category,
+			"email": self.email,
+			"password": self.password,
+			"suspensed": self.suspensed,
 			"social_media_links": self.social_media_links,
 		}

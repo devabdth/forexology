@@ -2,6 +2,7 @@ from os import mkdir
 from os.path import join, dirname, abspath, exists
 from plugins.consts import Consts
 from plugins.config import Config
+from database.helper import DatabaseHelper
 from flask import Flask, send_file, redirect, request
 
 from sys import path
@@ -13,6 +14,7 @@ class AssetsRouter:
         self.app: Flask = app
         self.cfg: Config = Config()
         self.consts: Consts = Consts()
+        self.helper= DatabaseHelper()
 
     def setup(self):
         self.assign_articles_covers()
@@ -24,6 +26,36 @@ class AssetsRouter:
         self.assign_writers_covers()
         self.assign_articles_podcast()
         self.assign_applications_cvs()
+        self.assign_article_section_cover()
+        self.assign_article_section_audio()
+        self.assign_article_section_video()
+
+    def assign_article_section_cover(self):
+        @self.app.route(self.consts.article_section_covers, methods=["GET"])
+        def article_section_cover(section_id):
+            url_params= dict(request.values)
+            res= self.helper.articles.get_section_cover(section_id)
+            if res != None:
+                return send_file(res)
+            return self.app.response_class(status= 404)
+        
+    def assign_article_section_audio(self):
+        @self.app.route(self.consts.article_section_audios, methods=["GET"])
+        def article_section_audio(section_id):
+            url_params= dict(request.values)
+            res= self.helper.articles.get_section_audio(section_id)
+            if res != None:
+                return send_file(res)
+            return self.app.response_class(status= 404)
+        
+    def assign_article_section_video(self):
+        @self.app.route(self.consts.article_section_videos, methods=["GET"])
+        def article_section_video(section_id):
+            url_params= dict(request.values)
+            res= self.helper.articles.get_section_video(section_id)
+            if res != None:
+                return send_file(res)
+            return self.app.response_class(status= 404)
 
     def assign_applications_cvs(self):
         @self.app.route(self.consts.applications_cvs, methods=["GET"])

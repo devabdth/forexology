@@ -1,211 +1,222 @@
-
 <!DOCTYPE html>
 {% if lang == 'AR' %}
-  <html dir="RTL">
-    {% else %}
-    <html dir="LTR">
-{% endif %}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      {{content.global_[lang]['platformTitle']}} -
-      {{content.actions[lang]['login']}}
-    </title>
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/login/styles/computer.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/login/styles/largeTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/login/styles/smallTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/login/styles/mobile.css')}}"
-    />
+<html dir="RTL">
+  {% else %}
+  <html dir="LTR">
+    {% endif %}
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>
+        {{content.global_[lang]['platformTitle']}} -
+        {{content.actions[lang]['login']}}
+      </title>
+      <link
+        rel="icon"
+        type="image/x-icon"
+        href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/login/styles/computer.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/login/styles/largeTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/login/styles/smallTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/login/styles/mobile.css')}}"
+      />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
-    />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
+      />
 
-    <script
-      type="text/javascript"
-      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{url_for('static', filename='website/home/scripts/main.js')}}"
-    ></script>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
-  <body>
-    <style type="text/css">
-      {% if lang == 'AR' %}
-      :root {
-        --pff: "IBM Plex Sans Arabic";
-        --sff: "Cairo";
-      }
-      {% else %}
-      :root {
-        --pff: "Raleway";
-        --sff: "Poppins";
-      }
-      {% endif %}
-    </style>
-        <header>
-      <div
-        onclick="window.open('{{consts.index_route}}', `_self`);"
-        id="logo"
-      ></div>
-      <div id="options">
-        <button onclick="openSearcDFhDialog();" class="main-icon-button">
-          <i onclick="openSearchDialog();" class="search"></i>
-        </button>
-        |
-        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
-          <i class="theme"></i>
-        </button>
-      </div>
-    </header>
-
-	<section>
-      <div id="form">
-        <h3>{{content.actions[lang]['login']}}</h3>
-        <div class="field-border">
-          <input
-            type="email"
-            name="email"
-            placeholder="{{content.placeholders[lang]['emailUsernameFieldPlaceholder']}}"
-            class="single-line-field-awhite"
-          />
-        </div>
-        <div class="field-border">
-          <input
-            type="password"
-            name="password"
-            placeholder="{{content.placeholders[lang]['passwordFieldPlaceholder']}}"
-            class="single-line-field-awhite"
-          />
-        </div>
+      <script
+        type="text/javascript"
+        src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+      ></script>
+      <script
+        type="text/javascript"
+        src="{{url_for('static', filename='website/login/scripts/main.js')}}"
+      ></script>
+    </head>
+    <body>
+      <style type="text/css">
+        {% if lang == 'AR' %}
+        :root {
+          --pff: "IBM Plex Sans Arabic";
+          --sff: "Cairo";
+        }
+        {% else %}
+        :root {
+          --pff: "Raleway";
+          --sff: "Poppins";
+        }
+        {% endif %}
+      </style>
+      <header>
+        <div
+          onclick="window.open('{{consts.index_route}}', `_self`);"
+          id="logo"
+        ></div>
         <div id="options">
-          <div class="checkbox-container">
-            <label for="rememberMe">
-              <input type="checkbox" name="rememberMe" id="rememberMe" />
-              {{content.actions[lang]['rememberMe']}}
-            </label>
-          </div>
-          <a href="/passwordReset/" class="shadow-button"
-            >{{content.actions[lang]['forgetPassword']}}</a
-          >
-        </div>
-        <div id="actions">
-          <button onclick="loginDialogSubmit()" class="main-button">
-            {{content.actions[lang]['login']}}
+          <button onclick="openSearcDFhDialog();" class="main-icon-button">
+            <i onclick="openSearchDialog();" class="search"></i>
           </button>
-          <a href="/join/" class="shadow-button"
-            >{{content.global_[lang]['dontHaveAccount']}}</a
-          >
+          |
+          <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
+            <i class="theme"></i>
+          </button>
         </div>
-      </div>
-	</section>
-	   <footer>
-      <div class="footer-row" id="categories">
-        {% for pcat in db_helper.categories.parent_cats %}
-        <div class="categories-column">
-          <label><strong>{{pcat.name[lang]}}</strong></label>
-          <p>{{pcat.bio[lang][:50]}}...</p>
-          <div class="categories-column-tabs">
-            {% for cat in pcat.categories %}
-            <a href="/categories/{{cat.id}}/">{{cat.name[lang]}}</a>
-            {% endfor %}
+      </header>
+
+      <section>
+        <div id="form">
+          <h3>{{content.actions[lang]['login']}}</h3>
+          <div class="field-border">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="{{content.placeholders[lang]['emailUsernameFieldPlaceholder']}}"
+              class="single-line-field-awhite"
+            />
+          </div>
+          <div class="field-border">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="{{content.placeholders[lang]['passwordFieldPlaceholder']}}"
+              class="single-line-field-awhite"
+            />
+          </div>
+          <div id="options">
+            <div class="checkbox-container">
+              <label for="rememberMe">
+                <input type="checkbox" name="rememberMe" id="rememberMe" />
+                {{content.actions[lang]['rememberMe']}}
+              </label>
+            </div>
+            <a href="/passwordReset/" class="shadow-button"
+              >{{content.actions[lang]['forgetPassword']}}</a
+            >
+          </div>
+          <div id="actions">
+            <button onclick="confirmation()" class="main-button">
+              {{content.actions[lang]['login']}}
+            </button>
+            <p id="status-msg"></p>
+            <a href="/join/" class="shadow-button"
+              >{{content.global_[lang]['dontHaveAccount']}}</a
+            >
           </div>
         </div>
-        {% endfor %}
-      </div>
-      <div class="footer-row" id="info">
-        <div id="information">
-          <div id="logo" class="symbol"></div>
-          <h3>{{content.global_[lang]['platformTitle']}}</h3>
-          <p>{{content.global_[lang]['footerMsg']}}</p>
+      </section>
+      <footer>
+        <div class="footer-row" id="categories">
+          {% for pcat in db_helper.categories.parent_cats %}
+          <div class="categories-column">
+            <label><strong>{{pcat.name[lang]}}</strong></label>
+            <p>{{pcat.bio[lang][:50]}}...</p>
+            <div class="categories-column-tabs">
+              {% for cat in pcat.categories %}
+              <a href="/categories/{{cat.id}}/">{{cat.name[lang]}}</a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
         </div>
-        <div id="findUs">
-          <h3>{{content.global_[lang]['lightToFindUs']}}</h3>
-          <div id="social-media-icons">
-            {% if cfg.facebook != '' %}
-            <a
-              href="{{cfg.facebook}}"
-              class="facebook main-icon-button"
-              id="facebook"
-              ><i></i
-            ></a>
-            {%endif%} {% if cfg.instagram != '' %}
-            <a
-              href="{{cfg.instagram}}"
-              class="instagram main-icon-button"
-              id="instagram"
-              ><i></i
-            ></a>
-            {%endif%} {% if cfg.twitter != '' %}
-            <a
-              href="{{cfg.twitter}}"
-              class="twitter main-icon-button"
-              id="twitter"
-              ><i></i
-            ></a>
-            {%endif%} {% if cfg.linkedin != '' %}
-            <a
-              href="{{cfg.linkedin}}"
-              class="linkedin main-icon-button"
-              id="linkedin"
-              ><i></i
-            ></a>
-            {%endif%} {% if cfg.tiktok != '' %}
-            <a href="{{cfg.tiktok}}" class="tiktok main-icon-button" id="tiktok"
-              ><i></i
-            ></a>
-            {%endif%} {% if cfg.vimeo != '' %}
-            <a href="{{cfg.vimeo}}" class="vimeo main-icon-button" id="vimeo"
-              ><i></i
-            ></a>
-            {%endif%}
+        <div class="footer-row" id="info">
+          <div id="information">
+            <div id="logo" class="symbol"></div>
+            <h3>{{content.global_[lang]['platformTitle']}}</h3>
+            <p>{{content.global_[lang]['footerMsg']}}</p>
+          </div>
+          <div id="findUs">
+            <h3>{{content.global_[lang]['lightToFindUs']}}</h3>
+            <div id="social-media-icons">
+              {% if cfg.facebook != '' %}
+              <a
+                href="{{cfg.facebook}}"
+                class="facebook main-icon-button"
+                id="facebook"
+                ><i></i
+              ></a>
+              {%endif%} {% if cfg.instagram != '' %}
+              <a
+                href="{{cfg.instagram}}"
+                class="instagram main-icon-button"
+                id="instagram"
+                ><i></i
+              ></a>
+              {%endif%} {% if cfg.twitter != '' %}
+              <a
+                href="{{cfg.twitter}}"
+                class="twitter main-icon-button"
+                id="twitter"
+                ><i></i
+              ></a>
+              {%endif%} {% if cfg.linkedin != '' %}
+              <a
+                href="{{cfg.linkedin}}"
+                class="linkedin main-icon-button"
+                id="linkedin"
+                ><i></i
+              ></a>
+              {%endif%} {% if cfg.tiktok != '' %}
+              <a
+                href="{{cfg.tiktok}}"
+                class="tiktok main-icon-button"
+                id="tiktok"
+                ><i></i
+              ></a>
+              {%endif%} {% if cfg.vimeo != '' %}
+              <a href="{{cfg.vimeo}}" class="vimeo main-icon-button" id="vimeo"
+                ><i></i
+              ></a>
+              {%endif%}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="footer-row">
-        <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
-      </div>
-    </footer>
-    <script type="text/javascript">
-      changeHeaderLogoOnScroll= true;
-      document.firstElementChild.setAttribute('data-theme', '{{mode | lower}}')
-    </script>
-  </body>
+        <div class="footer-row">
+          <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
+        </div>
+      </footer>
+      <script type="text/javascript">
+        changeHeaderLogoOnScroll = true;
+        document.firstElementChild.setAttribute(
+          "data-theme",
+          "{{mode | lower}}"
+        );
+      </script>
+    </body>
+  </html>
 </html>

@@ -62,8 +62,6 @@
       type="text/javascript"
       src="{{url_for('static', filename='website/home/scripts/main.js')}}"
     ></script>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
   <body>
     <style type="text/css">
@@ -138,7 +136,7 @@
       </div>
       </div>
     </header>
-    <section id="entry">
+    <section id="home-entry">
       <div class="overlay">
         <div class="overlay-gradient">
           <div id="left-side">
@@ -665,6 +663,46 @@
                 </div>
               </div>
               {%endfor%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="news-bottom-sheet">
+      <div id="overlay">
+        <div id="header">
+          <h3>{{content.actions[lang]['checkThisOut']}}</h3>
+          <div>-</div>
+        </div>
+        <div id="body">
+          <div id="cards">
+            <div class="card">
+              <div id="img"></div>
+              <div id="information">
+                <h2>Gold Price</h2>
+                <p>1,000 L.E./g</p>
+              </div>
+            </div>
+            <div class="card">
+              <div id="img"></div>
+              <div id="information">
+                <h2>Gold Price</h2>
+                <p>1,000 L.E./g</p>
+              </div>
+            </div>
+            <div class="card">
+              <div id="img"></div>
+              <div id="information">
+                <h2>Gold Price</h2>
+                <p>1,000 L.E./g</p>
+              </div>
+            </div>
+            <div class="card">
+              <div id="img"></div>
+              <div id="information">
+                <h2>Gold Price</h2>
+                <p>1,000 L.E./g</p>
+              </div>
             </div>
           </div>
         </div>

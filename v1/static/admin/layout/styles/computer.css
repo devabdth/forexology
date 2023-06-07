@@ -68,6 +68,8 @@
     align-items: start;
     justify-content: start;
     overflow: auto;
+    row-gap: 1vw;
+    column-gap: 0.5vw;
   }
 
   #right-section h2.title {
@@ -621,6 +623,7 @@
     display: flex;
   }
 
+  .fragment#articles-ads .header,
   .fragment#header .header {
     width: 100%;
     display: flex;
@@ -629,6 +632,7 @@
     flex-direction: column;
   }
 
+  .fragment#articles-ads .header h3,
   .fragment#header .header h3 {
     font-weight: 900;
     font-family: var(--pff);
@@ -636,6 +640,7 @@
     color: var(--primaryColor);
   }
 
+  .fragment#articles-ads .header p,
   .fragment#header .header p {
     font-weight: 500;
     font-family: var(--sff);
@@ -651,5 +656,116 @@
     flex-direction: row;
     gap: 1vw;
     padding: 1vw 0;
+  }
+
+  .fragment#articles-ads .body {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+  }
+
+  .fragment#articles-ads #articles-cards {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1vw;
+    column-gap: 0.5vw;
+    align-items: start;
+    place-items: start;
+  }
+
+  /*.fragment#articles-ads .article-card*/
+  .fragment#articles-ads .article-card {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 1vw;
+    background-color: var(--bg-color);
+    padding: 0.5vw 1vw;
+    border-radius: 12px;
+  }
+
+  .fragment#articles-ads .article-card .cover {
+    min-width: 6vw;
+    min-height: 6vw;
+    display: flex;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .fragment#articles-ads .article-card {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: row;
+    grid-row: 0.5vw;
+    padding: 0.25vw 0.5vw;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  .fragment#articles-ads .article-card h4 {
+    font-weight: 700;
+    font-size: 1.25vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  .fragment#articles-ads .article-card p {
+    font-weight: 300;
+    font-size: 0.8vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+  }
+  .fragment#articles-ads .article-card p span {
+    font-weight: 500;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color: var(--primaryColor);
+  }
+
+  .form-dialog#article-ads-picker-dialog .body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1vw;
+    column-gap: 0.5vw;
+  }
+
+  .form-dialog#article-ads-picker-dialog .body .tile {
+    width: 100%;
+    height: 20vw;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .form-dialog#article-ads-picker-dialog .body .tile h3 {
+    font-weight: 700;
+    font-size: 1.25vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  .form-dialog#article-ads-picker-dialog .body .tile .ad-space {
+    width: 100%;
+    height: 15vw;
+    display: flex;
+  }
+
+  .form-dialog-overlay#article-ads-picker-dialog-overlay {
+    z-index: 499;
+  }
+
+  .form-dialog#article-ads-picker-dialog {
+    z-index: 510;
   }
 }
