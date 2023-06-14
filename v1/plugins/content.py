@@ -125,7 +125,7 @@ class Content:
                 "resetYourPassword": "إسترجع كلمة مرور حسابك",
                 "profilePicture": "الصورة الشخصية",
                 "coverPicture": "صورة الغلاف",
-                "allCareers": "جميع الوظائق",
+                "allCareers": "جميع الوظائف",
                 "weSearchingForYou": "نحن نبحث عنك كما تفعل!",
 
             }
@@ -157,7 +157,6 @@ class Content:
                 "classification": "التصنيفات",
                 "passwordReset": "إستعادة كلمة المرور",
                 "profile": "الصفحة الشخصية"
-
             }
         }
 

@@ -394,7 +394,7 @@
       <div id="cards">
         {% if not (layout.home_featured_missed_articles | length) == 0 %}
           {% for article in db_helper.articles.multiple_articles_by_ids(layout.home_featured_missed_articles) %}
-            <div class="search-dialog-article-card-border">
+            <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
@@ -423,7 +423,7 @@
           {%endfor%}
         {%else%}
           {% for article in db_helper.articles.trending_articles[:8] %}
-            <div class="search-dialog-article-card-border">
+            <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
@@ -500,7 +500,7 @@
       <div id="cards">
         {% if not (layout.home_featured_random_articles | length) == 0 %}
           {% for article in db_helper.articles.multiple_articles_by_ids(layout.home_featured_random_articles) %}
-            <div class="search-dialog-article-card-border">
+            <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
@@ -529,7 +529,7 @@
           {%endfor%}
         {% else %}
           {% for article in db_helper.articles.trending_articles[:8] %}
-            <div class="search-dialog-article-card-border">
+            <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
@@ -678,7 +678,7 @@
             </div>
             <div id="trending-articles-body">
               {% for article in db_helper.articles.trending_articles[:9] %}
-              <div class="search-dialog-article-card-border">
+              <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
                 <div class="search-dialog-article-card">
                   <div class="cover-wrapper">
                     <div

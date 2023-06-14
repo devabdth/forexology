@@ -180,7 +180,8 @@
 	        <div id="fragments">
 	          <div class="articles-fragment active" id="trending-fragment">
 	            {% for article in db_helper.articles.get_all_articles() %}
-	              <div class="search-dialog-article-card-border">
+	                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
@@ -210,7 +211,8 @@
 	          </div>
 	          <div class="articles-fragment" id="recent-fragment">
 	            {% for article in db_helper.articles.get_all_articles() %}
-	              <div class="search-dialog-article-card-border">
+	                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
 	              <div class="search-dialog-article-card">
 	                <div
 	                  class="cover"
@@ -240,7 +242,8 @@
 	          </div>
 	          <div class="articles-fragment" id="random-fragment">
 	            {% for article in db_helper.articles.get_all_articles() %}
-	              <div class="search-dialog-article-card-border">
+	                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
 	              <div class="search-dialog-article-card">
 	                <div
 	                  class="cover"
@@ -270,7 +273,8 @@
 	          </div>
 	          <div class="articles-fragment" id="all-fragment">
 	            {% for article in db_helper.articles.get_all_articles() %}
-	              <div class="search-dialog-article-card-border">
+	                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
 	              <div class="search-dialog-article-card">
 	                <div
 	                  class="cover"
@@ -422,7 +426,8 @@
             </div>
             <div id="trending-articles-body">
               {% for article in db_helper.articles.trending_articles[:9] %}
-              <div class="search-dialog-article-card-border">
+                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
                 <div class="search-dialog-article-card">
                   <div
                     class="cover"

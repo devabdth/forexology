@@ -282,7 +282,8 @@
       <section class="writer-section">
         <div class="left-section">
           {% for article_ in db_helper.articles.multiple_articles_by_ids(db_helper.articles.get_article_by_writer_id(writer.id))[:4] %}
-            <div class="search-dialog-article-card-border">
+                        <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
@@ -357,7 +358,8 @@
       <p>{{content.global_[lang]['incaseYouMissedMsg']}}</p>
       <div id="cards">
           {% for article_ in db_helper.articles.multiple_articles_by_ids(db_helper.articles.get_articles_by_category_and_parent_category(category= article.category, parent_category= article.parent_category))[:8] %}
-            <div class="search-dialog-article-card-border">
+                        <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
               <div class="search-dialog-article-card">
                 <div
                   class="cover"
@@ -488,7 +490,8 @@
             </div>
             <div id="trending-articles-body">
               {% for article in db_helper.articles.trending_articles[:9] %}
-              <div class="search-dialog-article-card-border">
+                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
                 <div class="search-dialog-article-card">
                   <div
                     class="cover"

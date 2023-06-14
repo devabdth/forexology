@@ -196,7 +196,8 @@
         <div id="cards">
           {% for article in
           db_helper.articles.get_article_by_writer_id(writer.id)[:4] %}
-          <div class="search-dialog-article-card-border">
+                      <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
+
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
