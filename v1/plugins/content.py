@@ -123,6 +123,11 @@ class Content:
                 "latestArticlesMsg": "تفقد أخر المقالات المنشورة!",
                 "careers": "الوظائف",
                 "resetYourPassword": "إسترجع كلمة مرور حسابك",
+                "profilePicture": "الصورة الشخصية",
+                "coverPicture": "صورة الغلاف",
+                "allCareers": "جميع الوظائق",
+                "weSearchingForYou": "نحن نبحث عنك كما تفعل!",
+
             }
         }
 
@@ -151,6 +156,8 @@ class Content:
                 "aboutUs": "نبذة عنا",
                 "classification": "التصنيفات",
                 "passwordReset": "إستعادة كلمة المرور",
+                "profile": "الصفحة الشخصية"
+
             }
         }
 
@@ -201,6 +208,15 @@ class Content:
                 "shareLinkVia": "شارك المقال عن طريق...",
                 "shareLink": "شارك رابط المقال",
                 "clear": "مسح"
+                "findEmail": "البحث عن البريد الإلكتروني",
+                "sendCodeAgain": "ارسل الرمز مجددا",
+                "changeEmail": "تغيير الايميل",
+                "validateYourEmail": "تحقق من صحة بريدك الإلكتروني",
+                "Validate": "تحقق",
+                "completeProfile": "أكمل الملف الشخصي",
+                "submit": "تأكيد",
+                "checkThisOut": "تحقق من هذا!",
+                "goBack": "عُد"
 
             }
         }
@@ -261,7 +277,13 @@ class Content:
             "EN": {
                 "notFound": "Not Found",
                 "notFoundMsg": "We didn't found the page or data you're searching for!",
-                "internalServerError": "Interval Server Error",
+                "internalServerError": "Internal Server Error",
                 "internalServerErrorMsg": "There is an error. Try again later!",
+            }و
+            "AR": {
+                "notFound": "غير موجود",
+                "notFoundMsg": "لم نعثر على الصفحة أو البيانات التي تبحث عنها!",
+                "internalServerError": "خطأ في الخادم الداخلي",
+                "internalServerErrorMsg": "هنالك خطأ. حاول مرة أخرى في وقت لاحق!",
             }
         }
