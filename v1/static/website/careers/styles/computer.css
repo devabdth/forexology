@@ -1,0 +1,195 @@
+@media screen and (min-width: 1024px) {
+  section#entry {
+    width: 100%;
+    height: 30vw;
+    background: linear-gradient(
+      180deg,
+      transparent 0,
+      var(--body-bg-color) 50%
+    );
+  }
+
+  section#entry #overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--overlay-color);
+  }
+
+  section#entry h1 {
+    color: var(--primaryColor);
+    font-size: 4vw;
+    font-family: var(--pff);
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  section#entry p {
+    color: var(--primaryVarientColor);
+    font-size: 1.5vw;
+    font-family: var(--sff);
+    font-weight: 300;
+    font-style: italic;
+    padding: 0 30%;
+    text-align: center;
+  }
+
+  section#entry p br {
+  	display: none;
+  }
+
+  section#careers {
+  	width: 100%;
+  	display: flex;
+  	align-items: start;
+  	justify-content: start;
+  	flex-direction: column;
+  	padding: 2.5vw 5%;
+  	gap: 1vw;
+  	background-color: var(--body-bg-color);
+  }
+
+  section#careers #header {
+  	width: 100%;
+  	display: flex;
+  	align-items: start;
+  	justify-content: start;
+  	flex-direction: column;
+  	gap: 0.75vw;
+  }
+
+  section#careers #header h2 {
+  	font-weight: 700;
+  	font-size: 3vw;
+  	font-family: var(--pff);
+  	color:  var(--primaryColor);
+  	font-style: italic;
+  }
+
+  section#careers #header p {
+  	font-weight: 300;
+  	font-style: 1vw;
+  	font-family: var(--pff);
+  	color: var(--primaryVarientColor);
+  }
+
+  section#careers #header #fragments-controllers {
+  	width: 100%;
+  	display: flex;
+  	align-items: start;
+  	justify-content: start;
+  	column-gap: 1vw;
+  	flex-direction: row;
+  }
+
+  section#careers #header .fragment-controller {
+  	font-weight: 300;
+  	font-size: 1.25vw;
+  	font-family: var(--sff);
+  	color: var(--primaryColor);
+  	cursor: pointer;
+  	transition: 250ms ease;
+  }
+
+  section#careers #header .fragment-controller.active {
+  	font-weight: 700;
+  	color: var(--accentColor);
+  	pointer-events: none;
+  }
+
+  section#careers #body {
+  	width: 100%;
+  	height: 100%;
+  	min-height: 40vw;
+  	display: flex;
+  	align-items: start;
+  	justify-content: start;
+  }
+
+  section#careers #body .fragment {
+  	width: 100%;
+  	height: 100%;
+  	display: none;
+  	grid-template-columns: repeat(3, 1fr);
+  	align-items: start;
+  	justify-content: start;
+  	flex-direction: row;
+  	flex-wrap: wrap;
+  	column-gap: 1vw;
+  	row-gap: 2vw;
+  }
+
+  section#careers #body .fragment.active {
+  	display: flex;
+  }
+
+  .job-card {
+  	width: 27.5vw;
+  	display: flex;
+  	align-items: start;
+  	justify-content: space-between;
+  	border-radius: 12px;
+  	background-color: var(--bg-color);
+  	padding: 0.5vw 1vw;
+  	flex-direction: column;
+  	transition: 500ms ease;
+  	cursor: pointer;
+  }
+
+  .job-card:hover {
+  	transform: scale(1.1);
+  	border: 2px var(--accentColor) solid;
+  	box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.25);
+  }
+
+  .job-card .bio,
+  .job-card .subtitle {
+  	font-weight: 300;
+  	font-size: 0.75vw;
+  	font-family: var(--pff);
+  	color: var(--primaryVarientColor);
+  }
+
+  .job-card .bio {
+  	font-size: 1vw;
+  }
+
+  .job-card h3 {
+  	font-size: 1.5vw;
+  	font-family: var(--pff);
+  	color: var(--primaryColor);
+  	font-weight: 700;
+  }
+
+  .job-card .specs {
+  	width: 100%;
+  	display: flex;
+  	align-items: center;
+  	justify-content: end;
+  	flex-direction: row;
+  	gap: 1vw;
+  	flex-wrap: wrap;
+  	margin-top: 2vw;
+  }
+
+  .job-card .specs .applications {
+  	color: var(--accentColor);
+  	font-size: 1vw;
+  	font-weight: 700;
+  	font-family: var(--sff);
+  }
+
+  .job-card .specs .applications span,
+  .job-card .specs .job_type,
+  .job-card .specs .salary_type {
+  	font-weight: 300;
+  	font-size: 0.75vw;
+  	font-family: var(--sff);
+  	font-style: italic;
+  	color: var(--primaryColor);
+  }
+
+}
