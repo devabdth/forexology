@@ -51,8 +51,8 @@ class AuthRouter:
     def assign_login_index(self):
         @self.app.route(self.consts.login_route, methods=["GET"])
         def login_index():
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             return render_template(
                 '/website/login.html',
                 content=self.content,
@@ -98,8 +98,8 @@ class AuthRouter:
     def assign_password_reset_index(self):
         @self.app.route(self.consts.password_reset, methods=["GET"])
         def password_reset_index():
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             return render_template(
                 '/website/password_reset.html',
                 content=self.content,
@@ -146,8 +146,8 @@ class AuthRouter:
         @self.app.route(self.consts.signup_route, methods=["GET"])
         @self.app.route(self.consts.join_route, methods=["GET"])
         def signup_index():
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             return render_template(
                 '/website/signup.html',
                 content=self.content,

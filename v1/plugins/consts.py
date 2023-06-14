@@ -20,7 +20,7 @@ class Consts:
             "0": "Layout",
             "1": "CRM",
             "2": "Categories",
-            "3": "Carrers",
+            "3": "Careers",
             "4": "Ads Spaces",
             "5": "Writers",
             "6": "Admins"
@@ -48,8 +48,8 @@ class Consts:
             {
                 "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af3cb',
                 "mode": 'link',
-                "text": 'carrers',
-                "redirect": '/carrers/'
+                "text": 'careers',
+                "redirect": '/careers/'
             },
             {
                 "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af4cb',
@@ -74,6 +74,8 @@ class Consts:
             self.admin_publish_form_routes = data['ADMIN_PUBLISH_ROUTE']
 
             # Website Routes
+            self.careers_route = data['WEBSITE_CAREERS_ROUTE']
+            self.jobs_route = data['WEBSITE_JOBS_ROUTE']
             self.index_route = data['WEBSITE_INDEX_ROUTE']
             self.home_route = data['WEBSITE_HOME_ROUTE']
             self.main_page_route = data['WEBSITE_MAIN_PAGE_ROUTE']
@@ -115,7 +117,7 @@ class Consts:
             self.admin_logout_route = data['ADMIN_LOGOUT_ROUTE']
             self.admin_layout_route = data['ADMIN_LAYOUT_ROUTE']
             self.admin_layout_articles_ads_route = data['ADMIN_LAYOUT_ARTICLES_ADS_ROUTE']
-            self.admin_carrers_route = data['ADMIN_CARRERS_ROUTE']
+            self.admin_careers_route = data['ADMIN_CAREERS_ROUTE']
             self.admin_categories_route = data['ADMIN_CATEGORIES_ROUTE']
             self.admin_parent_categories_route = data['ADMIN_PARENT_CATEGORIES_ROUTE']
             self.admin_main_page = data['ADMIN_MAIN_ROUTE']

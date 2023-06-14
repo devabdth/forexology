@@ -1,6 +1,6 @@
 @media screen and (min-width: 1024px) {
   section#home-entry {
-    height: 45vw;
+    height: 55vw;
     width: 100%;
     display: flex;
   }
@@ -12,14 +12,10 @@
   }
 
   section#home-entry > div > div {
-    background: linear-gradient(
-      180deg,
-      transparent 40%,
-      var(--body-bg-color) 100%
-    );
+    background-color: var(--body-bg-color);
     padding: 0 5%;
     width: 100%;
-    padding-top: 10vh;
+    padding-top: 20vh;
     padding-bottom: 5vh;
     display: flex;
     align-items: center;
@@ -61,14 +57,14 @@
   }
 
   #left-side #title h2 {
-    font-size: 5vw;
+    font-size: 4vw;
     font-family: var(--pff);
     color: var(--primaryColor);
     font-style: italic;
   }
 
   #left-side #title .shadow-button {
-    color: var(--secondaryColor);
+    color: var(--primaryVarientColor);
     margin-bottom: 16px;
   }
 
@@ -90,7 +86,7 @@
     padding: 0 2.5vw;
     position: absolute;
     bottom: 2vw;
-    z-index: 500;
+    z-index: 40;
   }
 
   #featured-fragments .controllers .main-icon-button {
@@ -217,7 +213,7 @@
   #featured-fragments .fragment .title h3 {
     background-color: var(--secondaryColor);
     color: var(--primaryColor);
-    border-radius: 12px 12px 0 0;
+    border-radius: 12px;
     font-size: 1.75vw;
     font-family: var(--pff);
     padding: 4px 16px;
@@ -227,7 +223,7 @@
   #featured-fragments .fragment .title p {
     background-color: var(--secondaryColor);
     color: var(--primaryVarientColor);
-    border-radius: 0 12px 12px 12px;
+    border-radius: 12px;
     font-size: 1vw;
     font-family: var(--sff);
     padding: 4px 16px;
@@ -279,7 +275,7 @@
   }
 
   .right-side-article-card p.category {
-    background-color: white;
+    background-color: white !important;
     border-radius: 4px;
     padding: 4px 8px;
     color: #111;
@@ -668,7 +664,7 @@
     column-gap: 1vw;
   }
 
-  section#carrers {
+  section#careers {
     background-color: var(--body-bg-color);
     width: 100%;
     display: flex;
@@ -679,7 +675,7 @@
     padding: 5vw 5%;
   }
 
-  section#carrers > #left-section {
+  section#careers > #left-section {
     width: 20%;
     height: 100%;
     flex-direction: column;
@@ -689,14 +685,14 @@
     gap: 2vw;
   }
 
-  section#carrers > #left-section h2 {
+  section#careers > #left-section h2 {
     font-weight: 900;
     font-size: 2.5vw;
     font-family: var(--pff);
     color: var(--primaryColor);
   }
 
-  section#carrers > #left-section h2 span {
+  section#careers > #left-section h2 span {
     font-weight: 900;
     font-size: 3.5vw;
     font-family: var(--pff);
@@ -706,7 +702,7 @@
     text-decoration-style: wavy;
   }
 
-  section#carrers #cards {
+  section#careers #cards {
     width: 75%;
     display: grid;
     align-items: start;

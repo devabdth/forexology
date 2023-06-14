@@ -5,6 +5,7 @@ from models.job_application import JobApplication
 from datetime import datetime
 from sys import path
 import secrets
+from pandas import DataFrame
 path.insert(0, '../')
 
 
@@ -84,3 +85,16 @@ class JobsDatabaseHelper:
         except Exception as e:
             print(e)
             return False
+
+    def get_jobs_by_job_type(self, job_type: int= None):
+        try:
+            if job_type == None:
+                return self.all_jobs
+
+            jobs_df= DataFrame([job.to_dict() for job in self.all_jobs], columns=self.all_jobs[0].to_dict().keys())
+            jobs_df= jobs_df.loc[jobs_df['job_type'] == job_type]
+            jobs= [dict(row) for _, row in jobs_df.iterrows()]
+            return [Job(job) for job in jobs]
+        except Exception as e:
+            print(e)
+            return []

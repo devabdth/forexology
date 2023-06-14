@@ -1,2 +1,7 @@
 @media screen and (min-width: 1024px) {
+	.card#entry {
+		height: none;
+		min-height: 10vw;
+		max-height: 10000vw;
+	}
 }

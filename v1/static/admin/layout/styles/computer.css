@@ -265,7 +265,7 @@
     color: var(--primaryVarientColor);
   }
 
-  #carrers-selection-dialog #options,
+  #careers-selection-dialog #options,
   #writers-selection-dialog #options,
   #tabs-selection-dialog #options,
   #ad-selection-dialog #options,
@@ -279,7 +279,7 @@
     gap: 1vw;
   }
 
-  #carrers-selection-dialog-overlay,
+  #careers-selection-dialog-overlay,
   #writers-selection-dialog-overlay,
   #tabs-selection-dialog-overlay,
   #ad-selection-dialog-overlay,
@@ -293,7 +293,7 @@
     z-index: 1000;
   }
 
-  #carrers-selection-dialog,
+  #careers-selection-dialog,
   #writers-selection-dialog,
   #tabs-selection-dialog,
   #ad-selection-dialog,
@@ -315,7 +315,7 @@
     gap: 1.5vw;
   }
 
-  #carrers-selection-dialog #header,
+  #careers-selection-dialog #header,
   #writers-selection-dialog #header,
   #tabs-selection-dialog #header,
   #ad-selection-dialog #header,
@@ -328,7 +328,7 @@
     flex-direction: row;
   }
 
-  #carrers-selection-dialog #header h2,
+  #careers-selection-dialog #header h2,
   #writers-selection-dialog #header h2,
   #tabs-selection-dialog #header h2,
   #ad-selection-dialog #header h2,
@@ -339,7 +339,7 @@
     font-family: var(--pff);
   }
 
-  #carrers-selection-dialog #header div,
+  #careers-selection-dialog #header div,
   #writers-selection-dialog #header div,
   #tabs-selection-dialog #header div,
   #ad-selection-dialog #header div,
@@ -351,7 +351,7 @@
     cursor: pointer;
   }
 
-  #carrers-selection-dialog #body,
+  #careers-selection-dialog #body,
   #writers-selection-dialog #body,
   #tabs-selection-dialog #body,
   #ad-selection-dialog #body,
@@ -367,7 +367,7 @@
     padding: 0.5vw 1vw;
   }
 
-  #carrers-selection-dialog #body #filter,
+  #careers-selection-dialog #body #filter,
   #writers-selection-dialog #body #filter,
   #tabs-selection-dialog #body #filter,
   #ad-selection-dialog #body #filter,
@@ -380,7 +380,7 @@
     gap: 1vw;
   }
 
-  #carrers-selection-dialog #body > p,
+  #careers-selection-dialog #body > p,
   #writers-selection-dialog #body > p,
   #tabs-selection-dialog #body > p,
   #ad-selection-dialog #body > p {
@@ -396,12 +396,12 @@
     display: flex;
   }
 
-  #carrers-selection-dialog #body #all-carrers,
+  #careers-selection-dialog #body #all-careers,
   #writers-selection-dialog #body #all-writers,
   #tabs-selection-dialog #body #all-writers,
   #writers-selection-dialog #body #selected-writers,
   #tabs-selection-dialog #body #selected-writers,
-  #carrers-selection-dialog #body #selected-carrers,
+  #careers-selection-dialog #body #selected-careers,
   #ad-selection-dialog #body #selected-articles,
   #article-selection-dialog #body #selected-articles {
     width: 100%;
@@ -411,7 +411,7 @@
     column-gap: 8px;
   }
 
-  #carrers-selection-dialog #body #carrers,
+  #careers-selection-dialog #body #careers,
   #writers-selection-dialog #body #writers,
   #tabs-selection-dialog #body #writers,
   #ad-selection-dialog #body #cards,
@@ -427,7 +427,7 @@
     column-gap: 0.5vw;
   }
 
-  #carrers-selection-dialog #status,
+  #careers-selection-dialog #status,
   #writers-selection-dialog #status,
   #tabs-selection-dialog #status,
   #ad-selection-dialog #status,
@@ -505,7 +505,7 @@
     flex-direction: row;
   }
 
-  .collabsable#carrers #carrers,
+  .collabsable#careers #careers,
   .collabsable#writers #writers {
     width: 100%;
     display: grid;

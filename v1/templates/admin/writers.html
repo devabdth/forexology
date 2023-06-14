@@ -72,7 +72,7 @@
             class="left-menu-tile"
           >
             <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
-            <p>Carrers</p>
+            <p>Careers</p>
           </div>
           {%endif%} {% if "4" in admin_data['accesses'] %}
           <div
@@ -210,7 +210,10 @@
                         <label>Categories</label>
                         <h3 class="writer-row-collapsable-writer">
                           {%for category in writer.prefered_category %}
-                          {{db_helper.categories.get_category_by_id(category).name['EN']}},
+                          {% set cat= db_helper.categories.get_category_by_id(category) %}
+                          {% if cat %}
+                          {{cat.name['EN']}},
+                          {% endif %}
                           {% endfor %}
                         </h3>
                       </div>
@@ -218,7 +221,10 @@
                         <label>Classifications</label>
                         <h3 class="writer-row-collapsable-writer">
                           {%for category in writer.prefered_parent_category %}
-                          {{db_helper.categories.get_parent_category_by_id(category).name['EN']}},
+                          {% set parent_cat= db_helper.categories.get_category_by_id(category) %}
+                          {% if parent_cat %}
+                          {{parent_cat.name['EN']}},
+                          {% endif %}
                           {% endfor %}
                         </h3>
                       </div>

@@ -86,7 +86,7 @@
       </div>
       <div id="right-section">
         <h1>Welcome Back, <br /><span>{{writer.name['EN']}}</span></h1>
-        <div class="card" id="entry">
+        <div class="card" id="entry" style="overflow-y: auto;">
           <div id="icon"><div></div></div>
           <div id="information">
             <div class="information-row">
@@ -111,7 +111,10 @@
               <p class="title">Categories:</p>
               <p class="value">
                 {% for category in writer.prefered_category %}
-                {{db_helper.categories.get_category_by_id(category).name['EN']}},
+                  {% set cat= db_helper.categories.get_category_by_id(category) %}
+                  {% if cat %}
+                  {{cat.name['EN']}},
+                  {% endif %}
                 {%endfor%}
               </p>
             </div>
@@ -120,7 +123,10 @@
               <p class="title">Classifications:</p>
               <p class="value">
                 {% for parent_category in writer.prefered_parent_category %}
-                {{db_helper.categories.get_parent_category_by_id(parent_category).name['EN']}},
+                  {% set parent_cat= db_helper.categories.get_category_by_id(category) %}
+                  {% if parent_cat %}
+                  {{parent_cat.name['EN']}},
+                  {% endif %}
                 {%endfor%}
               </p>
             </div>

@@ -13,7 +13,7 @@ from plugins.layout import Layout
 from database.helper import DatabaseHelper
 
 
-class CarrersAdminRouter:
+class CareersAdminRouter:
 	def __init__(self, app: Flask):
 		self.app: Flask= app
 		self.content: Content= Content()
@@ -31,7 +31,7 @@ class CarrersAdminRouter:
 		self.assign_delete_job()
 
 	def assign_update_job(self):
-		@self.app.route(self.consts.admin_carrers_route, methods=["PATCH"])
+		@self.app.route(self.consts.admin_careers_route, methods=["PATCH"])
 		def update_job():
 			try:
 				body= dict(loads(request.data))
@@ -45,7 +45,7 @@ class CarrersAdminRouter:
 				return self.app.response_class(status= 500)
 
 	def assign_delete_job(self):
-		@self.app.route(self.consts.admin_carrers_route, methods=["DELETE"])
+		@self.app.route(self.consts.admin_careers_route, methods=["DELETE"])
 		def delete_job():
 			try:
 				url_params= dict(request.values)
@@ -60,7 +60,7 @@ class CarrersAdminRouter:
 
 
 	def assign_create_job(self):
-		@self.app.route(self.consts.admin_carrers_route, methods=["POST"])
+		@self.app.route(self.consts.admin_careers_route, methods=["POST"])
 		def create_job():
 			try:
 				body= dict(loads(request.data))
@@ -74,8 +74,8 @@ class CarrersAdminRouter:
 				return self.app.response_class(status= 500)
 		
 	def assign_index(self):
-		@self.app.route(self.consts.admin_carrers_route, methods=["GET"])
-		def admin_carrers_index():
+		@self.app.route(self.consts.admin_careers_route, methods=["GET"])
+		def admin_careers_index():
 			aid= session.get('ADMIN_ID')
 			if  aid == None:
 				return redirect(self.consts.admin_login_route)
@@ -88,7 +88,7 @@ class CarrersAdminRouter:
 			lang= session.get('LANG', 'EN')
 			mode= session.get('MODE', 'DARK')
 			return render_template(
-				'/admin/carrers.html',
+				'/admin/careers.html',
 				content= self.content,
 				cfg= self.cfg,
 				consts= self.consts,

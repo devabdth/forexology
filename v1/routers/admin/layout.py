@@ -67,6 +67,7 @@ class LayoutAdminRouter:
 				return redirect(self.consts.admin_login_route)
 			self.layout.load()
 			self.helper.ads.load_data()
+			self.helper.categories.load_data()			
 			lang= session.get('LANG', 'EN')
 			mode= session.get('MODE', 'DARK')
 			return render_template(

@@ -28,8 +28,8 @@ class CategoriesRouter:
     def assign_all_categories_index(self):
         @self.app.route(self.consts.categories_route, methods=["GET"])
         def all_categories_index():
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()
@@ -50,8 +50,8 @@ class CategoriesRouter:
     def assign_single_categories_index(self):
         @self.app.route(self.consts.single_category_route, methods=["GET"])
         def single_category_index(category_id):
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()

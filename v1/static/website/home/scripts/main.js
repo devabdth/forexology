@@ -44,6 +44,13 @@ const initializeFragments = (articles, lang, categories) => {
 
 		title.appendChild(h3);
 		title.appendChild(p);
+		if (lang === "AR") {
+			title.style.left= "none";
+			title.style.right= "2.5vw";
+		} else {
+			title.style.right= "none";
+			title.style.left= "2.5vw";
+		}
 
 		articleCard.appendChild(overlay);
 		articleCard.appendChild(labellingSection);
@@ -56,12 +63,12 @@ const initializeFragments = (articles, lang, categories) => {
 	const leftController = document.getElementById('left-controller');
 	leftController.onclick = () => {
 		if (currentSelectedArticle === 0) return;
-		selectFragmentByTab(currentSelectedArticle - 1);
+		selectFragmentByTab(currentSelectedArticle - 1, (articles.length - 1));
 	}
 	const rightController = document.getElementById('right-controller');
 	rightController.onclick = () => {
-		if (currentSelectedArticle === 4) return;
-		selectFragmentByTab(currentSelectedArticle + 1);
+		if (currentSelectedArticle === (articles.length - 1)) return;
+		selectFragmentByTab(currentSelectedArticle + 1, (articles.length - 1));
 	}
 	const tabs = document.querySelector('#featured-fragments .tabs');
 
@@ -74,16 +81,16 @@ const initializeFragments = (articles, lang, categories) => {
 		}
 
 		tab.onclick = () => {
-			selectFragmentByTab(i);
+			selectFragmentByTab(i, (articles.length - 1));
 		}
 		tabs.appendChild(tab);
 	}
-	selectFragmentByTab(currentSelectedArticle);
+	selectFragmentByTab(currentSelectedArticle, (articles.length - 1));
 
 }
 
 
-const selectFragmentByTab = (i) => {
+const selectFragmentByTab = (i, maxLen) => {
 	const leftController = document.getElementById('left-controller');
 	const rightController = document.getElementById('right-controller');
 	if (i === 0) {
@@ -91,7 +98,7 @@ const selectFragmentByTab = (i) => {
 	} else {
 		leftController.style.transform = 'scale(1)';
 	}
-	if (i === 4) {
+	if (i === maxLen) {
 		rightController.style.transform = 'scale(0)';
 	} else {
 		rightController.style.transform = 'scale(1)';

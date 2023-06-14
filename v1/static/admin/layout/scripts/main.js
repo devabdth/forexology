@@ -1,4 +1,4 @@
-let ads, articles, writers, carrers, selectedArticles, selectedAd;
+let ads, articles, writers, careers, selectedArticles, selectedAd;
 const adsData = {}
 
 const initArticles = (articles_) => {
@@ -13,8 +13,8 @@ const initWriters = (writers_) => {
 	writers = writers_;
 }
 
-const initCarreres = (carrers_) => {
-	carrers = carrers_;
+const initCarreres = (careers_) => {
+	careers = careers_;
 }
 
 const manageFragments = (tab) => {
@@ -323,14 +323,14 @@ const closeWritersSelectionDialog = () => {
 	document.querySelector('#writers-selection-dialog-overlay').style.display = 'none';
 }
 
-const openCarrersSelectionDialog = (props) => {
-	const selectedCarrersContainer = document.querySelector('#carrers-selection-dialog #body #selected-carrers');
-	selectedCarrersContainer.innerHTML = '';
-	const allCarrersContainer = document.querySelector('#carrers-selection-dialog #body #all-carrers');
-	allCarrersContainer.innerHTML = '';
-	const status = document.querySelector('#carrers-selection-dialog #status');
+const openCareersSelectionDialog = (props) => {
+	const selectedCareersContainer = document.querySelector('#careers-selection-dialog #body #selected-careers');
+	selectedCareersContainer.innerHTML = '';
+	const allCareersContainer = document.querySelector('#careers-selection-dialog #body #all-careers');
+	allCareersContainer.innerHTML = '';
+	const status = document.querySelector('#careers-selection-dialog #status');
 
-	for (let carrer of props.initialillySelectedCarrers) {
+	for (let carrer of props.initialillySelectedCareers) {
 		const carrerCard = document.createElement('div');
 		carrerCard.classList.add('carrer-card');
 		carrerCard.setAttribute('id', carrer.id);
@@ -349,7 +349,7 @@ const openCarrersSelectionDialog = (props) => {
 		action.classList.add('shadow-button');
 		action.innerHTML = 'Remove';
 		action.onclick = () => {
-			selectedCarrersContainer.removeChild(carrerCard);
+			selectedCareersContainer.removeChild(carrerCard);
 		}
 
 		options.appendChild(action);
@@ -361,19 +361,19 @@ const openCarrersSelectionDialog = (props) => {
 
 		carrerCard.appendChild(information)
 
-		selectedCarrersContainer.appendChild(carrerCard);
+		selectedCareersContainer.appendChild(carrerCard);
 	}
 
-	for (let carrer of carrers) {
+	for (let carrer of careers) {
 		const carrerCard = document.createElement('div');
 		carrerCard.classList.add('carrer-card');
 		carrerCard.setAttribute('id', carrer.id);
 		carrerCard.style.cursor = 'pointer';
 		carrerCard.onclick = () => {
-			if (selectedCarrersContainer.childNodes.length < props.limit) {
+			if (selectedCareersContainer.childNodes.length < props.limit) {
 				let _card;
 				try {
-					const cards = document.querySelectorAll(`#carrers-selection-dialog #selected-carrers .carrer-card`);
+					const cards = document.querySelectorAll(`#careers-selection-dialog #selected-careers .carrer-card`);
 					for (let card of cards) {
 						if (card.id == carrer.id) {
 							_card = card;
@@ -402,7 +402,7 @@ const openCarrersSelectionDialog = (props) => {
 					action.classList.add('shadow-button');
 					action.innerHTML = 'Remove';
 					action.onclick = () => {
-						selectedCarrersContainer.removeChild(carrerCard_);
+						selectedCareersContainer.removeChild(carrerCard_);
 					}
 
 					options.appendChild(action);
@@ -414,7 +414,7 @@ const openCarrersSelectionDialog = (props) => {
 
 					carrerCard_.appendChild(information)
 
-					selectedCarrersContainer.appendChild(carrerCard_);
+					selectedCareersContainer.appendChild(carrerCard_);
 				}
 			}
 		}
@@ -433,27 +433,27 @@ const openCarrersSelectionDialog = (props) => {
 
 		carrerCard.appendChild(information)
 
-		allCarrersContainer.appendChild(carrerCard);
+		allCareersContainer.appendChild(carrerCard);
 	}
-	const confirmOption = document.querySelector('div#carrers-selection-dialog #options .main-button');
+	const confirmOption = document.querySelector('div#careers-selection-dialog #options .main-button');
 	confirmOption.onclick = () => {
-		let currentCarrersCount = selectedCarrersContainer.childNodes.length;
-		if (!(currentCarrersCount >= props.minimum && currentCarrersCount <= props.limit)) {
-			status.innerHTML = `Select at least (${props.minimum}) carrers!`;
+		let currentCareersCount = selectedCareersContainer.childNodes.length;
+		if (!(currentCareersCount >= props.minimum && currentCareersCount <= props.limit)) {
+			status.innerHTML = `Select at least (${props.minimum}) careers!`;
 			return;
 		}
 		status.innerHTML = '';
-		props.placementParent.innerHTML = selectedCarrersContainer.innerHTML;
-		closeCarrersSelectionDialog();
+		props.placementParent.innerHTML = selectedCareersContainer.innerHTML;
+		closeCareersSelectionDialog();
 	}
 
-	document.querySelector('#carrers-selection-dialog').style.display = 'flex';
-	document.querySelector('#carrers-selection-dialog-overlay').style.display = 'flex';
+	document.querySelector('#careers-selection-dialog').style.display = 'flex';
+	document.querySelector('#careers-selection-dialog-overlay').style.display = 'flex';
 }
 
-const closeCarrersSelectionDialog = () => {
-	document.querySelector('#carrers-selection-dialog').style.display = 'none';
-	document.querySelector('#carrers-selection-dialog-overlay').style.display = 'none';
+const closeCareersSelectionDialog = () => {
+	document.querySelector('#careers-selection-dialog').style.display = 'none';
+	document.querySelector('#careers-selection-dialog-overlay').style.display = 'none';
 }
 
 
@@ -461,13 +461,13 @@ const closeCarrersSelectionDialog = () => {
 const homeFragmentSave = async () => {
 	const saveBtn = document.querySelector('.fragment#home #options .main-button');
 	const cancelBtn = document.querySelector('.fragment#home #options .shadow-button');
-	const articles = [], writers = [], carrers = [];
+	const articles = [], writers = [], careers = [];
 	const articlesCards = document.querySelectorAll('#featured-articles #articles .article-card');
 	for (let artCar of articlesCards) articles.push(artCar.id);
 	const writersCards = document.querySelectorAll('#writers #writers .writer-card');
 	for (let wriCard of writersCards) writers.push(wriCard.id);
-	const carrersCards = document.querySelectorAll('#carrers #carrers .carrer-card');
-	for (let carCard of carrersCards) carrers.push(carCard.id);
+	const careersCards = document.querySelectorAll('#careers #careers .carrer-card');
+	for (let carCard of careersCards) careers.push(carCard.id);
 
 
 	const payload = {
@@ -475,7 +475,7 @@ const homeFragmentSave = async () => {
 		featuredArticles: articles,
 		adsData: adsData,
 		writers: writers,
-		carrers: carrers
+		careers: careers
 	}
 
 	try {
@@ -535,8 +535,8 @@ const allTabs = [
 	{
 		id: 'a05685021712b94519ea3dade83cf7323cd9419b362af3cb',
 		mode: 'link',
-		text: 'carrers',
-		redirect: '/carrers/'
+		text: 'careers',
+		redirect: '/careers/'
 	},
 	{
 		id: 'a05685021712b94519ea3dade83cf7323cd9419b362af4cb',

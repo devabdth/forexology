@@ -29,7 +29,7 @@ class Content:
                 "incaseYouMissedMsg": "In case you missed these articles, Check them out now!",
                 "randomArticles": "Random Articles!",
                 "randomArticlesMsg": "Based on your pervious choises, We've picked these articles for you!",
-                "wannaJoinUs": "Curious about<br><span>Joining Us</span>",
+                "wannaJoinUs": "Curious about<br><span> Joining Us</span>",
                 "applications": "Applications",
                 "le": "L.E.",
                 "classification": "Classification",
@@ -59,10 +59,12 @@ class Content:
                 "allCategoriesMsg": "Check out all categories we have!",
                 "latestArticles": "Latest Articles",
                 "latestArticlesMsg": "Discover the latest articles now!",
-                "carrers": "Carrers",
+                "careers": "Careers",
                 "resetYourPassword": "Reset your password",
                 "profilePicture": "Profile Picture",
                 "coverPicture": "Cover Picture",
+                "allCareers": "All Careers",
+                "weSearchingForYou": "We're searching for you like you do!",
             },
             "AR": {
                 "platformTitle": "FOREXology",
@@ -119,7 +121,7 @@ class Content:
                 "allCategoriesMsg": "تفقد جميع الفئات التي نتناولها",
                 "latestArticles": "أحدث المقالات",
                 "latestArticlesMsg": "تفقد أخر المقالات المنشورة!",
-                "carrers": "الوظائف",
+                "careers": "الوظائف",
                 "resetYourPassword": "إسترجع كلمة مرور حسابك",
             }
         }
@@ -131,7 +133,7 @@ class Content:
                 "articles": "Articles",
                 "tools": "Tools",
                 "categories": "Categories",
-                "carrers": "Carrers",
+                "careers": "Careers",
                 "audioArticles": "Audio Articles",
                 "aboutUs": "About Us",
                 "classification": "Classification",
@@ -144,7 +146,7 @@ class Content:
                 "articles": "المقالات",
                 "tools": "الأدوات",
                 "categories": "الفئات",
-                "carrers": "الوظائف",
+                "careers": "الوظائف",
                 "audioArticles": "المقالات الصوتية",
                 "aboutUs": "نبذة عنا",
                 "classification": "التصنيفات",
@@ -178,7 +180,8 @@ class Content:
                 "Validate": "Validate",
                 "completeProfile": "Complete Profile",
                 "submit": "Submit",
-                "checkThisOut": "Check this out!"
+                "checkThisOut": "Check this out!",
+                "goBack": "Go Back"
             },
             "AR": {
                 "login": "تسجيل الدخول",
@@ -252,4 +255,13 @@ class Content:
                 2: "مستقل",
                 3: "حسب الوقت اللازم",
             },
+        }
+        
+        self.errors: dict= {
+            "EN": {
+                "notFound": "Not Found",
+                "notFoundMsg": "We didn't found the page or data you're searching for!",
+                "internalServerError": "Interval Server Error",
+                "internalServerErrorMsg": "There is an error. Try again later!",
+            }
         }

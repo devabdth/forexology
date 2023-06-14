@@ -30,8 +30,8 @@ class HomeRouter:
         @self.app.route(self.consts.main_page_route, methods=["GET"])
         @self.app.route(self.consts.main_route, methods=["GET"])
         def home_index():
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()

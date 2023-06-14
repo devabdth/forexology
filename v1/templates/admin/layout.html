@@ -72,7 +72,7 @@
             class="left-menu-tile"
           >
             <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
-            <p>Carrers</p>
+            <p>Careers</p>
           </div>
           {%endif%} {% if "4" in admin_data['accesses'] %}
           <div
@@ -393,18 +393,18 @@
                 </div>
               </div>
             </div>
-            <div class="collabsable" id="carrers">
+            <div class="collabsable" id="careers">
               <div onclick="toggleCollapsable(this)" class="title">
-                <h2 class="title">Carrers</h2>
+                <h2 class="title">Careers</h2>
                 <p class="subtitle">
-                  Edit the carrers that appears in the Home Page<br />
+                  Edit the careers that appears in the Home Page<br />
                 </p>
               </div>
               <div class="content">
                 <div class="options">
                   <button class="shadow-button" id="select">Select</button>
                 </div>
-                <div id="carrers">
+                <div id="careers">
                   {%for carrer in db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs)%}
                   <div class="carrer-card" id="{{carrer.id}}">
                     <div class="information">
@@ -514,7 +514,7 @@
     <div id="ad-selection-dialog-overlay"></div>
     <div id="writers-selection-dialog-overlay"></div>
     <div id="tabs-selection-dialog-overlay"></div>
-    <div id="carrers-selection-dialog-overlay"></div>
+    <div id="careers-selection-dialog-overlay"></div>
     <div class="form-dialog-overlay" id="article-ads-picker-dialog-overlay"></div>
     <div id="article-ads-picker-dialog" class="form-dialog">
       <div class="header">
@@ -593,19 +593,19 @@
         <p id="status"></p>
       </div>
     </div>
-    <div id="carrers-selection-dialog">
+    <div id="careers-selection-dialog">
       <div id="header">
-        <h2>Carrers Selection</h2>
-        <div onclick="closeCarrersSelectionDialog();">x</div>
+        <h2>Careers Selection</h2>
+        <div onclick="closeCareersSelectionDialog();">x</div>
       </div>
       <div id="body">
-        <p>Selected Carrers</p>
-        <div id="selected-carrers"></div>
-        <p>All Carrers</p>
-        <div id="all-carrers"></div>
+        <p>Selected Careers</p>
+        <div id="selected-careers"></div>
+        <p>All Careers</p>
+        <div id="all-careers"></div>
       </div>
       <div id="options">
-        <button class="shadow-button" onclick="closeCarrersSelectionDialog();">
+        <button class="shadow-button" onclick="closeCareersSelectionDialog();">
           Cancel
         </button>
         <button class="main-button">Confirm</button>
@@ -651,28 +651,31 @@
         <div id="cards">
           {% for article in db_helper.articles.get_all_articles() %}
           <div class="search-dialog-article-card-border">
-            <div class="search-dialog-article-card" id="{{article.id}}">
-              <div
-                class="cover"
-                style="background-image: url(/assets/articles/covers/{{article.id}});"
-              ></div>
-              <div class="content">
-                <div class="classification">
-                  {% set parent_category=
+              <div class="search-dialog-article-card">
+                <div class="cover-wrapper">
+                  <div
+                  class="cover"
+                  style="background-image: url(/assets/articles/covers/{{article.id}});"
+                ></div>
+                </div>
+                <div class="content">
+                  <div class="classification">
+                                      {% set parent_category=
                   db_helper.categories.get_parent_category_by_id(article.parent_category)
                   %} {% if parent_category %}
                   <h4>{{parent_category.name[lang]}}</h4>
                   {%endif%} {% set category=
                   db_helper.categories.get_category_by_id(article.category)%} {%
                   if category %}
-                  <h4>{{category.name[lang]}}</h4>
+                  <h4>{{category.name["EN"]}}</h4>
                   {%endif%}
+
+                  </div>
+                  <h3>{{article.title[lang]}}</h3>
+                  <p>{{article.short_brief[lang]}}</p>
                 </div>
-                <h3>{{article.title[lang]}}</h3>
-                <p>{{article.short_brief[lang]}}</p>
               </div>
             </div>
-          </div>
           {%endfor%}
         </div>
       </div>
@@ -709,13 +712,13 @@
       					placementParent: document.querySelector('.collabsable#writers #writers')
       				});
       	}
-      	document.querySelector('.collabsable#carrers #select').onclick= ()=> {
-      		openCarrersSelectionDialog({
+      	document.querySelector('.collabsable#careers #select').onclick= ()=> {
+      		openCareersSelectionDialog({
       			lang: 'EN',
       			minimum: 0,
       			limit: 6,
-      			initialillySelectedCarrers: {{dumps(utils.mutliple_to_dicts(db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs))) | safe}},
-      				placementParent: document.querySelector('.collabsable#carrers #carrers')
+      			initialillySelectedCareers: {{dumps(utils.mutliple_to_dicts(db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs))) | safe}},
+      				placementParent: document.querySelector('.collabsable#careers #careers')
       		});
       	}
       	document.querySelector('.shadow-button#entry-section-ad').onclick= ()=> {

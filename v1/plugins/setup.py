@@ -12,6 +12,7 @@ class Setup:
         self.setup_files_and_directories()
         self.setup_app()
         self.setup_routers()
+        self.setup_errors_routers()
         self.setup_adminstration_webapp_routes()
         self.setup_publish_webapp_routes()
         self.setup_socket_handlers()
@@ -77,6 +78,14 @@ class Setup:
         # ChattingHandler(self.app, self.socket)
         pass
 
+
+    def setup_errors_routers(self):
+        from routers.globals.config import ConfigRouter
+        ConfigRouter(self.app).setup()
+        from routers.globals.errors import ErrorsRouter
+        ErrorsRouter(self.app).setup()
+
+
     def setup_adminstration_webapp_routes(self):
         from routers.admin.publish import PublishAdminRouter
         PublishAdminRouter(self.app).setup()
@@ -96,8 +105,8 @@ class Setup:
         from routers.admin.ads import AdsAdminRouter
         AdsAdminRouter(self.app).setup()
 
-        from routers.admin.carrers import CarrersAdminRouter
-        CarrersAdminRouter(self.app).setup()
+        from routers.admin.carrers import CareersAdminRouter
+        CareersAdminRouter(self.app).setup()
         
         from routers.admin.admins import AdminsManagemnetAdminRouter
         AdminsManagemnetAdminRouter(self.app).setup()
@@ -107,8 +116,8 @@ class Setup:
 
     def setup_routers(self):
 
-        from routers.website.config import ConfigRouter
-        ConfigRouter(self.app).setup()
+        from routers.website.careers import CareersRouter
+        CareersRouter(self.app).setup()
 
         from routers.website.home import HomeRouter
         HomeRouter(self.app).setup()

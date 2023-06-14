@@ -1,4 +1,258 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.eot");
+  src: local("NeueHaasDisplay-Mediu"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-RomanItalic.eot");
+  src: local("NeueHaasDisplay-RomanItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-RomanItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-RomanItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-RomanItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-RomanItalic.ttf")
+      format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Black.eot");
+  src: local("NeueHaasDisplay-Black"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Black.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Black.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Black.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Black.ttf")
+      format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-MediumItalic.eot");
+  src: local("NeueHaasDisplay-MediumItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-MediumItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-MediumItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-MediumItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-MediumItalic.ttf")
+      format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BlackItalic.eot");
+  src: local("NeueHaasDisplay-BlackItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BlackItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BlackItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BlackItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BlackItalic.ttf")
+      format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Roman.eot");
+  src: local("NeueHaasDisplay-Roman"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Roman.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Roman.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Roman.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Roman.ttf")
+      format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BoldItalic.eot");
+  src: local("NeueHaasDisplay-BoldItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BoldItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BoldItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-BoldItalic.ttf")
+      format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-LightItalic.eot");
+  src: local("NeueHaasDisplay-LightItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-LightItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-LightItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-LightItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-LightItalic.ttf")
+      format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Bold.eot");
+  src: local("NeueHaasDisplay-Bold"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Bold.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Bold.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Bold.ttf")
+      format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Light.eot");
+  src: local("NeueHaasDisplay-Light"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Light.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Light.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Light.ttf")
+      format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThin.eot");
+  src: local("NeueHaasDisplay-XXThin"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThin.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThin.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThin.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThin.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThinItalic.eot");
+  src: local("NeueHaasDisplay-XThinItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThinItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThinItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThinItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThinItalic.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThinItalic.eot");
+  src: local("NeueHaasDisplay-XXThinItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThinItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThinItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThinItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XXThinItalic.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThin.eot");
+  src: local("NeueHaasDisplay-XThin"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThin.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThin.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThin.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-XThin.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Thin.eot");
+  src: local("NeueHaasDisplay-Thin"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Thin.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Thin.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Thin.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Thin.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-ThinItalic.eot");
+  src: local("NeueHaasDisplay-ThinItalic"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-ThinItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-ThinItalic.woff2")
+      format("woff2"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-ThinItalic.woff")
+      format("woff"),
+    url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-ThinItalic.ttf")
+      format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
 
 :root {
   --image-placeholder: url(/static/website/global/styles/images/imagePlaceholder.png);
@@ -29,6 +283,8 @@
   --symbol-512: url(/static/website/global/styles/images/symbol-512.png);
   --symbol-256: url(/static/website/global/styles/images/symbol-256.png);
   --language-icon: url(/static/website/global/styles/icons/languages.png);
+  --not-found: url(/static/website/global/styles/illustrations/not-found.png);
+  --internal-server-error: url(/static/website/global/styles/illustrations/internal-server-error.png);
 
   --search-icon-white: url(/static/website/global/styles/icons/search-white.png);
   --theme-icon-white: url(/static/website/global/styles/icons/light.png);
@@ -67,7 +323,7 @@
   --accentColor: #a700de;
 
   --body-bg-color: rgb(249, 249, 249);
-  --overlay-color: rgba(249, 249, 249, 0.5);
+  --overlay-color: rgba(249, 249, 249, 0.7);
   --bg-color: rgb(240, 240, 240);
   --bg-gradient: linear-gradient(180deg, #a700de 0%, #a700de 100%);
 
@@ -176,22 +432,41 @@
   header {
     transition: 250ms ease;
     width: 100%;
-    height: 5vw;
+    max-height: 10vw;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
+    justify-content: start;
+    flex-direction: column;
+    gap: 1vw;
     padding: 0 5%;
     position: fixed;
     z-index: 100;
     top: 0;
   }
 
-  header > #tabs {
+  header #intro-row {
+    width: 100%;
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  header > #tabs {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
     display: flex;
     flex-direction: row;
+  }
+
+  header > #tabs > #tabs {
+    width: 100%;
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5vw 0;
   }
 
   /* The container <div> - needed to position the dropdown content */
@@ -307,7 +582,7 @@
     font-weight: 500;
     font-size: 1.1vw;
     color: var(--primaryColor);
-    opacity: 0.5;
+    opacity: 0.75;
     text-decoration: none;
     cursor: pointer;
     transition: 500ms ease;
@@ -318,7 +593,7 @@
     background-color: transparent;
     border: none;
     outline: none;
-    padding: 0.5vw 1vw;
+    padding: 0.25vw 1vw;
   }
 
   .header-dropdown:hover {
@@ -338,16 +613,27 @@
     text-decoration: underline;
   }
 
-  header > #logo {
-    width: 15vw;
-    height: 6vw;
+  header > #tabs #logo,
+  header > #intro-row #logo {
+    width: 8vw;
     aspect-ratio: 1/1;
-    background-image: var(--logo-256-white);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: start;
     background-attachment: scroll;
     cursor: pointer;
+    transition: 250ms ease;
+  }
+
+  header > #intro-row #logo {
+    background-image: var(--logo-256);
+    height: 4vw;
+  }
+
+  header > #tabs #logo {
+    height: 3vw;
+    background-image: var(--logo-256);
+    width: 0;
     transition: 250ms ease;
   }
 
@@ -367,12 +653,16 @@
     z-index: 2;
   }
 
-  header > #options {
+  header > #tabs #options,
+  header > #intro-row #options {
     gap: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
+  }
+  header > #intro-row #options .main-button {
+    font-size: 1vw !important;
   }
 
   .single-line-field {
@@ -479,6 +769,33 @@
   .main-icon-button > i {
     width: 20px;
     height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    font-weight: 900;
+    font-size: 1.5vw;
+    font-family: var(--pff);
+    color: var(--secondaryColor);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-icon-button.collabsed {
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--primaryColor);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-icon-button.collabsed > i {
+    width: 0;
+    height: 0;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -887,6 +1204,10 @@
     padding: 4px;
   }
 
+  .search-dialog-article-card-border:hover .search-dialog-article-card .cover {
+    transform: scale(1.1);
+  }
+
   .search-dialog-article-card-border {
     width: 100%;
     height: 30vw;
@@ -911,15 +1232,21 @@
     padding: 8px;
   }
 
-  .search-dialog-article-card .cover {
+  .search-dialog-article-card .cover-wrapper {
     width: 100%;
     height: 60%;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .search-dialog-article-card .cover {
+    width: 100%;
+    height: 100%;
     background-position: center;
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
     background-color: var(--primaryColor);
-    border-radius: 12px;
+    transition: 500ms ease;
   }
 
   .search-dialog-article-card .classification {
@@ -1479,7 +1806,6 @@
     border-bottom-style: none;
   }
 
-
   #news-bottom-sheet.active {
     bottom: 0;
   }
@@ -1513,7 +1839,7 @@
     font-weight: 300;
     font-size: 1.5vw;
     font-family: var(--sff);
-    color:  var(--primaryColor);
+    color: var(--primaryColor);
     cursor: pointer;
   }
 

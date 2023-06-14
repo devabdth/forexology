@@ -2,6 +2,8 @@
   "ADMIN_PUBLISH_ROUTE": "/webapp/adminstration/publish/",
   "WEBSITE_INDEX_ROUTE": "/",
   "WEBSITE_HOME_ROUTE": "/home/",
+  "WEBSITE_CAREERS_ROUTE": "/careers/",
+  "WEBSITE_JOBS_ROUTE": "/jobs/",
   "WEBSITE_MAIN_PAGE_ROUTE": "/mainPage/",
   "WEBSITE_MAIN_ROUTE": "/main/",
   "WEBSITE_ARTICLES_ROUTE": "/articles/",
@@ -38,7 +40,7 @@
 
   "ADMIN_LAYOUT_ROUTE": "/webapp/adminstration/layout/",
   "ADMIN_LAYOUT_ARTICLES_ADS_ROUTE": "/webapp/adminstration/layout/articlesAds/",
-  "ADMIN_CARRERS_ROUTE": "/webapp/adminstration/jobs/",
+  "ADMIN_CAREERS_ROUTE": "/webapp/adminstration/jobs/",
   "ADMIN_CATEGORIES_ROUTE": "/webapp/adminstration/categories/",
   "ADMIN_PARENT_CATEGORIES_ROUTE": "/webapp/adminstration/categories/parent/",
   "ADMIN_LOGIN_ROUTE": "/webapp/adminstration/login/",

@@ -45,8 +45,8 @@ class Layout:
 			if 'writers' in payload.keys():
 				self.data['HOME_PAGE']['featuredWriters']= payload['writers']
 
-			if 'carrers' in payload.keys():
-				self.data['HOME_PAGE']['featuredJobs']= payload['carrers']
+			if 'careers' in payload.keys():
+				self.data['HOME_PAGE']['featuredJobs']= payload['careers']
 
 			with open(self.layout_path, 'w') as f:
 				dump(self.data, f)

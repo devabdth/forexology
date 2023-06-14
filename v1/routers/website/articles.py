@@ -29,8 +29,8 @@ class ArticlesRouter:
         @self.app.route(self.consts.all_articles_read_route, methods=["GET"])
         @self.app.route(self.consts.all_articles_journal_route, methods=["GET"])
         def all_articles_index():
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()

@@ -67,8 +67,8 @@
     <style type="text/css">
       {% if lang == 'AR' %}
       :root {
-        --pff: "IBM Plex Sans Arabic";
-        --sff: "Cairo";
+        --pff: "Neue Haas Grotesk Display Pro";
+        --sff: sans-serif;
       }
       {% else %}
       :root {
@@ -78,11 +78,39 @@
       {% endif %}
     </style>
     <header>
-      <div
+      <div id="intro-row">
+        <div
         onclick="window.open('{{consts.index_route}}', `_self`);"
         id="logo"
       ></div>
+      <div id="options">
+        <button onclick="openSearcDFhDialog();" class="main-icon-button">
+          <i onclick="openSearchDialog();" class="search"></i>
+        </button>
+        <button onclick="window.open('/login/', '_self');" class="main-button">
+          {{content.actions[lang]['login']}}
+        </button>
+        |
+        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
+          <i class="theme"></i>
+        </button>
+        <div class="lang header-dropdown">
+          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
+          <div class="lang header-dropdown-content">
+            <div id="dropdown-tabs">
+              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+            </div>
+          </div>
+      </div>
+      </div>
+      </div>
       <div id="tabs">
+        <div id="tabs">
+        <div
+        onclick="window.open('{{consts.index_route}}', `_self`);"
+        id="logo"
+        ></div>
         {% for tab in layout.header_tabs %}
           {% if tab['mode'] == 'link' %}
             <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
@@ -110,30 +138,24 @@
                 </div>
               </div>
           </div>
-
           {%endif%}
         {%endfor%}
-      </div>
-      <div id="options">
-        <button onclick="openSearcDFhDialog();" class="main-icon-button">
-          <i onclick="openSearchDialog();" class="search"></i>
-        </button>
-        <button onclick="window.open('/login/', '_self');" class="main-button">
-          {{content.actions[lang]['login']}}
-        </button>
-        |
-        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
-          <i class="theme"></i>
-        </button>
-        <div class="lang header-dropdown">
-          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
-          <div class="lang header-dropdown-content">
-            <div id="dropdown-tabs">
-              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
-              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+        </div>
+        <div id="options">
+          <button onclick="openSearcDFhDialog();" class="main-icon-button collabsed">
+            <i onclick="openSearchDialog();" class="search"></i>
+          </button>
+          <div class="lang header-dropdown">
+            <button class="main-icon-button collabsed" id="lang"><i class="lang"></i></button>
+            <div class="lang header-dropdown-content">
+              <div id="dropdown-tabs">
+                <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+                <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
+        </div>
+  
       </div>
     </header>
     <section id="home-entry">
@@ -148,9 +170,15 @@
             </div>
             <div id="featured-fragments">
               <div class="controllers">
+                {% if lang == "AR" %}
+                <button class="main-icon-button" id="left-controller"><i class="arrow-right-icon"></i></button>
+                <div class="tabs"></div>
+                <button class="main-icon-button" id="right-controller"><i class="arrow-left-icon"></i></button>
+                {% else %}
                 <button class="main-icon-button" id="left-controller"><i class="arrow-left-icon"></i></button>
                 <div class="tabs"></div>
                 <button class="main-icon-button" id="right-controller"><i class="arrow-right-icon"></i></button>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -164,6 +192,7 @@
               style="background-image: url(/assets/articles/covers/{{article.id}});"
             >
               <div id="overlay">
+                <p class="category">
                 {%set parent_category= db_helper.categories.get_parent_category_by_id(article.parent_category) %}
                 {%set category= db_helper.categories.get_category_by_id(article.category) %}
                 {% if parent_category %}
@@ -175,6 +204,7 @@
                 {% if category %}
                 {{category.name[lang]}}
                 {%endif%}
+              </p>
               <h2><span>{{article.title[lang]}}</span></h2>
                 <p class="short_brief">{{article.short_brief[lang]}}</p>
               </div>
@@ -324,27 +354,30 @@
         {%endif%}
       </div>
     {% endif %}
-    <section id="writers">
-    	<div id="left-section">
-	    	<h2>{{content.global_[lang]['ourBestWriters'] | safe}}</h2>
-	    	<a href="/writers/" class="main-button">{{content.actions[lang]['seeMore']}}</a>
-    	</div>
-    	<div id="cards">
-    	{%for writer in db_helper.writers.get_writers_by_ids(layout.home_featured_writers)%}
-    	<div class="writer-card" onclick="window.open('/writers/{{writer.id}}', '_self');">
-			<div class="cover">
-				<div class="illustration"></div>
-				<div class="img" style="background-image: url(/assets/writers/bgFree/{{writer.id}});"></div>
-			</div>    	
-			<h3>{{writer.name[lang]}}</h3>	
-			<p>{{writer.bio[lang][:75]}}...</p>
-			<div class="options">
-				<a href="/writers/{{writer.id}}" class="main-button">{{content.actions[lang]['seeMyArticles']}}</a>
-			</div>
-    	</div>
-    	{%endfor%}
-    	</div>
-    </section>
+    {% set featured_writers= db_helper.writers.get_writers_by_ids(layout.home_featured_writers)%}
+    {% if not (featured_writers | length) == 0%}
+      <section id="writers">
+        <div id="left-section">
+          <h2>{{content.global_[lang]['ourBestWriters'] | safe}}</h2>
+          <a href="/writers/" class="main-button">{{content.actions[lang]['seeMore']}}</a>
+        </div>
+        <div id="cards">
+        {%for writer in featured_writers%}
+        <div class="writer-card" onclick="window.open('/writers/{{writer.id}}', '_self');">
+        <div class="cover">
+          <div class="illustration"></div>
+          <div class="img" style="background-image: url(/assets/writers/bgFree/{{writer.id}});"></div>
+        </div>    	
+        <h3>{{writer.name[lang]}}</h3>	
+        <p>{{writer.bio[lang][:75]}}...</p>
+        <div class="options">
+          <a href="/writers/{{writer.id}}" class="main-button">{{content.actions[lang]['seeMyArticles']}}</a>
+        </div>
+        </div>
+        {%endfor%}
+        </div>
+      </section>
+    {%endif%}
     {% if not (layout.home_ad_space_five == None and layout.home_ad_space_six == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_five == None %}
@@ -363,10 +396,12 @@
           {% for article in db_helper.articles.multiple_articles_by_ids(layout.home_featured_missed_articles) %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
-                <div
+                <div class="cover-wrapper">
+                  <div
                   class="cover"
                   style="background-image: url(/assets/articles/covers/{{article.id}});"
                 ></div>
+                </div>
                 <div class="content">
                   <div class="classification">
                                       {% set parent_category=
@@ -390,10 +425,12 @@
           {% for article in db_helper.articles.trending_articles[:8] %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
-                <div
+                <div class="cover-wrapper">
+                  <div
                   class="cover"
                   style="background-image: url(/assets/articles/covers/{{article.id}});"
                 ></div>
+                </div>
                 <div class="content">
                   <div class="classification">
                   {% set parent_category=
@@ -427,7 +464,7 @@
       </div>
     {% endif %}
     {% if (layout.home_featured_jobs | length) != 0 %}
-      <section id="carrers">
+      <section id="careers">
         <div id="left-section">
           <h2>{{content.global_[lang]['wannaJoinUs'] | safe}}</h2>
           <a href="/writers/" class="main-button">{{content.actions[lang]['seeAllJobs']}}</a>
@@ -465,10 +502,12 @@
           {% for article in db_helper.articles.multiple_articles_by_ids(layout.home_featured_random_articles) %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
-                <div
+                <div class="cover-wrapper">
+                  <div
                   class="cover"
                   style="background-image: url(/assets/articles/covers/{{article.id}});"
                 ></div>
+                </div>
                 <div class="content">
                   <div class="classification">
                                       {% set parent_category=
@@ -492,10 +531,12 @@
           {% for article in db_helper.articles.trending_articles[:8] %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
-                <div
+                <div class="cover-wrapper">
+                  <div
                   class="cover"
                   style="background-image: url(/assets/articles/covers/{{article.id}});"
                 ></div>
+                </div>
                 <div class="content">
                   <div class="classification">
                                       {% set parent_category=
@@ -639,10 +680,12 @@
               {% for article in db_helper.articles.trending_articles[:9] %}
               <div class="search-dialog-article-card-border">
                 <div class="search-dialog-article-card">
-                  <div
-                    class="cover"
-                    style="background-image: url(/assets/articles/covers/{{article.id}});"
-                  ></div>
+                  <div class="cover-wrapper">
+                    <div
+                      class="cover"
+                      style="background-image: url(/assets/articles/covers/{{article.id}});"
+                    ></div>
+                  </div>
                   <div class="content">
                     <div class="classification">
                       {%set parent_category= db_helper.categories.get_parent_category_by_id(article.parent_category) %}
@@ -663,46 +706,6 @@
                 </div>
               </div>
               {%endfor%}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="news-bottom-sheet">
-      <div id="overlay">
-        <div id="header">
-          <h3>{{content.actions[lang]['checkThisOut']}}</h3>
-          <div>-</div>
-        </div>
-        <div id="body">
-          <div id="cards">
-            <div class="card">
-              <div id="img"></div>
-              <div id="information">
-                <h2>Gold Price</h2>
-                <p>1,000 L.E./g</p>
-              </div>
-            </div>
-            <div class="card">
-              <div id="img"></div>
-              <div id="information">
-                <h2>Gold Price</h2>
-                <p>1,000 L.E./g</p>
-              </div>
-            </div>
-            <div class="card">
-              <div id="img"></div>
-              <div id="information">
-                <h2>Gold Price</h2>
-                <p>1,000 L.E./g</p>
-              </div>
-            </div>
-            <div class="card">
-              <div id="img"></div>
-              <div id="information">
-                <h2>Gold Price</h2>
-                <p>1,000 L.E./g</p>
-              </div>
             </div>
           </div>
         </div>

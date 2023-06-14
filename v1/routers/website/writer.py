@@ -30,8 +30,8 @@ class WriterRouter:
     def assign_writer_index(self):
         @self.app.route(self.consts.writer_route, methods=["GET"])
         def writer_index(writer_id):
-            lang = session.get('LANG', 'EN')
-            mode = session.get('MODE', 'DARK')
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
             articles = self.helper.articles.get_article_by_writer_id(writer_id)
             self.helper.categories.load_data()
             self.helper.ads.load_data()

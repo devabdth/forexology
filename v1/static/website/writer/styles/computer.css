@@ -8,7 +8,7 @@
 
   section#entry {
     width: 90%;
-    height: 40vw;
+    height: 30vw;
     display: flex;
     position: relative;
     background-color: var(--body-bg-color);
@@ -17,8 +17,9 @@
     flex-direction: column;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     background-position: center;
-    margin-top: 7.5vw;
+    margin-top: 9vw;
     border-radius: 25px;
     overflow: hidden;
   }

@@ -8,26 +8,12 @@ const headerTabsConfig = () => {
 	}
 }
 
-const openNewsBottomSheet= ()=> {
-	document.querySelector('#news-bottom-sheet').classList.add('active');
-	document.querySelector('#news-bottom-sheet #header div').innerHTML= '-';
-	document.querySelector('#news-bottom-sheet #header div').onclick= closeNewsBottomSheet;
-}
-
-const closeNewsBottomSheet= ()=> {
-	document.querySelector('#news-bottom-sheet').classList.remove('active');
-	document.querySelector('#news-bottom-sheet #header div').innerHTML= '+';
-	document.querySelector('#news-bottom-sheet #header div').onclick= openNewsBottomSheet;
-}
-
-if (window.addEventListener) window.addEventListener('load', ()=> {
+if (window.addEventListener) window.addEventListener('load', () => {
 	headerTabsConfig();
-	openNewsBottomSheet();
 });
 
-else if (window.attachEvent) window.attachEvent('load', ()=> {
+else if (window.attachEvent) window.attachEvent('load', () => {
 	headerTabsConfig();
-	openNewsBottomSheet();
 });
 
 let changeHeaderLogoOnScroll;
@@ -110,12 +96,16 @@ const loginDialogSubmit = () => {
 
 window.addEventListener('scroll', () => {
 	if (window.scrollY >= 50) {
+		document.querySelector('header #intro-row').style.display = 'none';
+		document.querySelectorAll('header #tabs .main-icon-button').forEach(element => { element.classList.remove('collabsed') })
+		document.querySelector('header #tabs #logo').style.width = '8vw';
 		document.querySelector('header').style.backgroundColor = 'var(--secondaryColor)';
-		if (changeHeaderLogoOnScroll) document.querySelector('header #logo').style.backgroundImage = 'var(--logo-256)';
 		return;
 	}
+	document.querySelectorAll('header #tabs .main-icon-button').forEach(element => { element.classList.add('collabsed') })
+	document.querySelector('header #tabs #logo').style.width = '0';
+	document.querySelector('header #intro-row').style.display = 'flex';
 	document.querySelector('header').style.backgroundColor = 'transparent';
-	if (changeHeaderLogoOnScroll) document.querySelector('header #logo').style.backgroundImage = 'var(--logo-256-white)';
 })
 
 const adminLogout = async () => {

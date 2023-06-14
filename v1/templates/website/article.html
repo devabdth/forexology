@@ -70,8 +70,8 @@
     <style type="text/css">
       {% if lang == 'AR' %}
       :root {
-        --pff: "IBM Plex Sans Arabic";
-        --sff: "Cairo";
+        --pff: "Neue Haas Grotesk Display Pro";
+        --sff: sans-serif;
       }
       {% else %}
       :root {
@@ -81,11 +81,39 @@
       {% endif %}
     </style>
     <header>
-      <div
+      <div id="intro-row">
+        <div
         onclick="window.open('{{consts.index_route}}', `_self`);"
         id="logo"
       ></div>
+      <div id="options">
+        <button onclick="openSearcDFhDialog();" class="main-icon-button">
+          <i onclick="openSearchDialog();" class="search"></i>
+        </button>
+        <button onclick="window.open('/login/', '_self');" class="main-button">
+          {{content.actions[lang]['login']}}
+        </button>
+        |
+        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
+          <i class="theme"></i>
+        </button>
+        <div class="lang header-dropdown">
+          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
+          <div class="lang header-dropdown-content">
+            <div id="dropdown-tabs">
+              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+            </div>
+          </div>
+      </div>
+      </div>
+      </div>
       <div id="tabs">
+        <div id="tabs">
+        <div
+        onclick="window.open('{{consts.index_route}}', `_self`);"
+        id="logo"
+        ></div>
         {% for tab in layout.header_tabs %}
           {% if tab['mode'] == 'link' %}
             <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
@@ -113,30 +141,24 @@
                 </div>
               </div>
           </div>
-
           {%endif%}
         {%endfor%}
-      </div>
-      <div id="options">
-        <button onclick="openSearcDFhDialog();" class="main-icon-button">
-          <i onclick="openSearchDialog();" class="search"></i>
-        </button>
-        <button onclick="window.open('/login/', '_self');" class="main-button">
-          {{content.actions[lang]['login']}}
-        </button>
-        |
-        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
-          <i class="theme"></i>
-        </button>
-        <div class="lang header-dropdown">
-          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
-          <div class="lang header-dropdown-content">
-            <div id="dropdown-tabs">
-              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
-              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+        </div>
+        <div id="options">
+          <button onclick="openSearcDFhDialog();" class="main-icon-button collabsed">
+            <i onclick="openSearchDialog();" class="search"></i>
+          </button>
+          <div class="lang header-dropdown">
+            <button class="main-icon-button collabsed" id="lang"><i class="lang"></i></button>
+            <div class="lang header-dropdown-content">
+              <div id="dropdown-tabs">
+                <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+                <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
+        </div>
+  
       </div>
     </header>
     <section id="entry">
@@ -262,18 +284,24 @@
           {% for article_ in db_helper.articles.multiple_articles_by_ids(db_helper.articles.get_article_by_writer_id(writer.id))[:4] %}
             <div class="search-dialog-article-card-border">
               <div class="search-dialog-article-card">
-                <div
+                <div class="cover-wrapper">
+                  <div
                   class="cover"
-                  style="background-image: url(/assets/articles/covers/{{article.id}});"
+                  style="background-image: url(/assets/articles/covers/{{article_.id}});"
                 ></div>
+                </div>
                 <div class="content">
                   <div class="classification">
-                    <h4>
-                      {{db_helper.categories.get_parent_category_by_id(article_.parent_category).name[lang]}}
-                    </h4>
-                    <h4>
-                      {{db_helper.categories.get_category_by_id(article_.category).name[lang]}}
-                    </h4>
+                  {% set parent_category=
+                  db_helper.categories.get_parent_category_by_id(article_.parent_category)
+                  %} {% if parent_category %}
+                  <h4>{{parent_category.name[lang]}}</h4>
+                  {%endif%} {% set category=
+                  db_helper.categories.get_category_by_id(article_.category)%} {%
+                  if category %}
+                  <h4>{{category.name[lang]}}</h4>
+                  {%endif%}
+
                   </div>
                   <h3>{{article_.title[lang]}}</h3>
                   <p>{{article_.short_brief[lang]}}</p>

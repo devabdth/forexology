@@ -30,7 +30,6 @@
     padding: 1vw 2vw;
     gap: 2vw;
   }
-
   #right-section .card#entry {
     flex-direction: row;
   }

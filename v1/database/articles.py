@@ -11,34 +11,34 @@ class ArticlesDatabaseHelper:
         self.consts: Consts= Consts()
         self.trending_articles: list = [
             Article({
-                "id": "sdfsdfcsdcsd{}".format(i),
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af0cb",
                 "title": {
-                    "EN": "What happened in Gamasa pt {}".format(i),
-                    "AR": "What happened in Gamasa pt {}".format(i),
+                    "EN": "Will the US Federal Reserve surprise the markets and raise interest? The expected scenario!",
+                    "AR": "هل يفاجأ الفيدرالي الأمريكي الأسواق ويرفع الفائدة؟ السيناريو المتوقع!",
                 },
                 "short_brief": {
-                    "EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
-                    "AR": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
+                    "AR": "سوف تتابع أسواق العملات وبخاصة متداولي الدولار باهتمام كبير صدور قرارات الفيدرالي الأمريكي المرتقبة بشأن السياسة النقدية، والتي سيعقبها المؤتمر الصحفي لمحافظ البنك،..",
+                    "EN": "Currency markets, especially dollar traders, will follow with great interest the issuance of the upcoming US Federal Reserve decisions regarding monetary policy, which will be followed by the press conference of the bank’s governor,..",
                 },
                 "cover_attached_msg": {
-                    "EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
-                    "AR": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem."
+                    "EN": "",
+                    "AR": ""
                 },
-                "parent_category": "135cc6cdcfe4bd527eb4f956",
-                "category": "95a7cc16897a08b56ba4faf3",
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
                 "sections": [
                     {
                     "title": {
-                        "EN": "What happened in Gamasa pt {}".format(ii),
-                        "AR": "What happened in Gamasa pt {}".format(ii),
+                        "EN": "Will the US Federal Reserve surprise the markets and raise interest? The expected scenario!",
+                        "AR": "هل يفاجأ الفيدرالي الأمريكي الأسواق ويرفع الفائدة؟ السيناريو المتوقع!",
                     },
                     "subtitle": {
-                        "EN": f"What happened in Gamasa pt {i} Subtitle",
-                        "AR": f"What happened in Gamasa pt {i} Subtitle"
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
                     },
                     "bio": {
-                        "EN": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem.",
-                        "AR": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl tortor, rhoncus eget nisi vel, iaculis laoreet quam. Mauris congue quam in dignissim pretium. Aliquam sit amet turpis sem. In dolor turpis, commodo in volutpat laoreet, venenatis lobortis lorem."
+                        "AR": "سوف تتابع أسواق العملات وبخاصة متداولي الدولار باهتمام كبير صدور قرارات الفيدرالي الأمريكي المرتقبة بشأن السياسة النقدية، والتي سيعقبها المؤتمر الصحفي لمحافظ البنك،..",
+                        "EN": "Currency markets, especially dollar traders, will follow with great interest the issuance of the upcoming US Federal Reserve decisions regarding monetary policy, which will be followed by the press conference of the bank’s governor,..",
                     },
                     "id": str(secrets.token_hex(12)),
                     "attachement_msg": {
@@ -56,18 +56,424 @@ class ArticlesDatabaseHelper:
                 "comments": [],
                 "thread": "",
                 "published_in": str(datetime.now()),
-                "published_by": ["ssdfsdsdSDSDfsdfsd", "ssdfsdsdfsdfsd"],
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
                 "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
                 "saves": 124,
                 "views": 1118,
-                "mode": i % 2,
+                "mode": 1,
                 "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
                 "record_available": True,
                 "read_time": {
-                    f"sdfsdfcsdcsd{i}_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af0cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
                 }
 
-            }) for i in range(9)
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af1cb",
+                "title": {
+                    "EN": "Does the Fed volcano explode in the face of gold?",
+                    "AR": "هل ينفجر بركان الفيدرالي في وجه الذهب؟",
+                },
+                "short_brief": {
+                    "AR": "التحليل الفني اليومي للعملات والسلع والمؤشرات 14/6/2023 تفاصيل فيديو التحليل الفني",
+                    "EN": "Does the Fed volcano explode in the face of gold?",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                    "EN": "Does the Fed volcano explode in the face of gold?",
+                    "AR": "هل ينفجر بركان الفيدرالي في وجه الذهب؟",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "التحليل الفني اليومي للعملات والسلع والمؤشرات 14/6/2023 تفاصيل فيديو التحليل الفني",
+                        "EN": "Does the Fed volcano explode in the face of gold?",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af1cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af2cb",
+                "title": {
+                    "EN": "Yellen talks about Western sanctions, relations with China, and the dollar's global dominance",
+                    "AR": "يلين تتحدث عن العقوبات الغربية والعلاقات مع الصين وهيمنة الدولار العالمية",
+                },
+                "short_brief": {
+                    "AR": "قالت وزير الخزانة الأمريكية جانيت يلين أمس الثلاثاء أثناء الإدلاء بشهادتها أمام الكونجرس، ببعض النقاط الهامة فيما يتعلق بالعقوبات المفروضة على روسيا والعلاقات الأمريكية",
+                    "EN": "Yesterday, while testifying before Congress, US Treasury Secretary Janet Yellen said some important points regarding sanctions against Russia and US relations.",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                        "EN": "Yellen talks about Western sanctions, relations with China, and the dollar's global dominance",
+                        "AR": "يلين تتحدث عن العقوبات الغربية والعلاقات مع الصين وهيمنة الدولار العالمية",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "قالت وزير الخزانة الأمريكية جانيت يلين أمس الثلاثاء أثناء الإدلاء بشهادتها أمام الكونجرس، ببعض النقاط الهامة فيما يتعلق بالعقوبات المفروضة على روسيا والعلاقات الأمريكية",
+                        "EN": "Yesterday, while testifying before Congress, US Treasury Secretary Janet Yellen said some important points regarding sanctions against Russia and US relations.",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af2cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af3cb",
+                "title": {
+                    "EN": "Urgent - the release of growth data in Britain",
+                    "AR": "عاجل - صدور بيانات النمو في بريطانيا",
+                },
+                "short_brief": {
+                    "AR": "أظهرت البيانات الصادرة صباح يوم الأربعاء عن مكتب الإحصاءات الوطنية في بريطانيا نمو الناتج المحلي الإجمالي بنسبة 0.2% خلال أبريل الماضي على أساس شهري، بما يتماشى مع",
+                    "EN": "Data released on Wednesday morning by Britain's Office for National Statistics showed that the gross domestic product (GDP) grew by 0.2% in April on a monthly basis, in line with the previous forecast.",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                        "EN": "Urgent - the release of growth data in Britain",
+                        "AR": "عاجل - صدور بيانات النمو في بريطانيا",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "أظهرت البيانات الصادرة صباح يوم الأربعاء عن مكتب الإحصاءات الوطنية في بريطانيا نمو الناتج المحلي الإجمالي بنسبة 0.2% خلال أبريل الماضي على أساس شهري، بما يتماشى مع",
+                        "EN": "Data released on Wednesday morning by Britain's Office for National Statistics showed that the gross domestic product (GDP) grew by 0.2% in April on a monthly basis, in line with the previous forecast.",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af3cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af4cb",
+                "title": {
+                    "EN": "The International Monetary Fund makes recommendations on New Zealand's fiscal and monetary policy",
+                    "AR": "صندوق النقد الدولي يقدم توصياته حول السياسة المالية والنقدية في نيوزيلندا",
+                },
+                "short_brief": {
+                    "AR": "في البيان الختامي لبعثة صندوق النقد الدولي لنيوزيلندا في عام 2023، أشار صندوق النقد الدولي إلى أن اقتصاد نيوزيلندا من المحتمل أن يشهد حالة من التباطؤ الضروري ناتج عن",
+                    "EN": "In the concluding statement of the International Monetary Fund's mission to New Zealand in 2023, the IMF indicated that New Zealand's economy is likely to experience a necessary slowdown as a result of",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                        "EN": "The International Monetary Fund makes recommendations on New Zealand's fiscal and monetary policy",
+                        "AR": "صندوق النقد الدولي يقدم توصياته حول السياسة المالية والنقدية في نيوزيلندا",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "في البيان الختامي لبعثة صندوق النقد الدولي لنيوزيلندا في عام 2023، أشار صندوق النقد الدولي إلى أن اقتصاد نيوزيلندا من المحتمل أن يشهد حالة من التباطؤ الضروري ناتج عن",
+                        "EN": "In the concluding statement of the International Monetary Fund's mission to New Zealand in 2023, the IMF indicated that New Zealand's economy is likely to experience a necessary slowdown as a result of",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af4cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "title": {
+                    "EN": "The People's Bank of China sets the price of the dollar against the yuan at 7.1566",
+                    "AR": "بنك الصين الشعبي يحدد سعر الدولار مقابل اليوان عند 7.1566",
+                },
+                "short_brief": {
+                    "AR": "قرر بنك الصين الشعبي صباح اليوم الأربعاء تحديد سعر صرف اليوان مقابل الدولار الأمريكي عند مستوى 7.1566 يوان لكل دولار، ويعد هذا أدنى مستوى يتم تحديد اليوان عنده",
+                    "EN": "The People's Bank of China decided this morning, Wednesday, to set the exchange rate of the yuan against the US dollar at the level of 7.1566 yuan per dollar, and this is the lowest level at which the yuan is set.",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                        "EN": "The People's Bank of China sets the price of the dollar against the yuan at 7.1566",
+                        "AR": "بنك الصين الشعبي يحدد سعر الدولار مقابل اليوان عند 7.1566",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "قرر بنك الصين الشعبي صباح اليوم الأربعاء تحديد سعر صرف اليوان مقابل الدولار الأمريكي عند مستوى 7.1566 يوان لكل دولار، ويعد هذا أدنى مستوى يتم تحديد اليوان عنده",
+                        "EN": "The People's Bank of China decided this morning, Wednesday, to set the exchange rate of the yuan against the US dollar at the level of 7.1566 yuan per dollar, and this is the lowest level at which the yuan is set.",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af5cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af6cb",
+                "title": {
+                    "EN": "The Governor of the Bank of England makes important remarks",
+                    "AR": "محافظ بنك إنجلترا يدلي بتصريحات مهمة",
+                },
+                "short_brief": {
+                    "AR": "سوف تتابع أسواق العملات وبخاصة متداولي الدولار باهتمام كبير صدور قرارات الفيدرالي الأمريكي المرتقبة بشأن السياسة النقدية، والتي سيعقبها المؤتمر الصحفي لمحافظ البنك،",
+                    "EN": "Currency markets, especially dollar traders, will follow with great interest the issuance of the upcoming US Federal Reserve decisions on monetary policy, which will be followed by the press conference of the Bank’s governor,",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                        "EN": "The Governor of the Bank of England makes important remarks",
+                        "AR": "محافظ بنك إنجلترا يدلي بتصريحات مهمة",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "أدلى محافظ بنك إنجلترا أندرو بايلي ببعض التصريحات المهمة خلال شهادته أمام مجلس اللوردات البريطاني، حول الاقتصاد والقطاع المصرفي وتطورات السياسة النقدية داخل",
+                        "EN": "Bank of England Governor Andrew Bailey made some important statements during his testimony before the British House of Lords, about the economy, the banking sector and monetary policy developments in the UK.",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af6cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
+            Article({
+                "id": "a05685021712b94519ea3dade83cf7323cd9419b362af7cb",
+                "title": {
+                    "EN": "Natural gas futures rose during the US session",
+                    "AR": "العقود الآجلة للغاز الطبيعي ارتفعت خلال دورة الولايات المتحدة",
+                },
+                "short_brief": {
+                    "AR": "حسب بورصة نيويورك التجارية, تمت تجارة العقود الآجلة للغاز الطبيعي في يوليو على USD2.34 لكل مليون وحدة حرارية بريطانية وقت كتابة الخبر, ارتفع بنسبة 3.22%. لقد تمت",
+                    "EN": "According to the New York Mercantile Exchange, natural gas futures in July were trading at USD2.34 per million British thermal units at time of writing, up 3.22%. its done",
+                },
+                "cover_attached_msg": {
+                    "EN": "",
+                    "AR": ""
+                },
+                "parent_category": "1788ef9f6b6e66bf16f1513c",
+                "category": "c748d040ace4a78cf751f93d",
+                "sections": [
+                    {
+                    "title": {
+                        "EN": "Natural gas futures rose during the US session",
+                        "AR": "العقود الآجلة للغاز الطبيعي ارتفعت خلال دورة الولايات المتحدة",
+                    },
+                    "subtitle": {
+                        "EN": "Article Subtitle",
+                        "AR": "عنوان فرعي للمقال"
+                    },
+                    "bio": {
+                        "AR": "حسب بورصة نيويورك التجارية, تمت تجارة العقود الآجلة للغاز الطبيعي في يوليو على USD2.34 لكل مليون وحدة حرارية بريطانية وقت كتابة الخبر, ارتفع بنسبة 3.22%. لقد تمت",
+                        "EN": "According to the New York Mercantile Exchange, natural gas futures in July were trading at USD2.34 per million British thermal units at time of writing, up 3.22%. its done",
+                    },
+                    "id": str(secrets.token_hex(12)),
+                    "attachement_msg": {
+                        "EN": "This is an Image",
+                        "AR": "This is an Image",
+                    },
+                    "attachment_type": "IMAGE",
+                    "action_text": {},
+                    "action_link": "",
+                    "attached_ad_id": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                    "audio_stop": ii * 0.5,
+                    } for ii in range(10)
+                ],
+                "ratings": [],
+                "comments": [],
+                "thread": "",
+                "published_in": str(datetime.now()),
+                "published_by": ["49ead2d979eaa7cfd90672aa"],
+                "attached_ad": "a05685021712b94519ea3dade83cf7323cd9419b362af5cb",
+                "saves": 124,
+                "views": 1118,
+                "mode": 1,
+                "tags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"],
+                "record_available": True,
+                "read_time": {
+                    f"a05685021712b94519ea3dade83cf7323cd9419b362af7cb_ARTICLE_SECTION_{ii}": 16 for ii in range(10)
+                }
+
+            }),
         ]
 
     def get_article_by_id(self, article_id):
@@ -77,7 +483,7 @@ class ArticlesDatabaseHelper:
         return self.trending_articles
 
     def multiple_articles_by_ids(self, ids: list):
-        return self.trending_articles
+        return self.trending_articles[:len(ids)]
     
     def get_article_by_writer_id(self, writer_id):
         return self.trending_articles
