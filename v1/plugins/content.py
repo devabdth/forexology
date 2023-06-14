@@ -207,7 +207,7 @@ class Content:
                 "comment": "أترك تعليقاً",
                 "shareLinkVia": "شارك المقال عن طريق...",
                 "shareLink": "شارك رابط المقال",
-                "clear": "مسح"
+                "clear": "مسح",
                 "findEmail": "البحث عن البريد الإلكتروني",
                 "sendCodeAgain": "ارسل الرمز مجددا",
                 "changeEmail": "تغيير الايميل",
@@ -279,7 +279,7 @@ class Content:
                 "notFoundMsg": "We didn't found the page or data you're searching for!",
                 "internalServerError": "Internal Server Error",
                 "internalServerErrorMsg": "There is an error. Try again later!",
-            }و
+            },
             "AR": {
                 "notFound": "غير موجود",
                 "notFoundMsg": "لم نعثر على الصفحة أو البيانات التي تبحث عنها!",
