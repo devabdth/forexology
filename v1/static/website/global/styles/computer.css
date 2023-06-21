@@ -314,17 +314,17 @@
 }
 
 :root {
-  --primaryColor: rgb(17, 17, 17);
-  --primaryVarientColor: rgb(68, 68, 68);
+  --primaryColor: #111111;
+  --primaryVarientColor: #444444;
 
-  --secondaryColor: rgb(249, 249, 249);
-  --secondaryVarientColor: rgb(223, 223, 223);
+  --secondaryColor: #f9f9f9;
+  --secondaryVarientColor: #dfdfdf;
 
-  --accentColor: #a700de;
+  --accentColor: #8e00be;
 
-  --body-bg-color: rgb(249, 249, 249);
-  --overlay-color: rgba(249, 249, 249, 0.7);
-  --bg-color: rgb(240, 240, 240);
+  --body-bg-color: #f9f9f9;
+  --overlay-color: #f9f9f9b3;
+  --bg-color: #f0f0f0;
   --bg-gradient: linear-gradient(180deg, #a700de 0%, #a700de 100%);
 
   /*Icons*/
@@ -1030,6 +1030,27 @@
 
   footer #copyright {
     font-size: 0.8vw;
+    font-family: var(--sff);
+    color: white;
+    font-weight: 300;
+  }
+
+  footer div#warning {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+  }
+
+  footer div#warning #title {
+    font-size: 1.5vw;
+    font-family: var(--sff);
+    color: white;
+    font-weight: 500;
+  }
+
+  footer div#warning #warning {
+    font-size: 1vw;
     font-family: var(--sff);
     color: white;
     font-weight: 300;

@@ -121,12 +121,12 @@
           {% if tab['mode'] == 'classification' %}
           {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
             <div class="header-dropdown">
-              <button class="header-dropbtn">{{classification.name[lang]}}</button>
+              <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
               <div class="header-dropdown-content">
                 <div id="label">
                   <h3>{{classification.name[lang]}}</h3>
                   <p>{{classification.bio[lang]}}</p>
-                  <button onclick="window.open(`/classification/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
                 </div>
                 <div id="dropdown-tabs">
                   {% for category in classification['categories'] %}
@@ -247,7 +247,8 @@
     					<p class="label">{{db_helper.categories.active_cats[0].name[lang]}}</p>
     					<a href="/categories/{{db_helper.categories.active_cats[0].id}}/">{{content.actions[lang]['seeMore']}}</a>
     				</div>
-    				{% for article in db_helper.articles.get_articles_by_category(db_helper.categories.active_cats[0].id)['trending'][:4] %}
+            <div id="articles">
+              {% for article in db_helper.articles.get_articles_by_category(db_helper.categories.active_cats[0].id)['trending'][:4] %}
     					<div onclick="window.open('/articles/{{article.id}}', '_self');" class="column-article-card">
     						<div style="background-image: url(/assets/articles/covers/{{article.id}});" class="cover"></div>
     						<div class="content">
@@ -256,6 +257,7 @@
     						</div>
     					</div>
     				{%endfor%}
+    			</div>
     			</div>
     			<div class="articles-fragment-column">
     				<div style="background-image: url(/assets/categories/covers/{{db_helper.categories.active_cats[1].id}}/);" class="cover">
@@ -263,7 +265,8 @@
     					<p class="label">{{db_helper.categories.active_cats[1].name[lang]}}</p>
     					<a href="/categories/{{db_helper.categories.active_cats[0].id}}/">{{content.actions[lang]['seeMore']}}</a>
     				</div>
-    				{% for article in db_helper.articles.get_articles_by_category(db_helper.categories.active_cats[1].id)['trending'][:4] %}
+              <div id="articles">
+                {% for article in db_helper.articles.get_articles_by_category(db_helper.categories.active_cats[1].id)['trending'][:4] %}
     					<div onclick="window.open('/articles/{{article.id}}', '_self');" class="column-article-card">
     						<div style="background-image: url(/assets/articles/covers/{{article.id}});" class="cover"></div>
     						<div class="content">
@@ -271,7 +274,8 @@
     							<p>{{article.short_brief[lang][:100]}}...</p>
     						</div>
     					</div>
-    				{%endfor%}
+              {%endfor%}
+            </div>
     			</div>
     			<div class="articles-fragment-column">
     				<div style="background-image: url(/assets/categories/covers/{{db_helper.categories.active_cats[2].id}}/);" class="cover">
@@ -279,7 +283,8 @@
     					<p class="label">{{db_helper.categories.active_cats[2].name[lang]}}</p>
     					<a href="/categories/{{db_helper.categories.active_cats[0].id}}/">{{content.actions[lang]['seeMore']}}</a>
     				</div>
-    				{% for article in db_helper.articles.get_articles_by_category(db_helper.categories.active_cats[1].id)['trending'][:4] %}
+            <div id="articles">
+              {% for article in db_helper.articles.get_articles_by_category(db_helper.categories.active_cats[1].id)['trending'][:4] %}
     					<div onclick="window.open('/articles/{{article.id}}', '_self');" class="column-article-card">
     						<div style="background-image: url(/assets/articles/covers/{{article.id}});" class="cover"></div>
     						<div class="content">
@@ -287,7 +292,8 @@
     							<p>{{article.short_brief[lang][:100]}}...</p>
     						</div>
     					</div>
-    				{%endfor%}
+              {%endfor%}
+            </div>
     			</div>
     		</div>
     		{% for cat in db_helper.categories.active_cats[:5] %}
@@ -299,7 +305,8 @@
 	    					<p class="label">{{content.global_[lang]['featured']}}</p>
 	    					<a href="/categories/{{db_helper.categories.active_cats[0].id}}/featured/">{{content.actions[lang]['seeMore']}}</a>
 	    				</div>
-	    				{% for article in articles['featured'] %}
+              <div id="articles">
+                {% for article in articles['featured'][:4] %}
 	    					<div onclick="window.open('/articles/{{article.id}}', '_self');" class="column-article-card">
 	    						<div style="background-image: url(/assets/articles/covers/{{article.id}});" class="cover"></div>
 	    						<div class="content">
@@ -307,15 +314,17 @@
 	    							<p>{{article.short_brief[lang][:100]}}...</p>
 	    						</div>
 	    					</div>
-	    				{%endfor%}
-	    			</div>
+                {%endfor%}
+              </div>
+            </div>
 	    			<div class="articles-fragment-column">
-	    				<div style="background-image: url(/assets/categories/covers/{{cat.id}}/);" class="cover">
+              <div style="background-image: url(/assets/categories/covers/{{cat.id}}/);" class="cover">
 	    					<div class="overlay"></div>
 	    					<p class="label">{{content.global_[lang]['trending']}}</p>
 	    					<a href="/categories/{{db_helper.categories.active_cats[0].id}}/trending/">{{content.actions[lang]['seeMore']}}</a>
 	    				</div>
-	    				{% for article in articles['trending'] %}
+              <div id="articles">
+                {% for article in articles['trending'][:4] %}
 	    					<div onclick="window.open('/articles/{{article.id}}', '_self');" class="column-article-card">
 	    						<div style="background-image: url(/assets/articles/covers/{{article.id}});" class="cover"></div>
 	    						<div class="content">
@@ -324,6 +333,7 @@
 	    						</div>
 	    					</div>
 	    				{%endfor%}
+  	    			</div>
 	    			</div>
 	    			<div class="articles-fragment-column">
 	    				<div style="background-image: url(/assets/categories/covers/{{cat.id}}/);" class="cover">
@@ -331,7 +341,8 @@
 	    					<p class="label">{{content.global_[lang]['mostRecent']}}</p>
 	    					<a href="/categories/{{db_helper.categories.active_cats[0].id}}/mostRecent/">{{content.actions[lang]['seeMore']}}</a>
 	    				</div>
-	    				{% for article in articles['mostRecent'] %}
+              <div id="articles">
+	    				{% for article in articles['mostRecent'][:4] %}
 	    					<div onclick="window.open('/articles/{{article.id}}', '_self');" class="column-article-card">
 	    						<div style="background-image: url(/assets/articles/covers/{{article.id}});" class="cover"></div>
 	    						<div class="content">
@@ -340,6 +351,7 @@
 	    						</div>
 	    					</div>
 	    				{%endfor%}
+	      			</div>
 	    			</div>
     			</div>
     		{%endfor%}
@@ -628,6 +640,10 @@
             {%endif%}
           </div>
         </div>
+      </div>
+      <div class="footer-row" id="warning">
+        <p id="title">{{content.global_[lang]['riskwarning']}}</p>
+        <p id="warning">{{content.global_[lang]['riskwarningMsg']}}</p>
       </div>
       <div class="footer-row">
         <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>

@@ -35,8 +35,13 @@
   "WEBSITE_SESSION_HANDLER": "/config/",
   "WEBSITE_CATEGORIES_ROUTE": "/categories/",
   "WEBSITE_SINGLE_CATEGORY_ROUTE": "/categories/<category_id>/",
+  "WEBSITE_SINGLE_CLASSIFICATION_ROUTE": "/classifications/<classification_id>/",
   "WEBSITE_WRITER_ROUTE": "/writers/<writer_id>/",
   "WEBSITE_PASSWORD_RESET": "/passwordReset/",
+  "WEBSITE_AGENDA_RESET": "/agenda/",
+  "WEBSITE_CALENDER_RESET": "/calender/",
+  "WEBSITE_ECONOMIC_CALENDER_RESET": "/economicCalender/",
+  "WEBSITE_ECONOMIC_AGENDA_RESET": "/economicAgenda/",
 
   "ADMIN_LAYOUT_ROUTE": "/webapp/adminstration/layout/",
   "ADMIN_LAYOUT_ARTICLES_ADS_ROUTE": "/webapp/adminstration/layout/articlesAds/",
@@ -56,5 +61,7 @@
   "PUBLISHER_CREATE_ROUTE": "/webapp/publish/create/",
   "PUBLISHER_ARTICLES_ROUTE": "/webapp/publish/articles/",
   "PUBLISHER_PUBLISH_DRAFT_ROUTE": "/webapp/publish/articles/publishDraft/",
-  "PUBLISHER_PROFILE_ROUTE": "/webapp/publish/profile/"
+  "PUBLISHER_PROFILE_ROUTE": "/webapp/publish/profile/",
+
+  "CRM_ARTICLES_ROUTE": "/webapp/crm/articles/"
 }

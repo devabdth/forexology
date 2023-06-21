@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {{content.global_[lang]['platformTitle']}} -
+      {{content.tabs[lang]['home']}}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='demo/styles/style.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
+    />
+    <script src="{{url_for('static', filename='demo/scripts/main.js')}}"></script>
+  </head>
+  <body>
+    <style type="text/css">
+      {% if lang == 'AR' %}
+      :root {
+        --pff: "Neue Haas Grotesk Display Pro";
+        --sff: sans-serif;
+      }
+      {% else %}
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+      {% endif %}
+    </style>
+    <section>
+      <div class="img"></div>
+      <h1>FOREXology - فوريكسولوچي</h1>
+      <p class="countdown">00:00:00:12</p>
+      <div class="links">
+        <button class="shadow-icon-button" id="facebook"><i class="facebook"></i></button>
+        <button class="shadow-icon-button" id="twitter"><i class="twitter"></i></button>
+        <button class="shadow-icon-button" id="instagram"><i class="instagram"></i></button>
+        <button class="shadow-icon-button" id="linkedin"><i class="linkedin"></i></button>
+      </div>
+    </section>
+  </body>
+</html>

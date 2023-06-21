@@ -254,14 +254,22 @@
             <div id="profile"></div>
             <div id="information">
               <h3 id="name">This is my name</h3>
-              <p id="email"></p><br><br><br>
-              <p id="bio">This is my name name my is this This is my name name my is this This is my name name my is this This is my name name my is this</p>
+              <p id="email"></p>
+              <br /><br /><br />
+              <p id="bio">
+                This is my name name my is this This is my name name my is this
+                This is my name name my is this This is my name name my is this
+              </p>
             </div>
           </div>
           <div id="actions">
             <p id="status-msg"></p>
-            <button class="main-button">{{content.actions[lang]['submit']}}</button>
-            <button class="shadow-button" onclick="window.open('/', '_self');">{{content.actions[lang]['cancel']}}</button>
+            <button class="main-button">
+              {{content.actions[lang]['submit']}}
+            </button>
+            <button class="shadow-button" onclick="window.open('/', '_self');">
+              {{content.actions[lang]['cancel']}}
+            </button>
           </div>
         </div>
       </section>
@@ -330,6 +338,10 @@
               {%endif%}
             </div>
           </div>
+        </div>
+        <div class="footer-row" id="warning">
+          <p id="title">{{content.global_[lang]['riskwarning']}}</p>
+          <p id="warning">{{content.global_[lang]['riskwarningMsg']}}</p>
         </div>
         <div class="footer-row">
           <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>

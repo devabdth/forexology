@@ -24,6 +24,7 @@ class CategoriesRouter:
     def setup(self):
         self.assign_all_categories_index()
         self.assign_single_categories_index()
+        self.assign_single_classification_index()
 
     def assign_all_categories_index(self):
         @self.app.route(self.consts.categories_route, methods=["GET"])
@@ -59,6 +60,28 @@ class CategoriesRouter:
                 '/website/category.html',
                 category= self.helper.categories.get_category_by_id(category_id),
                 articles= self.helper.articles.get_articles_by_category(category_id),
+                content=self.content,
+                cfg=self.cfg,
+                consts=self.consts,
+                lang=lang,
+                mode=mode,
+                db_helper=self.helper,
+                utils=self.utils,
+                layout=self.layout,
+                dumps=dumps
+            )
+
+    def assign_single_classification_index(self):
+        @self.app.route(self.consts.single_classification_route, methods=["GET"])
+        def single_classification_index(classification_id):
+            lang = session.get('LANG', 'AR')
+            mode = session.get('MODE', 'LIGHT')
+            self.helper.categories.load_data()
+            self.helper.ads.load_data()
+            self.layout.load()
+            return render_template(
+                '/website/classification.html',
+                classification= self.helper.categories.get_parent_category_by_id(classification_id),
                 content=self.content,
                 cfg=self.cfg,
                 consts=self.consts,

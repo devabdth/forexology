@@ -9,7 +9,7 @@ class Consts:
         self.job_types= [0, 1, 2, 3]
 
         self.covers_supported_extenstions: list = [
-            'png', 'jpg', 'jpeg', 'gif', 'jfjf'
+            'png', 'jpg', 'jpeg', 'gif', 'jfjf', 'webp'
         ]
         self.audios_supported_extenstions: list= ['mp3', 'aac']
         self.videos_supported_extenstions: list= ['mp4', 'mpg', 'mpeg', 'flv', 'm2v']
@@ -40,6 +40,12 @@ class Consts:
                 "redirect": '/about/'
             },
             {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af6cb',
+                "mode": 'link',
+                "text": 'agenda',
+                "redirect": '/agenda/'
+            },
+            {
                 "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af2cb',
                 "mode": 'link',
                 "text": 'articles',
@@ -62,7 +68,7 @@ class Consts:
                 "mode": 'link',
                 "text": 'classification',
                 "redirect": '/classification/'
-            }
+            },
         ]
 
         self.podcast_supported_extenstions: list = ["mp3"]
@@ -97,6 +103,7 @@ class Consts:
             self.categories_icons = data['WEBSITE_ASSETS_CATEGORIES_ICONS_ROUTE']
             self.categories_route = data['WEBSITE_CATEGORIES_ROUTE']
             self.single_category_route = data['WEBSITE_SINGLE_CATEGORY_ROUTE']
+            self.single_classification_route = data['WEBSITE_SINGLE_CLASSIFICATION_ROUTE']
             self.writers_bg_free = data['WEBSITE_ASSETS_WRITERS_BGREE_ROUTE']
             self.writers_images = data['WEBSITE_ASSETS_WRITERS_ROUTE']
             self.writers_covers = data['WEBSITE_ASSETS_WRITERS_COVERS_ROUTE']
@@ -111,6 +118,10 @@ class Consts:
             self.all_articles_journal_route = data['WEBSITE_ARTICLES_JOURNAL_ROUTE']
             self.writer_route = data['WEBSITE_WRITER_ROUTE']
             self.password_reset = data['WEBSITE_PASSWORD_RESET']
+            self.agenda = data['WEBSITE_AGENDA_RESET']
+            self.calender = data['WEBSITE_CALENDER_RESET']
+            self.economic_calender = data['WEBSITE_ECONOMIC_CALENDER_RESET']
+            self.economic_agenda = data['WEBSITE_ECONOMIC_AGENDA_RESET']
 
             # Admin Routers
             self.admin_login_route = data['ADMIN_LOGIN_ROUTE']
@@ -133,3 +144,7 @@ class Consts:
             self.publisher_articles_page= data['PUBLISHER_ARTICLES_ROUTE']
             self.publisher_profile_page= data['PUBLISHER_PROFILE_ROUTE']
             self.publisher_publish_draft_page= data['PUBLISHER_PUBLISH_DRAFT_ROUTE']
+
+
+            # CRM Panel Routers:
+            self.crm_articles_route= data["CRM_ARTICLES_ROUTE"]

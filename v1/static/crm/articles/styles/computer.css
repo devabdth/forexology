@@ -1,0 +1,81 @@
+@media screen and (min-width: 1024px) {
+  div.body-card {
+    width: 100%;
+    max-height: 1000vw;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 0.5vw 1vw;
+    border-radius: 12px;
+    background-color: var(--body-bg-color);
+  }
+
+  div.body-card h2 {
+    font-weight: 700;
+    font-size: 2vw;
+    font-family: var(--pff);
+    color: var(--accentColor);
+  }
+
+  .main-container {
+    background: var(--bg-color);
+    color: #abafc6;
+    border-radius: 12px;
+    padding: 0.5vw 1vw;
+    width: 100%;
+    height: 30vw;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .year-stats {
+    white-space: nowrap;
+    max-height: 30vw;
+    overflow: auto;
+    width: 100%;
+    justify-content: space-between;
+    align-items: end;
+    display: flex;
+  }
+
+  .month-group {
+    cursor: pointer;
+    max-width: 100%;
+    height: 15vw;
+    display: inline-block;
+    font-family: var(--pff);
+  }
+
+  .bar {
+    background-color: var(--accentColor);
+    opacity: 0.25;
+    width: 1.5vw;
+    border-radius: 12px;
+    margin-bottom: 1vw;
+  }
+
+  .month-group:hover .bar,
+  .selected .bar {
+    opacity: 1;
+  }
+
+  .month-group:hover p,
+  .selected p {
+    color: var(--primaryColor);
+  }
+
+  .h-25 {
+    height: 25%;
+  }
+  .h-50 {
+    height: 50%;
+  }
+  .h-75 {
+    height: 75%;
+  }
+  .h-100 {
+    height: 100%;
+  }
+
+}

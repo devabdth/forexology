@@ -123,12 +123,12 @@
           {% if tab['mode'] == 'classification' %}
           {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
             <div class="header-dropdown">
-              <button class="header-dropbtn">{{classification.name[lang]}}</button>
+              <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
               <div class="header-dropdown-content">
                 <div id="label">
                   <h3>{{classification.name[lang]}}</h3>
                   <p>{{classification.bio[lang]}}</p>
-                  <button onclick="window.open(`/classification/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
                 </div>
                 <div id="dropdown-tabs">
                   {% for category in classification['categories'] %}
@@ -376,6 +376,10 @@
             {%endif%}
           </div>
         </div>
+      </div>
+      <div class="footer-row" id="warning">
+        <p id="title">{{content.global_[lang]['riskwarning']}}</p>
+        <p id="warning">{{content.global_[lang]['riskwarningMsg']}}</p>
       </div>
       <div class="footer-row">
         <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>

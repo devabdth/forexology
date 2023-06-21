@@ -521,6 +521,12 @@ const allTabs = [
 		redirect: '/'
 	},
 	{
+        id: 'a05685021712b94519ea3dade83cf7323cd9419b362af6cb',
+        mode: 'link',
+        text: 'agenda',
+        redirect: '/agenda/'
+	},
+	{
 		id: 'a05685021712b94519ea3dade83cf7323cd9419b362af1cb',
 		mode: 'link',
 		text: 'aboutUs',
@@ -569,6 +575,7 @@ const initHeaderTabs = (categories, classifications) => {
 			mode: 'classification'
 		});
 	}
+	console.log(allTabs)
 }
 
 const initSelectedTabs = (tabs) => {
@@ -593,7 +600,7 @@ const openHeaderTabsAddDialog = () => {
 	}
 	for (let card of cards) {
 		card.querySelector('.shadow-button').onclick = () => {
-			if (selectedTabs.length >= 8) {
+			if (selectedTabs.length >= 12) {
 				statusMsg.innerHTML = 'You have reached tabs limit!';
 				return;
 			}
@@ -611,7 +618,7 @@ const openHeaderTabsAddDialog = () => {
 	document.querySelector('#tabs-selection-dialog').style.display = 'flex';
 }
 const deleteHeaderTab = (tabId) => {
-	let tab = selectedTabs.filter(tab => tab.id == tabId)[0];
+	let tab = selectedTabs.filter(tab =>  tab.id == tabId )[0];
 	selectedTabs.splice(selectedTabs.indexOf(tab), 1);
 	const allFragmentTabs_ = document.querySelectorAll(`.fragment#header .header-tab-card`);
 	const allDialogTabs_ = document.querySelectorAll(`#tabs-selection-dialog #body .header-tab-card`);

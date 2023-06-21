@@ -65,9 +65,13 @@ class Content:
                 "coverPicture": "Cover Picture",
                 "allCareers": "All Careers",
                 "weSearchingForYou": "We're searching for you like you do!",
+                "riskwarning": "Risk Warning",
+                "riskwarningMsg": "Trading using leverage in the financial markets involves very high risks that are not suitable for all types of investors. You must understand the amount of risk that your money may be exposed to. All opinions, analyses, recommendations and content presented on the site are for general information and should not be taken as a tool for making any investment decisions, whether to buy or sell.",
+                "agenda": "Economic Agenda",
+                "agendaMsg": "Discover what's happening around you!"
             },
             "AR": {
-                "platformTitle": "FOREXology",
+                "platformTitle": "فوركسولوچي",
                 "footerMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus nibh, sagittis a ante eu, luctus fringilla est. Aliquam pulvinar justo iaculis lorem pretium elementum. In mauris quam, porttitor nec venenatis in, vulputate non arcu. Aliquam ac iaculis nisl. Morbi sit amet ante justo. Donec lectus erat, molestie at gravida in, convallis a massa. Aenean rutrum vel ligula consequat convallis. Suspendisse nec leo leo. Donec non mi nec eros consequat facilisis. In condimentum et libero ut hendrerit. Nullam scelerisque mauris ac nunc ultricies, eget tincidunt sapien ullamcorper.",
                 "lightToFindUs": "الضوء لتجدنا!",
                 "copyrightMsg": "All Copyrights reserved @ FOREXology, 2023",
@@ -127,7 +131,10 @@ class Content:
                 "coverPicture": "صورة الغلاف",
                 "allCareers": "جميع الوظائف",
                 "weSearchingForYou": "نحن نبحث عنك كما تفعل!",
-
+                "riskwarning": "تحذير المخاطرة",
+                "riskwarningMsg": "المتاجرة باستخدام الروافع المالية في أسواق المال ينطوي عليها مخاطر عالية جدًا لا تتناسب مع جميع أنواع المستثمرين، يجب عليك أن تستوعب حجم المخاطرة التي قد تتعرض لها أموالك. جميع ما يطرح في الموقع من آراء وتحليلات وتوصيات ومحتويات هو من باب المعلومات العامة ولا يجب أن يتخذ كأداة لاتخاذ أي قرارات استثمارية بالبيع أو الشراء. ",
+                "agenda": "الأجندة الإقتصادية",
+                "agendaMsg": "تابع ما يحدث من حولك في العالم!"
             }
         }
 
@@ -143,7 +150,8 @@ class Content:
                 "aboutUs": "About Us",
                 "classification": "Classification",
                 "passwordReset": "Password Reset",
-                "profile": "Profile"
+                "profile": "Profile",
+                "agenda": "Economic Agenda"
             },
             "AR": {
                 "home": "الرئيسية",
@@ -156,7 +164,8 @@ class Content:
                 "aboutUs": "نبذة عنا",
                 "classification": "التصنيفات",
                 "passwordReset": "إستعادة كلمة المرور",
-                "profile": "الصفحة الشخصية"
+                "profile": "الصفحة الشخصية",
+                "agenda": "الأجندة الإقتصادية"
             }
         }
 

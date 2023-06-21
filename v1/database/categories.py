@@ -75,6 +75,19 @@ class CategoriesDatabaseHelper:
 			if cat in pcat.categories:
 				return pcat
 
+	def get_categories_by_parent_category(self, pcid):
+		pcat= self.get_parent_category_by_id(pcid)
+		print(pcat.categories)
+		categories=  [cat if cat in pcat.categories else None for cat in self.active_cats]
+		print(categories)
+		categories= list(set(categories))
+		print(categories)
+		if None in categories:
+			del categories[categories.index(None)]
+
+		print(categories)
+		return categories
+		
 	def multiple_categories_by_id(self, cats_ids):
 		result= []
 		for cat in self.active_cats:

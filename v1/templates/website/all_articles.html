@@ -1,85 +1,92 @@
 <!DOCTYPE html>
 {% if lang == 'AR' %}
-  <html dir="RTL">
-    {% else %}
-    <html dir="LTR">
-{% endif %}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      {{content.global_[lang]['platformTitle']}} -
-      {{content.tabs[lang]['articles']}}
-    </title>
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/articles/styles/computer.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/articles/styles/largeTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/articles/styles/smallTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/articles/styles/mobile.css')}}"
-    />
+<html dir="RTL">
+  {% else %}
+  <html dir="LTR">
+    {% endif %}
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>
+        {{content.global_[lang]['platformTitle']}} -
+        {{content.tabs[lang]['articles']}}
+      </title>
+      <link
+        rel="icon"
+        type="image/x-icon"
+        href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/articles/styles/computer.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/articles/styles/largeTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/articles/styles/smallTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/articles/styles/mobile.css')}}"
+      />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
-    />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
+      />
 
-    <script
-      type="text/javascript"
-      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
-    ></script>
-    <script
-      type="text/javascript"
-      src="{{url_for('static', filename='website/articles/scripts/main.js')}}"
-    ></script>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
-  <body>
-    <style type="text/css">
-      {% if lang == 'AR' %}
-      :root {
-        --pff: "Neue Haas Grotesk Display Pro";
-        --sff: sans-serif;
-      }
-      {% else %}
-      :root {
-        --pff: "Raleway";
-        --sff: "Poppins";
-      }
-      {% endif %}
-    </style>
-    <header>
+      <script
+        type="text/javascript"
+        src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+      ></script>
+      <script
+        type="text/javascript"
+        src="{{url_for('static', filename='website/articles/scripts/main.js')}}"
+      ></script>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+      />
+    </head>
+    <body>
+      <style type="text/css">
+        {% if lang == 'AR' %}
+        :root {
+          --pff: sans-serif;
+          --sff: sans-serif;
+        }
+        {% else %}
+        :root {
+          --pff: "Raleway";
+          --sff: "Poppins";
+        }
+        {% endif %}
+      </style>
+      <header>
       <div id="intro-row">
         <div
         onclick="window.open('{{consts.index_route}}', `_self`);"
@@ -123,12 +130,12 @@
           {% if tab['mode'] == 'classification' %}
           {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
             <div class="header-dropdown">
-              <button class="header-dropbtn">{{classification.name[lang]}}</button>
+              <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
               <div class="header-dropdown-content">
                 <div id="label">
                   <h3>{{classification.name[lang]}}</h3>
                   <p>{{classification.bio[lang]}}</p>
-                  <button onclick="window.open(`/classification/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
                 </div>
                 <div id="dropdown-tabs">
                   {% for category in classification['categories'] %}
@@ -160,252 +167,287 @@
   
       </div>
     </header>
-    <section id="entry">
-      <div id="overlay">
-        <h1>{{content.global_[lang]['whatsYouWantToRead']}}</h1>
-        <p>{{content.global_[lang]['whatsYouWantToReadMsg']}}</p>
-      </div>
-    </section>
-    <section id="articles">
-      <div id="header">
-        <h2>{{content.global_[lang]['ourArticles']}}</h2>
-        <div id="fragments-controllers">
-          <button onclick="selectFragment(this, 'trending-fragment');" class="shadow-button active">{{content.global_[lang]['trending']}}</button>
-          <button onclick="selectFragment(this, 'recent-fragment');" class="shadow-button">{{content.global_[lang]['mostRecent']}}</button>
-          <button onclick="selectFragment(this, 'random-fragment');" class="shadow-button">{{content.global_[lang]['random']}}</button>
-          <button onclick="selectFragment(this, 'all-fragment');" class="shadow-button">{{content.global_[lang]['allArticles']}}</button>
+      <section id="entry">
+        <div id="overlay">
+          <h1>{{content.global_[lang]['whatsYouWantToRead']}}</h1>
+          <p>{{content.global_[lang]['whatsYouWantToReadMsg']}}</p>
         </div>
-      </div>
-      <div id="body">
-        <div id="fragments">
-          <div class="articles-fragment active" id="trending-fragment">
-            {% for article in db_helper.articles.get_all_articles() %}
-                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
-
-              <div class="search-dialog-article-card">
-                <div class="cover-wrapper">
+      </section>
+      <section id="articles">
+        <div id="header">
+          <h2>{{content.global_[lang]['ourArticles']}}</h2>
+          <div id="fragments-controllers">
+            <button
+              onclick="selectFragment(this, 'trending-fragment');"
+              class="shadow-button active"
+            >
+              {{content.global_[lang]['trending']}}
+            </button>
+            <button
+              onclick="selectFragment(this, 'recent-fragment');"
+              class="shadow-button"
+            >
+              {{content.global_[lang]['mostRecent']}}
+            </button>
+            <button
+              onclick="selectFragment(this, 'random-fragment');"
+              class="shadow-button"
+            >
+              {{content.global_[lang]['random']}}
+            </button>
+            <button
+              onclick="selectFragment(this, 'all-fragment');"
+              class="shadow-button"
+            >
+              {{content.global_[lang]['allArticles']}}
+            </button>
+          </div>
+        </div>
+        <div id="body">
+          <div id="fragments">
+            <div class="articles-fragment active" id="trending-fragment">
+              {% for article in db_helper.articles.get_all_articles() %}
+              <div class="search-dialog-article-card-border">
+                <div class="search-dialog-article-card">
                   <div
-                  class="cover"
-                  style="background-image: url(/assets/articles/covers/{{article.id}});"
-                ></div>
-                </div>
-                <div class="content">
-                  <div class="classification">
-                                      {% set parent_category=
-                  db_helper.categories.get_parent_category_by_id(article.parent_category)
-                  %} {% if parent_category %}
-                  <h4>{{parent_category.name[lang]}}</h4>
-                  {%endif%} {% set category=
-                  db_helper.categories.get_category_by_id(article.category)%} {%
-                  if category %}
-                  <h4>{{category.name[lang]}}</h4>
-                  {%endif%}
-
+                    class="cover"
+                    style="background-image: url(/assets/articles/covers/{{article.id}});"
+                  ></div>
+                  <div class="content">
+                    <div class="classification">
+                      <h4>
+                        {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
+                      </h4>
+                      <h4>
+                        {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
+                      </h4>
+                    </div>
+                    <h3>{{article.title[lang]}}</h3>
+                    <p>{{article.short_brief[lang]}}</p>
                   </div>
-                  <h3>{{article.title[lang]}}</h3>
-                  <p>{{article.short_brief[lang]}}</p>
                 </div>
               </div>
+              {%endfor%}
             </div>
-            {%endfor%}
-          </div>
-          <div class="articles-fragment" id="recent-fragment">
-            {% for article in db_helper.articles.get_all_articles() %}
-                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
-
-              <div class="search-dialog-article-card">
-                <div class="cover-wrapper">
+            <div class="articles-fragment" id="recent-fragment">
+              {% for article in db_helper.articles.get_all_articles() %}
+              <div class="search-dialog-article-card-border">
+                <div class="search-dialog-article-card">
                   <div
-                  class="cover"
-                  style="background-image: url(/assets/articles/covers/{{article.id}});"
-                ></div>
-                </div>
-                <div class="content">
-                  <div class="classification">
-                                      {% set parent_category=
-                  db_helper.categories.get_parent_category_by_id(article.parent_category)
-                  %} {% if parent_category %}
-                  <h4>{{parent_category.name[lang]}}</h4>
-                  {%endif%} {% set category=
-                  db_helper.categories.get_category_by_id(article.category)%} {%
-                  if category %}
-                  <h4>{{category.name[lang]}}</h4>
-                  {%endif%}
-
+                    class="cover"
+                    style="background-image: url(/assets/articles/covers/{{article.id}});"
+                  ></div>
+                  <div class="content">
+                    <div class="classification">
+                      <h4>
+                        {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
+                      </h4>
+                      <h4>
+                        {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
+                      </h4>
+                    </div>
+                    <h3>{{article.title[lang]}}</h3>
+                    <p>{{article.short_brief[lang]}}</p>
                   </div>
-                  <h3>{{article.title[lang]}}</h3>
-                  <p>{{article.short_brief[lang]}}</p>
                 </div>
               </div>
+              {%endfor%}
             </div>
-            {%endfor%}
-          </div>
-          <div class="articles-fragment" id="random-fragment">
-            {% for article in db_helper.articles.get_all_articles() %}
-                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
-
-              <div class="search-dialog-article-card">
-                <div class="cover-wrapper">
+            <div class="articles-fragment" id="random-fragment">
+              {% for article in db_helper.articles.get_all_articles() %}
+              <div class="search-dialog-article-card-border">
+                <div class="search-dialog-article-card">
                   <div
-                  class="cover"
-                  style="background-image: url(/assets/articles/covers/{{article.id}});"
-                ></div>
-                </div>
-                <div class="content">
-                  <div class="classification">
-                                      {% set parent_category=
-                  db_helper.categories.get_parent_category_by_id(article.parent_category)
-                  %} {% if parent_category %}
-                  <h4>{{parent_category.name[lang]}}</h4>
-                  {%endif%} {% set category=
-                  db_helper.categories.get_category_by_id(article.category)%} {%
-                  if category %}
-                  <h4>{{category.name[lang]}}</h4>
-                  {%endif%}
-
+                    class="cover"
+                    style="background-image: url(/assets/articles/covers/{{article.id}});"
+                  ></div>
+                  <div class="content">
+                    <div class="classification">
+                      <h4>
+                        {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
+                      </h4>
+                      <h4>
+                        {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
+                      </h4>
+                    </div>
+                    <h3>{{article.title[lang]}}</h3>
+                    <p>{{article.short_brief[lang]}}</p>
                   </div>
-                  <h3>{{article.title[lang]}}</h3>
-                  <p>{{article.short_brief[lang]}}</p>
                 </div>
               </div>
+              {%endfor%}
             </div>
-            {%endfor%}
-          </div>
-          <div class="articles-fragment" id="all-fragment">
-            {% for article in db_helper.articles.get_all_articles() %}
-                          <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
-
-              <div class="search-dialog-article-card">
-                <div class="cover-wrapper">
+            <div class="articles-fragment" id="all-fragment">
+              {% for article in db_helper.articles.get_all_articles() %}
+              <div class="search-dialog-article-card-border">
+                <div class="search-dialog-article-card">
                   <div
-                  class="cover"
-                  style="background-image: url(/assets/articles/covers/{{article.id}});"
-                ></div>
-                </div>
-                <div class="content">
-                  <div class="classification">
-                                      {% set parent_category=
-                  db_helper.categories.get_parent_category_by_id(article.parent_category)
-                  %} {% if parent_category %}
-                  <h4>{{parent_category.name[lang]}}</h4>
-                  {%endif%} {% set category=
-                  db_helper.categories.get_category_by_id(article.category)%} {%
-                  if category %}
-                  <h4>{{category.name[lang]}}</h4>
-                  {%endif%}
-
+                    class="cover"
+                    style="background-image: url(/assets/articles/covers/{{article.id}});"
+                  ></div>
+                  <div class="content">
+                    <div class="classification">
+                      <h4>
+                        {{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}
+                      </h4>
+                      <h4>
+                        {{db_helper.categories.get_category_by_id(article.category).name[lang]}}
+                      </h4>
+                    </div>
+                    <h3>{{article.title[lang]}}</h3>
+                    <p>{{article.short_brief[lang]}}</p>
                   </div>
-                  <h3>{{article.title[lang]}}</h3>
-                  <p>{{article.short_brief[lang]}}</p>
                 </div>
               </div>
+              {%endfor%}
             </div>
-            {%endfor%}
+          </div>
+          <div id="side-bar">
+            <div id="filter-form">
+              <h3>{{content.global_[lang]['filter']}}</h3>
+              <p>{{content.global_[lang]['filterMsg']}}</p>
+              <label for="name"
+                >{{content.global_[lang]['articleTitle']}}</label
+              >
+              <input
+                class="single-line-field-awhite"
+                type="name"
+                name="name"
+                placeholder="{{content.placeholders[lang]['search']}}"
+              />
+              <label for="classification"
+                >{{content.global_[lang]['classification']}}</label
+              >
+              <div name="classification" id="classification">
+                <button
+                  onclick="toggleClassificationDropdown()"
+                  id="classification-dropbtn"
+                  class="classification-dropbtn"
+                >
+                  {{content.global_[lang]["classification"]}}
+                </button>
+                <div
+                  id="classification-dropdown"
+                  class="classification-dropdown-content"
+                >
+                  <input
+                    type="text"
+                    placeholder="{{content.global_[lang]['search']}}..."
+                    id="classification-search"
+                    onkeyup="classificationfilter()"
+                  />
+                  {% for pcat in db_helper.categories.parent_cats %}
+                  <button
+                    style="font-family: 'Poppins'"
+                    onclick="chooseParentCategory({{pcat.to_dict(without_cats= True) | safe}}, '{{lang}}');"
+                  >
+                    {{pcat.name[lang]}}
+                  </button>
+                  {% endfor %}
+                </div>
+              </div>
+              <div name="category" id="category">
+                <label for="category"
+                  >{{content.global_[lang]['category']}}</label
+                >
+                <div id="checkboxes"></div>
+              </div>
+              <div id="options">
+                <button class="shadow-button" onclick="clearFilter();">
+                  {{content.actions[lang]['clear']}}
+                </button>
+                <button class="main-button">
+                  {{content.global_[lang]['search']}}
+                </button>
+              </div>
+              <p id="filter-msg"></p>
+            </div>
           </div>
         </div>
-        <div id="side-bar">
-          <div id="filter-form">
-            <h3>{{content.global_[lang]['filter']}}</h3>
-            <p>{{content.global_[lang]['filterMsg']}}</p>
-            <label for="name">{{content.global_[lang]['articleTitle']}}</label>
-            <input class="single-line-field-awhite" type="name" name="name" placeholder="{{content.placeholders[lang]['search']}}">
-            <label for="classification">{{content.global_[lang]['classification']}}</label>
-            <div name="classification" id="classification">
-              <button onclick="toggleClassificationDropdown()" id="classification-dropbtn" class="classification-dropbtn">{{content.global_[lang]["classification"]}}</button>
-              <div id="classification-dropdown" class="classification-dropdown-content">
-                <input type="text" placeholder="{{content.global_[lang]['search']}}..." id="classification-search" onkeyup="classificationfilter()">
-                {% for pcat in db_helper.categories.parent_cats %}
-                  <button style="font-family: 'Poppins';" onclick="chooseParentCategory({{pcat.to_dict(without_cats= True) | safe}}, '{{lang}}');">{{pcat.name[lang]}}</button>
-                {% endfor %}
-              </div>              
+      </section>
+      <footer>
+        <div class="footer-row" id="categories">
+          {% for pcat in db_helper.categories.parent_cats %}
+          <div class="categories-column">
+            <label><strong>{{pcat.name[lang]}}</strong></label>
+            <p>{{pcat.bio[lang][:50]}}...</p>
+            <div class="categories-column-tabs">
+              {% for cat in pcat.categories %}
+              <a href="/categories/{{cat.id}}/">{{cat.name[lang]}}</a>
+              {% endfor %}
             </div>
-            <div name="category" id="category">
-              <label for="category">{{content.global_[lang]['category']}}</label>
-              <div id="checkboxes"></div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="footer-row" id="info">
+          <div id="information">
+            <div id="logo" class="symbol"></div>
+            <h3 onclick="window.open('/', '_self');" style="cursor: pointer">
+              {{content.global_[lang]['platformTitle']}}
+            </h3>
+            <p>{{content.global_[lang]['footerMsg']}}</p>
+          </div>
+          <div id="findUs">
+            <h3>{{content.global_[lang]['lightToFindUs']}}</h3>
+            <div id="social-media-icons">
+              {% if cfg.facebook != '' %}
+              <a
+                href="{{cfg.facebook}}"
+                class="facebook main-icon-button"
+                id="facebook"
+                ><i class="facebook"></i
+              ></a>
+              {%endif%} {% if cfg.instagram != '' %}
+              <a
+                href="{{cfg.instagram}}"
+                class="instagram main-icon-button"
+                id="instagram"
+                ><i class="instagram"></i
+              ></a>
+              {%endif%} {% if cfg.twitter != '' %}
+              <a
+                href="{{cfg.twitter}}"
+                class="twitter main-icon-button"
+                id="twitter"
+                ><i class="twitter"></i
+              ></a>
+              {%endif%} {% if cfg.linkedin != '' %}
+              <a
+                href="{{cfg.linkedin}}"
+                class="linkedin main-icon-button"
+                id="linkedin"
+                ><i class="linkedin"></i
+              ></a>
+              {%endif%} {% if cfg.tiktok != '' %}
+              <a
+                href="{{cfg.tiktok}}"
+                class="tiktok main-icon-button"
+                id="tiktok"
+                ><i class="tiktok"></i
+              ></a>
+              {%endif%}
             </div>
-            <div id="options">
-              <button class="shadow-button" onclick="clearFilter();">{{content.actions[lang]['clear']}}</button>
-              <button class="main-button">{{content.global_[lang]['search']}}</button>
-            </div>
-            <p id="filter-msg"></p>
           </div>
         </div>
-      </div>
-    </section>
-    <footer>
-      <div class="footer-row" id="categories">
-        {% for pcat in db_helper.categories.parent_cats %}
-        <div class="categories-column">
-          <label><strong>{{pcat.name[lang]}}</strong></label>
-          <p>{{pcat.bio[lang][:50]}}...</p>
-          <div class="categories-column-tabs">
-            {% for cat in pcat.categories %}
-            <a href="/categories/{{cat.id}}/">{{cat.name[lang]}}</a>
-            {% endfor %}
-          </div>
+        <div class="footer-row" id="warning">
+          <p id="title">{{content.global_[lang]['riskwarning']}}</p>
+          <p id="warning">{{content.global_[lang]['riskwarningMsg']}}</p>
         </div>
-        {% endfor %}
-      </div>
-      <div class="footer-row" id="info">
-        <div id="information">
-          <div id="logo" class="symbol"></div>
-          <h3 onclick="window.open('/', '_self');" style="cursor: pointer">{{content.global_[lang]['platformTitle']}}</h3>
-          <p>{{content.global_[lang]['footerMsg']}}</p>
+        <div class="footer-row">
+          <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
         </div>
-        <div id="findUs">
-          <h3>{{content.global_[lang]['lightToFindUs']}}</h3>
-          <div id="social-media-icons">
-            {% if cfg.facebook != '' %}
-            <a
-              href="{{cfg.facebook}}"
-              class="facebook main-icon-button"
-              id="facebook"
-              ><i class="facebook"></i
-            ></a>
-            {%endif%} {% if cfg.instagram != '' %}
-            <a
-              href="{{cfg.instagram}}"
-              class="instagram main-icon-button"
-              id="instagram"
-              ><i class="instagram"></i
-            ></a>
-            {%endif%} {% if cfg.twitter != '' %}
-            <a
-              href="{{cfg.twitter}}"
-              class="twitter main-icon-button"
-              id="twitter"
-              ><i class="twitter"></i
-            ></a>
-            {%endif%} {% if cfg.linkedin != '' %}
-            <a
-              href="{{cfg.linkedin}}"
-              class="linkedin main-icon-button"
-              id="linkedin"
-              ><i class="linkedin"></i
-            ></a>
-            {%endif%} {% if cfg.tiktok != '' %}
-            <a href="{{cfg.tiktok}}" class="tiktok main-icon-button" id="tiktok"
-              ><i class="tiktok"></i
-            ></a>
-            {%endif%}
-          </div>
-        </div>
-      </div>
-      <div class="footer-row">
-        <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
-      </div>
-    </footer>
-    <script type="text/javascript">
-      const init= ()=> {
-        initCategories({{dumps(utils.mutliple_to_dicts(db_helper.categories.active_cats)) | safe}});
-        initArticles({{dumps(utils.mutliple_to_dicts(db_helper.articles.get_all_articles())) | safe}})
-        changeHeaderLogoOnScroll= true;
-        document.firstElementChild.setAttribute('data-theme', '{{mode | lower}}')
-      }
+      </footer>
+      <script type="text/javascript">
+        const init= ()=> {
+          initCategories({{dumps(utils.mutliple_to_dicts(db_helper.categories.active_cats)) | safe}});
+          initArticles({{dumps(utils.mutliple_to_dicts(db_helper.articles.get_all_articles())) | safe}})
+          changeHeaderLogoOnScroll= true;
+          document.firstElementChild.setAttribute('data-theme', '{{mode | lower}}')
+        }
 
-      if (window.attachEvent) window.attachEvent('load', init);
-      if (window.addEventListener) window.addEventListener('load', init);
-
-    </script>
-  </body>
+        if (window.attachEvent) window.attachEvent('load', init);
+        if (window.addEventListener) window.addEventListener('load', init);
+      </script>
+    </body>
+  </html>
 </html>

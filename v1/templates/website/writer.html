@@ -129,12 +129,12 @@
           {% if tab['mode'] == 'classification' %}
           {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
             <div class="header-dropdown">
-              <button class="header-dropbtn">{{classification.name[lang]}}</button>
+              <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
               <div class="header-dropdown-content">
                 <div id="label">
                   <h3>{{classification.name[lang]}}</h3>
                   <p>{{classification.bio[lang]}}</p>
-                  <button onclick="window.open(`/classification/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
                 </div>
                 <div id="dropdown-tabs">
                   {% for category in classification['categories'] %}
@@ -196,17 +196,19 @@
         <div id="cards">
           {% for article in
           db_helper.articles.get_article_by_writer_id(writer.id)[:4] %}
-                      <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
-
-              <div class="search-dialog-article-card">
-                <div class="cover-wrapper">
-                  <div
+          <div
+            class="search-dialog-article-card-border"
+            onclick="window.open('/articles/{{article.id}}/', '_self')"
+          >
+            <div class="search-dialog-article-card">
+              <div class="cover-wrapper">
+                <div
                   class="cover"
                   style="background-image: url(/assets/articles/covers/{{article.id}});"
                 ></div>
-                </div>
-                <div class="content">
-                  <div class="classification">
+              </div>
+              <div class="content">
+                <div class="classification">
                   {% set parent_category=
                   db_helper.categories.get_parent_category_by_id(article.parent_category)
                   %} {% if parent_category %}
@@ -216,13 +218,12 @@
                   if category %}
                   <h4>{{category.name[lang]}}</h4>
                   {%endif%}
-
-                  </div>
-                  <h3>{{article.title[lang]}}</h3>
-                  <p>{{article.short_brief[lang]}}</p>
                 </div>
+                <h3>{{article.title[lang]}}</h3>
+                <p>{{article.short_brief[lang]}}</p>
               </div>
             </div>
+          </div>
           {%endfor%}
         </div>
         <a href="/articles/?writerId={{writer.id}}" class="main-button"
@@ -292,6 +293,10 @@
               {%endif%}
             </div>
           </div>
+        </div>
+        <div class="footer-row" id="warning">
+          <p id="title">{{content.global_[lang]['riskwarning']}}</p>
+          <p id="warning">{{content.global_[lang]['riskwarningMsg']}}</p>
         </div>
         <div class="footer-row">
           <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>

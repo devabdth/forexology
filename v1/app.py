@@ -1,6 +1,8 @@
+from threading import Thread, Timer
 from flask import Flask
 # from flask_socketio import SocketIO
 
+from analyze_lab.crm.articles_analysis import ArticlesAnalysis
 from plugins.config import Config
 from plugins.setup import Setup
 
@@ -11,13 +13,15 @@ app: Flask = Flask(cfg.app_name)
 
 
 # Setup(app, socket).initializiation()
-Setup(app, None).initializiation()
+setup= Setup(app, None)
+setup.initializiation()
+threads= setup.threads
 
 
 if __name__ == '__main__':
-    # socket.run(app= app, host= "localhost", port= cfg.port, debug= cfg.debug)
-    app.run(
-        port= cfg.port,
-        host= cfg.host, 
-        debug= cfg.debug
-    )
+    # for thr in threads:
+    #     thr.start()
+    # for thr in threads:
+    #     thr.join()
+
+    app.run(debug=cfg.debug, host= cfg.host, port= cfg.port)

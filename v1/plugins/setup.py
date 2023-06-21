@@ -1,5 +1,12 @@
+import sys
+sys.path.insert(0, '../')
+from analyze_lab.crm.articles_analysis import ArticlesAnalysis
+
 from flask import Flask
+from threading import Thread
+from json import dump, dumps
 from .config import Config
+import datetime
 
 
 class Setup:
@@ -7,17 +14,34 @@ class Setup:
         self.app: Flask = app
         self.cfg: Config = Config()
         self.socket = socket
+        self.threads= [
+            Thread(target= lambda: app.run(port= self.cfg.port, debug=self.cfg.debug, use_reloader=False, host= self.cfg.host)),
+        ]
 
     def initializiation(self):
         self.setup_files_and_directories()
         self.setup_app()
         self.setup_routers()
         self.setup_errors_routers()
+        self.setup_crm_routers()
         self.setup_adminstration_webapp_routes()
         self.setup_publish_webapp_routes()
         self.setup_socket_handlers()
+        self.assign_generate_threads()
 
-    
+        from routers.globals.demo import DemoRouter
+        DemoRouter(self.app).setup()
+
+    def assign_generate_threads(self):
+        import time
+
+        def articles_thread():
+            while True:
+                ArticlesAnalysis().report()
+                time.sleep(60)
+
+        self.threads.append(Thread(target= articles_thread))
+
 
     def setup_app(self):
         from flask_session import Session
@@ -57,6 +81,61 @@ class Setup:
                 'dir': '../jsons/writersInvitations.json',
                 'initialData': {}
             },
+            {
+                'dir': '../jsons/articles_report.json',
+                'initialData': {
+                    f"{datetime.date.today().year}": {
+                    "overall": {},
+                    "months": {f"{i}": {
+                        "TOTAL_READTIME":0,
+                        "AVG_READTIME":0,
+                        "TOTAL_VIEWS":0,
+                        "AVG_VIEWS":0,
+                        "TOTAL_SAVES":0,
+                        "AVG_SAVES":0,
+                        "TOTAL_COMMENTS":0,
+                        "AVG_COMMENTS":0,
+                        "TOTAL_RATINGS_APPROACHES":0,
+                        "AVG_RATE":0,
+                        "CATEGORIES": {},
+                        "CLASSIFICATIONS": {}
+                        } for i in range(1, 13)},
+                    "weeks": {f"{i}": {
+                        "TOTAL_READTIME":0,
+                        "AVG_READTIME":0,
+                        "TOTAL_VIEWS":0,
+                        "AVG_VIEWS":0,
+                        "TOTAL_SAVES":0,
+                        "AVG_SAVES":0,
+                        "TOTAL_COMMENTS":0,
+                        "AVG_COMMENTS":0,
+                        "TOTAL_RATINGS_APPROACHES":0,
+                        "AVG_RATE":0,
+                        "CATEGORIES": {},
+                        "CLASSIFICATIONS": {}
+                        } for i in range(1, 55)}
+                    }
+                }
+            },
+            {
+                'dir': '../jsons/categories_report.json',
+                'initialData': {
+                    f"{datetime.date.today().year}": {
+                    "overall": {
+                        "CATEGORIES": {},
+                        "CLASSIFICATIONS": {},
+                    },
+                    "months": {f"{i}": {
+                        "CATEGORIES": {},
+                        "CLASSIFICATIONS": {},
+                        } for i in range(1, 13)},
+                    "weeks": {f"{i}": {
+                        "CATEGORIES": {},
+                        "CLASSIFICATIONS": {},
+                        } for i in range(1, 55)}
+                    }
+                }
+            },
         ]
 
         for dir_ in dirs:
@@ -70,7 +149,11 @@ class Setup:
             path= abspath(join(dirname(__file__), file_['dir']))
             if not exists(path):
                 with open(path, 'w') as f:
-                    f.write(f'{file_["initialData"]}')
+                    if not path.split('.')[1] == 'json':
+                        f.write(f'{file_["initialData"]}')
+                    else:
+                        json_object= dumps(file_['initialData'], indent= 4)
+                        f.write(json_object)
 
 
     def setup_socket_handlers(self):
@@ -140,6 +223,9 @@ class Setup:
         from routers.website.writer import WriterRouter
         WriterRouter(self.app).setup()
 
+        from routers.website.agenda import AgendaRouter
+        AgendaRouter(self.app).setup()
+
     def setup_publish_webapp_routes(self):
         from routers.publish.login import LoginPublishRouter
         LoginPublishRouter(self.app).setup()
@@ -155,3 +241,7 @@ class Setup:
 
         from routers.publish.profile import ProfilePublishRouter
         ProfilePublishRouter(self.app).setup()
+
+    def setup_crm_routers(self):
+        from routers.crm.articles import ArticlesCRMRouter
+        ArticlesCRMRouter(self.app).setup()
