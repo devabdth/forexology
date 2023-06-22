@@ -37,176 +37,272 @@
     text-align: center;
   }
 
-  section#all-categories {
+  section#agenda {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    place-items: center;
-    align-self: center;
-    padding: 5vw 10%;
-    background-color: var(--body-bg-color);
-    row-gap: 1.5vw;
-    column-gap: 1vw;
-  }
-
-  .category-small-card {
-    width: 100%;
-    height: 4vw;
-    background-color: var(--bg-color);
-    padding: 0.5vw 1vw;
-    flex-direction: row;
+    min-height: 40vw;
     display: flex;
-    border-radius: 8px;
-    gap: 1vw;
-    cursor: pointer;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: var(--body-bg-color);
+    padding: 2vw 5%;
+
   }
 
-  .category-small-card .cover {
-    min-width: 3vw;
-    min-height: 3vw;
+
+  section#agenda div#table {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    row-gap: 0.5vw;
+  }
+
+  .agenda-row:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .agenda-row#header:hover {
+    background-color: transparent;
+  }
+
+  .agenda-row {
+    transition: 250ms ease;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.5;
+    border-radius: 12px;
+  }
+
+  .agenda-row-header {
+    border-radius: 12px;
+    transition: 250ms ease;
+    padding: 0 0.5vw;
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    gap: 0.5vw;
+  }
+  .agenda-row-header#header {
+    max-height: 5vh;
+  }
+
+  .agenda-row-cover {
+    min-width: 64px;
+    min-height: 64px;
+    display: flex;
+    border-radius: 12px;
+    background-color: var(--bg-color);
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
   }
 
-  .category-small-card .content {
+  #header .agenda-row-cover {
+    opacity: 0;
+  }
+
+  .agenda-row-time {
+    min-width: 10%;
+    max-width: 10%;
     display: flex;
     align-items: start;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
     flex-direction: column;
-  }
-
-  .category-small-card .content h3 {
-    font-size: 1vw;
-    font-family: var(--pff);
-    color: var(--primaryColor);
-    font-weight: 700;
-  }
-
-  .category-small-card .content p {
-    font-size: 0.75vw;
-    font-family: var(--sff);
-    color: var(--primaryVarientColor);
+    justify-content: start;
+    text-align: start;
     font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
   }
 
-  section#counts {
-    width: 100%;
-    height: 15vw;
+  .agenda-row-currency {
+    min-width: 10%;
+    max-width: 10%;
     display: flex;
+    align-items: center;
+    justify-content: start;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+    flex-direction: row;
+
+  }
+
+  .agenda-row-title {
+    min-width: 30%;
+    max-width: 30%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+  }
+
+  .agenda-row-pervious,
+  .agenda-row-importance,
+  .agenda-row-current,
+  .agenda-row-predicted {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+    min-width: 10%;
+    max-width: 10%;
+  }
+
+  .agenda-row-importance {
+    min-width: 15%;
+    max-width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25vw;
+    flex-direction: row;
+    gap: 0.5vw;
+  }
+
+  .agenda-row-currency div {
+    width: 1.5vw;
+    aspect-ratio: 2/1;
+
+  }
+
+  .agenda-row-importance div {
+    width: 1.5vw;
+    height: 1.5vw;
+  }
+
+  .agenda-row-collapsable-importance i,
+  .agenda-row-collapsable-cover i,
+  .agenda-row-currency i,
+  .agenda-row-importance i {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .agenda-row-collapsable > * {
+    display: none;
+  }
+
+  .agenda-row-collapsable {
+    width: 100%;
+    height: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    transition: 250ms ease;
+    max-height: 200vh;
+  }
+
+  .agenda-row-collapsable-body {
+    width: 100%;
+    height: 100%;
+    display: none;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    padding: 4vw 15%;
+    padding: 32px 1vw;
   }
 
-  .count {
-    width: 100%;
-    height: 100%;
+  .agenda-row-collapsable.active {
+    height: 40vh;
+    overflow-y: auto;
+  }
+
+  .agenda-row-collapsable.active * {
     display: flex;
-    align-items: center;
+  }
+
+  .agenda-row-collapsable-column {
+    display: flex;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
-    gap: 2vw;
-  }
-
-  .count h3 {
-    font-size: 6vw;
-    font-family: var(--sff);
-    font-weight: 700;
-    color: white;
-  }
-
-  .count p {
-    font-size: 1.5vw;
-    font-family: var(--pff);
-    font-weight: 500;
-    color: ghostwhite;
-  }
-
-  section#all-categories-cards,
-  section#featured {
-    width: 100%;
-    min-height: 20vw !important;
-    max-height: 500vw !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    background-color: var(--body-bg-color);
-    padding: 4vw 5%;
-  }
-  section#all-categories-cards {
-    min-height: 100vw;
-    max-height: 10000vw;
-  }
-
-  section#all-categories-cards h2,
-  section#featured h2 {
-    font-size: 4vw;
-    font-family: var(--pff);
-    font-weight: 700;
-    color: var(--primaryColor);
-    font-style: italic;
-  }
-
-  section#all-categories-cards p,
-  section#featured p {
-    font-size: 1vw;
-    font-family: var(--sff);
-    font-weight: 300;
-    color: var(--primaryVarientColor);
-  }
-
-  section#all-categories-cards #cards,
-  section#featured #cards {
-    width: 100%;
+    width: 20%;
     height: 100%;
-    margin-top: 2vw;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: start;
-    column-gap: 2vw;
     row-gap: 1vw;
   }
+  .agenda-row-collapsable-cover {
+    min-width: 8vw;
+    min-height: 8vw;
+    display: flex;
+    background-color: var(--bg-color);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 12px;
+    padding: 0.5vw 1vw;
+  }
 
-  .featured_category_card {
+  .agenda-row-collapsable-cover div {
     width: 100%;
-    height: 30vw;
+    aspect-ratio: 2/1;
+  }
+
+  .agenda-row-collapsable-column-tile {
     display: flex;
     align-items: start;
     justify-content: start;
     flex-direction: column;
-    background-color: var(--bg-color);
-    border-radius: 12px;
-    transition: 500ms ease;
-    padding: 0.5vw 1vw;
-    cursor: pointer;
+    gap: 0.2vw;
   }
 
-  .featured_category_card:hover {
-    transform: scale(1.05);
-    border: 2px var(--accentColor) solid;
-  }
-
-  .featured_category_card .cover {
+  .agenda-row-collapsable-importance {
     width: 100%;
-    aspect-ratio: 3/2;
-    border-radius: 12px;
-    background-color: red;
-    margin-bottom: 1vw;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    flex-direction: row;
   }
 
-  .featured_category_card h3 {
-    font-size: 1.5vw;
-    font-family: var(--pff);
-    font-weight: 500;
-    color: var(--primaryColor);
+  .agenda-row-collapsable-importance div {
+    width: 2vw;
+    height: 2vw;
   }
+
+  .agenda-row-collapsable-column-tile > label {
+    font-weight: 300;
+    font-size: 0.7vw;
+    font-family: var(--pff);
+  }
+
+  .agenda-row-collapsable-column-tile > h3 {
+    font-weight: 700;
+    font-size: 1vw;
+    font-family: var(--pff);
+  }
+
+  .agenda-row-collapsable-column-tile > button {
+    font-weight: 500;
+    font-size: 0.5vw !important;
+    z-index: 5;
+    font-family: var(--pff);
+    color: #111;
+    text-decoration: underline;
+    /* padding-right: 4px; */
+    padding: 4px;
+  }
+
+
 }

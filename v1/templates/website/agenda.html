@@ -167,6 +167,107 @@
       </div>
     </section>
     <section id="agenda">
+      <div id="table">
+        <div class="agenda-row" id="asdasdas">
+                <div class="agenda-row-header">
+                  <div class="agenda-row-time">{{content.agenda[lang]['time']}}</div>
+                  <div class="agenda-row-currency">{{content.agenda[lang]['currency']}}</div>
+                  <div class="agenda-row-importance">
+                    {{content.agenda[lang]['importance']}}
+                  </div>
+                  <div class="agenda-row-title">{{content.agenda[lang]['event']}}</div>
+                  <div class="agenda-row-pervious">{{content.agenda[lang]['pervious']}}</div>
+                  <div class="agenda-row-current">{{content.agenda[lang]['current']}}</div>
+                  <div class="agenda-row-predicted">{{content.agenda[lang]['predicted']}}</div>
+                </div>
+                <div class="agenda-row-divider"></div>
+                <div class="agenda-row-collapsable">
+                  <div class="agenda-row-collapsable-body">
+                    <div
+                      class="agenda-row-collapsable-cover"
+                    ><i></i></div>
+                    <div class="agenda-row-collapsable-column">
+                      <div class="agenda-row-collapsable-column-tile">
+                        <label>{{content.agenda[lang]['event']}}</label>
+                        <h3 class="agenda-row-collapsable-writer">
+                         مؤشر أداء قطاع الخدمات
+                        </h3>
+                      </div>
+                      <div class="agenda-row-collapsable-column-tile importance">
+                        <label>{{content.agenda[lang]['importance']}}</label>
+                        <h3 class="agenda-row-collapsable-writer">
+                        <div><i class="star"></i></div>
+                        <div><i class="star-empty"></i></div>
+                        <div><i class="star-empty"></i></div>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {%for i in range(20) %}
+              <div class="agenda-row" id="asdasdas{{i}}" ondblclick="toggleAgendaRow(this)" >
+                <div class="agenda-row-header">
+                  <div class="agenda-row-time">20:00</div>
+                  <div class="agenda-row-currency"><div><i style="background-image:  url('{{url_for("static", filename="website/global/styles/flags/us.png")}}');"></i></div> USD</div>
+                  <div class="agenda-row-importance">
+                    <div><i class="star"></i></div>
+                    <div><i class="star"></i></div>
+                    <div><i class="star"></i></div>
+                  </div>
+                  <div class="agenda-row-title">مؤشر أداء قطاع الخدمات</div>
+                  <div class="agenda-row-pervious">50.1</div>
+                  <div class="agenda-row-current">53.3</div>
+                  <div class="agenda-row-predicted">12.21%</div>
+                </div>
+                <div class="agenda-row-divider"></div>
+                <div class="agenda-row-collapsable">
+                  <div class="agenda-row-collapsable-body">
+                    <div
+                      class="agenda-row-collapsable-cover"
+                    ><div><i style="background-image:  url('{{url_for("static", filename="website/global/styles/flags/us.png")}}');"></i></div></div>
+                    <div class="agenda-row-collapsable-column">
+                      <div class="agenda-row-collapsable-column-tile">
+                        <label>{{content.agenda[lang]['time']}}</label>
+                        <h3 class="agenda-row-collapsable-writer">
+                         20:00
+                        </h3>
+                      </div>
+                      <div class="agenda-row-collapsable-column-tile">
+                        <label>{{content.agenda[lang]['event']}}</label>
+                        <h3 class="agenda-row-collapsable-writer">
+                         مؤشر أداء قطاع الخدمات
+                        </h3>
+                      </div>
+                      <div class="agenda-row-collapsable-column-tile importance">
+                        <label>{{content.agenda[lang]['importance']}}</label>
+                        <h3 class="agenda-row-collapsable-importance">
+                        <div><i class="star"></i></div>
+                        <div><i class="star"></i></div>
+                        <div><i class="star"></i></div>
+                        </h3>
+                      </div>
+                    </div>
+                    <div class="agenda-row-collapsable-column">
+                      <div class="agenda-row-collapsable-column-tile">
+                        <label>{{content.agenda[lang]['pervious']}}</label>
+                        <h3 class="agenda-row-collapsable-writer">50.1</h3>
+                      </div>
+                      <div class="agenda-row-collapsable-column-tile">
+                        <label>{{content.agenda[lang]['current']}}</label>
+                        <h3 class="agenda-row-collapsable-writer">53.3</h3>
+                      </div>
+                      <div class="agenda-row-collapsable-column-tile importance">
+                        <label>{{content.agenda[lang]['predicted']}}</label>
+                        <h3 class="agenda-row-collapsable-importance">12.21%</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+      </div>
+      <div id="side-section"></div>
     </section>
     <footer>
       <div class="footer-row" id="categories">

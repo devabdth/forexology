@@ -295,3 +295,23 @@ class Content:
                 "internalServerErrorMsg": "هنالك خطأ. حاول مرة أخرى في وقت لاحق!",
             }
         }
+
+        self.agenda: dict= {
+            "EN": {
+                "event": "Event",
+                "current": "Current",
+                "pervious": "Pervious",
+                "predicted": "Predicted",
+                "importance": "Importance",
+                "time": "Time",
+            },
+            "AR": {
+                "currency": "العملة",
+                "event": "الحدث",
+                "current": "الحالي",
+                "pervious": "السابق",
+                "predicted": "المتوقع",
+                "importance": "الأهمية",
+                "time": "الوقت",
+            }
+        }

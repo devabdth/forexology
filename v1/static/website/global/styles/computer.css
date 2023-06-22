@@ -256,6 +256,8 @@
 
 :root {
   --image-placeholder: url(/static/website/global/styles/images/imagePlaceholder.png);
+  --star: url(/static/website/global/styles/icons/star.png);
+  --star-empty: url(/static/website/global/styles/icons/star-empty.png);
 
   --search-icon-black: url(/static/website/global/styles/icons/search-black.png);
   --theme-icon-black: url(/static/website/global/styles/icons/dark.png);
@@ -328,6 +330,8 @@
   --bg-gradient: linear-gradient(180deg, #a700de 0%, #a700de 100%);
 
   /*Icons*/
+  --star: url(/static/website/global/styles/icons/star.png);
+  --star-empty: url(/static/website/global/styles/icons/star-empty.png);
   --search-icon: var(--search-icon-white);
   --theme-icon: var(--theme-icon-black);
   --arrow-left-icon: var(--arrow-left-icon-white);
@@ -899,6 +903,14 @@
 
   i.lang {
     background-image: var(--language);
+  }
+
+  i.star {
+    background-image: var(--star);
+  }
+
+  i.star-empty {
+    background-image: var(--star-empty);
   }
 
   footer {
