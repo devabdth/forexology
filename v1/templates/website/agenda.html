@@ -79,87 +79,95 @@
       }
       {% endif %}
     </style>
-    <header>
-      <div id="intro-row">
-        <div
-        onclick="window.open('{{consts.index_route}}', `_self`);"
-        id="logo"
-      ></div>
-      <div id="options">
-        <button onclick="openSearcDFhDialog();" class="main-icon-button">
-          <i onclick="openSearchDialog();" class="search"></i>
-        </button>
-        <button onclick="window.open('/login/', '_self');" class="main-button">
-          {{content.actions[lang]['login']}}
-        </button>
-        |
-        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
-          <i class="theme"></i>
-        </button>
-        <div class="lang header-dropdown">
-          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
-          <div class="lang header-dropdown-content">
-            <div id="dropdown-tabs">
-              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
-              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+        <header>
+          <div id="intro-row">
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+              <button onclick="toggleDrawer()" class="shadow-icon-button" style="display: flex;" id="drawer"><i class="drawer"></i></button>
+              <div
+              onclick="window.open('{{consts.index_route}}', `_self`);"
+              id="logo"
+              ></div>
             </div>
-          </div>
-      </div>
-      </div>
-      </div>
-      <div id="tabs">
-        <div id="tabs">
-        <div
-        onclick="window.open('{{consts.index_route}}', `_self`);"
-        id="logo"
-        ></div>
-        {% for tab in layout.header_tabs %}
-          {% if tab['mode'] == 'link' %}
-            <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
-          {%endif%}
-          {% if tab['mode'] == 'category' %}
-            <a href="/categories/{{tab['categoryId']}}" class="header-tab">{{db_helper.categories.get_category_by_id(tab['categoryId']).name[lang]}}</a>
-          {%endif%}
-          {% if tab['mode'] == 'classification' %}
-          {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
-            <div class="header-dropdown">
-              <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
-              <div class="header-dropdown-content">
-                <div id="label">
-                  <h3>{{classification.name[lang]}}</h3>
-                  <p>{{classification.bio[lang]}}</p>
-                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
-                </div>
+          <div id="options">
+            {% if user_data %}
+            <button onclick="window.open('/profile/', '_self');" class="shadow-button" id="welcome-back">{{content.global_[lang]['welcomeBack']}}<br><span>{{user_data.name}}<span></span></button>
+            {%else%}
+            <button onclick="window.open('/login/', '_self');" class="main-button">
+              {{content.actions[lang]['login']}}
+            </button>
+            {%endif%}
+            |
+            <button onclick="openSearcDFhDialog();" class="main-icon-button">
+              <i onclick="openSearchDialog();" class="search"></i>
+            </button>
+            <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
+              <i class="theme"></i>
+            </button>
+            <div class="lang header-dropdown">
+              <button class="main-icon-button" id="lang"><i class="lang"></i></button>
+              <div class="lang header-dropdown-content">
                 <div id="dropdown-tabs">
-                  {% for category in classification['categories'] %}
-                  <a class="header-tab" href="/categories/{{category.id}}">
-                    <div class="shadow-icon-button"><i style="background-image: url('/assets/categories/icons/{{category.id}}/');"></i></div>
-                    <p>{{category.name[lang]}}</p>
-                  </a>
-                  {%endfor%}
+                  <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+                  <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
                 </div>
               </div>
           </div>
-          {%endif%}
-        {%endfor%}
-        </div>
-        <div id="options">
-          <button onclick="openSearcDFhDialog();" class="main-icon-button collabsed">
-            <i onclick="openSearchDialog();" class="search"></i>
-          </button>
-          <div class="lang header-dropdown">
-            <button class="main-icon-button collabsed" id="lang"><i class="lang"></i></button>
-            <div class="lang header-dropdown-content">
-              <div id="dropdown-tabs">
-                <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
-                <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+          </div>
+          </div>
+          <div id="tabs">
+            <div id="tabs">
+              <button onclick="toggleDrawer()" class="shadow-icon-button" style="display: none;" id="drawer"><i class="drawer"></i></button>
+            <div
+            onclick="window.open('{{consts.index_route}}', `_self`);"
+            id="logo"
+            ></div>
+            {% for tab in layout.header_tabs %}
+              {% if tab['mode'] == 'link' %}
+                <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
+              {%endif%}
+              {% if tab['mode'] == 'category' %}
+                <a href="/categories/{{tab['categoryId']}}" class="header-tab">{{db_helper.categories.get_category_by_id(tab['categoryId']).name[lang]}}</a>
+              {%endif%}
+              {% if tab['mode'] == 'classification' %}
+              {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
+                <div class="header-dropdown">
+                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
+                  <div class="header-dropdown-content">
+                    <div id="label">
+                      <h3>{{classification.name[lang]}}</h3>
+                      <p>{{classification.bio[lang]}}</p>
+                      <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                    </div>
+                    <div id="dropdown-tabs">
+                      {% for category in classification['categories'] %}
+                      <a class="header-tab" href="/categories/{{category.id}}">
+                        <div class="shadow-icon-button"><i style="background-image: url('/assets/categories/icons/{{category.id}}/');"></i></div>
+                        <p>{{category.name[lang]}}</p>
+                      </a>
+                      {%endfor%}
+                    </div>
+                  </div>
               </div>
+              {%endif%}
+            {%endfor%}
             </div>
-        </div>
-        </div>
-  
-      </div>
-    </header>
+            <div id="options">
+              <button onclick="openSearcDFhDialog();" class="main-icon-button collabsed">
+                <i onclick="openSearchDialog();" class="search"></i>
+              </button>
+              <div class="lang header-dropdown">
+                <button class="main-icon-button collabsed" id="lang"><i class="lang"></i></button>
+                <div class="lang header-dropdown-content">
+                  <div id="dropdown-tabs">
+                    <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+                    <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+                  </div>
+                </div>
+            </div>
+            </div>
+      
+          </div>
+        </header>    
     <section id="entry">
       <div id="overlay">
         <h1>{{content.global_[lang]['agenda'] | safe}}</h1>
@@ -338,8 +346,79 @@
         <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
       </div>
     </footer>
+    <div id="drawer-overlay"></div>
+    <div id="drawer-menu">
+      <div id="header">
+        <div id="logo">
+          <div id="logo"></div>
+          <div id="title">{{content.global_[lang]['platformTitle']}}</div>
+        </div>
+        <div id="close" onclick="toggleDrawer();">x</div>
+      </div>
+      <div id="tabs">
+        <a href="/" class="drawer-tab" id="home">{{content.tabs[lang]["home"]}}</a>
+        <a href="/aboutUs/" class="drawer-tab" id="aboutUs">{{content.tabs[lang]["aboutUs"]}}</a>
+        <a href="/articles/" class="drawer-tab" id="articles">{{content.tabs[lang]["articles"]}}</a>
+        <a href="/careers/" class="drawer-tab" id="careers">{{content.tabs[lang]["careers"]}}</a>
+        <a href="/categories/" class="drawer-tab" id="categories">{{content.tabs[lang]["categories"]}}</a>
+        <a href="/agenda/" class="drawer-tab" id="agenda">{{content.tabs[lang]["agenda"]}}</a>
+        {% for pcat in db_helper.categories.parent_cats %}
+          <div onclick="toggleClassificationRow(this);" class="classifications-collapsable" id="{{(pcat.id | string)[:6]}}">
+            <div class="header">
+              <p>{{pcat.name[lang]}}</p>
+              <div class="icon">{{'>'}}</div>
+            </div>
+            <div class="body">
+              {% for cat in pcat.categories %}
+                <a href="/categories/{{cat.id}}/" class="drawer-tab" id="{{cat.name['EN'] | lower}}">{{cat.name[lang]}}</a>
+              {%endfor%}
+            </div>
+          </div>
+        {%endfor%}
+      </div>
+      <div id="social-media-icons">
+        {% if cfg.facebook != '' %}
+        <a
+          href="{{cfg.facebook}}"
+          class="facebook main-icon-button"
+          id="facebook"
+          ><i class="facebook"></i
+        ></a>
+        {%endif%} {% if cfg.instagram != '' %}
+        <a
+          href="{{cfg.instagram}}"
+          class="instagram main-icon-button"
+          id="instagram"
+          ><i class="instagram"></i
+        ></a>
+        {%endif%} {% if cfg.twitter != '' %}
+        <a
+          href="{{cfg.twitter}}"
+          class="twitter main-icon-button"
+          id="twitter"
+          ><i class="twitter"></i
+        ></a>
+        {%endif%} {% if cfg.linkedin != '' %}
+        <a
+          href="{{cfg.linkedin}}"
+          class="linkedin main-icon-button"
+          id="linkedin"
+          ><i class="linkedin"></i
+        ></a>
+        {%endif%} {% if cfg.tiktok != '' %}
+        <a href="{{cfg.tiktok}}" class="tiktok main-icon-button" id="tiktok"
+          ><i class="tiktok"></i
+        ></a>
+        {%endif%}
+      </div>
+      <div id="copyright">
+        <p>{{content.global_[lang]['copyrightMsg']}}</p>
+      </div>
+    </div>
+
     <script type="text/javascript">
       const init = () => {
+        initDrawer('{{lang}}');
         changeHeaderLogoOnScroll = true;
         document.firstElementChild.setAttribute(
           "data-theme",

@@ -117,7 +117,8 @@ class CategoriesDatabaseHelper:
 			if res:
 				icon.save(join(self.icons_dir, f'{cid}.{icon.filename.split(".")[-1]}'))
 				cover.save(join(self.covers_dir, f'{cid}.{cover.filename.split(".")[-1]}'))
-			return True
+				return True
+			return False
 		except Exception as e:
 			print(e)
 			return False

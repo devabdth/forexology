@@ -34,9 +34,12 @@ class CategoriesRouter:
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None            
             return render_template(
                 '/website/all_categories.html',
                 content=self.content,
+                user_data= user_data,
                 cfg=self.cfg,
                 consts=self.consts,
                 lang=lang,
@@ -56,8 +59,11 @@ class CategoriesRouter:
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
             return render_template(
                 '/website/category.html',
+                user_data= user_data,
                 category= self.helper.categories.get_category_by_id(category_id),
                 articles= self.helper.articles.get_articles_by_category(category_id),
                 content=self.content,
@@ -79,8 +85,11 @@ class CategoriesRouter:
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
             return render_template(
                 '/website/classification.html',
+                user_data= user_data,
                 classification= self.helper.categories.get_parent_category_by_id(classification_id),
                 content=self.content,
                 cfg=self.cfg,

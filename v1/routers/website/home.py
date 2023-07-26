@@ -1,4 +1,5 @@
 from database.helper import DatabaseHelper
+from analyze_lab.feed.feed_generator import FeedGenerator
 from plugins.layout import Layout
 from plugins.utils import Utils
 from plugins.consts import Consts
@@ -20,6 +21,7 @@ class HomeRouter:
         self.helper: DatabaseHelper = DatabaseHelper()
         self.layout: Layout = Layout()
         self.utils: Utils = Utils()
+        self.feed_generator: FeedGenerator= FeedGenerator()
 
     def setup(self):
         self.assign_home_index()
@@ -35,8 +37,11 @@ class HomeRouter:
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
             return render_template(
                 '/website/home.html',
+                user_data= user_data,
                 content=self.content,
                 cfg=self.cfg,
                 consts=self.consts,

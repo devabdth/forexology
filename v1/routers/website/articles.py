@@ -34,8 +34,11 @@ class ArticlesRouter:
             self.helper.categories.load_data()
             self.helper.ads.load_data()
             self.layout.load()
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
             return render_template(
                 '/website/all_articles.html',
+                user_data= user_data,
                 content=self.content,
                 cfg=self.cfg,
                 consts=self.consts,

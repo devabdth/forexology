@@ -81,22 +81,6 @@
         }
         {% endif %}
       </style>
-      <header>
-        <div
-          onclick="window.open('{{consts.index_route}}', `_self`);"
-          id="logo"
-        ></div>
-        <div id="options">
-          <button onclick="openSearcDFhDialog();" class="main-icon-button">
-            <i onclick="openSearchDialog();" class="search"></i>
-          </button>
-          |
-          <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
-            <i class="theme"></i>
-          </button>
-        </div>
-      </header>
-
       <section>
         <div id="form">
           <h3>{{content.actions[lang]['login']}}</h3>

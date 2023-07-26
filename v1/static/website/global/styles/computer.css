@@ -455,6 +455,15 @@
     justify-content: space-between;
     flex-direction: row;
   }
+  header .shadow-button#welcome-back {
+    text-decoration: none;
+  }
+  header .shadow-button#welcome-back span {
+    font-weight: 700;
+  }
+  button#drawer {
+    display: none !important;
+  }
 
   header > #tabs {
     width: 100%;
@@ -615,6 +624,10 @@
     opacity: 1;
     color: var(--primaryColor);
     text-decoration: underline;
+  }
+
+  header > #tabs #drawer {
+    display: none;
   }
 
   header > #tabs #logo,
@@ -1957,5 +1970,10 @@
     color: ghostwhite;
     text-align: end;
     width: 100%;
+  }
+
+  #drawer-menu,
+  #drawer-overlay {
+    display: none;
   }
 }

@@ -32,6 +32,9 @@ class UsersDatabaseHelper:
 			}) for _ in range(0, 10)
 		]
 
+	def get_user_by_id(self, id):
+		return self.users[0]
+	
 	def get_user_by_email(self, email):
 		try:
 			for user in self.users:

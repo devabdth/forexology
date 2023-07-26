@@ -21,9 +21,9 @@ class Setup:
     def initializiation(self):
         self.setup_files_and_directories()
         self.setup_app()
-        self.setup_routers()
+        # self.setup_routers()
         self.setup_errors_routers()
-        self.setup_crm_routers()
+        # self.setup_crm_routers()
         self.setup_adminstration_webapp_routes()
         self.setup_publish_webapp_routes()
         self.setup_socket_handlers()
@@ -63,10 +63,17 @@ class Setup:
             "../assets/users/",
             "../assets/users/images",
             "../assets/users/covers",
+            "../assets/covers/courses",
+            "../assets/promos/",
+            "../assets/promos/courses",
         ]
         files= [
             {
                 'dir': '../jsons/jobs.json',
+                'initialData': {}
+            },
+            {
+                'dir': '../jsons/courses.json',
                 'initialData': {}
             },
             {

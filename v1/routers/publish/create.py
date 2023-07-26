@@ -35,7 +35,6 @@ class CreatePublishRouter:
 				writer_id= session.get('PUBLISHER_ID')
 				if writer_id == None:
 					return redirect(self.consts.publisher_login_route)
-				
 				body= loads(request.form['data'])
 				files= dict(request.files)
 				res= self.helper.articles.create_article(

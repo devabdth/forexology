@@ -1,16 +1,15 @@
 window.onload= ()=> {
 	const facebook= document.querySelector('.shadow-icon-button#facebook');
-	facebook.onclick= ()=> { window.open('https://facebook.com/forexology/', '_self'); }
+	facebook.onclick= ()=> { window.open('https://facebook.com/forexologyfx/', '_self'); }
 	const twitter= document.querySelector('.shadow-icon-button#twitter');
-	twitter.onclick= ()=> { window.open('https://twitter.com/forexology/', '_self'); }
+	twitter.onclick= ()=> { window.open('https://twitter.com/forexologyfx/', '_self'); }
 	const instagram= document.querySelector('.shadow-icon-button#instagram');
-	instagram.onclick= ()=> { window.open('https://instagram.com/forexology/', '_self'); }
+	instagram.onclick= ()=> { window.open('https://instagram.com/forexologyfx/', '_self'); }
 	const linkedin= document.querySelector('.shadow-icon-button#linkedin')	;
-	linkedin.onclick= ()=> { window.open('https://linkedin.com/forexology/', '_self'); }
+	linkedin.onclick= ()=> { window.open('https://linkedin.com/forexologyfx/', '_self'); }
 	const display= document.querySelector('section p.countdown');
 
-	const date= new Date('June 25, 2023 10:00:00');
-	console.log(date);
+	const date= new Date('August 1, 2023 10:00:00');
 
 	let x= setInterval(()=> {
 		const now= new Date().getTime();
@@ -26,7 +25,7 @@ window.onload= ()=> {
 			return;
 		}
 
-		display.innerHTML= `${days} : ${hours} : ${minutes} : ${seconds}`
+		display.innerHTML= `${days} Days : ${hours} Hours : ${minutes} Minutes : ${seconds} Seconds`
 
 	}, 1);
 }

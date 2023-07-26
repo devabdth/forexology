@@ -56,7 +56,7 @@ const generatSelectioneDialogCard = (article, parent) => {
 	title.innerHTML = article['title']['EN'];
 
 	const subtitle = document.createElement('p');
-	subtitle.innerHTML = article['short_brief']['EN'].length < 100 ? article['short_brief']['EN'] : article['short_brief']['EN'].substring(0, 100);
+	subtitle.innerHTML = article['short_brief']['EN'].length < 65 ? article['short_brief']['EN'] : article['short_brief']['EN'].substring(0, 65);
 
 	const options = document.createElement('div');
 	options.classList.add('options');
@@ -204,7 +204,7 @@ const openWritersSelectionDialog = (props) => {
 		title.innerHTML = writer.name[props.lang];
 
 		const subtitle = document.createElement('p');
-		subtitle.innerHTML = writer.bio[props.lang];
+		subtitle.innerHTML = writer.bio[props.lang].length > 65 ? `${writer.bio[props.lang].substring(0, 65)}...` : writer.bio[props.lang];
 
 		const options = document.createElement('options');
 		const action = document.createElement('button');
@@ -257,7 +257,7 @@ const openWritersSelectionDialog = (props) => {
 					const title = document.createElement('h3');
 					title.innerHTML = writer.name[props.lang];
 					const subtitle = document.createElement('p');
-					subtitle.innerHTML = writer.bio[props.lang];
+					subtitle.innerHTML = writer.bio[props.lang].length > 65 ? `${writer.bio[props.lang].substring(0, 65)}...` : writer.bio[props.lang];
 
 					const options = document.createElement('options');
 					const action = document.createElement('button');
@@ -292,7 +292,7 @@ const openWritersSelectionDialog = (props) => {
 		const title = document.createElement('h3');
 		title.innerHTML = writer.name[props.lang];
 		const subtitle = document.createElement('p');
-		subtitle.innerHTML = writer.bio[props.lang];
+		subtitle.innerHTML = writer.bio[props.lang].length > 65 ? `${writer.bio[props.lang].substring(0, 65)}...`: writer.bio[props.lang];
 
 		information.appendChild(title);
 		information.appendChild(subtitle);
@@ -521,10 +521,10 @@ const allTabs = [
 		redirect: '/'
 	},
 	{
-        id: 'a05685021712b94519ea3dade83cf7323cd9419b362af6cb',
-        mode: 'link',
-        text: 'agenda',
-        redirect: '/agenda/'
+		id: 'a05685021712b94519ea3dade83cf7323cd9419b362af6cb',
+		mode: 'link',
+		text: 'agenda',
+		redirect: '/agenda/'
 	},
 	{
 		id: 'a05685021712b94519ea3dade83cf7323cd9419b362af1cb',
@@ -618,7 +618,7 @@ const openHeaderTabsAddDialog = () => {
 	document.querySelector('#tabs-selection-dialog').style.display = 'flex';
 }
 const deleteHeaderTab = (tabId) => {
-	let tab = selectedTabs.filter(tab =>  tab.id == tabId )[0];
+	let tab = selectedTabs.filter(tab => tab.id == tabId)[0];
 	selectedTabs.splice(selectedTabs.indexOf(tab), 1);
 	const allFragmentTabs_ = document.querySelectorAll(`.fragment#header .header-tab-card`);
 	const allDialogTabs_ = document.querySelectorAll(`#tabs-selection-dialog #body .header-tab-card`);

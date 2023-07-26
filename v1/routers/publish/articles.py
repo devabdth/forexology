@@ -86,6 +86,7 @@ class ArticlesPublishRouter:
 			self.layout.load()
 			self.helper.writers.load_data()
 			writer= self.helper.writers.get_writer_by_id(writer_id)
+			self.helper.articles.refresh_all_articles()
 			lang= session.get('LANG', 'EN')
 			mode= session.get('MODE', 'DARK')
 			return render_template(

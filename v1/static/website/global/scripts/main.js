@@ -3,7 +3,13 @@ const headerTabsConfig = () => {
 	for (let tab of tabs) {
 		if (tab.href == window.location.href) {
 			tab.classList.add('active');
-			return;
+		}
+	}
+
+	const drawerTabs = document.querySelectorAll('.drawer-tab');
+	for (let tab of drawerTabs) {
+		if (tab.href === window.location.href) {
+			tab.classList.add('active');
 		}
 	}
 }
@@ -63,7 +69,7 @@ const closeSearchDialog = () => {
 	setTimeout(() => {
 		overlay.style.display = 'none';
 	}, 100);
-	dialog.style.transform = 'translate(-50%, -250%)';
+	dialog.style.transform = 'translate(-50%, -350%)';
 
 }
 
@@ -86,7 +92,7 @@ const closeLoginDialog = () => {
 	setTimeout(() => {
 		overlay.style.display = 'none';
 	}, 100);
-	dialog.style.transform = 'translate(-50%, -250%)';
+	dialog.style.transform = 'translate(-50%, -350%)';
 
 }
 
@@ -98,11 +104,20 @@ window.addEventListener('scroll', () => {
 	if (window.scrollY >= 50) {
 		document.querySelector('header #intro-row').style.display = 'none';
 		document.querySelectorAll('header #tabs .main-icon-button').forEach(element => { element.classList.remove('collabsed') })
-		document.querySelector('header #tabs #logo').style.width = '8vw';
+		document.querySelectorAll('header #tabs button.shadow-icon-button').forEach(element => { element.style.display = 'flex'; })
+		if (window.innerWidth > 1024) {
+			document.querySelector('header #tabs #logo').style.width = '8vw';
+		} else if (window.innerWidth > 650 && window.innerWidth < 1024) {
+			document.querySelector('header #tabs #logo').style.width = '12vw';
+		} else if (window.innerWidth < 650) {
+			document.querySelector('header #tabs #logo').style.width = '16vw';
+
+		}
 		document.querySelector('header').style.backgroundColor = 'var(--secondaryColor)';
 		return;
 	}
 	document.querySelectorAll('header #tabs .main-icon-button').forEach(element => { element.classList.add('collabsed') })
+	document.querySelectorAll('header #tabs button.shadow-icon-button').forEach(element => { element.style.display = 'none'; })
 	document.querySelector('header #tabs #logo').style.width = '0';
 	document.querySelector('header #intro-row').style.display = 'flex';
 	document.querySelector('header').style.backgroundColor = 'transparent';
@@ -168,4 +183,29 @@ const initializeAdSpace = async (container, ad, lang, customCallback) => {
 
 		container.appendChild(overlay);
 	}
+}
+
+const initDrawer = (lang) => {
+	document.querySelector('#drawer-overlay').onclick = toggleDrawer;
+	switch (lang) {
+		case "AR":
+			document.querySelector('#drawer-menu').classList.add('right');
+			document.querySelector('#drawer-overlay').classList.add('right');
+			break;
+		default:
+			document.querySelector('#drawer-menu').classList.add('left');
+			document.querySelector('#drawer-overlay').classList.add('left');
+			break;
+	}
+}
+
+const toggleDrawer = () => {
+	document.querySelector('#drawer-menu').classList.toggle('active');
+	document.querySelector('#drawer-overlay').classList.toggle('active');
+}
+
+const toggleClassificationRow = (element) => {
+	element.querySelector('.header .icon').classList.toggle('active');
+	console.log(element.querySelector('.header .icon').classList)
+	element.querySelector('.body').classList.toggle('active');
 }

@@ -4,7 +4,7 @@ from plugins.utils import Utils
 from plugins.consts import Consts
 from plugins.content import Content
 from plugins.config import Config
-from flask import Flask, session, render_template, url_for, request
+from flask import Flask, session, render_template, url_for, request, redirect
 from json import dumps, loads
 from sys import path
 path.insert(0, '../')
@@ -53,6 +53,9 @@ class AuthRouter:
         def login_index():
             lang = session.get('LANG', 'AR')
             mode = session.get('MODE', 'LIGHT')
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            if current_user_id != None:
+                return redirect(self.consts.profile_route)            
             return render_template(
                 '/website/login.html',
                 content=self.content,
@@ -100,6 +103,9 @@ class AuthRouter:
         def password_reset_index():
             lang = session.get('LANG', 'AR')
             mode = session.get('MODE', 'LIGHT')
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            if current_user_id != None:
+                return redirect(self.consts.profile_route)            
             return render_template(
                 '/website/password_reset.html',
                 content=self.content,
@@ -148,6 +154,9 @@ class AuthRouter:
         def signup_index():
             lang = session.get('LANG', 'AR')
             mode = session.get('MODE', 'LIGHT')
+            current_user_id= session.get("CURRENT_USER_ID", None)
+            if current_user_id != None:
+                return redirect(self.consts.profile_route)            
             return render_template(
                 '/website/signup.html',
                 content=self.content,
