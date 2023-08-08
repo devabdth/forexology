@@ -23,11 +23,11 @@ class DemoRouter:
         self.assign_demo()
 
     def assign_demo(self):
-        # @self.app.route('/demo/')
-        @self.app.route(self.consts.index_route, methods=["GET"])
-        @self.app.route(self.consts.home_route, methods=["GET"])
-        @self.app.route(self.consts.main_page_route, methods=["GET"])
-        @self.app.route(self.consts.main_route, methods=["GET"])
+        @self.app.route('/demo/')
+        # @self.app.route(self.consts.index_route, methods=["GET"])
+        # @self.app.route(self.consts.home_route, methods=["GET"])
+        # @self.app.route(self.consts.main_page_route, methods=["GET"])
+        # @self.app.route(self.consts.main_route, methods=["GET"])
 
         def demo():
             lang = session.get('LANG', 'AR')
