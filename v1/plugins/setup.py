@@ -21,7 +21,7 @@ class Setup:
     def initializiation(self):
         self.setup_files_and_directories()
         self.setup_app()
-        # self.setup_routers()
+        self.setup_routers()
         self.setup_errors_routers()
         # self.setup_crm_routers()
         self.setup_adminstration_webapp_routes()
