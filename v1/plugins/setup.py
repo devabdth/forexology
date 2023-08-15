@@ -49,7 +49,7 @@ class Setup:
         self.app.config["SESSION_PERMANENT"] = False
         self.app.config["SESSION_TYPE"] = "filesystem"
         self.app.config['SECRET'] = 'secret!1234'
-
+        self.app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024
         Session(self.app)
 
     def setup_files_and_directories(self):
