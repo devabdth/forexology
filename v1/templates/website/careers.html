@@ -349,7 +349,7 @@
               </button>
             </div>
             <div id="trending-articles-body">
-              {% for article in db_helper.articles.trending_articles[:9] %}
+              {% for article in db_helper.articles.all_articles[:9] %}
                           <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
 
                 <div class="search-dialog-article-card">

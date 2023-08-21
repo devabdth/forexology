@@ -442,7 +442,7 @@
             </div>
           {%endfor%}
         {%else%}
-          {% for article in db_helper.articles.trending_articles[:8] %}
+          {% for article in db_helper.articles.d[:8] %}
             <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
@@ -548,7 +548,7 @@
             </div>
           {%endfor%}
         {% else %}
-          {% for article in db_helper.articles.trending_articles[:8] %}
+          {% for article in db_helper.articles.d[:8] %}
             <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
@@ -701,7 +701,7 @@
               </button>
             </div>
             <div id="trending-articles-body">
-              {% for article in db_helper.articles.trending_articles[:9] %}
+              {% for article in db_helper.articles.d[:9] %}
               <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
                 <div class="search-dialog-article-card">
                   <div class="cover-wrapper">
@@ -811,7 +811,7 @@
           {% if layout.home_featured_articles != None %}
               initializeFragments({{dumps(utils.mutliple_to_dicts((db_helper.articles.multiple_articles_by_ids(layout.home_featured_articles)))) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
           {% else %}
-    		    initializeFragments({{utils.mutliple_to_dicts(db_helper.articles.trending_articles[:5]) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
+    		    initializeFragments({{utils.mutliple_to_dicts(db_helper.articles.d[:5]) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
           {% endif %}
         {% if layout.entry_section_ad != None %}
     		  {% if db_helper.ads.check_if_ad_is_active(db_helper.ads.get_ad_by_id(layout.entry_section_ad)) %}

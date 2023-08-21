@@ -200,4 +200,4 @@ class ArticlesAnalysis:
 		dataframe['tranding_indicator']= dataframe['read_time_values'] + dataframe['comments_lengths'] + dataframe['ratings_approaches'] + dataframe['views'] + dataframe['saves']
 		
 		dataframe= dataframe.sort_values(by='tranding_indicator', ascending= False, ignore_index= True)
-		self.trending_articles= dataframe
+		self.all_articles= dataframe
