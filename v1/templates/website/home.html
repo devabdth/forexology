@@ -442,7 +442,7 @@
             </div>
           {%endfor%}
         {%else%}
-          {% for article in db_helper.articles.d[:8] %}
+          {% for article in db_helper.articles.all_articles[:8] %}
             <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
@@ -548,7 +548,7 @@
             </div>
           {%endfor%}
         {% else %}
-          {% for article in db_helper.articles.d[:8] %}
+          {% for article in db_helper.articles.all_articles[:8] %}
             <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article.id}}/', '_self')">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
