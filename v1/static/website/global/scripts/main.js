@@ -134,6 +134,10 @@ const writerLogout = async () => {
 }
 
 const initializeAdSpace = async (container, ad, lang, customCallback) => {
+	if (ad === undefined || ad === null) {
+		container.style.display= 'none';
+		return;
+}
 	container.onclick = () => {
 		if (customCallback === undefined) window.open(ad['redirect']);
 		else customCallback();
