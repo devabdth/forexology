@@ -1,3 +1,16 @@
+{%set home_ad_space_one= db_helper.ads.get_ad_by_id(layout.home_ad_space_one) %}
+{%set home_ad_space_two= db_helper.ads.get_ad_by_id(layout.home_ad_space_two) %}
+{%set home_ad_space_three= db_helper.ads.get_ad_by_id(layout.home_ad_space_three) %}
+{%set home_ad_space_four= db_helper.ads.get_ad_by_id(layout.home_ad_space_four) %}
+{%set home_ad_space_five= db_helper.ads.get_ad_by_id(layout.home_ad_space_five) %}
+{%set home_ad_space_six= db_helper.ads.get_ad_by_id(layout.home_ad_space_six) %}
+{%set home_ad_space_seven= db_helper.ads.get_ad_by_id(layout.home_ad_space_seven) %}
+{%set home_ad_space_eight= db_helper.ads.get_ad_by_id(layout.home_ad_space_eight) %}
+{%set home_ad_space_nine= db_helper.ads.get_ad_by_id(layout.home_ad_space_nine) %}
+{%set home_ad_space_ten= db_helper.ads.get_ad_by_id(layout.home_ad_space_ten) %}
+{%set home_ad_space_eleven= db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven) %}
+{%set home_ad_space_twelve= db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve) %}
+
 <!DOCTYPE html>
 {% if lang == 'AR' %}
   <html dir="RTL">
@@ -228,7 +241,7 @@
         </div>
       </div>
     </section>
-    {% if not (layout.home_ad_space_one == None and layout.home_ad_space_two == None) %}
+    {% if not (home_ad_space_one == None and home_ad_space_two == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_one == None %}
           <div class="between-sections-ad-space" id="home_ad_space_one"></div>
@@ -364,7 +377,7 @@
     			</div>
     		{%endfor%}
     </section>
-    {% if not (layout.home_ad_space_three == None and layout.home_ad_space_four == None) %}
+    {% if not (home_ad_space_three == None and home_ad_space_four == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_three == None %}
           <div class="between-sections-ad-space" id="home_ad_space_three"></div>
@@ -398,7 +411,7 @@
         </div>
       </section>
     {%endif%}
-    {% if not (layout.home_ad_space_five == None and layout.home_ad_space_six == None) %}
+    {% if not (home_ad_space_five == None and home_ad_space_six == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_five == None %}
           <div class="between-sections-ad-space" id="home_ad_space_five"></div>
@@ -473,7 +486,7 @@
         {%endif%}
       </div>
     </section>
-    {% if not (layout.home_ad_space_seven == None and layout.home_ad_space_eight == None) %}
+    {% if not (home_ad_space_seven == None and home_ad_space_eight == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_seven == None %}
           <div class="between-sections-ad-space" id="home_ad_space_seven"></div>
@@ -504,7 +517,7 @@
         </div>
       </section>
     {%endif%}
-    {% if not (layout.home_ad_space_nine == None and layout.home_ad_space_ten == None) %}
+    {% if not (home_ad_space_nine == None and home_ad_space_ten == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_nine == None %}
           <div class="between-sections-ad-space" id="home_ad_space_nine"></div>
@@ -580,7 +593,7 @@
 
       </div>
     </section>
-    {% if not (layout.home_ad_space_eleven == None and layout.home_ad_space_twelve == None) %}
+    {% if not (home_ad_space_eleven == None and home_ad_space_twelve == None) %}
       <div class="between-sections-ads">
         {% if not layout.home_ad_space_eleven == None %}
           <div class="between-sections-ad-space" id="home_ad_space_eleven"></div>
@@ -822,73 +835,61 @@
 
     		initializeCategoriesFragments({{utils.mutliple_to_dicts(db_helper.categories.active_cats[:5]) | safe}});
 
-        {%set home_ad_space_one= db_helper.ads.get_ad_by_id(layout.home_ad_space_one) %}
         {% if not layout.home_ad_space_one == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_one'), 
             {%if home_ad_space_one%} {{home_ad_space_one.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_two= db_helper.ads.get_ad_by_id(layout.home_ad_space_two) %}
         {% if not layout.home_ad_space_two == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_two'), 
             {%if home_ad_space_two%} {{home_ad_space_two.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_three= db_helper.ads.get_ad_by_id(layout.home_ad_space_three) %}
         {% if not layout.home_ad_space_three == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_three'), 
             {%if home_ad_space_three%} {{home_ad_space_three.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_four= db_helper.ads.get_ad_by_id(layout.home_ad_space_four) %}
         {% if not layout.home_ad_space_four == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_four'), 
             {%if home_ad_space_four%} {{home_ad_space_four.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_five= db_helper.ads.get_ad_by_id(layout.home_ad_space_five) %}
         {% if not layout.home_ad_space_five == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_five'), 
             {%if home_ad_space_five%} {{home_ad_space_five.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_six= db_helper.ads.get_ad_by_id(layout.home_ad_space_six) %}
         {% if not layout.home_ad_space_six == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_six'), 
             {%if home_ad_space_six%} {{home_ad_space_six.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_seven= db_helper.ads.get_ad_by_id(layout.home_ad_space_seven) %}
         {% if not layout.home_ad_space_seven == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_seven'), 
             {%if home_ad_space_seven%} {{home_ad_space_seven.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_eight= db_helper.ads.get_ad_by_id(layout.home_ad_space_eight) %}
         {% if not layout.home_ad_space_eight == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_eight'), 
             {%if home_ad_space_eight%} {{home_ad_space_eight.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_nine= db_helper.ads.get_ad_by_id(layout.home_ad_space_nine) %}
         {% if not layout.home_ad_space_nine == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_nine'), 
             {%if home_ad_space_nine%} {{home_ad_space_nine.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_ten= db_helper.ads.get_ad_by_id(layout.home_ad_space_ten) %}
         {% if not layout.home_ad_space_ten == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_ten'), 
             {%if home_ad_space_ten%} {{home_ad_space_ten.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_eleven= db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven) %}
         {% if not layout.home_ad_space_eleven == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_eleven'), 
             {%if home_ad_space_eleven%} {{home_ad_space_eleven.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {%set home_ad_space_twelve= db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve) %}
         {% if not layout.home_ad_space_twelve == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_twelve'), 
             {%if home_ad_space_twelve%} {{home_ad_space_twelve.to_dict() | safe}} {%else%} null {%endif%}
