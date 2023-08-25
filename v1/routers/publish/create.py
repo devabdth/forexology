@@ -40,7 +40,8 @@ class CreatePublishRouter:
 				res= self.helper.articles.create_article(
 					payload= body,
 					media= files,
-					publisher=writer_id
+					publisher=writer_id,
+					cover= media['articleCover']
 				)
 				if res:
 					return self.app.response_class(status=201)
