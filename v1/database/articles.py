@@ -81,7 +81,6 @@ class ArticlesDatabaseHelper:
                 if section['id'] in media.keys():
                     section_media= media[section['id']]
                     section_media.filename= f'{sec_id}.{section_media.filename.split(".")[-1]}'
-                    print('Done 1')
 
                     if section_media.filename.split('.')[-1] in self.consts.covers_supported_extenstions:
                         images.append(section_media)
@@ -109,6 +108,7 @@ class ArticlesDatabaseHelper:
             article= Article(payload)
 
             article = self.articles_collection.insert_one(article.to_dict())
+            payload['articleCover'].save(abspath(join(dirname(__file__), '../assets/covers/articles/', payload['articleCover'].filename)))
             if article != None and article.inserted_id != None:
                 for image in images:
                     image.save(abspath(join(dirname(__file__), '../assets/articles/images/', image.filename),))
