@@ -108,7 +108,7 @@ class ArticlesDatabaseHelper:
             article= Article(payload)
 
             article = self.articles_collection.insert_one(article.to_dict())
-            payload['articleCover'].save(abspath(join(dirname(__file__), '../assets/covers/articles/', payload['articleCover'].filename)))
+            media['articleCover'].save(abspath(join(dirname(__file__), '../assets/covers/articles/', payload['articleCover'].filename)))
             if article != None and article.inserted_id != None:
                 for image in images:
                     image.save(abspath(join(dirname(__file__), '../assets/articles/images/', image.filename),))
