@@ -31,6 +31,7 @@ class HomeRouter:
         @self.app.route(self.consts.home_route, methods=["GET"])
         @self.app.route(self.consts.main_page_route, methods=["GET"])
         @self.app.route(self.consts.main_route, methods=["GET"])
+        self.helper.articles.refresh_all_articles()
         def home_index():
             lang = session.get('LANG', 'AR')
             mode = session.get('MODE', 'LIGHT')
