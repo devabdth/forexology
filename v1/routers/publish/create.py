@@ -41,7 +41,7 @@ class CreatePublishRouter:
 					payload= body,
 					media= files,
 					publisher=writer_id,
-					cover= media['articleCover']
+					cover= files['articleCover']
 				)
 				if res:
 					return self.app.response_class(status=201)
