@@ -6,6 +6,7 @@ from models.thread import Thread
 from models.article_section import ArticleSection
 import secrets
 from plugins.consts import Consts
+from bson.objectid import ObjectId
 
 class ArticlesDatabaseHelper:
     def __init__(self, client: pymongo.MongoClient):
@@ -61,11 +62,8 @@ class ArticlesDatabaseHelper:
 
     def delete_article(self, article_id):
         try:
-            for article in self.all_articles:
-                if article.id == article_id:
-                    del self.all_articles[self.all_articles.index(article)]
-                    return True
-            return False
+            self.articles_collection.delete_one({'_id': ObjectId(article_id)})
+            return True
         except Exception as e:
             print(e)
             return False
