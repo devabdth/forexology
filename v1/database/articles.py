@@ -48,8 +48,9 @@ class ArticlesDatabaseHelper:
         return [Article(dict(article)) for article in articles[0]]
 
     def get_drafts_by_writer_id(self, writer_id):
-        articles = self.articles_collection.find({'published_by': {'$in': [writer_id]}, 'mode': 0})
-        return [Article(article) for article in articles]
+        articles= self.articles_collection.find({ "mode": 0, "published_by" : { "$contains" : writer_id }})
+        return [Article(dict(article)) for article in articles[0]]
+
 
     def get_articles_by_category_and_parent_category(self, category, parent_category):
         if category is None and not parent_category is None:
