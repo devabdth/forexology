@@ -32,22 +32,34 @@ class ArticlesDatabaseHelper:
         return self.all_articles[0]
     
     def get_article_by_id(self, article_id):
-        return self.all_articles[0]
+        articles = self.articles_collection.find({'_id': ObjectId(article_id)})
+        return Article(article[0])
 
     def get_all_articles(self, filter_by: str = None, arrangment: str = 'ascending'):
         return self.all_articles
 
     def multiple_articles_by_ids(self, ids: list):
-        return self.all_articles[:len(ids)]
+        articles = self.articles_collection.find({'_id': {'$in': [ObjectId(
+            _id) if type(_id) is str else ObjectId(_id['id']) for _id in ids]}})
+        return [Article(article) for article in articles]
     
     def get_article_by_writer_id(self, writer_id):
-        return self.all_articles
+        articles = self.articles_collection.find({'published_by': {'$in': [writer_id]}, 'mode': 1})
+        return [Article(article) for article in articles]
 
     def get_drafts_by_writer_id(self, writer_id):
-        return self.all_articles
+        articles = self.articles_collection.find({'published_by': {'$in': [writer_id]}, 'mode': 0})
+        return [Article(article) for article in articles]
 
     def get_articles_by_category_and_parent_category(self, category, parent_category):
-        return self.all_articles
+        if category is None and not parent_category is None:
+            articles = self.articles_collection.find({'parent_category': parent_category})
+        if not category is None and parent_category is None:
+            articles = self.articles_collection.find({'category': category})
+        else:
+            articles = self.articles_collection.find({'category': category, 'parent_category': parent_category})
+        
+        return [Article(article) for article in articles]
 
     def get_articles_by_category(self, category_id):
         return {
