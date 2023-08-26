@@ -102,5 +102,5 @@ class ArticlesPublishRouter:
 				dumps= dumps,
 				writer= writer,
 				articles= [article for article in self.helper.articles.all_articles if writer.id in article.published_by and article.mode == 1],
-				drafts= [article for article in self.helper.articles.all_article if writer.id in article.published_by and article.mode == 0]
+				drafts= [article for article in self.helper.articles.all_articles if writer.id in article.published_by and article.mode == 0]
 			)
