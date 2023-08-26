@@ -45,12 +45,12 @@ class ArticlesDatabaseHelper:
     
     def get_article_by_writer_id(self, writer_id):
         articles= self.articles_collection.find({ "mode": 1, "published_by" : { "$contains" : writer_id }})
-        print(f'Articles Result: {articles}')
+        print(f'Articles Result: {list(articles)}')
         return [Article(dict(article)) for article in list(articles)]
 
     def get_drafts_by_writer_id(self, writer_id):
         articles= self.articles_collection.find({ "mode": 0, "published_by" : { "$contains" : writer_id }})
-        print(f'Articles Result: {articles}')
+        print(f'Articles Result: {list(articles)}')
         return [Article(dict(article)) for article in list(articles)]
 
 
