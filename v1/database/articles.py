@@ -12,7 +12,7 @@ class ArticlesDatabaseHelper:
     def __init__(self, client: pymongo.MongoClient):
         self.consts: Consts= Consts()
         self.client: pymongo.MongoClient = client
-        self.database = self.client["bra7tak"]
+        self.database = self.client["forexology"]
         self.articles_collection = self.database["articles"]
 
         self.all_articles: list = [
