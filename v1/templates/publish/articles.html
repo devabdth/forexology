@@ -93,7 +93,7 @@
               id="articles"
               onclick="toggleFragment(this)"
             >
-              Articles ({{db_helper.articles.get_article_by_writer_id(writer_id)
+              Articles ({{db_helper.articles.get_article_by_writer_id(writer.id)
               | length}})
             </div>
             <div
@@ -101,7 +101,7 @@
               id="drafts"
               onclick="toggleFragment(this)"
             >
-              Drafts ({{db_helper.articles.get_drafts_by_writer_id(writer_id) |
+              Drafts ({{db_helper.articles.get_drafts_by_writer_id(writer.id) |
               length}})
             </div>
           </div>
@@ -166,8 +166,8 @@
     <script>
       const init= ()=> {
           initData({
-            articles: {{dumps(utils.mutliple_to_dicts(db_helper.articles.get_article_by_writer_id(writer_id))) | safe}},
-            drafts: {{dumps(utils.mutliple_to_dicts(db_helper.articles.get_drafts_by_writer_id(writer_id))) | safe}},
+            articles: {{dumps(utils.mutliple_to_dicts(db_helper.articles.get_article_by_writer_id(writer.id))) | safe}},
+            drafts: {{dumps(utils.mutliple_to_dicts(db_helper.articles.get_drafts_by_writer_id(writer.id))) | safe}},
             categories: {{dumps(utils.mutliple_to_dicts(db_helper.categories.active_cats)) | safe}},
             classifications: {{dumps(utils.mutliple_to_dicts(db_helper.categories.parent_cats)) | safe}},
           });
