@@ -44,7 +44,7 @@ class ArticlesDatabaseHelper:
         return [Article(article) for article in articles]
     
     def get_article_by_writer_id(self, writer_id):
-        articles = self.articles_collection.find({'published_by': {'$in': [writer_id]}, 'mode': 1})
+        articles= self.articles_collection.find({ "mode": 1, "published_by" : { "$contains" : writer_id }})
         print(articles)
         print(len(articles))
         print(articles[0])
