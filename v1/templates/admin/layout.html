@@ -663,7 +663,7 @@
         </div>
         <div id="cards">
           {% for article in db_helper.articles.get_all_articles() %}
-          <div class="search-dialog-article-card-border" id="{{article.id | str}}">
+          <div class="search-dialog-article-card-border" id="{{article.id | string}}">
               <div class="search-dialog-article-card">
                 <div class="cover-wrapper">
                   <div
