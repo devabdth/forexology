@@ -492,16 +492,6 @@
     {% endif %}
     {% if (layout.home_featured_jobs | length) != 0 %}
     {%endif%}
-    {% if not (home_ad_space_nine == None and home_ad_space_ten == None) %}
-      <div class="between-sections-ads">
-        {% if not layout.home_ad_space_nine == None %}
-          <div class="between-sections-ad-space" id="home_ad_space_nine"></div>
-        {%endif%}
-        {% if not layout.home_ad_space_ten == None %}
-          <div class="between-sections-ad-space" id="home_ad_space_ten"></div>
-        {%endif%}
-      </div>
-    {% endif %}
     <section id="random-articles">
       <h1>{{content.global_[lang]['randomArticles']}}</h1>
       <p>{{content.global_[lang]['randomArticlesMsg']}}</p>
