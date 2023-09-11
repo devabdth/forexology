@@ -104,7 +104,9 @@ window.addEventListener('scroll', () => {
 	if (window.scrollY >= 50) {
 		document.querySelector('header #intro-row').style.display = 'none';
 		document.querySelectorAll('header #tabs .main-icon-button').forEach(element => { element.classList.remove('collabsed') })
-		document.querySelectorAll('header #tabs button.shadow-icon-button').forEach(element => { element.style.display = 'flex'; })
+		document.querySelectorAll('header #tabs button.shadow-icon-button').forEach(element => { element.style.display = 'flex';})
+		document.querySelectorAll('header .header-tab').forEach(element => { element.style.color= 'var(--secondaryColor)' })
+		document.querySelectorAll('header .header-dropbtn').forEach(element => { element.style.color= 'var(--secondaryColor)' })
 		if (window.innerWidth > 1024) {
 			document.querySelector('header #tabs #logo').style.width = '8vw';
 		} else if (window.innerWidth > 650 && window.innerWidth < 1024) {
@@ -113,11 +115,13 @@ window.addEventListener('scroll', () => {
 			document.querySelector('header #tabs #logo').style.width = '16vw';
 
 		}
-		document.querySelector('header').style.backgroundColor = 'var(--secondaryColor)';
+		document.querySelector('header').style.backgroundColor = 'var(--accentColor)';
 		return;
 	}
 	document.querySelectorAll('header #tabs .main-icon-button').forEach(element => { element.classList.add('collabsed') })
 	document.querySelectorAll('header #tabs button.shadow-icon-button').forEach(element => { element.style.display = 'none'; })
+	document.querySelectorAll('header .header-tab').forEach(element => { element.style.color= 'var(--primaryColor)' })
+	document.querySelectorAll('header .header-dropbtn').forEach(element => { element.style.color= 'var(--primaryColor)' })
 	document.querySelector('header #tabs #logo').style.width = '0';
 	document.querySelector('header #intro-row').style.display = 'flex';
 	document.querySelector('header').style.backgroundColor = 'transparent';

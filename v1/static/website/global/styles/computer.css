@@ -617,7 +617,6 @@
   .header-dropdown:hover,
   .header-tab:hover {
     opacity: 1;
-    color: var(--primaryColor);
   }
 
   .header-tab.active {
@@ -649,7 +648,7 @@
 
   header > #tabs #logo {
     height: 3vw;
-    background-image: var(--logo-256);
+    background-image: var(--logo-256-white);
     width: 0;
     transition: 250ms ease;
   }
