@@ -233,17 +233,7 @@
         </div>
       </header>
       <footer>
-        <div class="footer-row" id="categories">
-          {% for pcat in db_helper.categories.parent_cats %}
-          <div class="categories-column">
-            <label><strong>{{pcat.name[lang]}}</strong></label>
-            <p>{{pcat.bio[lang][:50]}}...</p>
-            <div class="categories-column-tabs">
-              {% for cat in pcat.categories %}
-              <a href="/categories/{{cat.id}}/">{{cat.name[lang]}}</a>
-              {% endfor %}
-            </div>
-          </div>
+        
           {% endfor %}
         </div>
         <div class="footer-row" id="info">
