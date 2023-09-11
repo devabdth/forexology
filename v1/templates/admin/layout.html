@@ -1,3 +1,16 @@
+{% set home_entry_section_ad= dumps(db_helper.ads.get_ad_by_id(layout.home_entry_section_ad) %}
+{% set home_ad_space_one= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_one) %}
+{% set home_ad_space_two= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_two) %}
+{% set home_ad_space_three= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_three) %}
+{% set home_ad_space_four= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_four) %}
+{% set home_ad_space_five= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_five) %}
+{% set home_ad_space_six= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_six) %}
+{% set home_ad_space_seven= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_seven) %}
+{% set home_ad_space_eight= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_eight) %}
+{% set home_ad_space_nine= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_nine) %}
+{% set home_ad_space_ten= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_ten) %}
+{% set home_ad_space_eleven= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven) %}
+{% set home_ad_space_twelve= dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve) %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -723,91 +736,143 @@
       	}
       	document.querySelector('.shadow-button#entry-section-ad').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_entry_section_ad).to_dict()) | safe}},
+            {% if home_entry_section_ad %}
+      			initiallySelectedAd: {{dumps(home_entry_section_ad.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#entry-section-ad'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_one').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_one).to_dict()) | safe}},
+            {% if home_ad_space_one %}
+      			initiallySelectedAd: {{dumps(home_ad_space_one.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_one'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_two').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_two).to_dict()) | safe}},
+            {% if home_ad_space_two %}
+      			initiallySelectedAd: {{dumps(home_ad_space_two.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_two'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_three').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_three).to_dict()) | safe}},
+            {% if home_ad_space_three %}
+      			initiallySelectedAd: {{dumps(home_ad_space_three.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_three'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_four').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_four).to_dict()) | safe}},
+            {% if home_ad_space_four %}
+      			initiallySelectedAd: {{dumps(home_ad_space_four.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_four'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_five').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_five).to_dict()) | safe}},
+            {% if home_ad_space_five %}
+      			initiallySelectedAd: {{dumps(home_ad_space_five.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_five'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_six').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_six).to_dict()) | safe}},
+            {% if home_ad_space_six %}
+      			initiallySelectedAd: {{dumps(home_ad_space_six.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_six'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_seven').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_seven).to_dict()) | safe}},
+            {% if home_ad_space_seven %}
+      			initiallySelectedAd: {{dumps(home_ad_space_seven.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_seven'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_eight').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_eight).to_dict()) | safe}},
+            {% if home_ad_space_eight %}
+      			initiallySelectedAd: {{dumps(home_ad_space_eight.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_eight'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_nine').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_nine).to_dict()) | safe}},
+            {% if home_ad_space_nine %}
+      			initiallySelectedAd: {{dumps(home_ad_space_nine.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_nine'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_ten').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_ten).to_dict()) | safe}},
+            {% if home_ad_space_ten %}
+      			initiallySelectedAd: {{dumps(home_ad_space_ten.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_ten'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_eleven').onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven).to_dict()) | safe}},
+            {% if home_ad_space_eleven %}
+      			initiallySelectedAd: {{dumps(home_ad_space_eleven.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_eleven'),
       		})
 
       	}
       	document.querySelector('.shadow-button#home_ad_space_twelve')			.onclick= ()=> {
       		openADSelectionDialog({
-      			initiallySelectedAd: {{dumps(db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve).to_dict()) | safe}},
+            {% if home_ad_space_twelve %}
+      			initiallySelectedAd: {{dumps(home_ad_space_twelve.to_dict()) | safe}},
+            {%else%}
+            initiallySelectedAd: undefined,
+            {%endif%}
       			placementParent: document.querySelector('.ad-space#home_ad_space_twelve'),
       		})
 
