@@ -39,8 +39,12 @@ class ArticlesDatabaseHelper:
         return self.all_articles
 
     def multiple_articles_by_ids(self, ids: list):
-        articles = self.articles_collection.find({'_id': {'$in': [ObjectId(
-            _id) if type(_id) is str else ObjectId(_id['id']) for _id in ids]}})
+        # articles = self.articles_collection.find({'_id': {'$in': [ObjectId(
+        #     _id) if type(_id) is str else ObjectId(_id['id']) for _id in ids]}})
+        articles= []
+        for article in self.all_articles:
+            if article.id in ids:
+                articles.append(article)
         return [Article(article) for article in articles]
     
     def get_article_by_writer_id(self, writer_id):
