@@ -877,42 +877,44 @@
       		})
 
       	}
-              await initializeAdSpace(document.querySelector('.ad-space#entry-section-ad'), {{db_helper.ads.get_ad_by_id(layout.home_entry_section_ad).to_dict() | safe}}, 'EN');
-            {% if not layout.home_ad_space_one == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_one'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_one).to_dict() | safe}}, '{{lang}}');
+            {% if not home_entry_section_ad == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#entry-section-ad'), {{db_helper.ads.get_ad_by_id(home_entry_section_ad).to_dict() | safe}}, 'EN');
             {% endif %}
-            {% if not layout.home_ad_space_two == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_two'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_two).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_one == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_one'), {{db_helper.ads.get_ad_by_id(home_ad_space_one).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_three == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_three'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_three).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_two == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_two'), {{db_helper.ads.get_ad_by_id(home_ad_space_two).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_four == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_four'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_four).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_three == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_three'), {{db_helper.ads.get_ad_by_id(home_ad_space_three).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_five == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_five'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_five).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_four == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_four'), {{db_helper.ads.get_ad_by_id(home_ad_space_four).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_six == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_six'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_six).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_five == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_five'), {{db_helper.ads.get_ad_by_id(home_ad_space_five).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_seven == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_seven'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_seven).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_six == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_six'), {{db_helper.ads.get_ad_by_id(home_ad_space_six).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_eight == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_eight'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eight).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_seven == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_seven'), {{db_helper.ads.get_ad_by_id(home_ad_space_seven).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_nine == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_nine'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_nine).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_eight == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_eight'), {{db_helper.ads.get_ad_by_id(home_ad_space_eight).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_ten == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_ten'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_ten).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_nine == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_nine'), {{db_helper.ads.get_ad_by_id(home_ad_space_nine).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_eleven == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_eleven'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_ten == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_ten'), {{db_helper.ads.get_ad_by_id(home_ad_space_ten).to_dict() | safe}}, '{{lang}}');
             {% endif %}
-            {% if not layout.home_ad_space_twelve == None %}
-              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_twelve'), {{db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve).to_dict() | safe}}, '{{lang}}');
+            {% if not home_ad_space_eleven == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_eleven'), {{db_helper.ads.get_ad_by_id(home_ad_space_eleven).to_dict() | safe}}, '{{lang}}');
+            {% endif %}
+            {% if not home_ad_space_twelve == None %}
+              await initializeAdSpace(document.querySelector('.ad-space#home_ad_space_twelve'), {{db_helper.ads.get_ad_by_id(home_ad_space_twelve).to_dict() | safe}}, '{{lang}}');
             {% endif %}
       }
 
