@@ -68,7 +68,7 @@ class Content:
                 "riskwarning": "Risk Warning",
                 "riskwarningMsg": "Trading using leverage in the financial markets involves very high risks that are not suitable for all types of investors. You must understand the amount of risk that your money may be exposed to. All opinions, analyses, recommendations and content presented on the site are for general information and should not be taken as a tool for making any investment decisions, whether to buy or sell.",
                 "agenda": "Economic Agenda",
-                "agendaMsg": "Discover what's happening around you!",
+                "agendaMsg": "Follow up the news and times that affect marketplaces!",
                 "welcomeBack": "Welcome Back"
             },
             "AR": {
@@ -135,7 +135,7 @@ class Content:
                 "riskwarning": "تحذير المخاطرة",
                 "riskwarningMsg": "المتاجرة باستخدام الروافع المالية في أسواق المال ينطوي عليها مخاطر عالية جدًا لا تتناسب مع جميع أنواع المستثمرين، يجب عليك أن تستوعب حجم المخاطرة التي قد تتعرض لها أموالك. جميع ما يطرح في الموقع من آراء وتحليلات وتوصيات ومحتويات هو من باب المعلومات العامة ولا يجب أن يتخذ كأداة لاتخاذ أي قرارات استثمارية بالبيع أو الشراء. ",
                 "agenda": "الأجندة الإقتصادية",
-                "agendaMsg": "تابع ما يحدث من حولك في العالم!",
+                "agendaMsg": "تابع الأخبار والمواقيت التي ترثؤ على الأسواق المالية!!",
                 "welcomeBack": "أهلاً بعودتك"
             }
         }

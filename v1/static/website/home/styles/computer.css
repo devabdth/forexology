@@ -1,6 +1,6 @@
 @media screen and (min-width: 1024px) {
   section#home-entry {
-    height: 55vw;
+    height: 40vw;
     width: 100%;
     display: flex;
   }
@@ -476,7 +476,9 @@
   }
 
   .column-article-card > .cover {
-    width: 20vw;
+    width: 15vw;
+    max-width:  15vw;
+    min-width:  15vw;
     height: 6vw;
     border-radius: 12px;
     background-position: center;

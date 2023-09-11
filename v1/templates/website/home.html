@@ -183,12 +183,6 @@
       <div class="overlay">
         <div class="overlay-gradient">
           <div id="left-side">
-            <div id="title">
-              <h2>{{content.global_[lang]['homeEntryMsg']}}</h2>
-              <a href="/articles/" class="shadow-button"
-                >{{content.actions[lang]['seeAllArticles']}} -></a
-              >
-            </div>
             <div id="featured-fragments">
               <div class="controllers">
                 {% if lang == "AR" %}
@@ -497,25 +491,6 @@
       </div>
     {% endif %}
     {% if (layout.home_featured_jobs | length) != 0 %}
-      <section id="careers">
-        <div id="left-section">
-          <h2>{{content.global_[lang]['wannaJoinUs'] | safe}}</h2>
-          <a href="/writers/" class="main-button">{{content.actions[lang]['seeAllJobs']}}</a>
-        </div>
-        <div id="cards">
-          {% for job in db_helper.jobs.get_jobs_by_ids(layout.home_featured_jobs) %}
-          <div class="job-card">
-            <p class="subtitle">{{job.subtitle[lang]}}</p>
-            <h4 class="title">{{job.title[lang]}}</h4>
-            <p class="bio">{{job.bio[lang]}}</p>
-            <div class="actions">
-              <p class="applications"><span>{{db_helper.jobs_applications.get_applications_for_job_by_id(job.id) | length }}</span> {{content.global_[lang]['applications']}}</p>
-              <a href="/jobs/{{job.id}}/apply/" class="main-button">{{content.actions[lang]['apply']}}</a>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
     {%endif%}
     {% if not (home_ad_space_nine == None and home_ad_space_ten == None) %}
       <div class="between-sections-ads">
