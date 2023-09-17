@@ -17,7 +17,7 @@ class Transformer:
         for path_ in pathes:
             with open(path_) as f:
                 conn = sqlite3.connect(path_)
-                df= read_sql("SELECT * FROM blogs", conn)
+                df= read_sql("SELECT * FROM blogs", conn, compression='gzip')
                 print(df.head())
 
 

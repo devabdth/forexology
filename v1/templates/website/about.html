@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+{% if lang == 'AR' %}
+  <html dir="RTL">
+    {% else %}
+    <html dir="LTR">
+{% endif %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {{content.global_[lang]['platformTitle']}} -
+      {{content.tabs[lang]['home']}}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/about/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/home/styles/largeTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/home/styles/smallTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/home/styles/mobile.css')}}"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/largeTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/smallTablets.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/mobile.css')}}"
+    />
+
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/home/scripts/main.js')}}"
+    ></script>
+</head>
+  <body>
+    <style type="text/css">
+      {% if lang == 'AR' %}
+      :root {
+        --pff: "Neue Haas Grotesk Display Pro";
+        --sff: sans-serif;
+      }
+      {% else %}
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+      {% endif %}
+    </style>
+    <header>
+      <div id="intro-row">
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+          <button onclick="toggleDrawer()" class="shadow-icon-button" style="display: flex;" id="drawer"><i class="drawer"></i></button>
+          <div
+          onclick="window.open('{{consts.index_route}}', `_self`);"
+          id="logo"
+          ></div>
+        </div>
+      <div id="options">
+        {% if user_data %}
+        <button onclick="window.open('/profile/', '_self');" class="shadow-button" id="welcome-back">{{content.global_[lang]['welcomeBack']}}<br><span>{{user_data.name}}<span></span></button>
+        {%else%}
+        <button onclick="window.open('/login/', '_self');" class="main-button">
+          {{content.actions[lang]['login']}}
+        </button>
+        {%endif%}
+        |
+        <button onclick="openSearcDFhDialog();" class="main-icon-button">
+          <i onclick="openSearchDialog();" class="search"></i>
+        </button>
+        <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
+          <i class="theme"></i>
+        </button>
+        <div class="lang header-dropdown">
+          <button class="main-icon-button" id="lang"><i class="lang"></i></button>
+          <div class="lang header-dropdown-content">
+            <div id="dropdown-tabs">
+              <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+              <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+            </div>
+          </div>
+      </div>
+      </div>
+      </div>
+      <div id="tabs">
+        <div id="tabs">
+          <button onclick="toggleDrawer()" class="shadow-icon-button" style="display: none;" id="drawer"><i class="drawer"></i></button>
+        <div
+        onclick="window.open('{{consts.index_route}}', `_self`);"
+        id="logo"
+        ></div>
+        {% for tab in layout.header_tabs %}
+          {% if tab['mode'] == 'link' %}
+            <a href="{{tab['redirect']}}" class="header-tab">{{content.tabs[lang][tab['text']]}}</a>
+          {%endif%}
+          {% if tab['mode'] == 'category' %}
+            <a href="/categories/{{tab['categoryId']}}" class="header-tab">{{db_helper.categories.get_category_by_id(tab['categoryId']).name[lang]}}</a>
+          {%endif%}
+          {% if tab['mode'] == 'classification' %}
+          {%set classification= db_helper.categories.get_parent_category_by_id(tab['classificationId']) %}
+            <div class="header-dropdown">
+              <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="header-dropbtn">{{classification.name[lang]}}</button>
+              <div class="header-dropdown-content">
+                <div id="label">
+                  <h3>{{classification.name[lang]}}</h3>
+                  <p>{{classification.bio[lang]}}</p>
+                  <button onclick="window.open(`/classifications/{{classification.id}}`, '_self')" class="main-button">{{content.actions[lang]['seeMore']}}</button>
+                </div>
+                <div id="dropdown-tabs">
+                  {% for category in classification['categories'] %}
+                  <a class="header-tab" href="/categories/{{category.id}}">
+                    <div class="shadow-icon-button"><i style="background-image: url('/assets/categories/icons/{{category.id}}/');"></i></div>
+                    <p>{{category.name[lang]}}</p>
+                  </a>
+                  {%endfor%}
+                </div>
+              </div>
+          </div>
+          {%endif%}
+        {%endfor%}
+        </div>
+        <div id="options">
+          <button onclick="openSearcDFhDialog();" class="main-icon-button collabsed">
+            <i onclick="openSearchDialog();" class="search"></i>
+          </button>
+          <div class="lang header-dropdown">
+            <button class="main-icon-button collabsed" id="lang"><i class="lang"></i></button>
+            <div class="lang header-dropdown-content">
+              <div id="dropdown-tabs">
+                <button class="lang {%if lang == 'EN' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">English</button>
+                <button class="lang {%if lang == 'AR' %} active {%endif%} header-tab" onclick="toggleLang(`{{lang}}`)">العربية</button>
+              </div>
+            </div>
+        </div>
+        </div>
+  
+      </div>
+    </header>
+    <section
+        id="entry"
+      >
+        <div id="overlay">
+          <h1>{{content.tabs[lang]['aboutUs']}}</h1>
+          <p>{{content.global_[lang]['aboutMsg']}}</p>
+        </div>
+      </section>
+
+    <footer>
+      </div>
+      <div class="footer-row" id="info">
+        <div id="information">
+          <div id="logo" class="symbol"></div>
+          <h3 onclick="window.open('/', '_self');" style="cursor: pointer">{{content.global_[lang]['platformTitle']}}</h3>
+          <p>{{content.global_[lang]['footerMsg']}}</p>
+        </div>
+        <div id="findUs">
+          <h3>{{content.global_[lang]['lightToFindUs']}}</h3>
+          <div id="social-media-icons">
+            {% if cfg.facebook != '' %}
+            <a
+              href="{{cfg.facebook}}"
+              class="facebook main-icon-button"
+              id="facebook"
+              ><i class="facebook"></i
+            ></a>
+            {%endif%} {% if cfg.instagram != '' %}
+            <a
+              href="{{cfg.instagram}}"
+              class="instagram main-icon-button"
+              id="instagram"
+              ><i class="instagram"></i
+            ></a>
+            {%endif%} {% if cfg.twitter != '' %}
+            <a
+              href="{{cfg.twitter}}"
+              class="twitter main-icon-button"
+              id="twitter"
+              ><i class="twitter"></i
+            ></a>
+            {%endif%} {% if cfg.linkedin != '' %}
+            <a
+              href="{{cfg.linkedin}}"
+              class="linkedin main-icon-button"
+              id="linkedin"
+              ><i class="linkedin"></i
+            ></a>
+            {%endif%} {% if cfg.tiktok != '' %}
+            <a href="{{cfg.tiktok}}" class="tiktok main-icon-button" id="tiktok"
+              ><i class="tiktok"></i
+            ></a>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+      <div class="footer-row" id="warning">
+        <p id="title">{{content.global_[lang]['riskwarning']}}</p>
+        <p id="warning">{{content.global_[lang]['riskwarningMsg']}}</p>
+      </div>
+      <div class="footer-row">
+        <p id="copyright">{{content.global_[lang]['copyrightMsg']}}</p>
+      </div>
+    </footer>
+    <div id="search-dialog-overlay" onclick="closeSearchDialog();"></div>
+    <div id="search-dialog" class="dialog">
+      <div id="overlay">
+        <div class="header">
+          <h3>{{content.global_[lang]['search']}}</h3>
+          <div id="sheach-dialog-close" onclick="closeSearchDialog();">x</div>
+        </div>
+        <div id="body">
+          <div id="search-options">
+            <div id="field-wrapper">
+              <input
+                class="single-line-field-awhite"
+                type="text"
+                name="token"
+                placeholder="{{content.placeholders[lang]['search']}}"
+              />
+              <button class="main-button">
+                {{content.global_[lang]['search']}}
+              </button>
+            </div>
+            <div id="search-dialog-categories">
+              {% for pcat in db_helper.categories.parent_cats %}
+              <div class="search-dialog-categories-column">
+                <a class="parent-cat" href="{{pcat.main_route}}"
+                  >{{pcat.name[lang]}}</a
+                >
+                <p>{{pcat.bio[lang][:50]}}...</p>
+                {% for cat in pcat.categories %}
+                <a class="inner-cat" href="/categories/{{cat.id}}/"
+                  >{{cat.name[lang]}}</a
+                >
+                {%endfor%}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div id="trending-articles">
+            <div class="header">
+              <h3>{{content.global_[lang]['trendingNow']}}</h3>
+              <button class="main-button">
+                {{content.actions[lang]['seeMore']}}
+              </button>
+            </div>
+            <div id="trending-articles-body">
+              {% for article in db_helper.articles.all_articles[:8] %}
+              <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article._id}}/', '_self')">
+                <div class="search-dialog-article-card">
+                  <div class="cover-wrapper">
+                    <div
+                      class="cover"
+                      style="background-image: url(/assets/articles/covers/{{article.id}});"
+                    ></div>
+                  </div>
+                  <div class="content">
+                    <div class="classification">
+                      {%set parent_category= db_helper.categories.get_parent_category_by_id(article.parent_category) %}
+                      {%set category= db_helper.categories.get_category_by_id(article.category) %}
+                      {% if parent_category %}
+                      {{parent_category.name[lang]}}
+                      {%endif%}
+                      {% if parent_category and category %}
+                      - 
+                      {% endif %}
+                      {% if category %}
+                      {{category.name[lang]}}
+                      {%endif%}
+                        </div>
+                    <h3>{{article.title[lang]}}</h3>
+                    <p>{{article.short_brief[lang]}}</p>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="drawer-overlay"></div>
+    <div id="drawer-menu">
+      <div id="header">
+        <div id="logo">
+          <div id="logo"></div>
+          <div id="title">{{content.global_[lang]['platformTitle']}}</div>
+        </div>
+        <div id="close" onclick="toggleDrawer();">x</div>
+      </div>
+      <div id="tabs">
+        <a href="/" class="drawer-tab" id="home">{{content.tabs[lang]["home"]}}</a>
+        <a href="/aboutUs/" class="drawer-tab" id="aboutUs">{{content.tabs[lang]["aboutUs"]}}</a>
+        <a href="/articles/" class="drawer-tab" id="articles">{{content.tabs[lang]["articles"]}}</a>
+        <a href="/careers/" class="drawer-tab" id="careers">{{content.tabs[lang]["careers"]}}</a>
+        <a href="/categories/" class="drawer-tab" id="categories">{{content.tabs[lang]["categories"]}}</a>
+        <a href="/agenda/" class="drawer-tab" id="agenda">{{content.tabs[lang]["agenda"]}}</a>
+        {% for pcat in db_helper.categories.parent_cats %}
+          <div onclick="toggleClassificationRow(this);" class="classifications-collapsable" id="{{(pcat.id | string)[:6]}}">
+            <div class="header">
+              <p>{{pcat.name[lang]}}</p>
+              <div class="icon">{{'>'}}</div>
+            </div>
+            <div class="body">
+              {% for cat in pcat.categories %}
+                <a href="/categories/{{cat.id}}/" class="drawer-tab" id="{{cat.name['EN'] | lower}}">{{cat.name[lang]}}</a>
+              {%endfor%}
+            </div>
+          </div>
+        {%endfor%}
+      </div>
+      <div id="social-media-icons">
+        {% if cfg.facebook != '' %}
+        <a
+          href="{{cfg.facebook}}"
+          class="facebook main-icon-button"
+          id="facebook"
+          ><i class="facebook"></i
+        ></a>
+        {%endif%} {% if cfg.instagram != '' %}
+        <a
+          href="{{cfg.instagram}}"
+          class="instagram main-icon-button"
+          id="instagram"
+          ><i class="instagram"></i
+        ></a>
+        {%endif%} {% if cfg.twitter != '' %}
+        <a
+          href="{{cfg.twitter}}"
+          class="twitter main-icon-button"
+          id="twitter"
+          ><i class="twitter"></i
+        ></a>
+        {%endif%} {% if cfg.linkedin != '' %}
+        <a
+          href="{{cfg.linkedin}}"
+          class="linkedin main-icon-button"
+          id="linkedin"
+          ><i class="linkedin"></i
+        ></a>
+        {%endif%} {% if cfg.tiktok != '' %}
+        <a href="{{cfg.tiktok}}" class="tiktok main-icon-button" id="tiktok"
+          ><i class="tiktok"></i
+        ></a>
+        {%endif%}
+      </div>
+      <div id="copyright">
+        <p>{{content.global_[lang]['copyrightMsg']}}</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+      changeHeaderLogoOnScroll= true;
+      const pageInit= async ()=> {
+        initDrawer('{{lang}}');
+          {% if layout.home_featured_articles != None %}
+              initializeFragments({{dumps(utils.mutliple_to_dicts((db_helper.articles.multiple_articles_by_ids(layout.home_featured_articles)))) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
+          {% else %}
+    		    initializeFragments({{utils.mutliple_to_dicts(db_helper.articles.d[:5]) | safe}}, '{{lang}}', {{utils.mutliple_to_dicts(db_helper.categories.active_cats) | safe}});
+          {% endif %}
+        {% if layout.entry_section_ad != None %}
+    		  {% if db_helper.ads.check_if_ad_is_active(db_helper.ads.get_ad_by_id(layout.entry_section_ad)) %}
+    			 initializeAdSpace(document.getElementById('entry-section-ad'), {{db_helper.ads.get_ad_by_id(layout.entry_section_ad).to_dict() | safe}}, '{{lang}}')
+    		    {% endif %}
+          {%else%}
+          {%endif%}
+
+    		initializeCategoriesFragments({{utils.mutliple_to_dicts(db_helper.categories.active_cats[:5]) | safe}});
+
+        {% if not layout.home_ad_space_one == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_one'), 
+            {%if home_ad_space_one%} {{home_ad_space_one.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_two == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_two'), 
+            {%if home_ad_space_two%} {{home_ad_space_two.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_three == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_three'), 
+            {%if home_ad_space_three%} {{home_ad_space_three.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_four == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_four'), 
+            {%if home_ad_space_four%} {{home_ad_space_four.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_five == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_five'), 
+            {%if home_ad_space_five%} {{home_ad_space_five.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_six == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_six'), 
+            {%if home_ad_space_six%} {{home_ad_space_six.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_seven == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_seven'), 
+            {%if home_ad_space_seven%} {{home_ad_space_seven.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_eight == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_eight'), 
+            {%if home_ad_space_eight%} {{home_ad_space_eight.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_nine == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_nine'), 
+            {%if home_ad_space_nine%} {{home_ad_space_nine.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_ten == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_ten'), 
+            {%if home_ad_space_ten%} {{home_ad_space_ten.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_eleven == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_eleven'), 
+            {%if home_ad_space_eleven%} {{home_ad_space_eleven.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        {% if not layout.home_ad_space_twelve == None %}
+          await initializeAdSpace(document.getElementById('home_ad_space_twelve'), 
+            {%if home_ad_space_twelve%} {{home_ad_space_twelve.to_dict() | safe}} {%else%} null {%endif%}
+            , '{{lang}}');
+        {% endif %}
+        document.firstElementChild.setAttribute('data-theme', '{{mode | lower}}')
+        
+      }
+
+      if (window.addEventListener) {
+        window.addEventListener('load', pageInit);
+      } else if (window.attachEvent) {
+        window.attachEvent('load', pageInit);
+      }
+      
+    </script>
+  </body>
+</html>

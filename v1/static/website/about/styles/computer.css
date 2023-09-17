@@ -1,0 +1,35 @@
+	section#entry {
+		width: 100%;
+		height: 40vw;
+		display: flex;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-image: url(./about.webp);
+		filter: grayscale(100%);
+	}
+
+	section#entry #overlay {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1vw;
+		flex-direction: column;
+		background-color: var(--overlay-color);
+	}
+
+	section#entry h1 {
+		font-weight: 900;
+		font-size: 4vw;
+		font-family: var(--pff);
+		color: var(--primaryColor);
+	}
+
+	section#entry p {
+		font-weight: 300;
+		font-size: 2vw;
+		font-family: var(--sff);
+		color: var(--primaryVarientColor);
+	}
