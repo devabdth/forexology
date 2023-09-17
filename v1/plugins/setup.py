@@ -212,6 +212,9 @@ class Setup:
         from routers.website.home import HomeRouter
         HomeRouter(self.app).setup()
 
+        from routers.website.about import AboutRouter
+        AboutRouter(self.app).setup()
+
         from routers.website.assets import AssetsRouter
         AssetsRouter(self.app).setup()
 

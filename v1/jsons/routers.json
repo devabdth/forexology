@@ -42,6 +42,9 @@
   "WEBSITE_CALENDER_RESET": "/calender/",
   "WEBSITE_ECONOMIC_CALENDER_RESET": "/economicCalender/",
   "WEBSITE_ECONOMIC_AGENDA_RESET": "/economicAgenda/",
+  "WEBSITE_ABOUT_US": "/aboutUs/",
+  "WEBSITE_ABOUT": "/about/",
+  "WEBSITE_WHO_ARE_WE": "/whoAreWe/",
 
   "ADMIN_LAYOUT_ROUTE": "/webapp/adminstration/layout/",
   "ADMIN_LAYOUT_ARTICLES_ADS_ROUTE": "/webapp/adminstration/layout/articlesAds/",

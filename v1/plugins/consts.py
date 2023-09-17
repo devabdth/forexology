@@ -122,6 +122,9 @@ class Consts:
             self.calender = data['WEBSITE_CALENDER_RESET']
             self.economic_calender = data['WEBSITE_ECONOMIC_CALENDER_RESET']
             self.economic_agenda = data['WEBSITE_ECONOMIC_AGENDA_RESET']
+            self.about = data['WEBSITE_ABOUT']
+            self.about_us = data['WEBSITE_ABOUT_US']
+            self.who_are_we = data['WEBSITE_WHO_ARE_WE']
 
             # Admin Routers
             self.admin_login_route = data['ADMIN_LOGIN_ROUTE']
