@@ -1978,4 +1978,48 @@
   #drawer-overlay {
     display: none;
   }
+
+  .randon-quote {
+    width: 100%;
+    height: 20vw;
+    display: flex;
+    align-items: top;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 15%;
+    background-color: var(--body-bg-color);
+  }
+
+  div.decoration {
+    font-weight: 900;
+    font-size: 4vw;
+    font-family: var(--sff);
+    color: var(--accentColor);
+    opacity: 0.5;
+  }
+
+  div.content {
+    max-width: 50vw;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding-top: 5vw;
+  }
+
+  div.content h3 {
+    font-weight: 900;
+    font-size: 3vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+    text-align: start;
+  }
+
+  div.content p {
+    font-weight: 300;
+    font-size: 1vw;
+    font-family: var(--pff);
+    color: var(--primaryVarientColor);
+    text-align: start;
+  }
 }

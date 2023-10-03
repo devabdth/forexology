@@ -203,6 +203,8 @@ class Setup:
 
         from routers.admin.writers import WritersAdminRouter
         WritersAdminRouter(self.app).setup()
+        from routers.admin.courses import CoursesAdminRouter
+        CoursesAdminRouter(self.app).setup()
 
     def setup_routers(self):
 
@@ -235,6 +237,9 @@ class Setup:
 
         from routers.website.agenda import AgendaRouter
         AgendaRouter(self.app).setup()
+
+        from routers.website.courses import CoursesRouter
+        CoursesRouter(self.app).setup()
 
     def setup_publish_webapp_routes(self):
         from routers.publish.login import LoginPublishRouter

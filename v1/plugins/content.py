@@ -3,10 +3,36 @@ from os.path import abspath, join, dirname
 
 class Content:
     def __init__(self):
+        
+        self.about_us_content: dict= {
+            "EN": {
+                "whoAreWe": "was founded in 2019. An entity that is responsible for providing traders with the best experience in Forex, and deliver one message: «TRADE ON THE RIGHT WAY».",
+                "vision": "- Install the right trading culture in the Middle East as a type of profitable investment that the whole world needs in recent times.\n\n-Reach the best international standards in Forex World.\n\n-Learn how to make money by trading. \n\n- Present comprehensive services in the world of financial markets through various methods that help traders achieve the greatest profit intelligently.\n\n- Spread the West's approach to trading and considering it an investment that must be learned properly to reap the largest profits.",
+                "mission": "- Focus on providing quality financial services\n\n- Provide reliable financial advice.\n\n- Create safe and reliable investments.\n\n- Adhere to ethical practices .\n\n- Help clients secure their financial future.\n\n- Provide excellent customer service.\n\n- Teach the public to trade the right way.\n\n- Warning against companies that use the term “trading” in order to delude the public into obtaining large profits without learning.\n\n- Availability of free educational value to teach the basics of trading.\n\n- View the latest trading strategies and share them with traders.",
+                "education": "Education",
+                "educationContent": "- Online Courses.\n\n- Offline Courses.\n\n- Free educaional content for beginners and advcanced audience.\n\n- Free Webinars.\n\n- Outdoor Events.",
+                "informing": "Informing",
+                "informingContent": "- Daily News on Our Website and platforms.\n\n- Articles on website.\n\n- Anylsing.\n\n- Weekly Economic Agenda.",
+                "trading": "Trading",
+                "tradingContent": "- Consulting.\n\n- Recommendatins.\n\n- Open Accounts.\n\n- Competations.",
+            },
+            "AR": {
+                "whoAreWe": "تأسست عام 2019. كيان مسؤول لتزويد المتداولين بأفضل تجربة في الفوركس، وإيصال رسالة واحدة: التداول على الطريق  الصحيح",
+                "vision": "-تثبيت  ثقافة التداول الصحيحة في الشرق الأوسط كنوع من الاستثمار المربح الذي يحتاجه العالم كله في الآونة الأخيرة.\n\n-الوصول إلى أفضل المعايير العالمية في عالم الفوركس.\n\n-تعلم كيفية كسب المال عن طريق التداول.\n\n- تقديم خدمات شاملة في عالم المال\n\n- الأسواق من خلال وسائل مختلفة تساعد المتداولين تحقيق أكبر قدر من الربح بذكاء.\n\n- نشر منهج الغرب في التجارة والنظر فيه استثمار يجب تعلمه بشكل صحيح لجني ثماره أكبر الأرباح",
+                "mission": "- التركيز على تقديم خدمات مالية عالية الجودة\n\n- تقديم المشورة المالية الموثوقة.\n\n- خلق استثمارات آمنة وموثوقة.\n\n- الالتزام بالممارسات الأخلاقية.\n\n- مساعدة العملاء على تأمين مستقبلهم المالي.\n\n- تقديم خدمة عملاء ممتازة.\n\n- تعليم الجمهور التجارة بالطريقة الصحيحة.\n\n- التحذير من الشركات التي تستخدم مصطلح \"التداول\" بهدف التضليل\n\nالجمهور للحصول على أرباح كبيرة دون التعلم.\n\n- توافر قيمة تعليمية مجانية لتعليم أساسيات التداول.\n\n- عرض أحدث استراتيجيات التداول ومشاركتها مع المتداولين",
+                "education": "التعليم",
+                "educationContent": "-  دروس مباشرة على الإنترنت.\n\n- دورات أوفلاين.\n\n- محتوى تعليمي مجاني لـ المبتدئين والمتقدمين\n\n- ندوات عبر الإنترنت مجانية.\n\n- الفعاليات الخارجية",
+                "informing": "أخبار",
+                "informingContent": "- الأخبار اليومية على موقعنا \والمنصات.\n\n- مقالات على الموقع.\n\n- تحليلات.\n\n- الأجندة الاقتصادية الأسبوعية.",
+                "trading": "تداول",
+                "tradingContent": "-الاستشارة-\n\nالتوصيات.\n\n- حسابات مفتوحة.\n\n- المسابقات.",
+
+            }
+        }
         self.global_: dict = {
             "EN": {
                 "platformTitle": "FOREXology",
-                "footerMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus nibh, sagittis a ante eu, luctus fringilla est. Aliquam pulvinar justo iaculis lorem pretium elementum. In mauris quam, porttitor nec venenatis in, vulputate non arcu. Aliquam ac iaculis nisl. Morbi sit amet ante justo. Donec lectus erat, molestie at gravida in, convallis a massa. Aenean rutrum vel ligula consequat convallis. Suspendisse nec leo leo. Donec non mi nec eros consequat facilisis. In condimentum et libero ut hendrerit. Nullam scelerisque mauris ac nunc ultricies, eget tincidunt sapien ullamcorper.",
+                "footerMsg": "was founded in 2019. An entity that is responsible for providing traders with the best experience in Forex, and deliver one message: «TRADE ON THE RIGHT WAY».",
                 "lightToFindUs": "Light to find Us!",
                 "copyrightMsg": "All Copyrights reserved @ FOREXology, 2023",
                 "search": "Search",
@@ -71,10 +97,13 @@ class Content:
                 "agendaMsg": "Follow up the news and times that affect marketplaces!",
                 "welcomeBack": "Welcome Back",
                 "aboutMsg": "Curious about know more about us?",
+                "coursesMsg": "Start your journey to \"Trade on the Right way\"!",
+                "price": "Price", 
+                "sessions": "Sessions"
             },
             "AR": {
                 "platformTitle": "فوركسولوچي",
-                "footerMsg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacus nibh, sagittis a ante eu, luctus fringilla est. Aliquam pulvinar justo iaculis lorem pretium elementum. In mauris quam, porttitor nec venenatis in, vulputate non arcu. Aliquam ac iaculis nisl. Morbi sit amet ante justo. Donec lectus erat, molestie at gravida in, convallis a massa. Aenean rutrum vel ligula consequat convallis. Suspendisse nec leo leo. Donec non mi nec eros consequat facilisis. In condimentum et libero ut hendrerit. Nullam scelerisque mauris ac nunc ultricies, eget tincidunt sapien ullamcorper.",
+                "footerMsg": "تأسست عام 2019. كيان مسؤول لتزويد المتداولين بأفضل تجربة في الفوركس، وإيصال رسالة واحدة: التداول على الطريق  الصحيح",
                 "lightToFindUs": "الضوء لتجدنا!",
                 "copyrightMsg": "All Copyrights reserved @ FOREXology, 2023",
                 "search": "بحث",
@@ -139,6 +168,9 @@ class Content:
                 "agendaMsg": "تابع الأخبار والمواقيت التي ترثؤ على الأسواق المالية!!",
                 "welcomeBack": "أهلاً بعودتك",
                 "aboutMsg": "مهتم أن تعرف المزيد عن من نكون؟",
+                "coursesMsg": "أبدأ رحلتك في التداول بالطريقة الصحيحة",
+                "price": "السعر", 
+                "sessions": "المحاضرات"
             }
         }
 
@@ -200,7 +232,8 @@ class Content:
                 "completeProfile": "Complete Profile",
                 "submit": "Submit",
                 "checkThisOut": "Check this out!",
-                "goBack": "Go Back"
+                "goBack": "Go Back",
+                "continueCourse": "Continue Course"
             },
             "AR": {
                 "login": "تسجيل الدخول",
@@ -228,7 +261,8 @@ class Content:
                 "completeProfile": "أكمل الملف الشخصي",
                 "submit": "تأكيد",
                 "checkThisOut": "تحقق من هذا!",
-                "goBack": "عُد"
+                "goBack": "عُد",
+                "continueCourse": "أكمل الدورة"
 
             }
         }

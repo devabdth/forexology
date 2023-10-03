@@ -24,7 +24,6 @@ class ArticlesDatabaseHelper:
     def refresh_all_articles(self):
         try:
             self.all_articles = [Article(article) for article in list(self.articles_collection.find())]
-            print(self.all_articles)
         except Exception as e:
             print(e)
 

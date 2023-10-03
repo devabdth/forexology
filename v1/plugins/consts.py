@@ -69,6 +69,12 @@ class Consts:
                 "text": 'classification',
                 "redirect": '/classification/'
             },
+            {
+                "id": 'a05685021712b94519ea3dade83cf7323cd9419b362af9cb',
+                "mode": 'link',
+                "text": 'courses',
+                "redirect": '/courses/'
+            },
         ]
 
         self.podcast_supported_extenstions: list = ["mp3"]
@@ -88,6 +94,8 @@ class Consts:
             self.main_route = data['WEBSITE_MAIN_ROUTE']
             self.articles_route = data['WEBSITE_ARTICLES_ROUTE']
             self.courses_route = data['WEBSITE_COURSES_ROUTE']
+            self.course_cover_route = data['WEBSITE_COURSES_COVER_ROUTE']
+            self.course_route = data['WEBSITE_COURSE_ROUTE']
             self.tools_route = data['WEBSITE_TOOLS_ROUTE']
             self.search_route = data['WEBSITE_SEARCH_ROUTE']
             self.login_route = data['WEBSITE_LOGIN_ROUTE']
@@ -138,6 +146,7 @@ class Consts:
             self.admins_management_page = data['ADMIN_MANAGEMENT_ROUTE']
             self.admin_ads_route = data['ADMIN_ADS_ROUTE']
             self.admin_writers_route = data['ADMIN_WRITERS_ROUTE']
+            self.admin_courses_route = data['ADMIN_COURSES_ROUTE']
 
             # Publishing Panel Routers:
             self.publisher_login_route= data['PUBLISHER_LOGIN_ROUTE']

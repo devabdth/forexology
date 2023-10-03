@@ -1,98 +1,61 @@
-from os.path import dirname, abspath, join, exists
-from os import remove as remove_file
-from sys import path
-from json import loads, dumps, dump
+from os.path import dirname, join, abspath, exists
+from json import loads, load, dumps, dump
+from pandas import DataFrame
 import secrets
+from datetime import datetime
+from models.course import Course
 from plugins.consts import Consts
 
-path.insert(0, '../')
-
-from models.course import Course, CourseRound
 
 class CoursesDatabaseHelper:
 	def __init__(self):
 		self.consts: Consts= Consts()
-		self.covers_dir: str= abspath(join(dirname(__file__), '../assets/covers/courses/'))
-		self.promos_dir: str= abspath(join(dirname(__file__), '../assets/promos/courses/'))
-		self.cources_file: str= abspath(join(dirname(__file__), '../jsons/courses.json'))
-		self.load_data()
+		self.courses_file= abspath(join(dirname(__file__), '../jsons/courses.json'))
+		self.courses_cover_dir= abspath(join(dirname(__file__), '../assets/courses/covers'))
+		self.courses_sessions_material_dir= abspath(join(dirname(__file__), '../assets/courses/sessions'))
 
 
-	def load_data(self):
-		with open(self.cources_file) as f:
-			data= dict(loads(f.read()))
-			self.courses= [
-				Course({
-					"id": c["id"],
-					"title": c["title"],
-					"bio": c["bio"],
-					"rounds": [CourseRound(cr) for cr in c["rounds"]],
-				}) for c in data.values()
-			]
+	def load_courses(self):
+		self.all_courses= []
+		if not exists(self.courses_file):
+			with open(self.courses_file, 'w') as f:
+				dump({}, f)
 
-
-	def write_data(self):
-		try:
-			data= {
-				c.id: {
-					"id": c.id,
-					"title": c.title,
-					"bio": c.bio,
-					"rounds": [cr.to_dict() for cr in c.rounds],
-				} for c in self.courses
-			}
-
-			with open(self.cources_file, "w") as f:
-				dump(data, f)
-				return True
-		except Exception as e:
-			print(e)
-			return False
+		with open(self.courses_file, 'r') as f:
+			courses_data= dict(loads(f.read()))
+			self.all_courses= [Course(course) for course in courses_data.values()]
 
 	def get_course_by_id(self, course_id):
-		for course in self.courses:
-			if course.id == course_id:
-				return course
-
-		return None
-
-	def create_category(self, data, cover, promo):
 		try:
-			course_id= str(secrets.token_hex(12))
-			rounds= []
-			for round_ in data["rounds"]:
-				round_id= str(secrets.token_hex(24))
-				rounds.append(
-					CourseRound({
-						"id": round_id,
-						"round_number": round_["round_number"],
-						"fee": round_["fee"],
-						"status": round_["status"],
-						"time": round_["time"],
-						"applicants": [],
-					})
-				)
+			for course in self.all_courses:
+				if course.id == course_id:
+					return course
+				
+			return None
+		except Exception as e:
+			print(e)
+			return None
+		
+	def get_course_cover_by_id(self, course_id):
+		try:
+			for ext in self.consts.covers_supported_extenstions:
+				file_path= abspath(join(self.courses_cover_dir, f'{course_id}.{ext}'),)
+				if exists(file_path):
+					return file_path
+			return None
+			
+		except Exception as e:
+			print(e)
+			return None
 
-			course= Course({
-				"id": course_id,
-				"title": {
-					"EN": data["enName"],
-					"AR": data["arName"],
-				},
-				"bio": {
-					"EN": data["enBio"],
-					"AR": data["arBio"],
-				},
-				"rounds": rounds
-			})
-
-			self.courses.append(course)
-			res= self.write_data()
-			if res: 
-				cover.save(join(self.covers_dir), f'{course_id}.{cover.filename.split(".")[-1]}')
-				promo.save(join(self.promos_dir), f'{course_id}.{promo.filename.split(".")[-1]}')
-				return True
-			return False
+	def create_course(self, payload, files):
+		try:
+			payload['id']= secrets.token_hex(12)
+			payload['sessions']= []
+			payload['active']= True
+			course= Course(payload)
+			return True
 		except Exception as e:
 			print(e)
 			return False
+

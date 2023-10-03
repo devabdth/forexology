@@ -556,6 +556,12 @@ const allTabs = [
 		text: 'classification',
 		redirect: '/classification/'
 	},
+	{
+		id: 'a05685021712b94519ea3dade83cf7323cd9419b362af9cb',
+		mode: 'link',
+		text: 'courses',
+		redirect: '/courses/'
+	},
 ];
 
 let selectedTabs;

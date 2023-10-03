@@ -8,6 +8,8 @@
   "WEBSITE_MAIN_ROUTE": "/main/",
   "WEBSITE_ARTICLES_ROUTE": "/articles/",
   "WEBSITE_COURSES_ROUTE": "/courses/",
+  "WEBSITE_COURSE_ROUTE": "/courses/<course_id>/",
+  "WEBSITE_COURSES_COVER_ROUTE": "/courses/cover/<course_id>/",
   "WEBSITE_TOOLS_ROUTE": "/tools/",
   "WEBSITE_SEARCH_ROUTE": "/search/",
   "WEBSITE_LOGIN_ROUTE": "/login/",
@@ -57,6 +59,7 @@
   "ADMIN_LOGOUT_ROUTE": "/webapp/adminstration/logout/",
   "ADMIN_MAIN_ROUTE": "/webapp/adminstration/",
   "ADMIN_MANAGEMENT_ROUTE": "/webapp/adminstration/admins/",
+  "ADMIN_COURSES_ROUTE": "/webapp/adminstration/courses/",
 
   "PUBLISHER_LOGIN_ROUTE": "/webapp/publish/login/",
   "PUBLISHER_LOGOUT_ROUTE": "/webapp/publish/logout/",
