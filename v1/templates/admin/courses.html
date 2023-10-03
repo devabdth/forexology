@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FOREXology - Courses</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='admin/courses/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='admin/courses/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+    <section class="admin">
+      <div id="left-section">
+        <div id="header">
+          <div id="logo"></div>
+          <p>{{admin_data['name']}}</p>
+        </div>
+        <div id="body">
+          <div
+            onclick="window.open(`/webapp/adminstration/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Home</p>
+          </div>
+          {% if "0" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/layout/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Layout</p>
+          </div>
+          {%endif%} {% if "2" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/categories/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon">
+              <i class="categories-white"></i>
+            </div>
+            <p>Categories</p>
+          </div>
+          {%endif%} {% if "3" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/jobs/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+            <p>Careers</p>
+          </div>
+          {%endif%} {% if "4" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/ads/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+            <p>Ads Spaces</p>
+          </div>
+          {%endif%} {% if "5" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/writers/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+            <p>Writers</p>
+          </div>
+          {%endif%} {% if "6" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/admins/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+            <p>Admins</p>
+          </div>
+          {%endif%} {% if "7" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/courses/`, '_self');"
+            class="active left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+            <p>Courses</p>
+          </div>
+          {%endif%}
+        </div>
+        <div id="footer">
+          <div onclick="adminLogout();" class="left-menu-tile">
+            <div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+      <div id="right-section">
+        <div class="body-card">
+          <div class="header">
+            <h3>Courses</h3>
+            <p>Create / Update / Delete Courses</p>
+            <div class="options">
+              <button
+                class="shadow-button"
+                onclick="openCourseFormDialog('CREATE')"
+              >
+                Create
+              </button>
+            </div>
+          </div>
+          <div class="body">
+          </div>
+        </div>
+      </div>
+    </section>
+        <div class="form-dialog-overlay" id="courses-form-dialog-overlay"></div>
+    <div class="form-dialog" id="courses-form-dialog">
+      <div class="header">
+        <h2></h2>
+        <div onclick="closeCarrerFormDialog();">x</div>
+      </div>
+      <div class="body">
+        <label for="en-title">English Title</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="en-title"
+          placeholder="English Title"
+        />
+        <label for="ar-title">Arabic Title</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="ar-title"
+          placeholder="Arabic Title"
+        />
+        <label for="en-subtitle">English Bio</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="en-bio"
+          placeholder="English Bio"
+        />
+        <label for="ar-bio">Arabic Bio</label>
+        <input
+          type="text"
+          class="single-line-field"
+          id="ar-bio"
+          placeholder="Arabic Bio"
+        />
+        <label for="hours">Total Hours</label>
+        <input
+          type="number"
+          class="single-line-field"
+          id="hours"
+          placeholder="Total Hours"
+        />
+        <label for="price">Price</label>
+        <input
+          type="number"
+          class="single-line-field"
+          id="price"
+          placeholder="Price"
+        />
+      </div>
+      <div class="options">
+        <button class="shadow-button" id="delete" style="color: red">
+          Delete
+        </button>
+        <button
+          class="shadow-button"
+          id="clear"
+          onclick="clearCarrerFormDialog()"
+        >
+          Clear
+        </button>
+        <button
+          class="shadow-button"
+          id="cancel"
+          onclick="closeCarrerFormDialog()"
+        >
+          Cancel
+        </button>
+        <button class="main-button" id="submit">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+
+    <script>
+      const init = () => {
+      };
+
+      if (window.addEventListener) window.addEventListener('load', init);
+      if (window.attachEvent) window.attachEvent('load', init);
+    </script>
+  </body>
+</html>
