@@ -29,6 +29,7 @@ class User:
 			{"name": "last_log_in", "type": str},
 			{"name": "current_reading_article", "type": str},
 			{"name": "current_reading_section", "type": str},
+			{"name": "courses", "type": dict},
 		]
 
 

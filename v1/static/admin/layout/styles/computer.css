@@ -623,6 +623,7 @@
     display: flex;
   }
 
+  .fragment#random-quotes .header,
   .fragment#articles-ads .header,
   .fragment#header .header {
     width: 100%;
@@ -632,6 +633,7 @@
     flex-direction: column;
   }
 
+  .fragment#random-quotes .header h3,
   .fragment#articles-ads .header h3,
   .fragment#header .header h3 {
     font-weight: 900;
@@ -640,6 +642,7 @@
     color: var(--primaryColor);
   }
 
+  .fragment#random-quotes .header p,
   .fragment#articles-ads .header p,
   .fragment#header .header p {
     font-weight: 500;
@@ -648,6 +651,7 @@
     color: var(--primaryVarientColor);
   }
 
+  .fragment#random-quotes .header .options,
   .fragment#header .header .options {
     width: 100%;
     display: flex;
@@ -767,5 +771,63 @@
 
   .form-dialog#article-ads-picker-dialog {
     z-index: 510;
+  }
+
+  .fragment#random-quotes .body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 1.5vw;
+  }
+
+  div.quote-entry {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 0.75vw 1.5vw;
+    background-color: var(--body-bg-color);
+    border-radius: 12px;
+  }
+
+  div.quote-entry h5 {
+    font-weight: 900;
+    font-size: 1.25vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  div.quote-entry p {
+    font-weight: 300;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+  }
+
+  div.quote-entry .options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+  }
+
+  button.shadow-button.red {
+    color: red;
+  }
+
+  div.form-dialog#quotes-delete-dialog {
+    height: 15vw;
+  }
+
+  div.form-dialog#quotes-delete-dialog .body p{
+    font-weight: 500;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
   }
 }

@@ -14,6 +14,7 @@ class Course:
 			{'name': 'bio', 'type': dict},
 			{'name': 'price', 'type': float},
 			{'name': 'active', 'type': bool},
+			{'name': 'content_list', 'type': list},
 			{'name': 'sessions', 'type': list},
 		]
 
@@ -33,6 +34,7 @@ class Course:
 			'title': self.title,
 			'bio': self.bio,
 			'price': self.price,
+			'content_list': self.content_list,
 			"active": self.active,
 			"sessions": self.sessions,
 		}

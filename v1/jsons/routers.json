@@ -13,6 +13,7 @@
   "WEBSITE_TOOLS_ROUTE": "/tools/",
   "WEBSITE_SEARCH_ROUTE": "/search/",
   "WEBSITE_LOGIN_ROUTE": "/login/",
+  "WEBSITE_LOGOUT_ROUTE": "/logout/",
   "WEBSITE_SIGNUP_ROUTE": "/signup/",
   "WEBSITE_JOIN_ROUTE": "/join/",
   "WEBSITE_ASSETS_ARTICLES_COVERS_ROUTE": "/assets/articles/covers/<article_id>/",

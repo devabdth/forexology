@@ -477,8 +477,8 @@
 
   .column-article-card > .cover {
     width: 10vw;
-    max-width:  10vw;
-    min-width:  10vw;
+    max-width: 10vw;
+    min-width: 10vw;
     background-color: red;
     height: 6vw;
     border-radius: 12px;
@@ -941,4 +941,5 @@
     row-gap: 2vw;
     column-gap: 1vw;
   }
+
 }

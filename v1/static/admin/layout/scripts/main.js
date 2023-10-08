@@ -292,7 +292,7 @@ const openWritersSelectionDialog = (props) => {
 		const title = document.createElement('h3');
 		title.innerHTML = writer.name[props.lang];
 		const subtitle = document.createElement('p');
-		subtitle.innerHTML = writer.bio[props.lang].length > 65 ? `${writer.bio[props.lang].substring(0, 65)}...`: writer.bio[props.lang];
+		subtitle.innerHTML = writer.bio[props.lang].length > 65 ? `${writer.bio[props.lang].substring(0, 65)}...` : writer.bio[props.lang];
 
 		information.appendChild(title);
 		information.appendChild(subtitle);
@@ -923,4 +923,166 @@ const saveArticleAds = async (article) => {
 
 	}
 
+}
+
+const openRandomQuoteForm = () => {
+	const form = document.querySelector('div.form-dialog#quotes-creation-dialog');
+	const enQuoteField = form.querySelector('input.single-line-field#en-quote');
+	const arQuoteField = form.querySelector('input.single-line-field#ar-quote');
+	const enQuoteeNameField = form.querySelector('input.single-line-field#en-quotee-name');
+	const arQuoteeNameField = form.querySelector('input.single-line-field#ar-quotee-name');
+	const submit = form.querySelector('div.options button.main-button#submit');
+	const statusMsg = form.querySelector('div.options p#status-msg');
+	submit.onclick = createQuote;
+
+
+	document.querySelector('div.form-dialog-overlay#quotes-creation-dialog-overlay').style.display = 'flex';
+	form.style.display = 'flex'
+}
+
+const createQuote = async () => {
+	const form = document.querySelector('div.form-dialog#quotes-creation-dialog');
+	const enQuoteField = form.querySelector('input.single-line-field#en-quote');
+	const arQuoteField = form.querySelector('input.single-line-field#ar-quote');
+	const enQuoteeNameField = form.querySelector('input.single-line-field#en-quotee-name');
+	const arQuoteeNameField = form.querySelector('input.single-line-field#ar-quotee-name');
+	const submit = form.querySelector('div.options button.main-button#submit');
+	const statusMsg = form.querySelector('div.options p#status-msg');
+
+	if (enQuoteField.value.trim().length < 32) {
+		enQuoteField.style.border = '2px red solid';
+		statusMsg.innerHTML = 'Quote must be at least 32 caracters!'
+		return;
+	}
+	enQuoteField.style.border = 'none';
+	statusMsg.innerHTML = ''
+
+	if (arQuoteField.value.trim().length < 32) {
+		arQuoteField.style.border = '2px red solid';
+		statusMsg.innerHTML = 'Quote must be at least 32 caracters!'
+		return;
+	}
+	arQuoteField.style.border = 'none';
+	statusMsg.innerHTML = ''
+
+	if (enQuoteeNameField.value.trim().length < 8) {
+		enQuoteeNameField.style.border = '2px red solid';
+		statusMsg.innerHTML = 'Quotee Name must be at least 8 caracters!'
+		return;
+	}
+	enQuoteeNameField.style.border = 'none';
+	statusMsg.innerHTML = ''
+
+	if (arQuoteeNameField.value.trim().length < 8) {
+		arQuoteeNameField.style.border = '2px red solid';
+		statusMsg.innerHTML = 'Quotee Name must be at least 8 caracters!'
+		return;
+	}
+	arQuoteeNameField.style.border = 'none';
+	statusMsg.innerHTML = ''
+
+	const payload = {
+		quote: {
+			EN: enQuoteField.value.trim(),
+			AR: arQuoteField.value.trim(),
+		},
+		quoteeName: {
+			EN: enQuoteeNameField.value.trim(),
+			AR: arQuoteeNameField.value.trim(),
+		}
+	}
+	submit.onclick = () => { }
+	submit.innerHTML = 'Loading...';
+	const res = await fetch(
+		'./', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	}
+	);
+
+	if (res.status === 201) {
+		window.open('./', '_self');
+		return;
+	}
+
+	statusMsg.innerHTML = 'Try again later!';
+	submit.innerHTML = 'Failed';
+	setTimeout(() => {
+		submit.innerHTML = 'Submit';
+		statusMsg.innerHTML = '';
+		submit.onclick = createQuote;
+	}, 3000);
+
+}
+
+const closeRandomQuoteForm = () => {
+	const form = document.querySelector('div.form-dialog#quotes-creation-dialog');
+	const enQuoteField = form.querySelector('input.single-line-field#en-quote');
+	const arQuoteField = form.querySelector('input.single-line-field#ar-quote');
+	const enQuoteeNameField = form.querySelector('input.single-line-field#en-quotee-name');
+	const arQuoteeNameField = form.querySelector('input.single-line-field#ar-quotee-name');
+	const submit = form.querySelector('div.options button.main-button#submit');
+	const statusMsg = form.querySelector('div.options p#status-msg');
+
+	enQuoteField.value = '';
+	arQuoteField.value = '';
+	enQuoteeNameField.value = '';
+	arQuoteeNameField.value = '';
+	statusMsg.innerHTML = '';
+	submit.innerHTML = 'Submit';
+	submit.onclick = createQuote;
+	form.style.display = 'none';
+	document.querySelector('div.form-dialog-overlay#quotes-creation-dialog-overlay').style.display = 'none';
+}
+
+const openQuoteDeleteDialog = async (quoteId) => {
+	const overlay = document.querySelector('div.form-dialog-overlay#quotes-delete-dialog-overlay');
+	const form = document.querySelector('div.form-dialog#quotes-delete-dialog');
+	
+	const submit = form.querySelector('.options button.main-button');
+	const statusMsg = form.querySelector('.options #status-msg');
+	
+	submit.onclick = async () => { deleteQuote(quoteId); }
+	
+	overlay.style.display = 'flex';
+	form.style.display = 'flex';
+}
+
+const deleteQuote = async (quoteId) => {
+	const form = document.querySelector('div.form-dialog#quotes-delete-dialog');
+	const submit = form.querySelector('.options button.main-button');
+	const statusMsg = form.querySelector('.options #status-msg');
+	try {
+		submit.innerHTML = 'Loading';
+		submit.onclick = () => { }
+		statusMsg.innerHTML = 'Deleting your quote!';
+		const res = await fetch(`./quotes/?quoteId=${quoteId}`, { method: 'DELETE' });
+		if (res.status === 200) {
+			window.open('./', '_self');
+			return;
+		}
+		statusMsg.innerHTML = 'Failed! Try again later!';
+		setTimeout(() => {
+			submit.innerHTML = 'Submit';
+			submit.onclick = async () => { deleteQuote(quoteId) }
+			statusMsg.innerHTML = '';
+		}, 3000);
+	} catch (e) {
+		console.log(e);
+		statusMsg.innerHTML = 'Failed! Try again later!';
+		setTimeout(() => {
+			submit.innerHTML = 'Submit';
+			submit.onclick = async () => { deleteQuote(quoteId) }
+			statusMsg.innerHTML = '';
+		}, 3000);
+	}
+}
+const closeQuoteDeleteDialog = () => {
+	const overlay = document.querySelector('div.form-dialog-overlay#quotes-delete-dialog-overlay');
+	const form = document.querySelector('div.form-dialog#quotes-delete-dialog');
+	overlay.style.display = 'none';
+	form.style.display = 'none';
 }

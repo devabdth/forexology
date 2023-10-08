@@ -185,18 +185,23 @@
                 <div class="options">
                   <p class="price"><span>{{content.global_[lang]['price']}}: </span>{{course.price}}</p>
                   <p class="sessions"><span>{{content.global_[lang]['sessions']}}: </span>{{course.sessions | length}}</p>
-                  <a class="status shadow-button" href="/courses/{{course.id}}">{{content.actions[lang]['continueCourse']}}</a>
+                  {% if user_data and course.id in user_data.courses.keys() %}
+                    <a class="status shadow-button" href="/courses/{{course.id}}">{{content.actions[lang]['continueCourse']}}</a>
+                  {% else %}
+                    <a class="status shadow-button" href="/courses/{{course.id}}">{{content.actions[lang]['enrollNow']}}</a>
+                  {%endif%}
                 </div>
               </div>
             </div>
           {%endfor%}
         </div>
       </section>
-      <section class="randon-quote">
+      <section class="random-quote">
+        {% set random_quote= db_helper.quotes.get_quote()%}
         <div class="decoration">"</div>
         <div class="content">
-          <h3>You get in life what you have the courge to ask for!</h3>
-          <p>Oprah Winphry</p>
+          <h3>{{random_quote['quote'][lang]}}</h3>
+          <p>{{random_quote['quoteeName'][lang]}}</p>
         </div>
         <div class="decoration">"</div>
       </section>

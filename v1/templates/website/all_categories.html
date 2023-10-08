@@ -266,14 +266,15 @@
           {%endfor%}
         </div>
       </section>
-      <section class="randon-quote">
-        <div class="decoration">"</div>
-        <div class="content">
-          <h3>You get in life what you have the courge to ask for!</h3>
-          <p>Oprah Winphry</p>
-        </div>
-        <div class="decoration">"</div>
-      </section>
+      <section class="random-quote">
+      {% set random_quote= db_helper.quotes.get_quote()%}
+      <div class="decoration">"</div>
+      <div class="content">
+        <h3>{{random_quote['quote'][lang]}}</h3>
+        <p>{{random_quote['quoteeName'][lang]}}</p>
+      </div>
+      <div class="decoration">"</div>
+    </section>
 
       <footer>
         </div>

@@ -169,19 +169,33 @@
         <section
         id="entry" style="background-image: url(/courses/cover/{{course.id}}/);"
       >
-        <div id="overlay">
-          <h1>{{course.title[lang]}}</h1>
-          <p>{{course.bio[lang]}}</p>
-        </div>
+        <div id="overlay"></div>
       </section>
-      <section class="randon-quote">
-        <div class="decoration">"</div>
-        <div class="content">
-          <h3>You get in life what you have the courge to ask for!</h3>
-          <p>Oprah Winphry</p>
+      <section id="course-content">
+        <div id="content">
+          <h1 id="course-title">{{course.title[lang]}}</h1>
+          <p id="course-bio">{{course.bio[lang]}}</p>
+          <p id="content-section-title">{{content.global_[lang]['content']}}</p>
+          {%for content_snippet in course.content_list %}
+          <h3 class="course-content-snippet-title">{{content_snippet['title'][lang]}}</h3>
+          <ol>
+            {%for li in content_snippet['content'][lang]%}
+            <li>{{li}}</li>
+            {%endfor%}
+          </ol>
+          {%endfor%}
         </div>
-        <div class="decoration">"</div>
+        <div id="promo"></div>
       </section>
+      <section class="random-quote">
+      {% set random_quote= db_helper.quotes.get_quote()%}
+      <div class="decoration">"</div>
+      <div class="content">
+        <h3>{{random_quote['quote'][lang]}}</h3>
+        <p>{{random_quote['quoteeName'][lang]}}</p>
+      </div>
+      <div class="decoration">"</div>
+    </section>
 
     <footer>
       </div>

@@ -73,6 +73,10 @@ class Setup:
                 'initialData': {}
             },
             {
+                'dir': '../jsons/quotes.json',
+                'initialData': {"quotes": []}
+            },
+            {
                 'dir': '../jsons/courses.json',
                 'initialData': {}
             },

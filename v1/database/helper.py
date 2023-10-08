@@ -7,6 +7,7 @@ from .jobs_applications import JobApplicationDatabaseHelper
 from .admins import AdminsDatabaseHelper
 from .users import UsersDatabaseHelper
 from .courses import CoursesDatabaseHelper
+from .quotes import QuotesDatabaseHelper
 import pymongo
 
 from sys import path
@@ -23,6 +24,6 @@ class DatabaseHelper:
         self.jobs = JobsDatabaseHelper()
         self.jobs_applications = JobApplicationDatabaseHelper()
         self.admins= AdminsDatabaseHelper()
-        self.users= UsersDatabaseHelper()
+        self.users= UsersDatabaseHelper(self.client)
         self.courses= CoursesDatabaseHelper()
-        # self.courses= UsersDatabaseHelper()
+        self.quotes= QuotesDatabaseHelper()

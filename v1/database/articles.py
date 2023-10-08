@@ -32,7 +32,7 @@ class ArticlesDatabaseHelper:
     
     def get_article_by_id(self, article_id):
         articles = self.articles_collection.find({'_id': ObjectId(article_id)})
-        return Article(article[0])
+        return Article(articles[0])
 
     def get_all_articles(self, filter_by: str = None, arrangment: str = 'ascending'):
         return self.all_articles
@@ -144,16 +144,12 @@ class ArticlesDatabaseHelper:
 
         try:
             if 'id' in payload.keys():
+                article_id= payload['id']
                 del payload['id']
-            for article in self.all_articles:
-                if article.id == article_id:
-                    for k in payload.keys():
-                        if k == 'sections':
-                            self.all_articles[self.all_articles.index(article)].__setattr__('sections', [ArticleSection(section) for section in payload['sections']])
-                        self.all_articles[self.all_articles.index(article)].__setattr__(k, payload[k])
-                        
-                    return True
-            return False
+                self.articles_collection.find_one_and_upate({'_id': ObjectId(article_id)}, {'$set': payload.to_dict()})
+                self.refresh_all_articles()
+                
+            return True
         except Exception as e:
             print(e)
             return False

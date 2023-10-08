@@ -233,7 +233,8 @@ class Content:
                 "submit": "Submit",
                 "checkThisOut": "Check this out!",
                 "goBack": "Go Back",
-                "continueCourse": "Continue Course"
+                "continueCourse": "Continue Course",
+                "enrollNow": "Enroll Now"
             },
             "AR": {
                 "login": "تسجيل الدخول",
@@ -262,7 +263,9 @@ class Content:
                 "submit": "تأكيد",
                 "checkThisOut": "تحقق من هذا!",
                 "goBack": "عُد",
-                "continueCourse": "أكمل الدورة"
+                "continueCourse": "أكمل الدورة",
+                "enrollNow": "التحق الآن"
+
 
             }
         }

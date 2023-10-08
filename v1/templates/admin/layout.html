@@ -11,6 +11,7 @@
 {% set home_ad_space_ten= db_helper.ads.get_ad_by_id(layout.home_ad_space_ten) %}
 {% set home_ad_space_eleven= db_helper.ads.get_ad_by_id(layout.home_ad_space_eleven) %}
 {% set home_ad_space_twelve= db_helper.ads.get_ad_by_id(layout.home_ad_space_twelve) %}
+{% set load_quotes_result= db_helper.quotes.load_data()%}
 <!DOCTYPE html>
 <html>
   <head>
@@ -124,7 +125,7 @@
         <div id="fragments-controllers">
           <div
             onclick="manageFragments(this);"
-            class="fragment-controller active"
+            class="fragment-controller"
             id="home"
           >
             Home Page
@@ -143,9 +144,37 @@
           >
             Articles' Ads
           </div>
+          <div
+            onclick="manageFragments(this);"
+            class="fragment-controller active"
+            id="random-quotes"
+          >
+            Random Quotes
+          </div>
         </div>
         <div id="fragments">
-          <div id="home" class="fragment active">
+          <div id="random-quotes" class="fragment active">
+            <div class="header">
+              <h3>Random Quotes</h3>
+              <p>Add / Delete random quotes that appears in the bottom of each page in the website!</p>
+              <div class="options">
+                <button class="shadow-button" onclick="openRandomQuoteForm()">Add</button>
+              </div>
+            </div>
+            <div class="body">
+              {% for quote in db_helper.quotes.all_quotes %}
+                <div class="quote-entry">
+                  <h5>{{quote.quote['EN']}}</h5>
+                  <p>{{quote.quoteeName['EN']}}</p>
+                  <div class="options">
+                    <button class="shadow-button red" onclick="openQuoteDeleteDialog(`{{quote['id']}}`)">Delete</button>
+                  </div>
+                </div>
+              {%endfor%}
+            </div>
+            
+          </div>
+          <div id="home" class="fragment">
             <div class="collabsable" id="featured-articles">
               <div onclick="toggleCollapsable(this)" class="title">
                 <h2 class="title">Featured Articles</h2>
@@ -528,14 +557,54 @@
     <div id="writers-selection-dialog-overlay"></div>
     <div id="tabs-selection-dialog-overlay"></div>
     <div id="careers-selection-dialog-overlay"></div>
+    <div class="form-dialog-overlay" id="quotes-creation-dialog-overlay"></div>
+    <div class="form-dialog-overlay" id="quotes-delete-dialog-overlay"></div>
     <div class="form-dialog-overlay" id="article-ads-picker-dialog-overlay"></div>
+    <div id="quotes-delete-dialog" class="form-dialog">
+      <div class="header">
+        <h2>Delete Quote</h2>
+        <div onclick="closeQuoteDeleteDialog();">x</div>
+      </div>
+      <div class="body">
+        <p>Are you sure, You want to delete this quote!</p>
+      </div>
+      <div class="options">
+        <button class="shadow-button" id="cancel" onclick="closeQuoteDeleteDialog()">Cancel</button>
+        <button class="main-button" id="submit">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+      
+    <div id="quotes-creation-dialog" class="form-dialog">
+      <div class="header">
+        <h2>Create Random Quote</h2>
+        <div onclick="closeRandomQuoteForm();">x</div>
+      </div>
+      <div class="body">
+        <label for="en-quote">English Quote</label>
+        <input type="text" name="en-quote" class="single-line-field" id="en-quote" placeholder="English Quote">
+        <label for="ar-quote">Arabic Quote</label>
+        <input type="text" name="ar-quote" class="single-line-field" id="ar-quote" placeholder="Arabic Quote">
+        <label for="en-quotee-name">English Quotee Name</label>
+        <input type="name" name="en-quotee-name" class="single-line-field" id="en-quotee-name" placeholder="English Quotee Name">
+        <label for="ar-quotee-name">Arabic Quotee Name</label>
+        <input type="name" name="ar-quotee-name" class="single-line-field" id="ar-quotee-name" placeholder="Arabic Quotee Name">
+      </div>
+      <div class="options">
+        <button class="shadow-button" id="cancel" onclick="closeRandomQuoteForm()">Cancel</button>
+        <button class="main-button" id="submit">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+      
+    </div>
     <div id="article-ads-picker-dialog" class="form-dialog">
       <div class="header">
         <h2>Article ADs Selection</h2>
         <div onclick="closeArticleAdsPicker();">x</div>
       </div>
       <div class="body"></div>
-      <div class="options">
+    <div class="options">
         <button class="shadow-button" id="cancel" onclick="closeArticleAdsPicker()">Cancel</button>
         <button class="main-button" id="submit">Submit</button>
         <p id="status-msg"></p>

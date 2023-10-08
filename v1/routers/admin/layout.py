@@ -26,8 +26,35 @@ class LayoutAdminRouter:
 
 	def setup(self):
 		self.assign_index()
+		self.assign_create_quotes()
+		self.assign_delete_quotes()
 		self.assign_update()
 		self.assign_article_ads_update()
+
+	def assign_delete_quotes(self):
+		@self.app.route(f'{self.consts.admin_layout_route}/quotes/', methods=["DELETE"])
+		def delete_quotes():
+			try:
+				params= dict(request.values)
+				res= self.helper.quotes.delete_quote(params['quoteId'])
+				if res:
+					return self.app.response_class(status= 200)
+				return self.app.response_class(status= 500)
+			except Exception as e:
+				print(e)
+				return self.app.response_class(status= 500)
+	def assign_create_quotes(self):
+		@self.app.route(self.consts.admin_layout_route, methods=["POST"])
+		def create_quotes():
+			try:
+				body= dict(loads(request.data))
+				res= self.helper.quotes.create_quote(body)
+				if res:
+					return self.app.response_class(status= 201)
+				return self.app.response_class(status= 500)
+			except Exception as e:
+				print(e)
+				return self.app.response_class(status= 500)
 
 	def assign_article_ads_update(self):
 		@self.app.route(self.consts.admin_layout_articles_ads_route, methods=["PATCH"])

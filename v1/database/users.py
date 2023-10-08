@@ -5,42 +5,42 @@ from json import loads, dumps, dump
 from pandas import DataFrame
 from datetime import datetime
 import secrets
+from plugins.consts import Consts
+from bson.objectid import ObjectId
+import pymongo
 
 
 class UsersDatabaseHelper:
-	def __init__(self):
+	def __init__(self, client: pymongo.MongoClient):
 		self.profile_dir= abspath(join(dirname(__file__), '../assets/users/images'))
 		self.covers_dir= abspath(join(dirname(__file__), '../assets/users/covers'))
-		self.users= [
-			User({
-				"id": str(secrets.token_hex(12)),
-				"name": "User Name",
-				"bio": "This is my user bio!",
-				"email": "a.tharwat@cubersio.com",
-				"password": "1234567890",
-				"joined_in": str(datetime.now()),
-				"prefered_categories": [],
-				"prefered_parent_categories": [],
-				"followed_writers": [],
-				"saves": [],
-				"comments": [],
-				"ratings": [],
-				"likes": [],
-				"last_log_in": str(datetime.now()),
-				"current_reading_article": "",
-				"current_reading_section": "",
-			}) for _ in range(0, 10)
+		self.consts: Consts= Consts()
+		self.client: pymongo.MongoClient = client
+		self.database = self.client["forexology"]
+		self.users_collection = self.database["users"]
+
+		self.all_users: list = [
 		]
 
+		self.refresh_all_users()
+
+
+	def refresh_all_users(self):
+		try:
+			self.all_users = [User(user) for user in list(self.users_collection.find())]
+		except Exception as e:
+			print(e)
+
+
+
 	def get_user_by_id(self, id):
-		return self.users[0]
+		users = self.users_collection.find({'_id': ObjectId(id)})
+		return User(users[0])
 	
 	def get_user_by_email(self, email):
 		try:
-			for user in self.users:
-				if user.email == email:
-					return user
-			return None
+			users = self.users_collection.find({'email': email})
+			return User(users[0])
 		except Exception as e:
 			print(e)
 			return None
@@ -53,6 +53,13 @@ class UsersDatabaseHelper:
 			payload= kwargs['payload'] if 'payload' in kwargs.keys() else None
 			cover= kwargs['cover'] if 'cover' in kwargs.keys() else None
 			profile= kwargs['profile'] if 'profile' in kwargs.keys() else None
+
+			if 'id' in payload.keys():
+				user_id= payload['id']
+				del payload['id']
+
+			self.users_collection.find_one_and_upate({'_id': ObjectId(user_id)}, {'$set': payload.to_dict()})
+			self.refresh_all_users()
 
 			return True
 		except Exception as e:

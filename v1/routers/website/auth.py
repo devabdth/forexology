@@ -24,6 +24,7 @@ class AuthRouter:
     def setup(self):
         self.assign_signup_index()
         self.assign_login_index()
+        self.assign_logout_index()
         self.assign_login_confirmation()
         self.assign_password_reset_index()
         self.assign_password_reset_traffic()
@@ -47,6 +48,17 @@ class AuthRouter:
                 print(e)
                 return self.app.response_class(status= 500)
 
+
+    def assign_logout_index(self):
+        @self.app.route(self.consts.logout_route, methods=["PATCH"])
+        def logout():
+            try:
+                session.pop('CURRENT_USER_ID')
+                return self.app.response_class(status= 200)
+            except Exception as e:
+                print(e)
+                return self.app.response_class(status= 500)
+            
 
     def assign_login_index(self):
         @self.app.route(self.consts.login_route, methods=["GET"])

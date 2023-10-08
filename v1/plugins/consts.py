@@ -99,6 +99,7 @@ class Consts:
             self.tools_route = data['WEBSITE_TOOLS_ROUTE']
             self.search_route = data['WEBSITE_SEARCH_ROUTE']
             self.login_route = data['WEBSITE_LOGIN_ROUTE']
+            self.logout_route = data['WEBSITE_LOGOUT_ROUTE']
             self.signup_route = data['WEBSITE_SIGNUP_ROUTE']
             self.join_route = data['WEBSITE_JOIN_ROUTE']
             self.articles_covers = data['WEBSITE_ASSETS_ARTICLES_COVERS_ROUTE']
