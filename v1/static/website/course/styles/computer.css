@@ -44,4 +44,122 @@
     display: none;
   }
 
+  section#course-content {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: var(--body-bg-color);
+    padding:  5vw 10vw;
+  }
+
+  section#course-content #content {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+  }
+
+  section#course-content #content h1 {
+    font-weight: 900;
+    color: var(--primaryColor);
+    font-size: 3.5vw;
+    font-family: var(--pff);
+  }
+
+  section#course-content #content p#course-bio {
+    font-weight: 500;
+    font-size: 1.5vw;
+    font-family: var(--pff);
+    color:  var(--primaryColor);
+  }
+
+  section#course-content #content #content-section-title {
+    margin-top: 2.5vw;
+    font-size: 1.5vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+    font-weight: 700;
+  }
+
+  section#course-content h3.course-content-snippet-title {
+    font-weight: 700;
+    font-size: 1.25vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+    margin-top: 1.5vw;
+  }
+
+  section#course-content ul {
+    width: 100%;
+    padding: 1vw 2vw;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+  }
+
+  section#course-content ul li {
+    font-weight: 300;
+    font-size: 0.85vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+  }
+
+  section#course-content .options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: red;
+    margin-top: 7.5vw;
+  }
+
+  section#course-content #promo {
+    width: 30%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 0.5vw 1vw;
+    background-color: var(--bg-color);
+    min-height: 5vw;
+    border-radius: 12px;
+    gap: 1vw;
+  }
+
+  section#course-content #promo #promo {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px var(--accentColor) solid;
+  }
+
+  section#course-content #promo #data {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  section#course-content #promo #data p {
+    font-weight: 900;
+    font-size: 1.5vw;
+    font-family: var(--pff);
+    text-align-last: center;
+    color: var(--primaryColor);
+  }
+
+  section#course-content #promo #data p span{
+    font-weight: 300;
+    font-size: 1vw;
+    font-family: var(--pff);
+    text-align-last: center;
+    color: var(--primaryVareintColor);
+  }
+
 }

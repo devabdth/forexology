@@ -174,18 +174,30 @@
       <section id="course-content">
         <div id="content">
           <h1 id="course-title">{{course.title[lang]}}</h1>
-          <p id="course-bio">{{course.bio[lang]}}</p>
-          <p id="content-section-title">{{content.global_[lang]['content']}}</p>
+          <p id="content-section-title">{{content.global_[lang]['courseContent']}}</p>
           {%for content_snippet in course.content_list %}
           <h3 class="course-content-snippet-title">{{content_snippet['title'][lang]}}</h3>
-          <ol>
+          <ul>
             {%for li in content_snippet['content'][lang]%}
             <li>{{li}}</li>
             {%endfor%}
-          </ol>
+          </ul>
           {%endfor%}
+          <div class="options">
+            <button class="shadow-button" id="wishlist-course">{{content.actions[lang]['addToWishlist']}}</button>
+            <button class="main-button" id="enroll-to-course">{{content.actions[lang]['enrollNow']}}</button>
+          </div>
         </div>
-        <div id="promo"></div>
+        <div id="promo">
+          <div id="promo" style="background-image: url(/courses/cover/{{course.id}}/);"></div>
+          <p id="course-bio">{{course.bio[lang]}}</p>
+          <div id="data">
+              <p class="price">{{course.price}}$<br><span>{{content.global_[lang]['price']}}</span></p>
+              <p class="sessions">{{course.sessions | length}}<br><span>{{content.global_[lang]['sessions']}}</span></p>
+              <p class="students">1.1K<br><span>{{content.global_[lang]['students']}}</span></p>
+          </div>
+
+        </div>
       </section>
       <section class="random-quote">
       {% set random_quote= db_helper.quotes.get_quote()%}

@@ -99,7 +99,9 @@ class Content:
                 "aboutMsg": "Curious about know more about us?",
                 "coursesMsg": "Start your journey to \"Trade on the Right way\"!",
                 "price": "Price", 
-                "sessions": "Sessions"
+                "sessions": "Sessions",
+                "courseContent": "Course Content",
+                "students": "Students"
             },
             "AR": {
                 "platformTitle": "فوركسولوچي",
@@ -170,7 +172,9 @@ class Content:
                 "aboutMsg": "مهتم أن تعرف المزيد عن من نكون؟",
                 "coursesMsg": "أبدأ رحلتك في التداول بالطريقة الصحيحة",
                 "price": "السعر", 
-                "sessions": "المحاضرات"
+                "sessions": "المحاضرات",
+                "courseContent": "محتوى الدورة",
+                "students": "عدد الطلاب"
             }
         }
 
@@ -234,7 +238,8 @@ class Content:
                 "checkThisOut": "Check this out!",
                 "goBack": "Go Back",
                 "continueCourse": "Continue Course",
-                "enrollNow": "Enroll Now"
+                "enrollNow": "Enroll Now",
+                "addToWishlist": "Add to wishlist",
             },
             "AR": {
                 "login": "تسجيل الدخول",
@@ -264,7 +269,8 @@ class Content:
                 "checkThisOut": "تحقق من هذا!",
                 "goBack": "عُد",
                 "continueCourse": "أكمل الدورة",
-                "enrollNow": "التحق الآن"
+                "enrollNow": "التحق الآن",
+                "addToWishlist": "أضف إلى قائمة الاهتمامات",
 
 
             }
