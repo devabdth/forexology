@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FOREXology - Agenda</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='admin/agenda/styles/computer.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='website/global/styles/computer.css')}}"
+    />
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='admin/agenda/scripts/main.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='website/global/scripts/main.js')}}"
+    ></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style type="text/css">
+      :root {
+        --pff: "Raleway";
+        --sff: "Poppins";
+      }
+    </style>
+
+    <section class="admin">
+      <div id="left-section">
+        <div id="header">
+          <div id="logo"></div>
+          <p>{{admin_data['name']}}</p>
+        </div>
+        <div id="body">
+          <div
+            onclick="window.open(`/webapp/adminstration/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="home-white"></i></div>
+            <p>Home</p>
+          </div>
+          {% if "0" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/layout/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="layout-white"></i></div>
+            <p>Layout</p>
+          </div>
+          {%endif%} {% if "2" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/categories/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon">
+              <i class="categories-white"></i>
+            </div>
+            <p>Categories</p>
+          </div>
+          {%endif%} {% if "3" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/jobs/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="jobs-white"></i></div>
+            <p>Careers</p>
+          </div>
+          {%endif%} {% if "4" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/ads/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="ads-white"></i></div>
+            <p>Ads Spaces</p>
+          </div>
+          {%endif%} {% if "5" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/writers/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="writers-white"></i></div>
+            <p>Writers</p>
+          </div>
+          {%endif%} {% if "6" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/admins/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+            <p>Admins</p>
+          </div>
+          {%endif%} {% if "7" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/courses/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="courses-white"></i></div>
+            <p>Courses</p>
+          </div>
+          {%endif%} {% if "8" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/agenda/`, '_self');"
+            class="active left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="agenda-white"></i></div>
+            <p>Agenda</p>
+          </div>
+          {%endif%}
+        </div>
+        <div id="footer">
+          <div onclick="adminLogout();" class="left-menu-tile">
+            <div class="left-menu-tile-icon"><i class="logout-white"></i></div>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+      <div id="right-section">
+        <div class="container" id="container">
+          <div id="header">
+            <h3>Agenda</h3>
+            <p>Create / Edit / Delete Agenda Snippets</p>
+            <div id="options">
+              <button
+                class="shadow-button"
+                id="create"
+                onclick="openCreateSnippetDialog()"
+              >
+                Create
+              </button>
+            </div>
+          </div>
+          <div id="body">
+            <div class="agenda-row" id="header">
+              <div class="agenda-row-header">
+                  <div class="agenda-row-time">Time</div>
+                  <div class="agenda-row-currency">Country</div>
+                  <div class="agenda-row-importance">
+                    Importance
+                  </div>
+                  <div class="agenda-row-title">Event</div>
+                  <div class="agenda-row-pervious">Previous</div>
+                  <div class="agenda-row-current">Forecast</div>
+                  <div class="agenda-row-predicted">Actual</div>
+                  <div class="agenda-row-options">Options</div>
+
+                </div>
+                </div>
+            {% for snippet in agenda_snippets.values()|reverse %}
+              <div class="agenda-row">
+                <div class="agenda-row-header">
+                  <div class="agenda-row-time">{{((snippet['timestamp'] |readable_time)|string).split(' ')[0]}}<br>{{((snippet['timestamp'] |readable_time)|string).split(' ')[1]}}</div>
+                  <div class="agenda-row-currency"><div class="flag" id="country-{{snippet['country_code']}}"></div></div>
+                  <div class="agenda-row-importance">
+                    <div class="power">
+                      {% for i in range((snippet['power']|int))%}
+                      <div><i class="star"></i></div>
+                      {%endfor%}
+                    </div>
+                  </div>
+                  <div class="agenda-row-title">{{snippet['event']['EN']}}<br>{{snippet['event']['AR']}}</div>
+                  <div class="agenda-row-pervious">{{snippet['previous']}}</div>
+                  <div class="agenda-row-current">{{snippet['forecast']}}</div>
+                  <div class="agenda-row-predicted">{{snippet['actual']}}</div>
+                  <div class="agenda-row-options">
+                    <button class="shadow-button" style="color: red;"
+                    onclick='openDeleteAgendaSnippetDialog({{dumps(snippet) | safe}});'>Delete</button>
+                    <button class="shadow-button" onclick='openAgendaSnippetEditDialog({{dumps(snippet) | safe}});'>Edit</button>                    
+                  </div>
+                </div>
+                </div>
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="form-dialog-overlay" id="agenda-snippet-dialog"></div>
+    <div class="form-dialog-overlay" id="delete-agenda-snippet-dialog"></div>
+    <div class="form-dialog" id="delete-agenda-snippet-dialog">
+      <div class="header">
+        <h2>Delete</h2>
+        <div onclick="closeDeleteAgendaSnippetDialog();">x</div>
+      </div>
+      <div class="body">
+        <p></p>
+      </div>
+      <div class="options">
+        <button class="shadow-button" onclick="closeDeleteAgendaSnippetDialog()">Cancel</button>
+        <button class="main-button">Delete</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+    <div class="form-dialog" id="agenda-snippet-dialog">
+      <div class="header" id="header">
+        <h2></h2>
+        <div onclick="closeCreateSnippetDialog();">x</div>
+      </div>
+      <div class="body" id="body">
+        <form>
+          <label for="timestamp">Date & Time*</label>
+          <input id="timestamp" name="timestamp" type="datetime-local" class="single-line-field" />
+          <label for="en-event">English Event Name*</label>
+          <input type="name" class="single-line-field" id="en-event" />
+          <label for="ar-event">Arabic Event Name*</label>
+          <input type="name" class="single-line-field" id="ar-event" />
+          <label for="previous">Previous*</label>
+          <input type="number" class="single-line-field" id="previous" />
+          <label for="forecast">Forecast*</label>
+          <input type="number" class="single-line-field" id="forecast" />
+          <label for="actual">Actual</label>
+          <input type="number" class="single-line-field" id="actual" />
+          <label for="en-comment">English Comment</label>
+          <textarea
+            class="mutli-line-field"
+            name="en-comment"
+            id="en-comment"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <label for="ar-comment">Arabic Comment</label>
+          <textarea
+            class="mutli-line-field"
+            name="ar-comment"
+            id="ar-comment"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <label for="country-code">Country Code*</label>
+          <div id="country-codes">
+            <input
+              type="radio"
+              name="country-code"
+              value="us"
+              id="country-us"
+            />
+            <div class="flag" id="country-us"></div>
+            <label for="country-us">Dollar</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="au"
+              id="country-au"
+            />
+            <div class="flag" id="country-au"></div>
+            <label for="country-au">Australlian Dollar</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="eu"
+              id="country-eu"
+            />
+            <div class="flag" id="country-eu"></div>
+            <label for="country-eu">Eurpean Union</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="ca"
+              id="country-ca"
+            />
+            <div class="flag" id="country-ca"></div>
+            <label for="country-ca">Candaian Dollar</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="nz"
+              id="country-nz"
+            />
+            <div class="flag" id="country-nz"></div>
+            <label for="country-nz">New Zelandian Dollar</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="jp"
+              id="country-jp"
+            />
+            <div class="flag" id="country-jp"></div>
+            <label for="country-jp">Yen</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="cn"
+              id="country-cn"
+            />
+            <div class="flag" id="country-cn"></div>
+            <label for="country-cn">Ywan</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="gb"
+              id="country-gb"
+            />
+            <div class="flag" id="country-gb"></div>
+            <label for="country-gb">Pound</label>
+            <input
+              type="radio"
+              name="country-code"
+              value="ch"
+              id="country-ch"
+            />
+            <div class="flag" id="country-ch"></div>
+            <label for="country-ch">Swiss Frank</label>
+          </div>
+          <label for="power">Power*</label>
+          <div id="powers">
+            <input type="radio" name="power" value="1" id="power-1" />
+            <label for="power-1">Low</label>
+            <input type="radio" name="power" value="2" id="power-2" />
+            <label for="power-2">Medium</label>
+            <input type="radio" name="power" value="3" id="power-3" />
+            <label for="power-3">High</label>
+          </div>
+        </form>
+      </div>
+      <div class="options" id="options">
+        <button class="shadow-button" onclick="closeCreateSnippetDialog();">
+          Cancel
+        </button>
+        <button class="main-button" id="submit">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+    <script>
+      init({{dumps(agenda_snippets) | safe}});
+    </script>
+  </body>
+</html>

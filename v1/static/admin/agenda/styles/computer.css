@@ -1,0 +1,344 @@
+@media screen and (min-width: 1024px) {
+  div#right-section div#container {
+    width: 100%;
+    height:  100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 1vw 2vw;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+  }
+
+  div#right-section div#container div#header {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.5vw;
+  }
+
+  div#right-section div#container div#header h3 {
+    font-weight: 900;
+    font-size: 2vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  div#right-section div#container div#header p {
+    font-weight: 300;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color:  var(--primaryVarientColor);
+  }
+
+  div#right-section div#container div#header div#options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+  }
+
+  div#right-section div#container div#body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 1vw;
+    overflow: auto;
+    margin-top: 1.5vw;
+  }
+
+  div.agenda-snippet-row {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 0.5vw 1vw;
+    background-color: var(--body-bg-color);
+    border-radius: 12px;
+  }
+
+  div.agenda-snippet-row h3 {
+    font-weight: 900;
+    font-size: 1.5vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  div.agenda-snippet-row h4 {
+    font-weight: 300;
+    font-size: 1vw;
+    font-family: var(--pff);
+    color: var(--primaryVarientColor);
+  }
+
+  div.agenda-snippet-row div.information {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    gap:  1vw;
+  }
+
+  div.agenda-row div.power {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5vw;
+    height: 24px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  div.agenda-snippet-row div.information div.timestamp {
+    font-weight: 500;
+    font-size: 1vw;
+    font-family: var(--pff);
+    color: var(--primaryVarientColor);
+  }
+
+  div.agenda-snippet-row div.options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+    gap: 1vw;
+  }
+
+  div.agenda-row div.power div i {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  div.agenda-row div.power div {
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+
+  }
+
+  div.form-dialog .body form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 1vw;
+  }
+
+  div.form-dialog #powers,
+  div.form-dialog #country-codes {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 1vw;
+  }
+
+  div.form-dialog #powers  label,
+  div.form-dialog #country-codes label {
+    margin-right: 2vw;
+  }
+
+  div.form-dialog #powers  input,
+  div.form-dialog #country-codes input {
+    margin-right: 0.5vw;
+  }
+
+  div.agenda-row div.flag,
+  div.form-dialog #country-codes div.flag {
+    width: 32px;
+    height: 16px;
+    display: flex;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .flag#country-us {
+    background-image: url(/static/website/global/styles/flags/us.png);
+  }
+
+  .flag#country-sa {
+    background-image: url(/static/website/global/styles/flags/sa.png);
+  }
+
+  .flag#country-eu {
+    background-image: url(/static/website/global/styles/flags/eu.png);
+  }
+
+  .flag#country-au {
+    background-image: url(/static/website/global/styles/flags/au.png);
+  }
+
+  .flag#country-ca {
+    background-image: url(/static/website/global/styles/flags/ca.png);
+  }
+
+  .flag#country-nz {
+    background-image: url(/static/website/global/styles/flags/nz.png);
+  }
+  .flag#country-jp {
+    background-image: url(/static/website/global/styles/flags/jp.png);
+  }
+  .flag#country-cn {
+    background-image: url(/static/website/global/styles/flags/cn.png);
+  }
+
+  .flag#country-gb {
+    background-image: url(/static/website/global/styles/flags/gb.png);
+  }
+
+  .flag#country-ch {
+    background-image: url(/static/website/global/styles/flags/ch.png);
+  }
+
+  div.form-dialog#delete-agenda-snippet-dialog {
+    height: 15vw;
+  }
+
+  div.form-dialog#delete-agenda-snippet-dialog div.body p {
+    font-weight: 500;
+    font-size: 1.5vw;
+    font-family: var(--pff);
+    color:  var(--primaryColor);
+  }
+
+  div.form-dialog#delete-agenda-snippet-dialog div.body p span {
+    font-weight: 900;
+  }
+
+
+  .agenda-row {
+    transition: 250ms ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.5;
+    border-radius: 12px;
+  }
+
+  .agenda-row-header {
+    border-radius: 12px;
+    transition: 250ms ease;
+    padding: 0 0.5vw;
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+    gap: 0.5vw;
+  }
+  .agenda-row-header#header {
+    max-height: 5vh;
+  }
+
+  .agenda-row-cover {
+    min-width: 64px;
+    min-height: 64px;
+    display: flex;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #header .agenda-row-cover {
+    opacity: 0;
+  }
+
+  .agenda-row-time {
+    min-width: 10%;
+    max-width: 10%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+  }
+
+  .agenda-row-currency {
+    min-width: 7.5%;
+    max-width: 7.5%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+    flex-direction: row;
+
+  }
+
+  .agenda-row-title {
+    min-width: 30%;
+    max-width: 30%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+  }
+
+  .agenda-row-pervious,
+  .agenda-row-importance,
+  .agenda-row-current,
+  .agenda-row-predicted,
+  .agenda-row-options {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    text-align: start;
+    font-weight: 300;
+    font-size: 0.9em;
+    font-family: var(--pff);
+    min-width: 7.5%;
+    max-width: 7.5%;
+  }
+
+  .agenda-row-importance {
+    min-width: 15%;
+    max-width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25vw;
+    flex-direction: row;
+    gap: 0.5vw;
+  }
+
+
+  .agenda-row:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .agenda-row#header:hover {
+    background-color: transparent;
+  }
+}
