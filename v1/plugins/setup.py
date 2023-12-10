@@ -28,6 +28,12 @@ class Setup:
         self.setup_publish_webapp_routes()
         self.setup_socket_handlers()
         self.assign_generate_threads()
+        self.assign_filters()
+
+    def assign_filters(self):
+        @self.app.template_filter('readable_time')
+        def readable_time(time):
+            return datetime.datetime.fromtimestamp(time/1000)
 
         from routers.globals.demo import DemoRouter
         DemoRouter(self.app).setup()
@@ -90,6 +96,10 @@ class Setup:
             },
             {
                 'dir': '../jsons/writersInvitations.json',
+                'initialData': {}
+            },
+            {
+                'dir': '../jsons/agenda.json',
                 'initialData': {}
             },
             {
@@ -207,8 +217,12 @@ class Setup:
 
         from routers.admin.writers import WritersAdminRouter
         WritersAdminRouter(self.app).setup()
+
         from routers.admin.courses import CoursesAdminRouter
         CoursesAdminRouter(self.app).setup()
+
+        from routers.admin.agenda import AgendaAdminRouter
+        AgendaAdminRouter(self.app).setup()
 
     def setup_routers(self):
 

@@ -31,6 +31,15 @@ class UsersDatabaseHelper:
 		except Exception as e:
 			print(e)
 
+	def create_user(self, dict_):
+		try:
+			res= self.users_collection.insert_one(dict_)
+			print(res)
+			return res.inserted_id
+		except Exception as e:
+			print(e)
+			return False
+
 
 
 	def get_user_by_id(self, id):

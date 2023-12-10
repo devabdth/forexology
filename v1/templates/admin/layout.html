@@ -112,6 +112,22 @@
             <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
             <p>Admins</p>
           </div>
+          {%endif%} {% if "7" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/courses/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="courses-white"></i></div>
+            <p>Courses</p>
+          </div>
+          {%endif%} {% if "8" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/agenda/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="agenda-white"></i></div>
+            <p>Agenda</p>
+          </div>
           {%endif%}
         </div>
         <div id="footer">
@@ -733,7 +749,7 @@
         <div id="cards">
           {% for article in db_helper.articles.get_all_articles() %}
           <div class="search-dialog-article-card-border" id="{{article.id | string}}">
-              <div class="search-dialog-article-card">
+              <div class="search-dialog-article-card" id="{{article.id | string}}">
                 <div class="cover-wrapper">
                   <div
                   class="cover"

@@ -43,6 +43,8 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border: 2px var(--accentColor) solid;
+    border-radius: 12px;
   }
 
   section#entry #left-section p#cover-attached-msg {
@@ -52,13 +54,25 @@
     color: var(--primaryVarientColor);
   }
 
-  section#entry #left-section #labelling-inforamtion {
+  section#entry #left-section #after-cover {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1vw;
+  }
+
+  section#entry #left-section #labelling-inforamtion {
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 0.5vw;
+    padding: 0.5vw 1vw;
+    border: 0.5px grey solid;
+    border-radius: 12px;
   }
 
   section#entry #left-section #labelling-inforamtion div {
@@ -92,7 +106,9 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    margin-top: 1vw;
+    border-radius: 12px;
+    border: 0.5px grey solid;
+    padding: 2vw 2vw;
   }
 
   section#entry #left-section #options .option {
@@ -108,7 +124,7 @@
 
   section#entry #left-section #options .option p {
     font-weight: 700;
-    font-size: 1.25vw;
+    font-size: 1vw;
     font-family: var(--pff);
     color: var(--primaryColor);
     text-align: start;
@@ -116,14 +132,14 @@
 
   section#entry #left-section #options .option p span {
     font-weight: 700;
-    font-size: 0.75vw;
+    font-size: 0.65vw;
     font-family: var(--pff);
     color: var(--primaryVarientColor);
   }
 
   section#entry #left-section #options .shadow-icon-button i {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 
   section#entry #right-section {
@@ -206,7 +222,7 @@
   section#articles-sections {
     width: 100%;
     max-height: 100%;
-    padding: 2vw 5%;
+    padding: 0.5vw 5%;
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -241,6 +257,7 @@
   }
 
   section#articles-sections #right-section #header {
+    width: 100%;
     border-radius: 12px;
     background-color: rgba(0, 0, 0, 0.1);
     padding: 8px 16px;
@@ -349,7 +366,7 @@
     min-height: 40vw;
     display: none;
     align-items: start;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
     gap: 1vw;
   }
@@ -380,6 +397,9 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: red;
+    border-radius: 12px;
+    border: 2px var(--accentColor) solid;
+    border-radius: 12px;
   }
 
   div.article-section p#cover-attached-msg {
@@ -394,6 +414,9 @@
     font-size: 1.5vw;
     font-family: var(--sff);
     color: var(--primaryColor);
+    text-align: justify;
+    pointer-events: none;
+    user-select: none;
   }
 
   .section-ad-container {

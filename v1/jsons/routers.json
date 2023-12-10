@@ -50,6 +50,7 @@
   "WEBSITE_WHO_ARE_WE": "/whoAreWe/",
 
   "ADMIN_LAYOUT_ROUTE": "/webapp/adminstration/layout/",
+  "ADMIN_AGENDA_ROUTE": "/webapp/adminstration/agenda/",
   "ADMIN_LAYOUT_ARTICLES_ADS_ROUTE": "/webapp/adminstration/layout/articlesAds/",
   "ADMIN_CAREERS_ROUTE": "/webapp/adminstration/jobs/",
   "ADMIN_CATEGORIES_ROUTE": "/webapp/adminstration/categories/",

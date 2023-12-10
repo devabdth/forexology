@@ -15,7 +15,8 @@ class Course:
 			{'name': 'price', 'type': float},
 			{'name': 'active', 'type': bool},
 			{'name': 'content_list', 'type': list},
-			{'name': 'sessions', 'type': list},
+			{'name': 'sessions', 'type': dict},
+			{'name': 'applications_list', 'type': list},
 		]
 
 
@@ -37,4 +38,5 @@ class Course:
 			'content_list': self.content_list,
 			"active": self.active,
 			"sessions": self.sessions,
+			"applications_list": self.applications_list,
 		}

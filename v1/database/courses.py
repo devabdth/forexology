@@ -25,6 +25,16 @@ class CoursesDatabaseHelper:
 			courses_data= dict(loads(f.read()))
 			self.all_courses= [Course(course) for course in courses_data.values()]
 
+	def write_data(self, new_entry: dict= None):
+		try:
+			data= {course.id: course.to_dict() for course in self.all_courses}
+			with open(self.courses_file, 'w') as f:
+				dump(data, f)
+				return True
+		except Exception as e:
+			print(e)
+			return False
+
 	def get_course_by_id(self, course_id):
 		try:
 			for course in self.all_courses:
@@ -58,4 +68,38 @@ class CoursesDatabaseHelper:
 		except Exception as e:
 			print(e)
 			return False
+		
+	def update_course(self, course):
+		try:
+			for course_ in self.all_courses:
+				if course_.id == course.id:
+					self.all_courses[self.all_courses.index(course_)] = course
+					return self.write_data()
+			return False
+		except Exception as e:
+			print(e)
+			return False
+		
+	def create_course_application(self, course, application):
+		try:
+			self.load_courses()
+			course= self.get_course_by_id(course)
+			applications_list= course.applications_list
+			applications_df= DataFrame(applications_list, columns=['name', 'email', 'phone'])
+			applications_df= applications_df.loc[applications_df['name'] == application['name']]
+			applications_df= applications_df.loc[applications_df['email'] == application['email']]
+			applications_df= applications_df.loc[applications_df['phone'] == application['phone']]
+			if len(applications_df) != 0:
+				return -1
+			
+			applications_list.append(application)
+			course.applications_list= applications_list
+			print('Done Here')
+			result= self.update_course(course)
+			if result:
+				return 1
+			return 0
+		except Exception as e:
+			print(e)
+			return 0
 

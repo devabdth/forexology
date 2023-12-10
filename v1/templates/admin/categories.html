@@ -56,12 +56,31 @@
 					<div class="left-menu-tile-icon"><i class="writers-white"></i></div>
 					<p>Writers</p>
 				</div>
-				{%endif%} {% if "6" in admin_data['accesses'] %} 
-				<div onclick="window.open(`/webapp/adminstration/admins/`, '_self');" class="left-menu-tile">
-					<div class="left-menu-tile-icon"><i class="admins-white"></i></div>
-					<p>Admins</p>
+				{%endif%} {% if "6" in admin_data['accesses'] %}
+				<div
+				  onclick="window.open(`/webapp/adminstration/admins/`, '_self');"
+				  class="left-menu-tile"
+				>
+				  <div class="left-menu-tile-icon"><i class="admins-white"></i></div>
+				  <p>Admins</p>
 				</div>
-				{%endif%}
+				{%endif%} {% if "7" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/courses/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="courses-white"></i></div>
+            <p>Courses</p>
+          </div>
+          {%endif%} {% if "8" in admin_data['accesses'] %}
+          <div
+            onclick="window.open(`/webapp/adminstration/agenda/`, '_self');"
+            class="left-menu-tile"
+          >
+            <div class="left-menu-tile-icon"><i class="agenda-white"></i></div>
+            <p>Agenda</p>
+          </div>
+          {%endif%}
 			</div>
 			<div id="footer">
 			<div onclick="adminLogout();" class="left-menu-tile">

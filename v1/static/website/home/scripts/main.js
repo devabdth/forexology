@@ -87,6 +87,14 @@ const initializeFragments = (articles, lang, categories) => {
 	}
 	selectFragmentByTab(currentSelectedArticle, (articles.length - 1));
 
+	setInterval(()=> {
+		if (currentSelectedArticle === (articles.length - 1)) {
+			selectFragmentByTab(0, (articles.length - 1));
+			return;
+		};
+		selectFragmentByTab(currentSelectedArticle + 1, (articles.length - 1));
+	}, 5000);
+
 }
 
 

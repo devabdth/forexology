@@ -31,7 +31,7 @@ class ArticlesDatabaseHelper:
         return self.all_articles[0]
     
     def get_article_by_id(self, article_id):
-        articles = self.articles_collection.find({'_id': ObjectId(article_id)})
+        articles = self.articles_collection.find({'id': article_id})
         return Article(articles[0])
 
     def get_all_articles(self, filter_by: str = None, arrangment: str = 'ascending'):
@@ -47,12 +47,12 @@ class ArticlesDatabaseHelper:
         return articles
     
     def get_article_by_writer_id(self, writer_id):
-        articles= self.articles_collection.find({ "mode": 1, "published_by" : { "$contains" : writer_id }})
+        articles= self.articles_collection.find({ "mode": 1, "published_by" : { "$in" : [writer_id] }})
         print(f'Articles Result: {list(articles)}')
         return [Article(dict(article)) for article in list(articles)]
 
     def get_drafts_by_writer_id(self, writer_id):
-        articles= self.articles_collection.find({ "mode": 0, "published_by" : { "$contains" : writer_id }})
+        articles= self.articles_collection.find({ "mode": 0, "published_by" : { "$in" : [writer_id] }})
         print(f'Articles Result: {list(articles)}')
         return [Article(dict(article)) for article in list(articles)]
 
@@ -80,7 +80,7 @@ class ArticlesDatabaseHelper:
 
     def delete_article(self, article_id):
         try:
-            self.articles_collection.delete_one({'_id': ObjectId(article_id)})
+            self.articles_collection.delete_one({'id': article_id})
             return True
         except Exception as e:
             print(e)

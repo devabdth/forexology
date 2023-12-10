@@ -51,7 +51,7 @@
     justify-content: space-between;
     flex-direction: row;
     background-color: var(--body-bg-color);
-    padding:  5vw 10vw;
+    padding: 5vw 10vw;
   }
 
   section#course-content #content {
@@ -74,7 +74,7 @@
     font-weight: 500;
     font-size: 1.5vw;
     font-family: var(--pff);
-    color:  var(--primaryColor);
+    color: var(--primaryColor);
   }
 
   section#course-content #content #content-section-title {
@@ -114,6 +114,7 @@
     justify-content: end;
     flex-direction: red;
     margin-top: 7.5vw;
+    gap: 1.5vw;
   }
 
   section#course-content #promo {
@@ -154,7 +155,7 @@
     color: var(--primaryColor);
   }
 
-  section#course-content #promo #data p span{
+  section#course-content #promo #data p span {
     font-weight: 300;
     font-size: 1vw;
     font-family: var(--pff);
@@ -162,4 +163,91 @@
     color: var(--primaryVareintColor);
   }
 
+  div.overlay#application-overlay {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1100;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  div.form#application-form {
+    width: 70%;
+    height: 50%;
+    display: none;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--body-bg-color);
+    z-index: 1101;
+    border-radius: 12px;
+    padding: 1vw 2vw;
+  }
+
+  div.form#application-form div.header#header {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  div.form#application-form div.header#header h4 {
+    color: var(--accentColor);
+    font-weight: 900;
+    font-size: 1.5vw;
+    font-family: var(--pff);
+  }
+
+  div.form#application-form div.header#header div {
+    font-weight: 100;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color: var(--primaryVareintColor);
+    cursor: pointer;
+  }
+
+  div.form#application-form div.body#body {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+  }
+
+  div.form#application-form div.body#body label {
+    font-weight: 900;
+    font-size: 1.15vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+    margin-top: 1vw;
+  }
+
+  div.form#application-form div.options#options {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1.5vw;
+    flex-direction: row;
+  }
+
+  div.form#application-form div.options#options p#status-msg {
+    font-weight: 300;
+    font-size: 1vw;
+    font-family: var(--pff);
+    color: var(--primaryVareintColor);
+  }
 }

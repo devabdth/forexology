@@ -29,6 +29,22 @@ class AssetsRouter:
         self.assign_article_section_cover()
         self.assign_article_section_audio()
         self.assign_article_section_video()
+        self.assign_get_course_section_video()
+
+    def assign_get_course_section_video(self):
+        @self.app.route('/assets/courses/<course_id>/session/video/<session_id>')
+        def get_course_section_video(course_id, session_id):
+            try:
+                for ext in self.consts.videos_supported_extenstions:
+                    path_= f'../../assets/courses/sessions/{course_id}/{session_id}.{ext}'
+                    print(abspath(join(dirname(__file__), path_)))
+                    if (exists(abspath(join(dirname(__file__), path_)))):
+                        return send_file(abspath(join(dirname(__file__), path_)))
+
+                return self.app.response_class(status= 404)
+            except Exception as e:
+                print(e)
+                return self.app.response_class(status= 500)
 
     def assign_article_section_cover(self):
         @self.app.route(self.consts.article_section_covers, methods=["GET"])

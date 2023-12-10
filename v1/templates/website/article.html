@@ -179,68 +179,73 @@
           style="background-image: url('/assets/articles/covers/{{article.id}}');"
         ></div>
         <p id="cover-attached-msg">{{article.cover_attached_msg[lang]}}</p>
-        <div id="labelling-inforamtion">
-          <div>
-            <h3>
-              {{content.global_[lang]['classification']}}:
-              <span
-                >{{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}</span
-              >
-            </h3>
-            <h3>
-              {{content.global_[lang]['category']}}:
-              <span
-                >{{db_helper.categories.get_category_by_id(article.category).name[lang]}}</span
-              >
-            </h3>
+        <div id="after-cover">          
+          <div id="labelling-inforamtion">
+            <div>
+              <h3>
+                {{content.global_[lang]['classification']}}:
+                <span
+                  >{{db_helper.categories.get_parent_category_by_id(article.parent_category).name[lang]}}</span
+                >
+              </h3>
+              <h3>
+                {{content.global_[lang]['category']}}:
+                <span
+                  >{{db_helper.categories.get_category_by_id(article.category).name[lang]}}</span
+                >
+              </h3>
+            </div>
+            <div>
+              {% if writers | length != 0 %}
+              <h3>
+                {{content.global_[lang]['writtenBy']}}: 
+              </h3>
+              {% for writer in writers %}
+                <a href="/writers/{{writer.id}}/" class="shadow-button">
+                  <span>
+                    {{writer.name[lang]}}
+                  </span>
+                </a>
+                |
+              {%endfor%}
+              {% endif %}
+            </div>
           </div>
-          <div>
-            {% if writers | length != 0 %}
-            <h3>
-              {{content.global_[lang]['writtenBy']}}: 
-            </h3>
-            {% for writer in writers %}
-              <a href="/writers/{{writer.id}}/" class="shadow-button">
-                <span>
-                  {{writer.name[lang]}}
-                </span>
-              </a>
-              |
-            {%endfor%}
-            {% endif %}
+          <div id="options">
+            <button class="option" enabled="{{article.record_available}}" onclick="openArticleDialogs('listen');">
+              <div class="icon shadow-icon-button"><i class="listen"></i></div>
+              {% if article.record_available %}
+              <p>{{content.actions[lang]['listen']}}<br><span>{{content.global_[lang]['listenMsg']}}</p>
+              {% else %}
+              <p>{{content.global_[lang]['unavailable']}}<br><span>{{content.global_[lang]['unavailableMsg']}}</p>
+              {% endif %}
+            </button>
+            |
+            <button class="option" onclick="openArticleDialogs('share');">
+              <div class="icon shadow-icon-button"><i class="share"></i></div>
+              <p>{{content.actions[lang]['share']}}<br><span>{{content.global_[lang]['shareMsg']}}</p>
+            </button>
+            |
+            <button class="option" onclick="openArticleDialogs('rate');">
+              <div class="icon shadow-icon-button"><i class="rate"></i></div>
+              <p>{{content.actions[lang]['rate']}}<br><span>{{content.global_[lang]['rateMsg']}}</p>
+            </button>
+            |
+            <button class="option" onclick="openArticleDialogs('commet');">
+              <div class="icon shadow-icon-button"><i class="comment"></i></div>
+              <p>{{content.actions[lang]['comment']}}<br><span>{{content.global_[lang]['commentMsg']}}</p>
+            </button>
           </div>
         </div>
-        <div id="options">
-          <button class="option" enabled="{{article.record_available}}" onclick="openArticleDialogs('listen');">
-            <div class="icon shadow-icon-button"><i class="listen"></i></div>
-            {% if article.record_available %}
-            <p>{{content.actions[lang]['listen']}}<br><span>{{content.global_[lang]['listenMsg']}}</p>
-            {% else %}
-            <p>{{content.global_[lang]['unavailable']}}<br><span>{{content.global_[lang]['unavailableMsg']}}</p>
-            {% endif %}
-          </button>
-          |
-          <button class="option" onclick="openArticleDialogs('share');">
-            <div class="icon shadow-icon-button"><i class="share"></i></div>
-            <p>{{content.actions[lang]['share']}}<br><span>{{content.global_[lang]['shareMsg']}}</p>
-          </button>
-          |
-          <button class="option" onclick="openArticleDialogs('rate');">
-            <div class="icon shadow-icon-button"><i class="rate"></i></div>
-            <p>{{content.actions[lang]['rate']}}<br><span>{{content.global_[lang]['rateMsg']}}</p>
-          </button>
-          |
-          <button class="option" onclick="openArticleDialogs('commet');">
-            <div class="icon shadow-icon-button"><i class="comment"></i></div>
-            <p>{{content.actions[lang]['comment']}}<br><span>{{content.global_[lang]['commentMsg']}}</p>
-          </button>
-        </div>
+        
       </div>
       <div id="right-section">
-        {% if article.attached_ad %} {% set entry_ad=
-        db_helper.ads.get_ad_by_id(article.attached_ad) %}
-        <div id="entry-ad"></div>
+        {% if article.attached_ad %} 
+        {% set entry_ad= db_helper.ads.get_ad_by_id(article.attached_ad) %} 
+        {% else %}
+        {%set entry_ad= db_helper.ads.get_ad_by_id(layout.home_ad_space_one) %}
         {% endif %}
+        <div id="entry-ad"></div>
       </div>
     </section>
     <section id="articles-sections">
@@ -250,7 +255,9 @@
             <p class="subtitle">{{section.subtitle[lang]}}</p>
             <h2>{{section.title[lang]}}</h2>
             <div class="attachment" id="sec-{{section.id[:6]}}"></div>
+            {% if article.mediaType == "cover" %}
               <div class="cover" id="sec-{{section.id[:6]}}"></div>
+            {%endif%}
             <p class="bio">{{section.bio[lang]}}</p>
             {% if section.attached_ad_id != '' %}
               <div class="section-ad-container">
@@ -290,7 +297,7 @@
     {% for writer in writers %}
       <section class="writer-section">
         <div class="left-section">
-          {% for article_ in db_helper.articles.multiple_articles_by_ids(db_helper.articles.get_article_by_writer_id(writer.id))[:4] %}
+          {#{% for article_ in db_helper.articles.multiple_articles_by_ids(db_helper.articles.get_article_by_writer_id(writer.id))[:4] %}
                         <div class="search-dialog-article-card-border" onclick="window.open('/articles/{{article._id}}/', '_self')">
 
               <div class="search-dialog-article-card">
@@ -318,7 +325,7 @@
                 </div>
               </div>
             </div>
-          {%endfor%}
+          {%endfor%}#}
         </div>
         <div class="right-section">
           <div class="writer-card">

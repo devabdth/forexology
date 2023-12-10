@@ -227,7 +227,30 @@
             </div>
             {%if db_helper.ads.check_if_ad_is_active(db_helper.ads.get_ad_by_id(layout.entry_section_ad))%}
               <div></div>
-            	<div id="entry-section-ad"></div>
+            	<div id="entry-section-ad" style="display: none"></div>
+              <div
+              class="right-side-article-card"
+              style="background-image: url(/assets/articles/covers/{{article.id}});"
+            >
+              <div id="overlay">
+                <p class="category">
+                {%set parent_category= db_helper.categories.get_parent_category_by_id(article.parent_category) %}
+                {%set category= db_helper.categories.get_category_by_id(article.category) %}
+                {% if parent_category %}
+                {{parent_category.name[lang]}}
+                {%endif%}
+                {% if parent_category and category %}
+                - 
+                {% endif %}
+                {% if category %}
+                {{category.name[lang]}}
+                {%endif%}
+              </p>
+              <h2><span>{{article.title[lang]}}</span></h2>
+                <p class="short_brief">{{article.short_brief[lang]}}</p>
+              </div>
+              <p id="label">{{content.global_[lang]['trending']}}</p>
+            </div>
             {%else%}
             	<div></div>
             {%endif%}
@@ -809,16 +832,16 @@
             {%if home_ad_space_two%} {{home_ad_space_two.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {% if not layout.home_ad_space_three == None %}
-          await initializeAdSpace(document.getElementById('home_ad_space_three'), 
-            {%if home_ad_space_three%} {{home_ad_space_three.to_dict() | safe}} {%else%} null {%endif%}
-            , '{{lang}}');
-        {% endif %}
-        {% if not layout.home_ad_space_four == None %}
-          await initializeAdSpace(document.getElementById('home_ad_space_four'), 
-            {%if home_ad_space_four%} {{home_ad_space_four.to_dict() | safe}} {%else%} null {%endif%}
-            , '{{lang}}');
-        {% endif %}
+        {#{% if not layout.home_ad_space_three == None %}
+                  await initializeAdSpace(document.getElementById('home_ad_space_three'), 
+                    {%if home_ad_space_three%} {{home_ad_space_three.to_dict() | safe}} {%else%} null {%endif%}
+                    , '{{lang}}');
+                {% endif %}
+                {% if not layout.home_ad_space_four == None %}
+                  await initializeAdSpace(document.getElementById('home_ad_space_four'), 
+                    {%if home_ad_space_four%} {{home_ad_space_four.to_dict() | safe}} {%else%} null {%endif%}
+                    , '{{lang}}');
+                {% endif %}#}
         {% if not layout.home_ad_space_five == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_five'), 
             {%if home_ad_space_five%} {{home_ad_space_five.to_dict() | safe}} {%else%} null {%endif%}
@@ -839,16 +862,16 @@
             {%if home_ad_space_eight%} {{home_ad_space_eight.to_dict() | safe}} {%else%} null {%endif%}
             , '{{lang}}');
         {% endif %}
-        {% if not layout.home_ad_space_nine == None %}
-          await initializeAdSpace(document.getElementById('home_ad_space_nine'), 
-            {%if home_ad_space_nine%} {{home_ad_space_nine.to_dict() | safe}} {%else%} null {%endif%}
-            , '{{lang}}');
-        {% endif %}
-        {% if not layout.home_ad_space_ten == None %}
-          await initializeAdSpace(document.getElementById('home_ad_space_ten'), 
-            {%if home_ad_space_ten%} {{home_ad_space_ten.to_dict() | safe}} {%else%} null {%endif%}
-            , '{{lang}}');
-        {% endif %}
+        {#{% if not layout.home_ad_space_nine == None %}
+                  await initializeAdSpace(document.getElementById('home_ad_space_nine'), 
+                    {%if home_ad_space_nine%} {{home_ad_space_nine.to_dict() | safe}} {%else%} null {%endif%}
+                    , '{{lang}}');
+                {% endif %}
+                {% if not layout.home_ad_space_ten == None %}
+                  await initializeAdSpace(document.getElementById('home_ad_space_ten'), 
+                    {%if home_ad_space_ten%} {{home_ad_space_ten.to_dict() | safe}} {%else%} null {%endif%}
+                    , '{{lang}}');
+                {% endif %}#}
         {% if not layout.home_ad_space_eleven == None %}
           await initializeAdSpace(document.getElementById('home_ad_space_eleven'), 
             {%if home_ad_space_eleven%} {{home_ad_space_eleven.to_dict() | safe}} {%else%} null {%endif%}

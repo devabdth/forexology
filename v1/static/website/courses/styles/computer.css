@@ -1,7 +1,7 @@
 @media screen and (min-width: 1024px) {
   section#entry {
     width: 100%;
-    height: 30vw;
+    height: 20vw;
     background: linear-gradient(
       180deg,
       transparent 0,
@@ -14,7 +14,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     flex-direction: column;
     background: var(--overlay-color);
   }
@@ -43,11 +43,12 @@
 
   section#all-courses {
     width: 100%;
+    min-height: 10vw;
     max-height: 2000000vw;
     display: flex;
     align-items: start;
     justify-content: start;
-    padding: 5% 5vw;
+    padding: 2.5vw 5vw;
     flex-direction: column;
     background-color: var(--body-bg-color);
   }

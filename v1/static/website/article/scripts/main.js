@@ -57,7 +57,6 @@ const initializeSections= (sections, lang) => {
 
 	sectionsIds= sections.map(section => section.id.substring(0, 6))
 	currentActiveSection= 0;
-
 	tabsTitle.innerHTML = sections[currentActiveSection].title[lang];
 	tabsSubTitle.innerHTML = sections[currentActiveSection].subtitle[lang];
 	tabsindicator.innerHTML= `${currentActiveSection+1} / ${sections.length}`;
@@ -106,7 +105,7 @@ const initializeSections= (sections, lang) => {
 		const currentArticle= sectionsIds[currentActiveSection];
 		document.querySelector(`.article-section#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
 		document.querySelector(`.article-section-tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
-		document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');		
+		document.querySelector(`#tabs-selector .tab#sec-${sectionsIds[currentActiveSection]}`).classList.remove('active');
 		nextAction.innerHTML= `${lang == 'EN' ? 'Next: ': 'التالي: '} ${sections[(currentActiveSection)].title[lang]}`
 		nextAction.style.pointerEvents= 'all';
 		nextAction.style.userSelect= 'all';

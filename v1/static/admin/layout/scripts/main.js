@@ -43,6 +43,7 @@ const toggleCollapsable = (element) => {
 const generatSelectioneDialogCard = (article, parent) => {
 	const card = document.createElement('div');
 	card.classList.add('article-card');
+	console.log(article)
 	card.setAttribute('id', article['id']);
 
 	const cover = document.createElement('div');
@@ -144,10 +145,11 @@ const openArticleSelectionDialog = (props) => {
 	articleCards.forEach(articleCard => {
 		articleCard.onclick = () => {
 			if (props.limit !== undefined && cards.childNodes.length == props.limit) return;
+			if(selectedArticles === undefined) selectedArticles= [];
 			if (selectedArticles.filter(article_ => article_.id == articleCard.id).length != 0) return;
-			selectedArticles.push(articles.filter(article_ => article_.id == articleCard.id)[0])
+			selectedArticles.push(articles.filter(article_ => {if(article_.id == articleCard.id) return article_})[0])
 			cards.appendChild(generatSelectioneDialogCard(
-				articles.filter(article_ => article_.id == articleCard.id)[0],
+				articles.filter(article_ => {if(article_.id == articleCard.id) return article_})[0],
 				cards,
 			));
 		}

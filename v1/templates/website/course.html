@@ -184,8 +184,12 @@
           </ul>
           {%endfor%}
           <div class="options">
-            <button class="shadow-button" id="wishlist-course">{{content.actions[lang]['addToWishlist']}}</button>
-            <button class="main-button" id="enroll-to-course">{{content.actions[lang]['enrollNow']}}</button>
+            {% if user_data == None or course.id not in user_data.courses.keys() %}
+              <button class="shadow-button" id="wishlist-course">{{content.actions[lang]['addToWishlist']}}</button>
+              <button class="main-button" id="enroll-to-course" onclick="openCourseEnrollForm()">{{content.actions[lang]['enrollNow']}}</button>
+            {%else%}
+              <button class="main-button" id="enroll-to-course" onclick="window.open('./dashboard/', '_self')">{{content.actions[lang]['continueCourse']}}</button>
+            {%endif%}
           </div>
         </div>
         <div id="promo">
@@ -341,6 +345,27 @@
         </div>
       </div>
     </div>
+    <div class="overlay" id="application-overlay"></div>
+    <div class="form" id="application-form">
+      <div class="header" id="header">
+        <h4>{{content.actions[lang]['enrollNow']}}</h4>
+        <div id="header-close" onclick="closeCourseEnrollForm()">x</div>
+      </div>
+      <div class="body" id="body">
+        <label for="name">{{content.global_[lang]['name']}}</label>
+        <input placeholder="{{content.global_[lang]['name']}}" type="text" class="single-line-field" id="name">
+        <label for="name">{{content.global_[lang]['email']}}</label>
+        <input placeholder="{{content.global_[lang]['email']}}" type="email" class="single-line-field" id="email">
+        <label for="name">{{content.global_[lang]['phoneNumber']}}</label>
+        <input placeholder="{{content.global_[lang]['phoneNumber']}}" type="tel" class="single-line-field" id="phone-number">
+      </div>
+      <div class="options" id="options">
+        <button class="shadow-button" id="cancel" onclick="closeCourseEnrollForm()">{{content.actions[lang]['cancel']}}</button>
+        <button class="main-button" id="submit"
+        onclick="submitCourseApplication()">{{content.actions[lang]['submit']}}</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
     <div id="drawer-overlay"></div>
     <div id="drawer-menu">
       <div id="header">
@@ -414,7 +439,12 @@
     <script type="text/javascript">
       const init= ()=> {
         initDrawer('{{lang}}');
-        changeHeaderLogoOnScroll= true;      
+        changeHeaderLogoOnScroll= true;
+        {% if user_Data %}
+        initialState('{{lang}}', {{dumps(user_data.to_dict())|safe}});
+        {%else%}
+        initialState('{{lang}}', undefined);
+        {%endif%}
       }
 
       if (window.attachEvent) window.attachEvent('load', init);

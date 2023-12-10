@@ -1,7 +1,7 @@
 const headerTabsConfig = () => {
 	const tabs = document.querySelectorAll('header div#tabs a');
 	for (let tab of tabs) {
-		if (tab.href == window.location.href) {
+		if (tab.href == window.location.href || `${tab.href}/` === `${window.location.href}`) {
 			tab.classList.add('active');
 		}
 	}
@@ -141,7 +141,8 @@ const initializeAdSpace = async (container, ad, lang, customCallback) => {
 	if (ad === undefined || ad === null) {
 		container.style.display= 'none';
 		return;
-}
+	}
+	console.log(container)
 	container.onclick = () => {
 		if (customCallback === undefined) window.open(ad['redirect']);
 		else customCallback();

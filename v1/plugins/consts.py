@@ -23,7 +23,9 @@ class Consts:
             "3": "Careers",
             "4": "Ads Spaces",
             "5": "Writers",
-            "6": "Admins"
+            "6": "Admins",
+            "7": "Courses",
+            "8": "Agenda",
         }
 
         self.header_fixed_tabs= [
@@ -139,6 +141,7 @@ class Consts:
             self.admin_login_route = data['ADMIN_LOGIN_ROUTE']
             self.admin_logout_route = data['ADMIN_LOGOUT_ROUTE']
             self.admin_layout_route = data['ADMIN_LAYOUT_ROUTE']
+            self.admin_agenda_route = data['ADMIN_AGENDA_ROUTE']
             self.admin_layout_articles_ads_route = data['ADMIN_LAYOUT_ARTICLES_ADS_ROUTE']
             self.admin_careers_route = data['ADMIN_CAREERS_ROUTE']
             self.admin_categories_route = data['ADMIN_CATEGORIES_ROUTE']

@@ -8,6 +8,7 @@ from .admins import AdminsDatabaseHelper
 from .users import UsersDatabaseHelper
 from .courses import CoursesDatabaseHelper
 from .quotes import QuotesDatabaseHelper
+from .agenda import AgendaDatabaseHelper
 import pymongo
 
 from sys import path
@@ -27,3 +28,4 @@ class DatabaseHelper:
         self.users= UsersDatabaseHelper(self.client)
         self.courses= CoursesDatabaseHelper()
         self.quotes= QuotesDatabaseHelper()
+        self.agenda= AgendaDatabaseHelper()
