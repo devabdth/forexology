@@ -63,8 +63,7 @@ class CoursesRouter:
                 self.helper.ads.load_data()
                 self.layout.load()
                 current_user_id= session.get("CURRENT_USER_ID", None)
-                # user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
-                user_data= {"id": "sdfksd;lfksdfk;sdlf", "name": "Ahmed Ibrahim", "bio": "This is Ahmed Ibrahim Account", "email": "a.ibrahim@storiesclub.net", "password": "1234567890", "joined_in": "2023-08-26 07:39:06.662730", "prefered_categories": [], "prefered_parent_categories": [], "followed_writers": [], "saves": [], "comments": [], "ratings": [], "likes": [], "last_log_in": "2023-08-26 07:39:06.662730", "current_reading_article": [], "current_reading_section": [], "courses": {"asfasdasdassdfsdf": {"completed_sessions": ["1", "2", "3", "4"]}}}
+                user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
                 return render_template(
                     '/website/course.html',
                     course= course,
@@ -100,8 +99,7 @@ class CoursesRouter:
                 self.helper.ads.load_data()
                 self.layout.load()
                 current_user_id= session.get("CURRENT_USER_ID", None)
-                # user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
-                user_data= {"id": "sdfksd;lfksdfk;sdlf", "name": "Ahmed Ibrahim", "bio": "This is Ahmed Ibrahim Account", "email": "a.ibrahim@storiesclub.net", "password": "1234567890", "joined_in": "2023-08-26 07:39:06.662730", "prefered_categories": [], "prefered_parent_categories": [], "followed_writers": [], "saves": [], "comments": [], "ratings": [], "likes": [], "last_log_in": "2023-08-26 07:39:06.662730", "current_reading_article": [], "current_reading_section": [], "courses": {"asfasdasdassdfsdf": {"completed_sessions": ["1", "2", "3", "4"]}}}
+                user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
                 return render_template(
                     '/website/courseDashboard.html',
                     course= course,
@@ -152,8 +150,7 @@ class CoursesRouter:
             self.helper.courses.load_courses()
             self.layout.load()
             current_user_id= session.get("CURRENT_USER_ID", None)
-            # user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
-            user_data= {"id": "sdfksd;lfksdfk;sdlf", "name": "Ahmed Ibrahim", "bio": "This is Ahmed Ibrahim Account", "email": "a.ibrahim@storiesclub.net", "password": "1234567890", "joined_in": "2023-08-26 07:39:06.662730", "prefered_categories": [], "prefered_parent_categories": [], "followed_writers": [], "saves": [], "comments": [], "ratings": [], "likes": [], "last_log_in": "2023-08-26 07:39:06.662730", "current_reading_article": [], "current_reading_section": [], "courses": {"asfasdasdassdfsdf": {"completed_sessions": ["1", "2", "3", "4"]}}}
+            user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
             return render_template(
                 '/website/courses.html',
                 user_data= user_data,
