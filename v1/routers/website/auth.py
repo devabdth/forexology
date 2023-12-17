@@ -7,6 +7,8 @@ from plugins.config import Config
 from flask import Flask, session, render_template, url_for, request, redirect
 from json import dumps, loads
 from sys import path
+import random
+from plugins.email_plugin import EmailPlugin
 path.insert(0, '../')
 path.insert(1, '../../')
 
@@ -29,6 +31,36 @@ class AuthRouter:
         self.assign_password_reset_index()
         self.assign_password_reset_traffic()
         self.assign_signup_traffic()
+        self.assign_create_user()
+
+    def assign_create_user(self):
+        @self.app.route(self.consts.join_route, methods=["POST"])
+        @self.app.route(self.consts.signup_route, methods=["POST"])
+        def create_user():
+            try:
+                body= loads(request.form['data'])
+                
+                files= request.files
+                profile= files['PROFILE'] if 'PROFILE' in files.keys() else None
+                cover= files['COVER'] if 'COVER' in files.keys() else None
+                res= self.helper.users.create_user(
+                    username= body['username'],
+                    phone_number= body['phoneNumber'],
+                    email= body['email'],
+                    password= body['password'],
+                    writers= body['writers'],
+                    profile= profile,
+                    cover= cover
+                )
+
+                if res != None:
+                    session['CURRENT_USER_ID']= res
+                    return self.app.response_class(status= 201)
+                    
+                return self.app.response_class(status= 500)
+            except Exception as e:
+                print(e)
+                return self.app.response_class(status= 500)
 
     def assign_login_confirmation(self):
         @self.app.route(self.consts.login_route, methods=["PATCH"])
@@ -93,7 +125,14 @@ class AuthRouter:
                     res= self.helper.users.get_user_by_email(body['email'])
                     if res is None:
                         return self.app.response_class(status= 404)
-                    session['VERIFICATION_CODE']= "123456"
+                    code = str(random.randint(0, 999999))
+                    session['VERIFICATION_CODE']= code
+                    EmailPlugin().send_raw_email(
+                        msg= 'Welcome to Forexology! Your verfication code is: {}'.format(code),
+                        recipent= body['email'],
+                        subject="Verify your Email"
+				    )
+
                     return self.app.response_class(status= 200)
                 elif body['mode'] == 'CODE':
                     if body['code'] == session.get('VERIFICATION_CODE'):
@@ -143,7 +182,13 @@ class AuthRouter:
                 if body['mode'] == 'CHECKING_EMAIL_UNIQUENESS':
                     res= self.helper.users.get_user_by_email(body['email'])
                     if res is None:
-                        session['VERIFICATION_CODE']= "123456"
+                        code = str(random.randint(0, 999999))
+                        session['VERIFICATION_CODE']= code
+                        EmailPlugin().send_raw_email(
+                            msg= 'Welcome to Forexology! Your verfication code is: {}'.format(code),
+                            recipent= body['email'],
+                            subject="Verify your Email"
+                        )
                         return self.app.response_class(status= 200)
                     return self.app.response_class(status= 301)
                 elif body['mode'] == 'CODE':

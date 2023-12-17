@@ -31,14 +31,46 @@ class UsersDatabaseHelper:
 		except Exception as e:
 			print(e)
 
-	def create_user(self, dict_):
+	def create_user(self, **kwargs):
 		try:
-			res= self.users_collection.insert_one(dict_)
-			print(res)
-			return res.inserted_id
+			print(kwargs)
+			res= self.users_collection.insert_one(
+				{
+					"id": secrets.token_hex(12),
+					"name": kwargs["username"],
+					"email": kwargs["email"],
+					"phone_number": kwargs["phone_number"],
+					"password": kwargs["password"],
+					"joined_in": str(datetime.now()),
+					"prefered_categories": [],
+					"prefered_parent_categories": [],
+					"followed_writers": kwargs['writers'],
+					"saves": [],
+					"comments": [],
+					"ratings": [],
+					"likes": [],
+					"last_log_in": str(datetime.now()),
+					"current_reading_article": "",
+					"current_reading_section": "",
+					"courses": {}
+				}
+			)
+
+			inserted_id= res.inserted_id
+			if inserted_id == None:
+				return False
+			
+			if kwargs['profile'] != None:
+				if kwargs['profile'].filename.split('.')[-1] in self.consts.covers_supported_extenstions:
+					kwargs['profile'].save(abspath(join(dirname(__file__), '../assets/users/profiles/', f"{inserted_id}.{kwargs['profile'].filename.split('.')[-1]}"),))
+			if kwargs['cover'] != None:
+				if kwargs['cover'].filename.split('.')[-1] in self.consts.covers_supported_extenstions:
+					kwargs['cover'].save(abspath(join(dirname(__file__), '../assets/users/covers/', f"{inserted_id}.{kwargs['cover'].filename.split('.')[-1]}"),))
+
+			return inserted_id
 		except Exception as e:
 			print(e)
-			return False
+			return None
 
 
 

@@ -68,7 +68,6 @@
     background-size: cover;
   }
 
-
   .form#confirmation-form #information,
   .form#confirmation-form #profile {
     transform: translate(0, -50%);
@@ -79,11 +78,10 @@
     aspect-ratio: 1/1;
     border-radius: 12px;
     border: 0.5vw var(--body-bg-color) solid;
-    transform: translate(10%, -50%);
-        background-position: center;
+    transform: translate(-15%, -50%);
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
   }
 
   .from#confirmation-form #information h3 {

@@ -1,4 +1,4 @@
-let lang, selectedWriters, username, email, password, profile, cover, profileReaderResult, coverReaderResult;
+let lang, selectedWriters, username, phoneNumber, email, password, profile, cover, profileReaderResult, coverReaderResult;
 window.onload = () => {
     const profilePicker = document.querySelector('.form#profile-picker div.image-picker');
     profilePicker.onclick = () => {
@@ -45,6 +45,7 @@ const confirmation = async () => {
     const form = document.querySelector('section #form');
     const nameField = document.querySelector('section div#form input.single-line-field-awhite#name');
     const emailField = document.querySelector('section div#form input.single-line-field-awhite#email');
+    const phoneField = document.querySelector('section div#form input.single-line-field-awhite#phone');
     const passwordField = document.querySelector('section div#form input.single-line-field-awhite#password');
     const repasswordField = document.querySelector('section div#form input.single-line-field-awhite#repassword');
     const statusMsg = document.querySelector('#actions p#status-msg');
@@ -65,6 +66,16 @@ const confirmation = async () => {
     }
 
     emailField.style.border = 'none';
+
+    const phoneRe = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
+    ;
+    if (!(phoneField.value.trim().length > 8 && String(phoneField.value.trim()).toLowerCase().match(phoneRe))) {
+        phoneField.style.border = '2px red solid';
+        statusMsg.innerHTML = lang == 'EN' ? 'Enter a valid email!' : 'البريد لإلكتروني لا يصلح';
+        return;
+    }
+
+    phoneField.style.border = 'none';
 
 
     if (passwordField.value.trim().length < 8 || passwordField.value.trim().length > 64) {
@@ -98,6 +109,7 @@ const confirmation = async () => {
             username = nameField.value.trim();
             email = emailField.value.trim();
             password = passwordField.value.trim();
+            phoneNumber = phoneField.value.trim();
             form.style.display = 'none';
             document.querySelector('section #email-validation-form').style.display = 'flex';
         } else if (res.status === 301) {
@@ -280,21 +292,88 @@ const showConfirmationPanel = () => {
     const form = document.querySelector('.form#confirmation-form');
     const coverContainer = form.querySelector('#cover');
     if (cover !== undefined && coverReaderResult !== undefined) {
-        coverContainer.style.backgroundImage= `url(${coverReaderResult})`
+        coverContainer.style.backgroundImage = `url(${coverReaderResult})`
     } else {
-        coverContainer.style.background= 'var(--accentColor)';
+        coverContainer.style.background = 'var(--accentColor)';
     }
 
     const profileContainer = form.querySelector('#profile');
     if (profile !== undefined && profileReaderResult !== undefined) {
-        profileContainer.style.backgroundImage= `url(${profileReaderResult})`
+        profileContainer.style.backgroundImage = `url(${profileReaderResult})`
     } else {
-        profileContainer.style.background= 'var(--accentColor)';
+        profileContainer.style.background = 'var(--accentColor)';
     }
     const nameDisplay = form.querySelector('#information h3');
-    nameDisplay.innerHTML= username
+    nameDisplay.innerHTML = username
     const emailDisplay = form.querySelector('#information p#email');
-    emailDisplay.innerHTML= email
+    emailDisplay.innerHTML = email
     const writers = form.querySelector('#writers');
     form.style.display = 'flex';
+
+    const submitBtn = document.querySelector("div.form#confirmation-form #actions .main-button");
+    submitBtn.onclick = () => {
+        createUser();
+    }
+}
+
+const createUser = async () => {
+    const statusMsg = document.querySelector("div.form#confirmation-form #actions p");
+    const submitBtn = document.querySelector("div.form#confirmation-form #actions .main-button");
+    const cancelBtn = document.querySelector("div.form#confirmation-form #actions .shadow-button");
+    try {
+
+        submitBtn.onclick = () => { }
+        cancelBtn.onclick = () => { }
+        statusMsg.innerHTML = lang === 'EN' ? "Creating your account..." : "جاري إنشاء حسابك...";
+        submitBtn.innerHTML = lang === 'EN' ? "Loading..." : "جاري التحميل...";
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = () => {
+            if (xhr.status === 201) {
+                window.open('/', '_self');
+                return;
+            }
+
+            console.log(xhr.status);
+            statusMsg.innerHTML = lang === 'EN' ? "Please, Try again later!" : "من فضلك، أعد المحاولة لاحقًا";
+            submitBtn.innerHTML = lang === 'EN' ? 'Failed' : "فشلت العملية";
+            setTimeout(() => {
+                statusMsg.innerHTML = '';
+                submitBtn.innerHTML = lang === 'EN' ? 'Submit' : "تآكيد";
+                submitBtn.onclick = () => {
+                    createUser();
+                }
+                cancelBtn.onclick = () => { window.open('./', '_self'); }
+            }, 3000);
+        }
+
+        const formData = new FormData();
+        formData.append('data', JSON.stringify({
+            username: username,
+            email: email,
+            phoneNumber: phoneNumber,
+            password: password,
+            writers: selectedWriters,
+        }));
+
+        if (cover !== undefined) formData.append('COVER', cover);
+        if (profile !== undefined) formData.append('PROFILE', profile);
+
+        xhr.open('POST', './');
+        xhr.send(formData);
+
+    } catch (error) {
+        console.log(error);
+        statusMsg.innerHTML = lang === 'EN' ? "Please, Try again later!" : "من فضلك، أعد المحاولة لاحقًا";
+        submitBtn.innerHTML = lang === 'EN' ? 'Failed' : "فشلت العملية";
+        setTimeout(() => {
+            statusMsg.innerHTML = '';
+            submitBtn.innerHTML = lang === 'EN' ? 'Submit' : "تآكيد";
+            submitBtn.onclick = () => {
+                createUser();
+            }
+            cancelBtn.onclick = () => { window.open('./', '_self'); }
+        }, 3000);
+
+    }
 }

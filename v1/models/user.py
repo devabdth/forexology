@@ -15,7 +15,7 @@ class User:
 		self.params: list= [
 			{"name": "id", "type": str},
 			{"name": "name", "type": str},
-			{"name": "bio", "type": str},
+			{"name": "phone_number", "type": str},
 			{"name": "email", "type": str},
 			{"name": "password", "type": str},
 			{"name": "joined_in", "type": str},
@@ -48,7 +48,7 @@ class User:
 		return {
 			"id": self.id,
 			"name": self.name,
-			"bio": self.bio,
+			"phone_number": self.phone_number,
 			"email": self.email,
 			"password": self.password,
 			"joined_in": self.joined_in,
@@ -62,4 +62,5 @@ class User:
 			"last_log_in": self.last_log_in,
 			"current_reading_article": self.current_reading_article,
 			"current_reading_section": self.current_reading_section,
+			"courses": self.courses
 		}

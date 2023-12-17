@@ -12,6 +12,10 @@
         {{content.actions[lang]['signup']}}
       </title>
       <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>  
+      <link
         rel="icon"
         type="image/x-icon"
         href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
@@ -24,17 +28,12 @@
       <link
         rel="stylesheet"
         type="text/css"
-        href="{{url_for('static', filename='website/signup/styles/largeTablets.css')}}"
+        href="{{url_for('static', filename='website/signup/styles/tablets.css')}}"
       />
       <link
         rel="stylesheet"
         type="text/css"
-        href="{{url_for('static', filename='website/signup/styles/smallTablets.css')}}"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="{{url_for('static', filename='website/signup/styles/mobile.css')}}"
+        href="{{url_for('static', filename='website/signup/styles/mobiles.css')}}"
       />
 
       <link
@@ -81,21 +80,6 @@
         }
         {% endif %}
       </style>
-      <header>
-        <div
-          onclick="window.open('{{consts.index_route}}', `_self`);"
-          id="logo"
-        ></div>
-        <div id="options">
-          <button onclick="openSearcDFhDialog();" class="main-icon-button">
-            <i onclick="openSearchDialog();" class="search"></i>
-          </button>
-          |
-          <button onclick="toggleTheme(`{{mode}}`);" class="main-icon-button">
-            <i class="theme"></i>
-          </button>
-        </div>
-      </header>
       <section>
         <div id="form" class="form">
           <h3>{{content.actions[lang]['signup']}}</h3>
@@ -114,6 +98,21 @@
               name="email"
               id="email"
               placeholder="{{content.placeholders[lang]['emailFieldPlaceholder']}}"
+              class="single-line-field-awhite"
+            />
+          </div>
+          <div class="field-border">
+            <input
+              type="tel"
+              name="phone"
+              id="phone"
+              {% if lang == 'AR' %}
+              dir="RTL"
+                {% else %}
+               dir="LTR"
+              {% endif %}
+              style="width: 100% !important;"
+              placeholder="{{content.placeholders[lang]['phoneFieldPlaceholder']}}"
               class="single-line-field-awhite"
             />
           </div>
@@ -165,7 +164,7 @@
                 {{content.actions[lang]['sendCodeAgain']}}
               </button>
               <div id="divider">|</div>
-              <button class="shadow-button" id="change-email">
+              <button class="shadow-button" id="change-email" onclick='window.open("./", "_self");'>
                 {{content.actions[lang]['changeEmail']}}
               </button>
             </div>
@@ -256,10 +255,6 @@
               <h3 id="name">This is my name</h3>
               <p id="email"></p>
               <br /><br /><br />
-              <p id="bio">
-                This is my name name my is this This is my name name my is this
-                This is my name name my is this This is my name name my is this
-              </p>
             </div>
           </div>
           <div id="actions">
@@ -342,6 +337,15 @@
           "data-theme",
           "{{mode | lower}}"
         );
+
+        const init= ()=> {
+          const phoneInputField = document.querySelector(".single-line-field-awhite#phone");
+          const phoneInput = window.intlTelInput(phoneInputField, { utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" });
+          document.querySelector('.iti').style.width= '100%'
+        }
+
+        if (window.addEventListener) window.addEventListener('load', init);
+        else if (window.attachEvent) window.attachEvent('load', init);
       </script>
     </body>
   </html>

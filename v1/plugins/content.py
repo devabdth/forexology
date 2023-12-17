@@ -285,18 +285,20 @@ class Content:
         self.placeholders: dict = {
             "EN": {
                 "search": "Search by name, keywords, etc...",
-                "emailUsernameFieldPlaceholder": "Email Address or Username",
+                "emailUsernameFieldPlaceholder": "Email Address",
                 "emailFieldPlaceholder": "Email Address",
                 "nameFieldPlaceholder": "Name",
                 "passwordFieldPlaceholder": "Enter your Password!",
+                "phoneFieldPlaceholder": "Enter your Phone Number!",
                 "repasswordFieldPlaceholder": "Re-enter your Password!",
             }, "AR": {
-                "search": "Search by name, keywords, etc...",
-                "emailUsernameFieldPlaceholder": "Email Address or Username",
-                "emailFieldPlaceholder": "Email Address",
-                "nameFieldPlaceholder": "Name",
-                "passwordFieldPlaceholder": "Enter your Password!",
-                "repasswordFieldPlaceholder": "Re-enter your Password!",
+                "search": "أبحث بالاسم، كلمة مفتاحية، أو آخرى",
+                "emailUsernameFieldPlaceholder": "أدخل بريدك الإلكتروني",
+                "emailFieldPlaceholder": "البريد الالكتروني",
+                "nameFieldPlaceholder": "الاسم",
+                "passwordFieldPlaceholder": "أدخل كلمة السر",
+                "repasswordFieldPlaceholder": "أعد إدخال كلمة السر",
+                "phoneFieldPlaceholder": "أدخل رقم الهاتف",
             }
         }
 

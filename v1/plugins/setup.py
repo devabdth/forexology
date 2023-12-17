@@ -62,6 +62,10 @@ class Setup:
         from os.path import abspath, dirname, join, exists
         from os import mkdir
         dirs= [
+            "../assets/users/",
+            "../assets/users/covers/",
+            "../assets/users/profiles/",
+            "../assets/articles/",
             "../assets/articles/",
             "../assets/articles/images",
             "../assets/articles/audios",

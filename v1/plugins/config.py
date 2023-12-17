@@ -8,6 +8,8 @@ class Config:
 		# App Information
 		self.port= environ['PORT'] if 'PORT' in environ.keys() else 1010
 		self.app_name= environ['APP_NAME'] if 'APP_NAME' in environ.keys() else 'CUBERS_PROJECT'
+		self.email_model_email= environ['MODEL_EMAIL'] if 'MODEL_EMAIL' in environ.keys() else 'no-reply@forexology.net'
+		self.email_model_access_key= environ['MODEL_EMAIL_ACCESS_KEY'] if 'MODEL_EMAIL_ACCESS_KEY' in environ.keys() else '1234567890'
 		self.auth_key= environ['AUTH_KEY'] if 'AUTH_KEY' in environ.keys() else 'AUTH_KEY'
 		self.version= environ['VERSION'] if 'VERSION' in environ.keys() else 'VERSION'
 		self.host= environ['HOST'] if 'HOST' in environ.keys() else '0.0.0.0'
