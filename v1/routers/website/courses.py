@@ -5,7 +5,7 @@ from plugins.utils import Utils
 from plugins.consts import Consts
 from plugins.content import Content
 from plugins.config import Config
-from flask import Flask, session, render_template, url_for, send_file, request
+from flask import Flask, session, render_template, url_for, send_file, request, redirect
 from json import dumps, loads
 from sys import path
 path.insert(0, '../')
@@ -29,14 +29,19 @@ class CoursesRouter:
         self.assign_course_dashboard_index()
         self.assign_course_application_post()
         self.assign_courses_cover_index()
+        self.assign_completed_session_assignment()
 
     def assign_course_application_post(self):
         @self.app.route(self.consts.course_route, methods=['POST'])
         def course_application_post(course_id):
             try:
+                current_user_id= session.get("CURRENT_USER_ID", None)
+                if current_user_id == None:
+                    return redirect('/login/')
+
                 body= dict(loads(request.data))
                 result= self.helper.courses.create_course_application(
-                    course= course_id, application= body
+                    course= course_id, application= body, current_user_id= current_user_id
                 )
 
                 if result == 1:
@@ -55,7 +60,6 @@ class CoursesRouter:
             try:
                 self.helper.courses.load_courses()
                 course= self.helper.courses.get_course_by_id(course_id)
-                print(course)
                 if course is None:
                     return self.app.response_class(status= 404)
                 lang = session.get('LANG', 'AR')
@@ -81,6 +85,24 @@ class CoursesRouter:
                 
             
             
+            except Exception as e:
+                print(e)
+                return self.app.response_class(status= 500)
+
+    def assign_completed_session_assignment(self):
+        @self.app.route(f"{self.consts.course_route}/dashboard/completedSession/", methods=['PATCH'])
+        def completed_session_assignment(course_id):
+            try:
+                current_user_id= session.get("CURRENT_USER_ID", None)
+                user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
+                if user_data is None:
+                    raise Exception('No User Found!')
+                sessionId= loads(request.data)['session']
+                if not sessionId in user_data.courses[course_id]["completed_sessions"]:
+                    user_data.courses[course_id]["completed_sessions"].append(sessionId)
+                    res= self.helper.users.update_user(payload= {"id": user_data.id, "courses": user_data.courses})
+                    return self.app.response_class(status= 200 if True else 500)
+                return self.app.response_class(status= 400)
             except Exception as e:
                 print(e)
                 return self.app.response_class(status= 500)

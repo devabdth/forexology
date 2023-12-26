@@ -36,7 +36,9 @@ const confirmation = async () => {
         });
 
         if (res.status === 200) {
-            window.open('/', '_self');
+            let body= await res.json();
+            if (body['fallbackURL'] !== undefined) window.open(`..${body['fallbackURL']}/`, '_self');
+            else window.open('/', '_self');
             return;
         } else if (res.status === 401) {
             statusMsg.innerHTML = 'Wrong Password!';

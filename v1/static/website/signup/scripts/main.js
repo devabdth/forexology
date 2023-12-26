@@ -99,7 +99,7 @@ const confirmation = async () => {
     try {
         const res = await fetch('./', {
             method: 'PATCH',
-            body: JSON.stringify({ email: emailField.value.trim(), mode: 'CHECKING_EMAIL_UNIQUENESS' }),
+            body: JSON.stringify({ email: emailField.value.trim(), name: nameField.value.trim(), mode: 'CHECKING_EMAIL_UNIQUENESS' }),
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -130,6 +130,37 @@ const confirmation = async () => {
             statusMsg.innerHTML = '';
             confirmBtn.style.pointerEvents = 'all';
         }, 3000);
+    }
+}
+
+const sendCodeAgain = async () => {
+    try {
+        const statusMsg = document.querySelector('#status-msg');
+        const btn = document.querySelector('#send-code-again');
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.5';
+        statusMsg.innerHTML = lang === 'EN' ? 'Loading...' : "جاري التحميل";
+        const res = await fetch('./', {
+            method: 'PATCH',
+            body: JSON.stringify({ mode: 'SEND_CODE_AGAIN' }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (res.status === 200) {
+            statusMsg.innerHTML = lang === 'EN' ? "Code sent successfully" : "تم إرسال الرمز بنجاح";
+        } else {
+            statusMsg.innerHTML = lang === 'EN' ? "Try again later!" : "أعد المحاول لاحقاً";
+        }
+        setTimeout(() => {
+            btn.style.pointerEvents = 'all';
+            btn.style.opacity = '1';
+            statusMsg.innerHTML = '';
+        }, 5000);
+
+    } catch (error) {
+        console.log(error)
+
     }
 }
 

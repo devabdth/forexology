@@ -43,7 +43,7 @@ class AuthRouter:
                 files= request.files
                 profile= files['PROFILE'] if 'PROFILE' in files.keys() else None
                 cover= files['COVER'] if 'COVER' in files.keys() else None
-                res= self.helper.users.create_user(
+                inserted_id, id= self.helper.users.create_user(
                     username= body['username'],
                     phone_number= body['phoneNumber'],
                     email= body['email'],
@@ -53,9 +53,9 @@ class AuthRouter:
                     cover= cover
                 )
 
-                if res != None:
-                    session['CURRENT_USER_ID']= res
-                    return self.app.response_class(status= 201)
+                if inserted_id != None and id != None:
+                    session['CURRENT_USER_ID']= id
+                    return self.app.response_class(status= 201, response=dumps({'fallbackURL': session['fallbackURL'] if session.get('fallbackURL') else ''}))
                     
                 return self.app.response_class(status= 500)
             except Exception as e:
@@ -73,7 +73,7 @@ class AuthRouter:
                 
                 if user.password == body['password']:
                     session['CURRENT_USER_ID']= user.id
-                    return self.app.response_class(status= 200)
+                    return self.app.response_class(status= 200, response=dumps({'fallbackURL': session.get('fallbackURL', None)}))
                 else:
                     return self.app.response_class(status= 401)
             except Exception as e:
@@ -85,6 +85,8 @@ class AuthRouter:
         @self.app.route(self.consts.logout_route, methods=["PATCH"])
         def logout():
             try:
+                if session.get('fallbackURL'):
+                    session.pop('fallbackURL')
                 session.pop('CURRENT_USER_ID')
                 return self.app.response_class(status= 200)
             except Exception as e:
@@ -97,6 +99,9 @@ class AuthRouter:
         def login_index():
             lang = session.get('LANG', 'AR')
             mode = session.get('MODE', 'LIGHT')
+            if 'fallbackURL' in request.values.keys():
+                print(request.values['fallbackURL'])
+                session['fallbackURL']= request.values['fallbackURL']
             current_user_id= session.get("CURRENT_USER_ID", None)
             if current_user_id != None:
                 return redirect(self.consts.profile_route)            
@@ -125,12 +130,12 @@ class AuthRouter:
                     res= self.helper.users.get_user_by_email(body['email'])
                     if res is None:
                         return self.app.response_class(status= 404)
-                    code = str(random.randint(0, 999999))
+                    code = str(f'{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}')
                     session['VERIFICATION_CODE']= code
-                    EmailPlugin().send_raw_email(
-                        msg= 'Welcome to Forexology! Your verfication code is: {}'.format(code),
+                    EmailPlugin().send_otp_email(
+                        otp= code,
                         recipent= body['email'],
-                        subject="Verify your Email"
+                        name= body['name'],
 				    )
 
                     return self.app.response_class(status= 200)
@@ -179,15 +184,33 @@ class AuthRouter:
                 if 'mode' not in body.keys():
                     return self.app.response_class(status= 500)
                 
+                if body['mode'] == 'SEND_CODE_AGAIN':
+                    try:
+                        if not ( session.get("UP_TO_VERIFICATION_EMAIL", None) is None and \
+                            session.get("UP_TO_VERIFICATION_USERNAME", None) is None):
+                            code = str(f'{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}')
+                            session['VERIFICATION_CODE']= code
+                            EmailPlugin().send_otp_email(
+                                otp= code,
+                                recipent= session.get("UP_TO_VERIFICATION_EMAIL", None),
+                                name= session.get("UP_TO_VERIFICATION_USERNAME", None),
+                            )
+                            return self.app.response_class(status= 200)
+                        return self.app.response_class(status= 500)
+                    except  Exception as e:
+                        print(e)
+                        return self.app.response_class(status= 500)
                 if body['mode'] == 'CHECKING_EMAIL_UNIQUENESS':
                     res= self.helper.users.get_user_by_email(body['email'])
                     if res is None:
-                        code = str(random.randint(0, 999999))
+                        code = str(f'{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}')
                         session['VERIFICATION_CODE']= code
-                        EmailPlugin().send_raw_email(
-                            msg= 'Welcome to Forexology! Your verfication code is: {}'.format(code),
+                        session['UP_TO_VERIFICATION_EMAIL']= body['email']
+                        session['UP_TO_VERIFICATION_USERNAME']= body['name']
+                        EmailPlugin().send_otp_email(
+                            otp= code,
                             recipent= body['email'],
-                            subject="Verify your Email"
+                            name= body['name'],
                         )
                         return self.app.response_class(status= 200)
                     return self.app.response_class(status= 301)

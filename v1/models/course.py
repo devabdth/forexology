@@ -17,6 +17,7 @@ class Course:
 			{'name': 'content_list', 'type': list},
 			{'name': 'sessions', 'type': dict},
 			{'name': 'applications_list', 'type': list},
+			{'name': 'students', 'type': list},
 		]
 
 
@@ -39,4 +40,5 @@ class Course:
 			"active": self.active,
 			"sessions": self.sessions,
 			"applications_list": self.applications_list,
+			"students": self.students,
 		}

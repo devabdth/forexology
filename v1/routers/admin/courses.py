@@ -26,6 +26,48 @@ class CoursesAdminRouter:
 
 	def setup(self):
 		self.assign_index()
+		self.assign_update_course()
+		self.assign_applications_traffic()
+
+
+	def assign_update_course(self):
+		@self.app.route(f'{self.consts.admin_courses_route}', methods=['PATCH'])
+		def update_course():
+			try:
+				formData= dict(request.form)
+				payload= loads(formData['payload'])
+				self.helper.courses.load_courses()
+				course= self.helper.courses.get_course_by_id(payload['id'])
+				if course is None:
+					return self.app.response_class(status= 500)
+
+				course.title= payload['title']
+				course.bio= payload['bio']
+				course.price= float(payload['price'])
+				res= self.helper.courses.update_course(course)
+				return self.app.response_class(status= 200 if res else 500)
+			except Exception as e:
+				print(e)
+				return self.app.response_class(status= 500)
+	def assign_applications_traffic(self):
+		@self.app.route(f'{self.consts.admin_courses_route}/applications/', methods=['PATCH'])
+		def applications_traffic():
+			try:
+				body= loads(request.data)
+				res= self.helper.courses.handle_course_request(
+					status= body['status'],
+					course_id= body['courseId'],
+					request= body['request']
+				)
+				print([res, body['status']])
+				if res and body['status']:
+					user_data= self.helper.users.get_user_by_id(body['request']['userId'])
+					user_data.courses[body['courseId']]= {"completed_sessions": []}
+					self.helper.users.update_user(payload= {"courses": user_data.courses, "id": user_data.id})
+				return self.app.response_class(status= 200 if res else 500)
+			except Exception as e:
+				print(e)
+				return self.app.response_class(status= 500)
 
 	def assign_index(self):
 		@self.app.route(self.consts.admin_courses_route, methods=["GET"])
@@ -33,6 +75,7 @@ class CoursesAdminRouter:
 			aid= session.get('ADMIN_ID')
 			if  aid == None:
 				return redirect(self.consts.admin_login_route)
+			self.helper.courses.load_courses()
 			self.layout.load()
 			self.helper.admins.load_admins()
 			lang= session.get('LANG', 'EN')

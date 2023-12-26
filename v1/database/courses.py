@@ -34,7 +34,7 @@ class CoursesDatabaseHelper:
 		except Exception as e:
 			print(e)
 			return False
-
+	
 	def get_course_by_id(self, course_id):
 		try:
 			for course in self.all_courses:
@@ -62,6 +62,7 @@ class CoursesDatabaseHelper:
 		try:
 			payload['id']= secrets.token_hex(12)
 			payload['sessions']= []
+			payload['students']= []
 			payload['active']= True
 			course= Course(payload)
 			return True
@@ -80,7 +81,7 @@ class CoursesDatabaseHelper:
 			print(e)
 			return False
 		
-	def create_course_application(self, course, application):
+	def create_course_application(self, course, application, current_user_id):
 		try:
 			self.load_courses()
 			course= self.get_course_by_id(course)
@@ -91,10 +92,9 @@ class CoursesDatabaseHelper:
 			applications_df= applications_df.loc[applications_df['phone'] == application['phone']]
 			if len(applications_df) != 0:
 				return -1
-			
+			application['userId']= current_user_id
 			applications_list.append(application)
 			course.applications_list= applications_list
-			print('Done Here')
 			result= self.update_course(course)
 			if result:
 				return 1
@@ -103,3 +103,29 @@ class CoursesDatabaseHelper:
 			print(e)
 			return 0
 
+	def handle_course_request(self, status, course_id, request):
+		try:
+			self.load_courses()
+			course= self.get_course_by_id(course_id)
+			applications_list= course.applications_list
+			applications_df= DataFrame(applications_list, columns=['name', 'email', 'phone', 'userId'])
+			applications_df= applications_df.loc[applications_df['userId'] == request['userId']]
+			i= applications_df.loc[applications_df['userId'] == request['userId']].index
+			i= applications_df[applications_df['userId'] == request['userId']].index
+			if len(applications_df) == 0:
+				return False
+   
+			applications_df.drop(i)
+			applications_list= []
+			for _, row in applications_df.iterrows():
+				row= dict(row)
+				if not row['userId'] == request['userId']:
+					applications_list.append(row)
+			course.applications_list= applications_list
+			if status:
+				course.students.append(request['userId'])
+			self.update_course(course)
+			return True
+		except Exception as e:
+			print(e)
+			return False

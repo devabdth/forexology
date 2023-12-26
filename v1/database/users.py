@@ -33,10 +33,10 @@ class UsersDatabaseHelper:
 
 	def create_user(self, **kwargs):
 		try:
-			print(kwargs)
+			id= secrets.token_hex(12)
 			res= self.users_collection.insert_one(
 				{
-					"id": secrets.token_hex(12),
+					"id": id,
 					"name": kwargs["username"],
 					"email": kwargs["email"],
 					"phone_number": kwargs["phone_number"],
@@ -67,15 +67,23 @@ class UsersDatabaseHelper:
 				if kwargs['cover'].filename.split('.')[-1] in self.consts.covers_supported_extenstions:
 					kwargs['cover'].save(abspath(join(dirname(__file__), '../assets/users/covers/', f"{inserted_id}.{kwargs['cover'].filename.split('.')[-1]}"),))
 
-			return inserted_id
+			return (inserted_id, id)
 		except Exception as e:
 			print(e)
 			return None
 
 
 
+	def get_users_by_id(self, ids, return_as_dicts= False):
+		users = self.users_collection.find({'id': {'$in': ids}})
+		if return_as_dicts:
+			return [User(user).to_dict() for user in users]
+		return [User(user) for user in users]
+	
+
+
 	def get_user_by_id(self, id):
-		users = self.users_collection.find({'_id': ObjectId(id)})
+		users = self.users_collection.find({'id': id})
 		return User(users[0])
 	
 	def get_user_by_email(self, email):
@@ -98,8 +106,7 @@ class UsersDatabaseHelper:
 			if 'id' in payload.keys():
 				user_id= payload['id']
 				del payload['id']
-
-			self.users_collection.find_one_and_upate({'_id': ObjectId(user_id)}, {'$set': payload.to_dict()})
+			res= self.users_collection.find_one_and_update({'id': user_id}, {'$set': dict(payload)})
 			self.refresh_all_users()
 
 			return True

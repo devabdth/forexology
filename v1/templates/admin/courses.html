@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FOREXology - Courses</title>
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='website/global/styles/images/symbol-512.ico')}}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -23,9 +27,12 @@
       type="text/javascript"
       src="{{url_for('static', filename='website/global/scripts/main.js')}}"
     ></script>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
   <body>
     <style type="text/css">
       :root {
@@ -138,15 +145,38 @@
             </div>
           </div>
           <div class="body">
+            <div id="cards">
+              {%for course in db_helper.courses.all_courses %}
+              <div class="course-card" id="course-card-{{course.id[:6]}}">
+                <div
+                  class="cover"
+                  style="background-image: url(/courses/cover/{{course.id}}/);"
+                ></div>
+                <div class="content">
+                  <h2>{{course.title[lang]}}</h2>
+                  <p>{{course.bio[lang]}}</p>
+                  <div class="options">
+                    <a
+                      class="shadow-button"
+                      onclick="openAccessManagerForm(`{{course.id}}`, `{{db_helper.users.get_users_by_id(course['students'], return_as_dicts= True) | string | safe | replace("'", "\'")}}`);"
+                      >Manage Access</a
+                    >
+                    <a class="shadow-button">Manage Sessions</a>
+                    <a class="shadow-button" onclick="openCourseFormDialog('EDIT', {{dumps(course.to_dict())}});">Edit Course</a>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
           </div>
         </div>
       </div>
     </section>
-        <div class="form-dialog-overlay" id="courses-form-dialog-overlay"></div>
+    <div class="form-dialog-overlay" id="courses-form-dialog-overlay"></div>
     <div class="form-dialog" id="courses-form-dialog">
       <div class="header">
         <h2></h2>
-        <div onclick="closeCarrerFormDialog();">x</div>
+        <div onclick="closeCourseInfoFormDialog();">x</div>
       </div>
       <div class="body">
         <label for="en-title">English Title</label>
@@ -177,14 +207,7 @@
           id="ar-bio"
           placeholder="Arabic Bio"
         />
-        <label for="hours">Total Hours</label>
-        <input
-          type="number"
-          class="single-line-field"
-          id="hours"
-          placeholder="Total Hours"
-        />
-        <label for="price">Price</label>
+        <label for="price">Price ($)</label>
         <input
           type="number"
           class="single-line-field"
@@ -199,14 +222,14 @@
         <button
           class="shadow-button"
           id="clear"
-          onclick="clearCarrerFormDialog()"
+          onclick="clearCourseInfoFormDialog()"
         >
           Clear
         </button>
         <button
           class="shadow-button"
           id="cancel"
-          onclick="closeCarrerFormDialog()"
+          onclick="closeCourseInfoFormDialog()"
         >
           Cancel
         </button>
@@ -214,13 +237,90 @@
         <p id="status-msg"></p>
       </div>
     </div>
-
+    <div class="form-dialog-overlay" id="access-manager"></div>
+    <div class="form-dialog" id="access-manager">
+      <div class="header" id="header">
+        <h2>Access Manager</h2>
+        <div onclick="closeAccessManagerForm();">x</div>
+      </div>
+      <div class="body">
+        <h3>Requests</h3>
+        {% set course= db_helper.courses.all_courses[0] %} {% if not
+        (course['applications_list'] | length) == 0 %} {% for req in
+        course['applications_list'] %}
+        <table id="requests">
+          <tr>
+            <th>UID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+          </tr>
+          <tr>
+            <td>{{req['userId']}}</td>
+            <td>{{req['name']}}</td>
+            <td>{{req['email']}}</td>
+            <td>{{req['phone']}}</td>
+            <td id="options">
+              <button
+                class="shadow-button"
+                id="accent"
+                style="color: green"
+                onclick="applicationRequestTraffic(true, '{{course['id']}}', this.parentElement.parentElement)"
+              >
+                Accept
+              </button>
+              <button
+                class="shadow-button"
+                id="Decline"
+                style="color: red"
+                onclick="applicationRequestTraffic(false, '{{course['id']}}', this.parentElement.parentElement)"
+              >
+                Decline
+              </button>
+            </td>
+          </tr>
+        </table>
+        {% endfor %} {% else %}
+        <p class="no-entries" id="requests">No active requests</p>
+        {%endif%}
+        <h3>Students</h3>
+        {% set students= db_helper.users.get_users_by_id(course['students'])%}
+        <table id="students">
+          <tr>
+            <th>UID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+          {% for student in students %}
+          <tr>
+            <td>{{student['id']}}</td>
+            <td>{{student['name']}}</td>
+            <td>{{student['email']}}</td>
+            <td>{{student['phone_number']}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% if not (students | length) != 0 %}
+        <p class="no-entries" id="students">No students enrolled</p>
+        {%endif%}
+      </div>
+      <div class="options" id="options">
+        <button class="main-button" onclick="closeAccessManagerForm();">Close</button>
+        <p class="status-msg" id="status-msg"></p>
+      </div>
+    </div>
     <script>
       const init = () => {
+        courses= []
+        {%for course in db_helper.courses.all_courses %}
+          courses.push(({{dumps(course.to_dict() ) | safe}}));
+        {%endfor%}
       };
 
-      if (window.addEventListener) window.addEventListener('load', init);
-      if (window.attachEvent) window.attachEvent('load', init);
+      if (window.addEventListener) window.addEventListener("load", init);
+      if (window.attachEvent) window.attachEvent("load", init);
     </script>
   </body>
 </html>

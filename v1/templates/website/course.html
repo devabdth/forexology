@@ -186,7 +186,13 @@
           <div class="options">
             {% if user_data == None or course.id not in user_data.courses.keys() %}
               <button class="shadow-button" id="wishlist-course">{{content.actions[lang]['addToWishlist']}}</button>
-              <button class="main-button" id="enroll-to-course" onclick="openCourseEnrollForm()">{{content.actions[lang]['enrollNow']}}</button>
+              <button class="main-button" id="enroll-to-course" onclick="
+              {% if not user_data %}
+              window.open(`/login/?fallbackURL=${window.location.href.replace(/^.*\/\/[^\/]+/, '')}`, '_self'); return;
+              {%else%}
+              openCourseEnrollForm()
+              {%endif%}
+              ">{{content.actions[lang]['enrollNow']}}</button>
             {%else%}
               <button class="main-button" id="enroll-to-course" onclick="window.open('./dashboard/', '_self')">{{content.actions[lang]['continueCourse']}}</button>
             {%endif%}
@@ -352,17 +358,26 @@
         <div id="header-close" onclick="closeCourseEnrollForm()">x</div>
       </div>
       <div class="body" id="body">
+        {% if not user_data %}
         <label for="name">{{content.global_[lang]['name']}}</label>
         <input placeholder="{{content.global_[lang]['name']}}" type="text" class="single-line-field" id="name">
         <label for="name">{{content.global_[lang]['email']}}</label>
         <input placeholder="{{content.global_[lang]['email']}}" type="email" class="single-line-field" id="email">
         <label for="name">{{content.global_[lang]['phoneNumber']}}</label>
         <input placeholder="{{content.global_[lang]['phoneNumber']}}" type="tel" class="single-line-field" id="phone-number">
+        {%else%}
+        <label for="name">{{content.global_[lang]['name']}}</label>
+        <h3 style="font-family: var(--pff);">{{user_data['name']}}</h3>
+        <label for="name">{{content.global_[lang]['email']}}</label>
+        <h3 style="font-family: var(--pff);">{{user_data['email']}}</h3>
+        <label for="name">{{content.global_[lang]['phoneNumber']}}</label>
+        <h3 style="font-family: var(--pff);">{{user_data['phone_number']}}</h3>
+        {%endif%}
       </div>
       <div class="options" id="options">
         <button class="shadow-button" id="cancel" onclick="closeCourseEnrollForm()">{{content.actions[lang]['cancel']}}</button>
         <button class="main-button" id="submit"
-        onclick="submitCourseApplication()">{{content.actions[lang]['submit']}}</button>
+        onclick="submitCourseApplication('{{user_data['name']}}', '{{user_data['email']}}', '{{user_data['phone_number']}}')">{{content.actions[lang]['submit']}}</button>
         <p id="status-msg"></p>
       </div>
     </div>
