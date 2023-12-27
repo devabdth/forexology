@@ -2131,4 +2131,41 @@
   .classifications-collapsable .body.active {
     display: flex;
   }
+
+  
+
+  .random-quote {
+    width: 100%;
+    max-height: 15vw;
+    display: flex;
+    align-items: top;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 2.5vw 10%;
+    background-color: var(--body-bg-color);
+  }
+
+  section.random-quote div.decoration {
+    font-weight: 900;
+    font-size: 4vw;
+    font-family: var(--sff);
+    color: var(--accentColor);
+    opacity: 0.5;
+  }
+
+  section.random-quote h3 {
+    dfont-weight: 900;
+    font-size: 4vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+    text-align: start;
+  }
+
+  section.random-quote p {
+    font-weight: 300;
+    font-size: 2vw;
+    font-family: var(--pff);
+    color: var(--primaryVarientColor);
+    text-align: start;
+  }
 }

@@ -472,6 +472,7 @@
     width: 100%;
     flex-direction: column;
     display: flex;
+    row-gap: 1vw;
   }
 
   .column-article-card {

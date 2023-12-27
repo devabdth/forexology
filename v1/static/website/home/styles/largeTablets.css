@@ -414,8 +414,8 @@
   }
 
   .articles-fragment-column > .cover {
-    min-width: 30vw;
-    height: 40vw;
+    min-width: 22vw;
+    max-height: 40vw;
     display: flex;
     margin-bottom: 1vw;
     border-radius: 12px;
@@ -423,7 +423,8 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-  }
+    height: 100%;
+    aspect-ratio: 1/1;  }
 
   .articles-fragment-column > .cover > .overlay {
     width: 100%;
@@ -464,11 +465,19 @@
     font-style: italic;
   }
 
+  .articles-fragment-column #articles {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    row-gap: 1vw;
+  }
+
+
   .column-article-card {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 0.5vw;
     background-color: var(--body-bg-color);
     border-radius: 12px;

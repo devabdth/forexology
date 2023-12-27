@@ -37,7 +37,8 @@ const confirmation = async () => {
 
         if (res.status === 200) {
             let body= await res.json();
-            if (body['fallbackURL'] !== undefined) window.open(`..${body['fallbackURL']}/`, '_self');
+            console.log(body)
+            if (body['fallbackURL'] !== undefined  && body['fallbackURL'] !== "null" && body['fallbackURL'] !== null) window.open(`..${body['fallbackURL']}/`, '_self');
             else window.open('/', '_self');
             return;
         } else if (res.status === 401) {
