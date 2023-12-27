@@ -6,7 +6,7 @@ const initData = async (courseData_, userProgressData_, lang_, userId_) => {
 	userId = userId_;
 }
 
-const openSessionsDialog = () => {
+const openSessionsDialog = (customSessionId) => {
 	if (courseData === undefined) {
 		document.querySelector('#intro .main-button').innerHTML= lang === 'EN'? 'Loading...': "جاري التحميل";
 		setTimeout(openSessionsDialog, 500);
@@ -18,11 +18,19 @@ const openSessionsDialog = () => {
 	dialog.style.display = 'flex'
 	const dialogOverlay = document.querySelector('div.dialog-overlay#dialog-overlay');
 	dialogOverlay.style.display = 'flex'
-	let displaySession;
-	const userStep= userProgressData['completed_sessions'][userProgressData['completed_sessions'].length - 1];
-	const index= Object.keys(courseData.sessions).indexOf(userStep);
-	if (!(index +1 === Object.keys(courseData.sessions).length)) {
-		displaySession = courseData.sessions[Object.keys(courseData.sessions)[index+1]];
+	let displaySession, userStep, index;
+	if (customSessionId === undefined) {
+		userStep= userProgressData['completed_sessions'][userProgressData['completed_sessions'].length - 1];
+		index= Object.keys(courseData.sessions).indexOf(userStep);
+		if (!(index +1 === Object.keys(courseData.sessions).length)) {
+			displaySession = courseData.sessions[Object.keys(courseData.sessions)[index+1]];
+		}
+	} else {
+		userStep= customSessionId;
+		index= Object.keys(courseData.sessions).indexOf(userStep);
+		if (!(index === Object.keys(courseData.sessions).length)) {
+			displaySession = courseData.sessions[Object.keys(courseData.sessions)[index]];
+		}
 	}
 
 	if (displaySession === undefined) {
@@ -89,7 +97,7 @@ const openSessionsDialog = () => {
 		videoPlayer.addEventListener('timeupdate', ()=> {
 			dialog.querySelector('#times #current-time').innerHTML = `${new Date(videoPlayer.currentTime * 1000).toISOString().substring(11, 19)}`
 			if (!sessionCompletion) {
-				if ((videoPlayer.currentTime / videoPlayer.duration) >= 0.00001) {
+				if ((videoPlayer.currentTime / videoPlayer.duration) >= 0.85) {
 					completedSessionListener(displaySession.id);
 				}
 			}

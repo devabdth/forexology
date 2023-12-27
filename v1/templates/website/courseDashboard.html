@@ -192,7 +192,11 @@
         <div id="sessions">
           <h2>المحاضرات</h2>
           {%for session in course.sessions.values() %}
-          <div class="session-row" id="sess-{{session.id}}">
+          <div class="session-row" id="sess-{{session.id}}"
+          {% if session['id'] in user_data['courses'][course.id]['completed_sessions'] %}
+            onclick="openSessionsDialog('{{session.id}}')" 
+          {%endif%}
+          >
             <h3>{{session['title'][lang]}}</h3>
             <p>{{session['bio'][lang]}}</p>
             {% if session['id'] in user_data['courses'][course.id]['completed_sessions'] %}
