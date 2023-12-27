@@ -1,0 +1,254 @@
+@media screen and (max-width: 1024px) and (min-width: 650px) {
+  section#entry {
+    width: 100%;
+    height: 30vw;
+    background: linear-gradient(
+      180deg,
+      transparent 0,
+      var(--body-bg-color) 50%
+    );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  section#entry #overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--overlay-color);
+  }
+
+  section#entry h1 {
+    color: var(--primaryColor);
+    font-size: 4vw;
+    font-family: var(--pff);
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  section#entry p {
+    color: var(--primaryVarientColor);
+    font-size: 1.5vw;
+    font-family: var(--sff);
+    font-weight: 300;
+    font-style: italic;
+    padding: 0 30%;
+    text-align: center;
+  }
+
+  section#entry p br {
+    display: none;
+  }
+
+  section#course-content {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    background-color: var(--body-bg-color);
+    padding: 5vw 10vw;
+  }
+
+  section#course-content #content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+  }
+
+  section#course-content #content h1 {
+    font-weight: 900;
+    color: var(--primaryColor);
+    font-size: 5vw;
+    font-family: var(--pff);
+  }
+
+  section#course-content #content p#course-bio {
+    font-weight: 500;
+    font-size: 3vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+  }
+
+  section#course-content #content #content-section-title {
+    margin-top: 2.5vw;
+    font-size: 2.5vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+    font-weight: 700;
+  }
+
+  section#course-content h3.course-content-snippet-title {
+    font-weight: 700;
+    font-size: 2.25vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+    margin-top: 1.5vw;
+  }
+
+  section#course-content ul {
+    width: 100%;
+    padding: 1vw 2vw;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+  }
+
+  section#course-content ul li {
+    font-weight: 300;
+    font-size: 1.5vw;
+    font-family: var(--sff);
+    color: var(--primaryVarientColor);
+  }
+
+  section#course-content .options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: red;
+    margin-top: 7.5vw;
+    gap: 1.5vw;
+  }
+
+  section#course-content #promo {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 0.5vw 1vw;
+    background-color: var(--bg-color);
+    min-height: 5vw;
+    border-radius: 12px;
+    gap: 1vw;
+  }
+
+  section#course-content #promo #promo {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px var(--accentColor) solid;
+  }
+
+  section#course-content #promo #data {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  section#course-content #promo #data p {
+    font-weight: 900;
+    font-size: 4vw;
+    font-family: var(--pff);
+    text-align-last: center;
+    color: var(--primaryColor);
+  }
+
+  section#course-content #promo #data p span {
+    font-weight: 300;
+    font-size: 3vw;
+    font-family: var(--pff);
+    text-align-last: center;
+    color: var(--primaryVareintColor);
+  }
+
+  div.overlay#application-overlay {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1100;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  div.form#application-form {
+    width: 90%;
+    height: 60%;
+    display: none;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--body-bg-color);
+    z-index: 1101;
+    border-radius: 12px;
+    padding: 1vw 2vw;
+  }
+
+  div.form#application-form div.header#header {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  div.form#application-form div.header#header h4 {
+    color: var(--accentColor);
+    font-weight: 900;
+    font-size: 3vw;
+    font-family: var(--pff);
+  }
+
+  div.form#application-form div.header#header div {
+    font-weight: 100;
+    font-size: 1vw;
+    font-family: var(--sff);
+    color: var(--primaryVareintColor);
+    cursor: pointer;
+  }
+
+  div.form#application-form div.body#body {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+  }
+
+  div.form#application-form div.body#body label {
+    font-weight: 900;
+    font-size: 2.5vw;
+    font-family: var(--pff);
+    color: var(--primaryColor);
+    margin-top: 1vw;
+  }
+
+  div.form#application-form div.options#options {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1.5vw;
+    flex-direction: row;
+  }
+
+  div.form#application-form div.options#options p#status-msg {
+    font-weight: 300;
+    font-size: 2vw;
+    font-family: var(--pff);
+    color: var(--primaryVareintColor);
+  }
+	
+}
