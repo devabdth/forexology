@@ -103,7 +103,8 @@ class Content:
                 "price": "Price", 
                 "sessions": "Sessions",
                 "courseContent": "Course Content",
-                "students": "Students"
+                "students": "Students",
+                "next_session": "Next Session"
             },
             "AR": {
                 "platformTitle": "فوركسولوچي",
@@ -178,7 +179,8 @@ class Content:
                 "price": "السعر", 
                 "sessions": "المحاضرات",
                 "courseContent": "محتوى الدورة",
-                "students": "عدد الطلاب"
+                "students": "عدد الطلاب",
+                "next_session": "المحاضرة القادمة"
             }
         }
 
@@ -382,4 +384,35 @@ class Content:
                 "courseCompletion": "إكمال الدورة",
                 "testsPassed": "الاختبارات التي تم تجاوزها",
             },
+        }
+
+        self.months= {
+            "EN": {
+                "January": "January",
+                "February": "February",
+                "March": "March",
+                "April": "April",
+                "May": "May",
+                "June": "June",
+                "July": "July",
+                "August": "August",
+                "September": "September",
+                "October": "October",
+                "November": "November",
+                "December": "December",
+            },
+            "AR": {
+                "January": "يناير ",
+                "February": "فبراير ",
+                "March": "مارس ",
+                "April": "إبريل ",
+                "May": "مايو ",
+                "June": "يونيو ",
+                "July": "يوليو ",
+                "August": "أغسطس ",
+                "September": "سبتمبر ",
+                "October": "أكتوبر ",
+                "November": "نوفمبر ",
+                "December": "ديسمبر ",
+            },            
         }

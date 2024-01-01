@@ -98,6 +98,10 @@ class CoursesRouter:
                 if user_data is None:
                     raise Exception('No User Found!')
                 sessionId= loads(request.data)['session']
+                print(user_data.courses[course_id])
+                if 'completed_sessions' not in user_data.courses[course_id].keys():
+                    user_data.courses[course_id]['completed_sessions']= []
+                print(user_data.courses[course_id])
                 if not sessionId in user_data.courses[course_id]["completed_sessions"]:
                     user_data.courses[course_id]["completed_sessions"].append(sessionId)
                     res= self.helper.users.update_user(payload= {"id": user_data.id, "courses": user_data.courses})
@@ -111,9 +115,9 @@ class CoursesRouter:
         @self.app.route(f"{self.consts.course_route}/dashboard/", methods=['GET'])
         def course_dashboard_index(course_id):
             try:
+                import datetime
                 self.helper.courses.load_courses()
                 course= self.helper.courses.get_course_by_id(course_id)
-                print(course)
                 if course is None:
                     return self.app.response_class(status= 404)
                 lang = session.get('LANG', 'AR')
@@ -121,7 +125,12 @@ class CoursesRouter:
                 self.helper.ads.load_data()
                 self.layout.load()
                 current_user_id= session.get("CURRENT_USER_ID", None)
+                if current_user_id is None:
+                    return redirect(f'{self.consts.course_route.replace("<course_id>", course_id)}')
                 user_data= self.helper.users.get_user_by_id(current_user_id) if current_user_id is not None else None
+                if user_data is None or course_id not in list(user_data.courses.keys()):
+                    return redirect(f'{self.consts.course_route.replace("<course_id>", course_id)}')
+
                 return render_template(
                     '/website/courseDashboard.html',
                     course= course,
@@ -134,7 +143,9 @@ class CoursesRouter:
                     db_helper=self.helper,
                     utils=self.utils,
                     layout=self.layout,
-                    dumps=dumps
+                    dumps=dumps,
+                    current_time= (datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000,
+                    convert_date= lambda x: datetime.datetime.utcfromtimestamp(x/1000.0)
                 )
                 
             

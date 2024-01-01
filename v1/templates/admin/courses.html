@@ -161,7 +161,7 @@
                       onclick="openAccessManagerForm(`{{course.id}}`, `{{db_helper.users.get_users_by_id(course['students'], return_as_dicts= True) | string | safe | replace("'", "\'")}}`);"
                       >Manage Access</a
                     >
-                    <a class="shadow-button">Manage Sessions</a>
+                    <a class="shadow-button" onclick="openManageSessionsFormDialog({{dumps(course.to_dict())}})">Manage Sessions</a>
                     <a class="shadow-button" onclick="openCourseFormDialog('EDIT', {{dumps(course.to_dict())}});">Edit Course</a>
                   </div>
                 </div>
@@ -214,6 +214,13 @@
           id="price"
           placeholder="Price"
         />
+        <label for="cover">cover</label>
+        <div
+          class="image-picker"
+          id="cover"
+          onclick="pickImage(this, {mode: 'COVER', coverSize: true})"
+        ></div>
+        <label for="content">Content</label>
       </div>
       <div class="options">
         <button class="shadow-button" id="delete" style="color: red">
@@ -245,9 +252,6 @@
       </div>
       <div class="body">
         <h3>Requests</h3>
-        {% set course= db_helper.courses.all_courses[0] %} {% if not
-        (course['applications_list'] | length) == 0 %} {% for req in
-        course['applications_list'] %}
         <table id="requests">
           <tr>
             <th>UID</th>
@@ -256,6 +260,8 @@
             <th>Phone</th>
             <th>Actions</th>
           </tr>
+        {% set course= db_helper.courses.all_courses[0] %} {% for req in
+        course['applications_list'] %}
           <tr>
             <td>{{req['userId']}}</td>
             <td>{{req['name']}}</td>
@@ -280,10 +286,8 @@
               </button>
             </td>
           </tr>
+        {% endfor %}
         </table>
-        {% endfor %} {% else %}
-        <p class="no-entries" id="requests">No active requests</p>
-        {%endif%}
         <h3>Students</h3>
         {% set students= db_helper.users.get_users_by_id(course['students'])%}
         <table id="students">
@@ -302,18 +306,106 @@
           </tr>
           {% endfor %}
         </table>
-        {% if not (students | length) != 0 %}
-        <p class="no-entries" id="students">No students enrolled</p>
-        {%endif%}
       </div>
       <div class="options" id="options">
         <button class="main-button" onclick="closeAccessManagerForm();">Close</button>
         <p class="status-msg" id="status-msg"></p>
       </div>
     </div>
+    <div class="form-dialog-overlay" id="start-point-selection"></div>
+    <div class="form-dialog" id="start-point-selection">
+      <div class="header">
+        <h2>Select Start Point</h2>
+        <div>x</div>
+      </div>
+      <div class="body">
+        <div class="sessions-dropdown dropdown">
+          <button class="sessions-dropbtn dropbtn">Pick Session</button>
+          <div class="sessions-dropdown-content dropdown-content">
+            {% for session in db_helper.courses.all_courses[0].sessions.values() %}
+            <button
+              class="shadow-button"
+              onclick="selectSession({{session | safe}})"
+            >
+              {{session.title['EN']}}
+            </button>
+            {% endfor %}
+          </div>
+        </div>        
+      </div>
+      <div class="options">
+        <div class="shadow-button">Cancel</div>
+        <div class="main-button">Submit</div>
+      </div>
+    </div>
+    <div class="form-dialog-overlay" id="manage-sessions"></div>
+    <div class="form-dialog" id="manage-sessions">
+      <div class="header">
+        <h2>Manage Sessions</h2>
+        <div onclick="closeManageSessionsFormDialog();">x</div>
+      </div>
+      <div class="body">
+        <div id="header">
+            <div class="information-snippet" id="snippet-one">
+              <div class="icon" id="snippet-one"></div>
+              <h3>Create Session</h3>
+            </div>
+            <div class="information-snippet" id="snippet-two">
+              <div class="icon" id="snippet-two"></div>
+              <h3>Create Test</h3>
+            </div>
+        </div>
+        <h3>Sessions</h3>
+        <div id="sessions"></div>
+      </div>
+      <div class="options">
+        <button class="shadow-button" onclick="closeManageSessionsFormDialog();">Cancel</button>
+        <button class="main-button">Submit</button>
+        <p id="status-msg"></p>
+      </div>
+    </div>
+    <div class="form-dialog-overlay" id="create-session"></div>
+    <div class="form-dialog" id="create-session">
+      <div class="header">
+        <h2>Create Session</h2>
+        <div>x</div>
+      </div>
+      <div class="body">
+        <label for="en-title">English Title</label>
+        <input type="name" name="en-title" class="single-line-field" id="en-title">
+        <label for="ar-title">Arabic Title</label>
+        <input type="name" name="ar-title" class="single-line-field" id="ar-title">
+        <label for="en-bio">English Bio</label>
+        <textarea name="en-bio" class="mutli-line-field" id="en-bio"></textarea>
+        <label for="ar-bio">Arabic Bio</label>
+        <textarea name="ar-bio" class="mutli-line-field" id="ar-bio"></textarea>
+        <div class="fragments-controllers">
+          <div id="video">Video</div>
+          <div id="blog" class="active">Blog</div>
+        </div>
+        <div class="fragments">
+          <div id="video"></div>
+          <div id="blog" class="active">
+        <label for="blog-en-title">English Title</label>
+        <input type="name" name="blog-en-title" class="single-line-field" id="blog-en-title">
+        <label for="blog-ar-title">Arabic Title</label>
+        <input type="name" name="blog-ar-title" class="single-line-field" id="blog-ar-title">
+        <label for="blog-en-bio">English Bio</label>
+        <textarea name="blog-en-bio" class="mutli-line-field" id="blog-en-bio"></textarea>
+        <label for="blog-ar-bio">Arabic Bio</label>
+        <textarea name="blog-ar-bio" class="mutli-line-field" id="blog-ar-bio"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="options">
+        <button class="shadow-button">Cancel</button>
+        <button class="main-button">Submit</button>
+      </div>
+    </div>
     <script>
       const init = () => {
-        courses= []
+        openManageSessionsFormDialog({{dumps(db_helper.courses.all_courses[0].to_dict()) | safe}})
+        courses= [];
         {%for course in db_helper.courses.all_courses %}
           courses.push(({{dumps(course.to_dict() ) | safe}}));
         {%endfor%}

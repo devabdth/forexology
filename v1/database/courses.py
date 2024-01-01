@@ -27,6 +27,8 @@ class CoursesDatabaseHelper:
 
 	def write_data(self, new_entry: dict= None):
 		try:
+			if new_entry is not None:
+				self.all_courses.append(new_entry)
 			data= {course.id: course.to_dict() for course in self.all_courses}
 			with open(self.courses_file, 'w') as f:
 				dump(data, f)
@@ -58,23 +60,29 @@ class CoursesDatabaseHelper:
 			print(e)
 			return None
 
-	def create_course(self, payload, files):
+	def create_course(self, payload, new_cover):
 		try:
 			payload['id']= secrets.token_hex(12)
-			payload['sessions']= []
+			payload['sessions']= {}
+			payload['price']= float(payload['price'])
 			payload['students']= []
+			payload['applications_list']= []
 			payload['active']= True
 			course= Course(payload)
+			new_cover.save(abspath(join(dirname(__file__), '../assets/courses/covers/', '{}.{}'.format(payload['id'], new_cover.filename.split('.')[-1]))))			
+			return self.write_data(new_entry= course)
 			return True
 		except Exception as e:
 			print(e)
 			return False
 		
-	def update_course(self, course):
+	def update_course(self, course, new_cover= None):
 		try:
 			for course_ in self.all_courses:
 				if course_.id == course.id:
 					self.all_courses[self.all_courses.index(course_)] = course
+					if not new_cover is None:
+						new_cover.save(abspath(join(dirname(__file__), '../assets/courses/covers/', '{}.{}'.format(course.id, new_cover.filename.split('.')[-1]))))
 					return self.write_data()
 			return False
 		except Exception as e:

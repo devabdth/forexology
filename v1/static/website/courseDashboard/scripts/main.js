@@ -20,7 +20,10 @@ const openSessionsDialog = (customSessionId) => {
 	dialogOverlay.style.display = 'flex'
 	let displaySession, userStep, index;
 	if (customSessionId === undefined) {
-		userStep= userProgressData['completed_sessions'][userProgressData['completed_sessions'].length - 1];
+		if (userProgressData['completed_sessions'] !== undefined){
+			if(userProgressData['completed_sessions'].length === 0) userStep= -1;
+			else userStep= userProgressData['completed_sessions'][userProgressData['completed_sessions'].length - 1];
+		} else userStep= -1;
 		index= Object.keys(courseData.sessions).indexOf(userStep);
 		if (!(index +1 === Object.keys(courseData.sessions).length)) {
 			displaySession = courseData.sessions[Object.keys(courseData.sessions)[index+1]];
@@ -97,7 +100,7 @@ const openSessionsDialog = (customSessionId) => {
 		videoPlayer.addEventListener('timeupdate', ()=> {
 			dialog.querySelector('#times #current-time').innerHTML = `${new Date(videoPlayer.currentTime * 1000).toISOString().substring(11, 19)}`
 			if (!sessionCompletion) {
-				if ((videoPlayer.currentTime / videoPlayer.duration) >= 0.85) {
+				if ((videoPlayer.currentTime / videoPlayer.duration) >= 0.95) {
 					completedSessionListener(displaySession.id);
 				}
 			}
@@ -189,6 +192,7 @@ const completedSessionListener= async (sessionId) => {
 		});
 		if (res.status === 200) {
 			sessionCompletion= true;
+			if(userProgressData["completed_sessions"] ===undefined) userProgressData["completed_sessions"]= [];
 			userProgressData["completed_sessions"].push(sessionId);
 			const infoCountTile= document.querySelector('.information-snippet#snippet-one h3');
 			infoCountTile.innerHTML = `${userProgressData["completed_sessions"].length}<span> ` + infoCountTile.innerHTML.split("<span>")[1]
