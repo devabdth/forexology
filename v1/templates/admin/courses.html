@@ -404,7 +404,7 @@
     </div>
     <script>
       const init = () => {
-        openManageSessionsFormDialog({{dumps(db_helper.courses.all_courses[0].to_dict()) | safe}})
+        // openManageSessionsFormDialog({{dumps(db_helper.courses.all_courses[0].to_dict()) | safe}})
         courses= [];
         {%for course in db_helper.courses.all_courses %}
           courses.push(({{dumps(course.to_dict() ) | safe}}));
