@@ -432,3 +432,59 @@ const audioStop = (audio, audioTime, audioCurrentTime) => {
 	audioCurrentTime.innerText = "00:00";
 	audioCurrentTime.innerHTML = "00:00";
 }
+
+const publishNewComment= async (userId, userName)=> {
+	const field= document.querySelector('section#commenting #header input#comment-field');
+	const btn= document.querySelector('section#commenting #header button.main-button');
+	console.log('Clicked');
+	if (field.value.trim().length < 8) {
+		field.style.border= '2px red solod';
+		btn.innerHTML= lang === 'EN' ? 'Comment too short!': 'أجعل تعليقك  مفصلًا';
+		btn.onclick= ()=> {}
+		setTimeout(()=> {
+			btn.innerHTML= lang === 'EN' ? 'Add' : 'أضف';
+			btn.onclick= ()=> { publishNewComment(userId, userName); }
+		}, 3000);
+		return;
+	}
+	console.log('Clicked');
+
+	btn.innerHTML= 'Loading...';
+	btn.onclick= ()=> {}
+	const res= await fetch('./comments/', {
+		body: JSON.stringify({ userId: userId, comment: field.value.trim() }),
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+	console.log('Clicked');
+
+	if (res.status === 201) {
+		const newCommentRow= document.createElement('div');
+		newCommentRow.classList.add('comment-row');
+		newCommentRow.innerHTML= `
+            <div class="user-image" style="background-image: url(/assets/users/${userId});"></div>
+            <div class="comment">
+              <p class="comment">${field.value.trim()}</p>
+              <p class="user-name">${userName}</p>
+              <p class="date">${new Date()}</p>
+            </div>		
+		`;
+		document.querySelector('section#commenting #comments').insertBefore(
+			newCommentRow, document.querySelector('section#commenting #comments').firstChild
+		)
+		field.value= '';
+		btn.innerHTML= lang === 'EN' ? 'Add' : 'أضف';
+		btn.onclick= ()=> { publishNewComment(userId, userName); }
+		return;
+
+	}
+
+	btn.innerHTML= lang === 'EN'? 'Failed!' : 'فشلت العملية';
+	setTimeout(() => {
+			btn.innerHTML= lang === 'EN' ? 'Add' : 'أضف';
+			btn.onclick= ()=> { publishNewComment(userId, userName); }
+	}, 3000);
+
+}

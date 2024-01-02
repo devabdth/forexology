@@ -27,6 +27,7 @@ class ArticleRouter:
     def setup(self):
         self.assign_article_index()
         self.assign_article_readtime()
+        self.assign_create_comment()
 
     def assign_article_readtime(self):
         @self.app.route(self.consts.article_readtime_route, methods=["PATCH"])
@@ -41,6 +42,35 @@ class ArticleRouter:
                 return self.app.response_class(status= 200)
             
             return self.app.response_class(status= 500)
+
+    def assign_create_comment(self):
+        @self.app.route(f'{self.consts.article_route}/comments/', methods=["POST"])
+        @self.app.route(f'{self.consts.read_route}/comments/', methods=["POST"])
+        @self.app.route(f'{self.consts.journal_route}/comments/', methods=["POST"])
+        def create_comment(article_id):
+            import datetime
+            import secrets
+            try:
+                body= loads(request.data)
+                article= self.helper.articles.get_article_by_id(article_id)
+                article.comments.append({
+                    'id': secrets.token_hex(8),
+                    'comment': body['comment'],
+                    'commenter_id': body['userId'],
+                    'time': (datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000
+
+                })
+                article= article.to_dict()
+                res= self.helper.articles.update_article(
+                    article_id= article['id'],
+                    payload= article,
+                )
+                if res:
+                    return self.app.response_class(status= 201)
+                return self.app.response_class(status= 500)
+            except Exception as e:
+                print(e)
+                return self.app.response_class(status= 500)
 
     def assign_article_index(self):
         @self.app.route(self.consts.article_route, methods=["GET"])

@@ -7,6 +7,7 @@ from models.article_section import ArticleSection
 import secrets
 from plugins.consts import Consts
 from bson.objectid import ObjectId
+from pandas import DataFrame
 
 class ArticlesDatabaseHelper:
     def __init__(self, client: pymongo.MongoClient):
@@ -14,6 +15,7 @@ class ArticlesDatabaseHelper:
         self.client: pymongo.MongoClient = client
         self.database = self.client["forexology"]
         self.articles_collection = self.database["articles"]
+        self.users_collection = self.database["users"]
 
         self.all_articles: list = [
         ]
@@ -146,7 +148,7 @@ class ArticlesDatabaseHelper:
             if 'id' in payload.keys():
                 article_id= payload['id']
                 del payload['id']
-                self.articles_collection.find_one_and_upate({'_id': ObjectId(article_id)}, {'$set': payload.to_dict()})
+                self.articles_collection.find_one_and_update({'id': article_id}, {'$set': payload})
                 self.refresh_all_articles()
                 
             return True
@@ -175,3 +177,19 @@ class ArticlesDatabaseHelper:
             if exists(file_path):
                 return file_path
         return None
+
+    def format_comments(self, article):
+        df= DataFrame(article.comments, columns=['id', 'commenter_id', 'comment', 'time'])
+        commenters_ids= list(df['commenter_id'])
+        commenters_ids= list(filter(('Anonymous').__ne__, commenters_ids))
+        users = self.users_collection.find({'id': {'$in': commenters_ids}})
+        users= {user['id']: user for user in users}
+        users['Anonymous']= {'name': 'Anonymous', 'id': 'Anonymous'}
+        comments= article.comments
+        for comment in article.comments:
+            comment['commenter']= users[comment['commenter_id']]
+
+        df= DataFrame(article.comments, columns= ['id', 'commenter_id', 'comment', 'commenter', 'time'])
+        df.sort_values('time', ascending= True)
+
+        return [dict(comment) for _, comment in df.iterrows()]

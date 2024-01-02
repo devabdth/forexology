@@ -1,4 +1,5 @@
 from .article_section import ArticleSection
+import bson
 
 
 class Article:
@@ -26,6 +27,7 @@ class Article:
     def __init__(self, payload):
         self.params: list = [
             {'name': "id", 'type': str},
+            {'name': "_id", 'type': bson.objectid.ObjectId},
             {'name': "title", 'type': dict},
             {'name': "short_brief", 'type': dict},
             {'name': "cover_attached_msg", 'type': dict},

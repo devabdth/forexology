@@ -212,7 +212,11 @@
             </div>
           </div>
           <div id="options">
-            <button class="option" enabled="{{article.record_available}}" onclick="openArticleDialogs('listen');">
+            <button class="option" enabled="{{article.record_available}}" onclick="openArticleDialogs('listen');"
+              {% if not article.record_available %}
+              style="pointer-events: none; opacity: 0.75;" 
+              {%endif%}
+             >
               <div class="icon shadow-icon-button"><i class="listen"></i></div>
               {% if article.record_available %}
               <p>{{content.actions[lang]['listen']}}<br><span>{{content.global_[lang]['listenMsg']}}</p>
@@ -224,11 +228,6 @@
             <button class="option" onclick="openArticleDialogs('share');">
               <div class="icon shadow-icon-button"><i class="share"></i></div>
               <p>{{content.actions[lang]['share']}}<br><span>{{content.global_[lang]['shareMsg']}}</p>
-            </button>
-            |
-            <button class="option" onclick="openArticleDialogs('rate');">
-              <div class="icon shadow-icon-button"><i class="rate"></i></div>
-              <p>{{content.actions[lang]['rate']}}<br><span>{{content.global_[lang]['rateMsg']}}</p>
             </button>
             |
             <button class="option" onclick="openArticleDialogs('commet');">
@@ -294,6 +293,25 @@
       </div>
       <button class="shadow-button" id="next"></button>
     </div>
+    <section id="commenting">
+      <h2>{{content.global_[lang]['comments']}}</h2>
+      <div id="header">
+        <input type="text" name="comment-field" class="single-line-field" id="comment-field">
+        <button class="main-button" id="comment-field-submission" onclick="publishNewComment('{%if not user_data%}Anonymous{%else%}{{user_data.id}}{%endif%}', '{%if not user_data%}Anonymous{%else%}{{user_data.name}}{%endif%}')">{{content.actions[lang]['add']}}</button>
+      </div>
+      <div id="comments">
+        {% for comment in db_helper.articles.format_comments(article) %}
+          <div class="comment-row">
+            <div class="user-image" style="background-image: url(/assets/users/{{comment.commenter.id}});"></div>
+            <div class="comment">
+              <p class="comment">{{comment.comment}}</p>
+              <p class="user-name">{{comment.commenter.name}}</p>
+              <p class="date">{{comment.time | readable_time}}</p>
+            </div>
+          </div>
+        {%endfor%}
+      </div>
+    </section>
     {% for writer in writers %}
       <section class="writer-section">
         <div class="left-section">
@@ -594,15 +612,15 @@
         <div class="body">
           <p>{{content.actions[lang]['shareLinkVia']}}</p>
           <div id="social-media-icons">
-            <button class="main-icon-button"><i class="facebook"></i></button>
-            <button class="main-icon-button"><i class="linkedin"></i></button>
-            <button class="main-icon-button"><i class="twitter"></i></button>
-            <button class="main-icon-button"><i class="whatsapp"></i></button>
-            <button class="main-icon-button"><i class="instagram"></i></button>
-            <button class="main-icon-button"><i class="tiktok"></i></button>
+            <button style="border-radius: 50%;" class="shadow-icon-button"><i class="facebook"></i></button>
+            <button style="border-radius: 50%;" class="shadow-icon-button"><i class="linkedin"></i></button>
+            <button style="border-radius: 50%;" class="shadow-icon-button"><i class="twitter"></i></button>
+            <button style="border-radius: 50%;" class="shadow-icon-button"><i class="whatsapp"></i></button>
+            <button style="border-radius: 50%;" class="shadow-icon-button"><i class="instagram"></i></button>
+            <button style="border-radius: 50%;" class="shadow-icon-button"><i class="tiktok"></i></button>
           </div>
           <p>{{content.actions[lang]['shareLink']}}</p>
-          <div id="link">
+          <div id="link" dir="ltr">
             <p></p>
             <button class="shadow-icon-button"><i class="copy"></i></button>
           </div>

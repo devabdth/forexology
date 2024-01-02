@@ -104,7 +104,8 @@ class Content:
                 "sessions": "Sessions",
                 "courseContent": "Course Content",
                 "students": "Students",
-                "next_session": "Next Session"
+                "next_session": "Next Session",
+                "comments": "Comments"
             },
             "AR": {
                 "platformTitle": "فوركسولوچي",
@@ -180,7 +181,8 @@ class Content:
                 "sessions": "المحاضرات",
                 "courseContent": "محتوى الدورة",
                 "students": "عدد الطلاب",
-                "next_session": "المحاضرة القادمة"
+                "next_session": "المحاضرة القادمة",
+                "comments": "التعليقات"
             }
         }
 
@@ -247,6 +249,7 @@ class Content:
                 "continueCourse": "Continue Course",
                 "enrollNow": "Enroll Now",
                 "addToWishlist": "Add to wishlist",
+                "add": "Add"
             },
             "AR": {
                 "login": "تسجيل الدخول",
@@ -279,6 +282,7 @@ class Content:
                 "continueCourse": "أكمل الدورة",
                 "enrollNow": "التحق الآن",
                 "addToWishlist": "أضف إلى قائمة الاهتمامات",
+                "add": "أضف",
 
 
             }
