@@ -44,7 +44,8 @@ const openSessionsDialog = (customSessionId) => {
 	if (displaySession.type === "video") {
 		dialog.querySelector('#body #main-section').innerHTML = `
 			<div id="video-section">
-				<video id="video" autoplay="autoplay"></video>
+				<div id="video-blocker"></div>
+				<video id="video" autoplay="autoplay" oncontextmenu="return false;" onkeydown="return false;"></video>
 				<div id="controllers">
 					<div>
 						<i id="forward" class="fa-solid fa-forward"></i>
@@ -62,7 +63,7 @@ const openSessionsDialog = (customSessionId) => {
 						<i class="fa-solid fa-pause" id="playback"></i>
 						<p>${lang === 'EN' ? "Pause" : "إيقاف"}</p>
 						</div>
-					<!--<div><i id="full-page" class="fa-solid fa-up-right-and-down-left-from-center"></i><p>${lang === 'EN' ? "Full Screen" : "تكبير الشاشة"}</p></div>-->
+					<div><i id="full-page" class="fa-solid fa-expand"></i><p>${lang === 'EN' ? "Full Screen" : "تكبير الشاشة"}</p></div>
 					<div>
 						<i id="voice-down" class="fa-solid fa-volume-low"></i>
 						<p>${lang === 'EN' ? "Volume-" : "تقليل الصوت"}</p>
@@ -114,21 +115,7 @@ const openSessionsDialog = (customSessionId) => {
 			videoPlayer.currentTime = 0;
 			videoPlayer.play()
 		}
-		// dialog.querySelector('#controllers #full-page').onclick = () => {
-		// 	const element = videoPlayer;
-		// 	if (element.requestFullscreen) {
-		// 		element.requestFullscreen();
-		// 	} else if (element.mozRequestFullScreen) {
-		// 		element.mozRequestFullScreen();
-		// 	} else if (element.webkitRequestFullscreen) {
-		// 		element.webkitRequestFullscreen();
-		// 	} else if (element.msRequestFullscreen) {
-		// 		element.msRequestFullscreen();
-		// 	} else {
-		// 		element.classList.toggle('fullscreen');
-		// 	}
-
-		// }
+		dialog.querySelector('#controllers #full-page').onclick = videoSectionFullScreen;
 		dialog.querySelector('#controllers #forward').onclick = () => {
 			videoPlayer.currentTime = videoPlayer.currentTime + 10;
 		}
@@ -163,7 +150,42 @@ const openSessionsDialog = (customSessionId) => {
 		dialog.querySelector('#body #main-section').innerHTML = "article";
 
 	}
+}
 
+const videoSectionFullScreen= ()=> {
+		const dialog = document.querySelector('div.dialog#dialog');
+
+				const element = document.querySelector('#video-section');
+			if (element.requestFullscreen) {
+				element.requestFullscreen();
+			} else if (element.mozRequestFullScreen) {
+				element.mozRequestFullScreen();
+			} else if (element.webkitRequestFullscreen) {
+				element.webkitRequestFullscreen();
+			} else if (element.msRequestFullscreen) {
+				element.msRequestFullscreen();
+			} else {
+				element.classList.toggle('fullscreen');
+			}
+
+			dialog.querySelector('#controllers #full-page').parentElement.innerHTML= `<i id="full-page" class="fa-solid fa-compress"></i><p>${lang === 'EN' ? "Close Full Screen" : "تصغير الشاشة"}</p>`;
+			dialog.querySelector('#controllers #full-page').onclick = videoSectionExitFullScreen;
+}
+
+const videoSectionExitFullScreen= ()=> {
+		const dialog = document.querySelector('div.dialog#dialog');
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+
+			dialog.querySelector('#controllers #full-page').parentElement.innerHTML= `<i id="full-page" class="fa-solid fa-expand"></i><p>${lang === 'EN' ? "Full Screen" : "تكبير الشاشة"}</p>`;
+		dialog.querySelector('#controllers #full-page').onclick = videoSectionFullScreen;
 
 }
 

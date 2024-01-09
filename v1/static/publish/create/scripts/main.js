@@ -1,6 +1,7 @@
 // Necessary Data
-let categories, parentCategories, audioArticleDuratio;
+let categories, parentCategories, audioArticleDuratio, enableLocalizations;
 const initialize = (props) => {
+
     const actionsHeader = document.querySelector('#right-section .options#header');
     document.querySelector('#right-section').addEventListener('scroll', () => {
         if (document.querySelector('#right-section').scrollTop >= 50) {
@@ -13,7 +14,36 @@ const initialize = (props) => {
 
     categories = props.categories;
     parentCategories = props.parentCategories;
+   enableLocalizations= false;
+   const localizationSwitch = document.getElementById('toggleSwitch');
+    localizationSwitch.addEventListener('change', handleSwitchChange);
+
 }
+    function handleSwitchChange() {
+   const localizationSwitch = document.getElementById('toggleSwitch');
+        const isSwitchOn = localizationSwitch.checked;
+        if (isSwitchOn) {
+            Array.from(document.querySelectorAll('#ar-title')).forEach(e => {e.style.display= 'flex'});
+            Array.from(document.querySelectorAll('#ar-short-brief')).forEach(e => {e.style.display= 'flex'});
+            Array.from(document.querySelectorAll('#ar-cover-msg')).forEach(e => {e.style.display= 'flex'});
+                        Array.from(document.querySelectorAll('.section-form #ar-title')).forEach(e => {e.style.display= 'flex'});
+            Array.from(document.querySelectorAll('.section-form #ar-subtitle')).forEach(e => {e.style.display= 'flex'});
+            Array.from(document.querySelectorAll('.section-form #ar-bio')).forEach(e => {e.style.display= 'flex'});
+            Array.from(document.querySelectorAll('.section-form #ar-media-message')).forEach(e => {e.style.display= 'flex'});
+
+            enableLocalizations= true;
+        } else {
+            Array.from(document.querySelectorAll('#ar-title')).forEach(e => {e.style.display= 'none'});
+            Array.from(document.querySelectorAll('#ar-short-brief')).forEach(e => {e.style.display= 'none'});
+            Array.from(document.querySelectorAll('#ar-cover-msg')).forEach(e => {e.style.display= 'none'});
+                        Array.from(document.querySelectorAll('.section-form #ar-title')).forEach(e => {e.style.display= 'none'});
+            Array.from(document.querySelectorAll('.section-form #ar-subtitle')).forEach(e => {e.style.display= 'none'});
+            Array.from(document.querySelectorAll('.section-form #ar-bio')).forEach(e => {e.style.display= 'none'});
+            Array.from(document.querySelectorAll('.section-form #ar-media-message')).forEach(e => {e.style.display= 'none'});
+
+            enableLocalizations= false;
+        }
+    }
 
 const selectCategory = (catId) => {
     const btn = document.querySelector('button.categories-dropbtn');
@@ -216,20 +246,20 @@ const newSection = () => {
     section.innerHTML = `
     <h2>Section ${section.id}</h2>
     <div class="fields-row">
-        <label>English Title</label>
-        <label>Arabic Title</label>
+        <label id="en-title">English Title</label>
+        <label id="ar-title">Arabic Title</label>
         <input class="single-line-field" id="en-title" placeholder="English Title" />
         <input class="single-line-field" id="ar-title" placeholder="Arabic Title" />
     </div>
     <div class="fields-row">
-        <label>English Subtitle</label>
-        <label>Arabic Subtitle</label>
+        <label id="en-subtitle">English Subtitle</label>
+        <label id="ar-subtitle">Arabic Subtitle</label>
         <input class="single-line-field" id="en-subtitle" placeholder="English Subtitle" />
         <input class="single-line-field" id="ar-subtitle" placeholder="Arabic Subtitle" />
     </div>
     <div class="fields-row">
-        <label>English Bio</label>
-        <label>Arabic Bio</label>
+        <label id="en-bio">English Bio</label>
+        <label id="ar-bio">Arabic Bio</label>
         <textarea class="mutli-line-field" id="en-bio" placeholder="English Bio"></textarea>
         <textarea class="mutli-line-field" id="ar-bio" placeholder="Arabic Bio"></textarea>
     </div>
@@ -248,7 +278,7 @@ const newSection = () => {
     <input type="number" class="single-line-field" id="audio-stop" placeholder="Audio Stop (seconds)" />
     <div class="fields-row">
         <label>English Media Message</label>
-        <label>Arabic Media Message</label>
+        <label id="ar-media-message">Arabic Media Message</label>
         <textarea class="mutli-line-field" id="en-media-message" placeholder="English Media Message"></textarea>
         <textarea class="mutli-line-field" id="ar-media-message" placeholder="Arabic Media Message"></textarea>
     </div>
@@ -259,6 +289,7 @@ const newSection = () => {
     `
 
     container.insertBefore(section, container.childNodes[(container.childNodes.length - 2)]);
+    handleSwitchChange()
 }
 
 const deleteSection = (instance) => {
@@ -321,12 +352,14 @@ const articleInfoFormValidation = () => {
     }
     enTitleField.style.border = 'none';
 
-    if (arTitleField.value.trim().length < 8) {
-        toast({ msg: 'Enter a valid arabic title!' });
-        arTitleField.style.border = '2px red solid';
-        return;
+    if (enableLocalizations) {
+        if (arTitleField.value.trim().length < 8) {
+            toast({ msg: 'Enter a valid arabic title!' });
+            arTitleField.style.border = '2px red solid';
+            return;
+        }
+        arTitleField.style.border = 'none';
     }
-    arTitleField.style.border = 'none';
 
 
     if (enShortBriefField.value.trim().length < 8) {
@@ -336,13 +369,14 @@ const articleInfoFormValidation = () => {
     }
     enShortBriefField.style.border = 'none';
 
-    if (arShortBriefField.value.trim().length < 8) {
-        toast({ msg: 'Enter a valid arabic short brief!' });
-        arShortBriefField.style.border = '2px red solid';
-        return;
+    if (enableLocalizations) {
+        if (arShortBriefField.value.trim().length < 8) {
+            toast({ msg: 'Enter a valid arabic short brief!' });
+            arShortBriefField.style.border = '2px red solid';
+            return;
+        }
+        arShortBriefField.style.border = 'none';
     }
-    arShortBriefField.style.border = 'none';
-
     if (selectedCategory === undefined) {
         toast({ msg: 'Select article\'s category!' });
         return;
@@ -366,12 +400,14 @@ const articleInfoFormValidation = () => {
         }
         enCoverMsgField.style.border = 'none';
 
-        if (arCoverMsgField.value.trim().length < 8) {
-            toast({ msg: 'Enter a valid arabic cover message!' });
-            arCoverMsgField.style.border = '2px red solid';
-            return;
-        }
-        arCoverMsgField.style.border = 'none';
+        if (enableLocalizations) {
+            if (arCoverMsgField.value.trim().length < 8) {
+                toast({ msg: 'Enter a valid arabic cover message!' });
+                arCoverMsgField.style.border = '2px red solid';
+                return;
+            }
+            arCoverMsgField.style.border = 'none';
+    }
     } else {
         enCoverMsgField.style.border = 'none';
         arCoverMsgField.style.border = 'none';
@@ -383,17 +419,26 @@ const articleInfoFormValidation = () => {
     }
 
     return {
-        title: {
+        title: enableLocalizations ?{
             EN: enTitleField.value.trim(),
             AR: arTitleField.value.trim(),
+        } :{
+            EN: enTitleField.value.trim(),
+            AR: enTitleField.value.trim(),
         },
-        short_brief: {
+        short_brief: enableLocalizations?{
             EN: enShortBriefField.value.trim(),
             AR: arShortBriefField.value.trim(),
+        }:{
+            EN: enShortBriefField.value.trim(),
+            AR: enShortBriefField.value.trim(),
         },
-        cover_attached_msg: {
+        cover_attached_msg: enableLocalizations?{
             EN: enCoverMsgField.value.trim(),
             AR: arCoverMsgField.value.trim(),
+        }:{
+            EN: enCoverMsgField.value.trim(),
+            AR: enCoverMsgField.value.trim(),
         },
         category: selectedCategory,
         parent_category: selectedParentCategory,
@@ -429,12 +474,14 @@ const validateSection = (container, wToast) => {
     }
     enTitleField.style.border = 'none';
 
-    if (arTitleField.value.trim().length < 8) {
-        toast({ msg: sectionName + ': Enter a valid arabic title!' });
-        arTitleField.style.border = '2px red solid';
-        return;
+    if (enableLocalizations) {
+        if (arTitleField.value.trim().length < 8) {
+            toast({ msg: sectionName + ': Enter a valid arabic title!' });
+            arTitleField.style.border = '2px red solid';
+            return;
+        }
+        arTitleField.style.border = 'none';
     }
-    arTitleField.style.border = 'none';
 
 
     if (enSubtitleField.value.trim().length > 8 || arSubtitleField.value.trim().length > 8) {
@@ -445,12 +492,14 @@ const validateSection = (container, wToast) => {
         }
         enSubtitleField.style.border = 'none';
 
-        if (arSubtitleField.value.trim().length < 8) {
-            toast({ msg: sectionName + ': Enter a valid arabic cover message!' });
-            arSubtitleField.style.border = '2px red solid';
-            return;
+        if (enableLocalizations) {
+            if (arSubtitleField.value.trim().length < 8) {
+                toast({ msg: sectionName + ': Enter a valid arabic cover message!' });
+                arSubtitleField.style.border = '2px red solid';
+                return;
+            }
+            arSubtitleField.style.border = 'none';
         }
-        arSubtitleField.style.border = 'none';
     } else {
         enSubtitleField.style.border = 'none';
         arSubtitleField.style.border = 'none';
@@ -464,12 +513,14 @@ const validateSection = (container, wToast) => {
     }
     enBioField.style.border = 'none';
 
-    if (arBioField.value.trim().length < 64) {
-        toast({ msg: sectionName + ': Enter a valid arabic bio!' });
-        arBioField.style.border = '2px red solid';
-        return;
+    if (enableLocalizations) {
+        if (arBioField.value.trim().length < 64) {
+            toast({ msg: sectionName + ': Enter a valid arabic bio!' });
+            arBioField.style.border = '2px red solid';
+            return;
+        }
+        arBioField.style.border = 'none';
     }
-    arBioField.style.border = 'none';
 
     if (activeMediaTile === undefined) {
         toast({ msg: sectionName + ': Select media type!' });
@@ -521,35 +572,49 @@ const validateSection = (container, wToast) => {
         }
         enMediaMsgField.style.border = 'none';
 
-        if (arMediaMsgField.value.trim().length < 8) {
-            toast({ msg: 'Enter a valid arabic media message!' });
-            arMediaMsgField.style.border = '2px red solid';
-            return;
+    if (enableLocalizations) {
+            if (arMediaMsgField.value.trim().length < 8) {
+                toast({ msg: 'Enter a valid arabic media message!' });
+                arMediaMsgField.style.border = '2px red solid';
+                return;
+            }
+            arMediaMsgField.style.border = 'none';
+        } else {
+            enMediaMsgField.style.border = 'none';
+            arMediaMsgField.style.border = 'none';
         }
-        arMediaMsgField.style.border = 'none';
-    } else {
-        enMediaMsgField.style.border = 'none';
-        arMediaMsgField.style.border = 'none';
     }
 
 
     if (wToast) toast({ msg: sectionName + ': Section is completed!' });
     return {
-        title: {
+        title: enableLocalizations ? {
             EN: enTitleField.value.trim(),
             AR: arTitleField.value.trim(),
+        }:{
+            EN: enTitleField.value.trim(),
+            AR: enTitleField.value.trim(),
         },
-        subtitle: {
+        subtitle: enableLocalizations ? {
             EN: enSubtitleField.value.trim(),
             AR: arSubtitleField.value.trim(),
+        }:{
+            EN: enSubtitleField.value.trim(),
+            AR: enSubtitleField.value.trim(),
         },
-        bio: {
+        bio: enableLocalizations ? {
             EN: enBioField.value.trim(),
             AR: arBioField.value.trim(),
+        }:{
+            EN: enBioField.value.trim(),
+            AR: enBioField.value.trim(),
         },
-        attachement_msg: {
+        attachement_msg: enableLocalizations?{
             EN: enMediaMsgField.value.trim(),
             AR: arMediaMsgField.value.trim(),
+        }:{
+            EN: enMediaMsgField.value.trim(),
+            AR: enMediaMsgField.value.trim(),
         },
         attachment_type: mediaType,
         id: sectionId,

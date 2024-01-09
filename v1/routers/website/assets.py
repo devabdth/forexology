@@ -3,7 +3,7 @@ from os.path import join, dirname, abspath, exists
 from plugins.consts import Consts
 from plugins.config import Config
 from database.helper import DatabaseHelper
-from flask import Flask, send_file, redirect, request
+from flask import Flask, send_file, redirect, request, make_response
 
 from sys import path
 path.insert(0, '../')
@@ -35,11 +35,16 @@ class AssetsRouter:
         @self.app.route('/assets/courses/<course_id>/session/video/<session_id>')
         def get_course_section_video(course_id, session_id):
             try:
+                if not request.cookies.get("USER_ID"):
+                    return self.app.response_class(status= 500)
+                print(request.cookies.get("USER_ID"))
+
                 for ext in self.consts.videos_supported_extenstions:
                     path_= f'../../assets/courses/sessions/{course_id}/{session_id}.{ext}'
                     print(abspath(join(dirname(__file__), path_)))
                     if (exists(abspath(join(dirname(__file__), path_)))):
-                        return send_file(abspath(join(dirname(__file__), path_)))
+                         res= make_response(send_file(abspath(join(dirname(__file__), path_))))
+                         return res
 
                 return self.app.response_class(status= 404)
             except Exception as e:

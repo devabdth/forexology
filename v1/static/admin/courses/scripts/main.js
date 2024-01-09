@@ -2,408 +2,408 @@ let courses, selectedSession, cover, addSnippetSectionBtn;
 const openCourseFormDialog = (mode, payload) => {
 	const body= document.querySelector('.form-dialog#courses-form-dialog div.body')
 	switch (mode) {
-		case 'CREATE':
-			document.querySelector('.form-dialog#courses-form-dialog .header h2').innerHTML = 'Create'
-			document.querySelector('.form-dialog-overlay#courses-form-dialog-overlay').style.display = 'flex';
-			document.querySelector('.form-dialog#courses-form-dialog').style.display = 'flex';
-			document.querySelector('.form-dialog#courses-form-dialog .options #delete').style.display = 'none';
-			addSnippetSectionBtn= document.createElement('button');
-			addSnippetSectionBtn.classList.add('shadow-button');
-			addSnippetSectionBtn.setAttribute('id', 'snippet-section-btn');
-			addSnippetSectionBtn.innerHTML= 'Add Section';
-			addSnippetSectionBtn.onclick= ()=> {
-				const div= document.createElement('div');
-				div.classList.add('content-snippet');
-				div.innerHTML= `
-					<div class="row">
-						<label>Content Snippet English Title</label>
-						<label>Content Snippet Arabic Title</label>
-					</div>
-					<div class="row">
-						<input id="en-title" type="name" class="single-line-field" >
-						<input id="ar-title" type="name" class="single-line-field" >
-					</div>
-					<label>English Snippets</label>
-					<div class="snippets en">
-						<div class="header">
-						  <input
-						    type="name"
-						    name="tag"
-						    placeholder="English Snippet"
-						    class="single-line-field"
-						    id="cat-snippets"
-						  />
-						  <button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
-						</div>
-						<div class="body"></div>
-					</div>					
+	case 'CREATE':
+		document.querySelector('.form-dialog#courses-form-dialog .header h2').innerHTML = 'Create'
+		document.querySelector('.form-dialog-overlay#courses-form-dialog-overlay').style.display = 'flex';
+		document.querySelector('.form-dialog#courses-form-dialog').style.display = 'flex';
+		document.querySelector('.form-dialog#courses-form-dialog .options #delete').style.display = 'none';
+		addSnippetSectionBtn= document.createElement('button');
+		addSnippetSectionBtn.classList.add('shadow-button');
+		addSnippetSectionBtn.setAttribute('id', 'snippet-section-btn');
+		addSnippetSectionBtn.innerHTML= 'Add Section';
+		addSnippetSectionBtn.onclick= ()=> {
+			const div= document.createElement('div');
+			div.classList.add('content-snippet');
+			div.innerHTML= `
+			<div class="row">
+			<label>Content Snippet English Title</label>
+			<label>Content Snippet Arabic Title</label>
+			</div>
+			<div class="row">
+			<input id="en-title" type="name" class="single-line-field" >
+			<input id="ar-title" type="name" class="single-line-field" >
+			</div>
+			<label>English Snippets</label>
+			<div class="snippets en">
+			<div class="header">
+			<input
+			type="name"
+			name="tag"
+			placeholder="English Snippet"
+			class="single-line-field"
+			id="cat-snippets"
+			/>
+			<button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
+			</div>
+			<div class="body"></div>
+			</div>					
 
-					<label>Arabic Snippets</label>
-					<div class="snippets ar">
-						<div class="header">
-						  <input
-						    type="name"
-						    name="tag"
-						    placeholder="Arabic Snippet"
-						    class="single-line-field"
-						    id="cat-snippets"
-						  />
-						  <button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
-						</div>
-						<div class="body"></div>
-					</div>					
-					<div class="options"><button class="shadow-button" style="color: red;" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);"> Delete</button></div>
+			<label>Arabic Snippets</label>
+			<div class="snippets ar">
+			<div class="header">
+			<input
+			type="name"
+			name="tag"
+			placeholder="Arabic Snippet"
+			class="single-line-field"
+			id="cat-snippets"
+			/>
+			<button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
+			</div>
+			<div class="body"></div>
+			</div>					
+			<div class="options"><button class="shadow-button" style="color: red;" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);"> Delete</button></div>
 
-				`;
-				body.appendChild(div);
-				if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
-			}
+			`;
+			body.appendChild(div);
 			if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
+		}
+		if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
 
-			document.querySelector('.form-dialog#courses-form-dialog .main-button').onclick = ()=>{
-				const enNameField= document.querySelector('.form-dialog#courses-form-dialog #en-title');
-				const arNameField= document.querySelector('.form-dialog#courses-form-dialog #ar-title');
-				const enBioField= document.querySelector('.form-dialog#courses-form-dialog #en-bio');
-				const arBioField= document.querySelector('.form-dialog#courses-form-dialog #ar-bio');
-				const priceField= document.querySelector('.form-dialog#courses-form-dialog #price');
-				const coverField= document.querySelector('.form-dialog#courses-form-dialog .image-picker#cover');				
-				const statusMsg= document.querySelector('.form-dialog#courses-form-dialog p#status-msg');
-				if (enNameField.value.trim().length < 16) {
-					statusMsg.innerHTML= 'Enter a valid English course title';
-					enNameField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				enNameField.style.border= 'none';
-				if (arNameField.value.trim().length < 16) {
-					statusMsg.innerHTML= 'Enter a valid Arabic course title';
-					arNameField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				arNameField.style.border= 'none';
-				if (enBioField.value.trim().length < 32) {
-					statusMsg.innerHTML= 'Enter a valid English course bio';
-					enBioField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				enBioField.style.border= 'none';
-				if (arBioField.value.trim().length < 32) {
-					statusMsg.innerHTML= 'Enter a valid Arabic course title';
-					arBioField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				arBioField.style.border= 'none';
-				if (priceField.value.trim().length < 1 || Number.parseInt(priceField.value.trim()) === undefined) {
-					statusMsg.innerHTML= 'Enter a valid price';
-					priceField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				priceField.style.border= 'none';
-				if (cover === undefined) {
-					statusMsg.innerHTML= 'Course should have a cover image!';
-					return;
-				}
-				let snippets= []
-				const snippetsSections= document.querySelectorAll('.content-snippet');
-				if (snippetsSections.length === 0) {
-					statusMsg.innerHTML= 'Course should have at least one content snippet section!';
-					return;
-				}
-				for (let snippetSection of snippetsSections) {
-					let enTitle= snippetSection.querySelector('input#en-title');
-					if (enTitle.value.trim().length < 8) {
-						statusMsg.innerHTML= 'Enter a valid snippet\'s English title!';
-						enTitle.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					enTitle.style.border= 'none';
-					let arTitle= snippetSection.querySelector('input#ar-title');
-					if (arTitle.value.trim().length < 2) {
-						statusMsg.innerHTML= 'Enter a valid snippet\'s Arabic title!';
-						arTitle.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					arTitle.style.border= 'none';
-
-					let enSnippets= snippetSection.querySelectorAll('div.snippets');
-					let arSnippets= enSnippets[1];
-					enSnippets= enSnippets[0];
-					let enSnippetsField= enSnippets.querySelector('input');
-					let arSnippetsField= arSnippets.querySelector('input');
-					enSnippets= Array.from(enSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
-					if (enSnippets.length === 0) {
-						statusMsg.innerHTML= 'Snippets Section should have at least one element!';
-						enSnippetsField.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					enSnippetsField.style.border= 'none';
-
-					arSnippets= Array.from(arSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
-					if (arSnippets.length === 0) {
-						statusMsg.innerHTML= 'Snippets Section should have at least one element!';
-						arSnippetsField.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					arSnippetsField.style.border= 'none';
-					snippets.push({
-						title: {
-							EN: enTitle.value.trim(),
-							AR: arTitle.value.trim(),
-						},
-						content: {
-							EN: enSnippets,
-							AR: arSnippets,
-						}
-					});
-				}
-				createCourse({
-					title: {
-						EN: enNameField.value,
-						AR: arNameField.value,
-					},
-					bio: {
-						EN: enBioField.value,
-						AR: arBioField.value,
-					},
-					price: Number.parseFloat(priceField.value),
-					content_list: snippets,
-				})
-			} ;
-
-			break;
-
-		case 'EDIT':
-			document.querySelector('.form-dialog#courses-form-dialog .header h2').innerHTML = 'Edit'
-			document.querySelector('.form-dialog#courses-form-dialog').style.display = 'flex';
-			document.querySelector('.form-dialog-overlay#courses-form-dialog-overlay').style.display = 'flex';
+		document.querySelector('.form-dialog#courses-form-dialog .main-button').onclick = ()=>{
 			const enNameField= document.querySelector('.form-dialog#courses-form-dialog #en-title');
-			enNameField.value = payload['title']['EN'];
 			const arNameField= document.querySelector('.form-dialog#courses-form-dialog #ar-title');
-			arNameField.value = payload['title']['AR'];
 			const enBioField= document.querySelector('.form-dialog#courses-form-dialog #en-bio');
-			enBioField.value = payload['bio']['EN'];
 			const arBioField= document.querySelector('.form-dialog#courses-form-dialog #ar-bio');
-			arBioField.value = payload['bio']['AR'];
 			const priceField= document.querySelector('.form-dialog#courses-form-dialog #price');
-			priceField.value = payload['price'];
-			const coverField= document.querySelector('.form-dialog#courses-form-dialog .image-picker#cover');
-			coverField.style.backgroundImage= `url(/courses/cover/${payload["id"]}/)`;
-			for (let snippet of payload["content_list"]) {
-				let div= document.createElement('div');
-				div.classList.add('content-snippet')
-				div.innerHTML= `
-					<div class="row">
-						<label>Content Snippet English Title</label>
-						<label>Content Snippet Arabic Title</label>
-					</div>
-					<div class="row">
-						<input id="en-title" type="name" class="single-line-field" value='${snippet["title"]["EN"]}' >
-						<input id="ar-title" type="name" class="single-line-field" value='${snippet["title"]["AR"]}' >
-					</div>
-					<label>English Snippets</label>
-					<div class="snippets">
-						<div class="header">
-						  <input
-						    type="name"
-						    name="tag"
-						    placeholder="English Snippet"
-						    class="single-line-field"
-						    id="cat-snippets"
-						  />
-						  <button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
-						</div>
-						<div class="body">${snippet["content"]["EN"].map(e=> `<div class="snippet-tile"><p>${e}</p><div onclick="this.parentElement.parentElement.removeChild(this.parentElement)">x</div></div>`).toString().replaceAll(',', '')}</div>
-					</div>					
-
-					<label>Arabic Snippets</label>
-					<div class="snippets">
-						<div class="header">
-						  <input
-						    type="name"
-						    name="tag"
-						    placeholder="Arabic Snippet"
-						    class="single-line-field"
-						    id="cat-snippets"
-						  />
-						  <button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
-						</div>
-						<div class="body">${snippet["content"]["AR"].map(e=> `<div class="snippet-tile"><p>${e}</p><div onclick="this.parentElement.parentElement.removeChild(this.parentElement)">x</div></div>`).toString().replaceAll(',', '')}</div>
-					</div>					
-					<div class="options"><button class="shadow-button" style="color: red;" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);"> Delete</button></div>
-				`;
-				body.appendChild(div);
-			}
-			addSnippetSectionBtn= document.createElement('button');
-			addSnippetSectionBtn.classList.add('shadow-button');
-			addSnippetSectionBtn.setAttribute('id', 'snippet-section-btn');
-			addSnippetSectionBtn.innerHTML= 'Add Section';
-			addSnippetSectionBtn.onclick= ()=> {
-				body.removeChild(addSnippetSectionBtn);
-				const div= document.createElement('div');
-				div.classList.add('content-snippet');
-				div.innerHTML= `
-					<div class="row">
-						<label>Content Snippet English Title</label>
-						<label>Content Snippet Arabic Title</label>
-					</div>
-					<div class="row">
-						<input id="en-title" type="name" class="single-line-field" >
-						<input id="ar-title" type="name" class="single-line-field" >
-					</div>
-					<label>English Snippets</label>
-					<div class="snippets en">
-						<div class="header">
-						  <input
-						    type="name"
-						    name="tag"
-						    placeholder="English Snippet"
-						    class="single-line-field"
-						    id="cat-snippets"
-						  />
-						  <button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
-						</div>
-						<div class="body"></div>
-					</div>					
-
-					<label>Arabic Snippets</label>
-					<div class="snippets ar">
-						<div class="header">
-						  <input
-						    type="name"
-						    name="tag"
-						    placeholder="Arabic Snippet"
-						    class="single-line-field"
-						    id="cat-snippets"
-						  />
-						  <button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
-						</div>
-						<div class="body"></div>
-					</div>					
-					<div class="options"><button class="shadow-button" style="color: red;" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);"> Delete</button></div>
-
-				`;
-				body.appendChild(div);
-				if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
-			}
-			if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
+			const coverField= document.querySelector('.form-dialog#courses-form-dialog .image-picker#cover');				
 			const statusMsg= document.querySelector('.form-dialog#courses-form-dialog p#status-msg');
-			document.querySelector('.form-dialog#courses-form-dialog .main-button').onclick = ()=>{
-				if (enNameField.value.trim().length < 16) {
-					statusMsg.innerHTML= 'Enter a valid English course title';
-					enNameField.style.border= '2px red solid';
+			if (enNameField.value.trim().length < 16) {
+				statusMsg.innerHTML= 'Enter a valid English course title';
+				enNameField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			enNameField.style.border= 'none';
+			if (arNameField.value.trim().length < 16) {
+				statusMsg.innerHTML= 'Enter a valid Arabic course title';
+				arNameField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			arNameField.style.border= 'none';
+			if (enBioField.value.trim().length < 32) {
+				statusMsg.innerHTML= 'Enter a valid English course bio';
+				enBioField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			enBioField.style.border= 'none';
+			if (arBioField.value.trim().length < 32) {
+				statusMsg.innerHTML= 'Enter a valid Arabic course title';
+				arBioField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			arBioField.style.border= 'none';
+			if (priceField.value.trim().length < 1 || Number.parseInt(priceField.value.trim()) === undefined) {
+				statusMsg.innerHTML= 'Enter a valid price';
+				priceField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			priceField.style.border= 'none';
+			if (cover === undefined) {
+				statusMsg.innerHTML= 'Course should have a cover image!';
+				return;
+			}
+			let snippets= []
+			const snippetsSections= document.querySelectorAll('.content-snippet');
+			if (snippetsSections.length === 0) {
+				statusMsg.innerHTML= 'Course should have at least one content snippet section!';
+				return;
+			}
+			for (let snippetSection of snippetsSections) {
+				let enTitle= snippetSection.querySelector('input#en-title');
+				if (enTitle.value.trim().length < 8) {
+					statusMsg.innerHTML= 'Enter a valid snippet\'s English title!';
+					enTitle.style.border= '2px red solid';
 					return;
 				}
 				statusMsg.innerHTML= '';
-				enNameField.style.border= 'none';
-				if (arNameField.value.trim().length < 16) {
-					statusMsg.innerHTML= 'Enter a valid Arabic course title';
-					arNameField.style.border= '2px red solid';
+				enTitle.style.border= 'none';
+				let arTitle= snippetSection.querySelector('input#ar-title');
+				if (arTitle.value.trim().length < 2) {
+					statusMsg.innerHTML= 'Enter a valid snippet\'s Arabic title!';
+					arTitle.style.border= '2px red solid';
 					return;
 				}
 				statusMsg.innerHTML= '';
-				arNameField.style.border= 'none';
-				if (enBioField.value.trim().length < 32) {
-					statusMsg.innerHTML= 'Enter a valid English course bio';
-					enBioField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				enBioField.style.border= 'none';
-				if (arBioField.value.trim().length < 32) {
-					statusMsg.innerHTML= 'Enter a valid Arabic course title';
-					arBioField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				arBioField.style.border= 'none';
-				if (priceField.value.trim().length < 1 || Number.parseInt(priceField.value.trim()) === undefined) {
-					statusMsg.innerHTML= 'Enter a valid price';
-					priceField.style.border= '2px red solid';
-					return;
-				}
-				statusMsg.innerHTML= '';
-				priceField.style.border= 'none';
-				let snippets= []
-				const snippetsSections= document.querySelectorAll('.content-snippet');
-				if (snippetsSections.length === 0) {
-					statusMsg.innerHTML= 'Course should have at least one content snippet section!';
-					return;
-				}
-				for (let snippetSection of snippetsSections) {
-					let enTitle= snippetSection.querySelector('input#en-title');
-					if (enTitle.value.trim().length < 8) {
-						statusMsg.innerHTML= 'Enter a valid snippet\'s English title!';
-						enTitle.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					enTitle.style.border= 'none';
-					let arTitle= snippetSection.querySelector('input#ar-title');
-					if (arTitle.value.trim().length < 2) {
-						statusMsg.innerHTML= 'Enter a valid snippet\'s Arabic title!';
-						arTitle.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					arTitle.style.border= 'none';
+				arTitle.style.border= 'none';
 
-					let enSnippets= snippetSection.querySelectorAll('div.snippets');
-					let arSnippets= enSnippets[1];
-					enSnippets= enSnippets[0];
-					let enSnippetsField= enSnippets.querySelector('input');
-					let arSnippetsField= arSnippets.querySelector('input');
-					enSnippets= Array.from(enSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
-					if (enSnippets.length === 0) {
-						statusMsg.innerHTML= 'Snippets Section should have at least one element!';
-						enSnippetsField.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					enSnippetsField.style.border= 'none';
-
-					arSnippets= Array.from(arSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
-					if (arSnippets.length === 0) {
-						statusMsg.innerHTML= 'Snippets Section should have at least one element!';
-						arSnippetsField.style.border= '2px red solid';
-						return;
-					}
-					statusMsg.innerHTML= '';
-					arSnippetsField.style.border= 'none';
-					snippets.push({
-						title: {
-							EN: enTitle.value.trim(),
-							AR: arTitle.value.trim(),
-						},
-						content: {
-							EN: enSnippets,
-							AR: arSnippets,
-						}
-					});
+				let enSnippets= snippetSection.querySelectorAll('div.snippets');
+				let arSnippets= enSnippets[1];
+				enSnippets= enSnippets[0];
+				let enSnippetsField= enSnippets.querySelector('input');
+				let arSnippetsField= arSnippets.querySelector('input');
+				enSnippets= Array.from(enSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
+				if (enSnippets.length === 0) {
+					statusMsg.innerHTML= 'Snippets Section should have at least one element!';
+					enSnippetsField.style.border= '2px red solid';
+					return;
 				}
-				updateCourse({
-					id: payload['id'],
+				statusMsg.innerHTML= '';
+				enSnippetsField.style.border= 'none';
+
+				arSnippets= Array.from(arSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
+				if (arSnippets.length === 0) {
+					statusMsg.innerHTML= 'Snippets Section should have at least one element!';
+					arSnippetsField.style.border= '2px red solid';
+					return;
+				}
+				statusMsg.innerHTML= '';
+				arSnippetsField.style.border= 'none';
+				snippets.push({
 					title: {
-						EN: enNameField.value,
-						AR: arNameField.value,
+						EN: enTitle.value.trim(),
+						AR: arTitle.value.trim(),
 					},
-					bio: {
-						EN: enBioField.value,
-						AR: arBioField.value,
-					},
-					price: Number.parseFloat(priceField.value),
-					content_list: snippets
-				})
-			} ;
+					content: {
+						EN: enSnippets,
+						AR: arSnippets,
+					}
+				});
+			}
+			createCourse({
+				title: {
+					EN: enNameField.value,
+					AR: arNameField.value,
+				},
+				bio: {
+					EN: enBioField.value,
+					AR: arBioField.value,
+				},
+				price: Number.parseFloat(priceField.value),
+				content_list: snippets,
+			})
+		} ;
 
-			break;
+		break;
+
+	case 'EDIT':
+		document.querySelector('.form-dialog#courses-form-dialog .header h2').innerHTML = 'Edit'
+		document.querySelector('.form-dialog#courses-form-dialog').style.display = 'flex';
+		document.querySelector('.form-dialog-overlay#courses-form-dialog-overlay').style.display = 'flex';
+		const enNameField= document.querySelector('.form-dialog#courses-form-dialog #en-title');
+		enNameField.value = payload['title']['EN'];
+		const arNameField= document.querySelector('.form-dialog#courses-form-dialog #ar-title');
+		arNameField.value = payload['title']['AR'];
+		const enBioField= document.querySelector('.form-dialog#courses-form-dialog #en-bio');
+		enBioField.value = payload['bio']['EN'];
+		const arBioField= document.querySelector('.form-dialog#courses-form-dialog #ar-bio');
+		arBioField.value = payload['bio']['AR'];
+		const priceField= document.querySelector('.form-dialog#courses-form-dialog #price');
+		priceField.value = payload['price'];
+		const coverField= document.querySelector('.form-dialog#courses-form-dialog .image-picker#cover');
+		coverField.style.backgroundImage= `url(/courses/cover/${payload["id"]}/)`;
+		for (let snippet of payload["content_list"]) {
+			let div= document.createElement('div');
+			div.classList.add('content-snippet')
+			div.innerHTML= `
+			<div class="row">
+			<label>Content Snippet English Title</label>
+			<label>Content Snippet Arabic Title</label>
+			</div>
+			<div class="row">
+			<input id="en-title" type="name" class="single-line-field" value='${snippet["title"]["EN"]}' >
+			<input id="ar-title" type="name" class="single-line-field" value='${snippet["title"]["AR"]}' >
+			</div>
+			<label>English Snippets</label>
+			<div class="snippets">
+			<div class="header">
+			<input
+			type="name"
+			name="tag"
+			placeholder="English Snippet"
+			class="single-line-field"
+			id="cat-snippets"
+			/>
+			<button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
+			</div>
+			<div class="body">${snippet["content"]["EN"].map(e=> `<div class="snippet-tile"><p>${e}</p><div onclick="this.parentElement.parentElement.removeChild(this.parentElement)">x</div></div>`).toString().replaceAll(',', '')}</div>
+			</div>					
+
+			<label>Arabic Snippets</label>
+			<div class="snippets">
+			<div class="header">
+			<input
+			type="name"
+			name="tag"
+			placeholder="Arabic Snippet"
+			class="single-line-field"
+			id="cat-snippets"
+			/>
+			<button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
+			</div>
+			<div class="body">${snippet["content"]["AR"].map(e=> `<div class="snippet-tile"><p>${e}</p><div onclick="this.parentElement.parentElement.removeChild(this.parentElement)">x</div></div>`).toString().replaceAll(',', '')}</div>
+			</div>					
+			<div class="options"><button class="shadow-button" style="color: red;" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);"> Delete</button></div>
+			`;
+			body.appendChild(div);
+		}
+		addSnippetSectionBtn= document.createElement('button');
+		addSnippetSectionBtn.classList.add('shadow-button');
+		addSnippetSectionBtn.setAttribute('id', 'snippet-section-btn');
+		addSnippetSectionBtn.innerHTML= 'Add Section';
+		addSnippetSectionBtn.onclick= ()=> {
+			body.removeChild(addSnippetSectionBtn);
+			const div= document.createElement('div');
+			div.classList.add('content-snippet');
+			div.innerHTML= `
+			<div class="row">
+			<label>Content Snippet English Title</label>
+			<label>Content Snippet Arabic Title</label>
+			</div>
+			<div class="row">
+			<input id="en-title" type="name" class="single-line-field" >
+			<input id="ar-title" type="name" class="single-line-field" >
+			</div>
+			<label>English Snippets</label>
+			<div class="snippets en">
+			<div class="header">
+			<input
+			type="name"
+			name="tag"
+			placeholder="English Snippet"
+			class="single-line-field"
+			id="cat-snippets"
+			/>
+			<button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
+			</div>
+			<div class="body"></div>
+			</div>					
+
+			<label>Arabic Snippets</label>
+			<div class="snippets ar">
+			<div class="header">
+			<input
+			type="name"
+			name="tag"
+			placeholder="Arabic Snippet"
+			class="single-line-field"
+			id="cat-snippets"
+			/>
+			<button class="shadow-button" id="snippets-submit" onclick="createSnippetTile(this);">Add</button>
+			</div>
+			<div class="body"></div>
+			</div>					
+			<div class="options"><button class="shadow-button" style="color: red;" onclick="this.parentElement.parentElement.parentElement.removeChild(this.parentElement.parentElement);"> Delete</button></div>
+
+			`;
+			body.appendChild(div);
+			if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
+		}
+		if (!document.querySelector('#snippet-section-btn')) body.appendChild(addSnippetSectionBtn);
+		const statusMsg= document.querySelector('.form-dialog#courses-form-dialog p#status-msg');
+		document.querySelector('.form-dialog#courses-form-dialog .main-button').onclick = ()=>{
+			if (enNameField.value.trim().length < 16) {
+				statusMsg.innerHTML= 'Enter a valid English course title';
+				enNameField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			enNameField.style.border= 'none';
+			if (arNameField.value.trim().length < 16) {
+				statusMsg.innerHTML= 'Enter a valid Arabic course title';
+				arNameField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			arNameField.style.border= 'none';
+			if (enBioField.value.trim().length < 32) {
+				statusMsg.innerHTML= 'Enter a valid English course bio';
+				enBioField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			enBioField.style.border= 'none';
+			if (arBioField.value.trim().length < 32) {
+				statusMsg.innerHTML= 'Enter a valid Arabic course title';
+				arBioField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			arBioField.style.border= 'none';
+			if (priceField.value.trim().length < 1 || Number.parseInt(priceField.value.trim()) === undefined) {
+				statusMsg.innerHTML= 'Enter a valid price';
+				priceField.style.border= '2px red solid';
+				return;
+			}
+			statusMsg.innerHTML= '';
+			priceField.style.border= 'none';
+			let snippets= []
+			const snippetsSections= document.querySelectorAll('.content-snippet');
+			if (snippetsSections.length === 0) {
+				statusMsg.innerHTML= 'Course should have at least one content snippet section!';
+				return;
+			}
+			for (let snippetSection of snippetsSections) {
+				let enTitle= snippetSection.querySelector('input#en-title');
+				if (enTitle.value.trim().length < 8) {
+					statusMsg.innerHTML= 'Enter a valid snippet\'s English title!';
+					enTitle.style.border= '2px red solid';
+					return;
+				}
+				statusMsg.innerHTML= '';
+				enTitle.style.border= 'none';
+				let arTitle= snippetSection.querySelector('input#ar-title');
+				if (arTitle.value.trim().length < 2) {
+					statusMsg.innerHTML= 'Enter a valid snippet\'s Arabic title!';
+					arTitle.style.border= '2px red solid';
+					return;
+				}
+				statusMsg.innerHTML= '';
+				arTitle.style.border= 'none';
+
+				let enSnippets= snippetSection.querySelectorAll('div.snippets');
+				let arSnippets= enSnippets[1];
+				enSnippets= enSnippets[0];
+				let enSnippetsField= enSnippets.querySelector('input');
+				let arSnippetsField= arSnippets.querySelector('input');
+				enSnippets= Array.from(enSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
+				if (enSnippets.length === 0) {
+					statusMsg.innerHTML= 'Snippets Section should have at least one element!';
+					enSnippetsField.style.border= '2px red solid';
+					return;
+				}
+				statusMsg.innerHTML= '';
+				enSnippetsField.style.border= 'none';
+
+				arSnippets= Array.from(arSnippets.querySelectorAll('.snippet-tile p')).map(e=> e.innerHTML);
+				if (arSnippets.length === 0) {
+					statusMsg.innerHTML= 'Snippets Section should have at least one element!';
+					arSnippetsField.style.border= '2px red solid';
+					return;
+				}
+				statusMsg.innerHTML= '';
+				arSnippetsField.style.border= 'none';
+				snippets.push({
+					title: {
+						EN: enTitle.value.trim(),
+						AR: arTitle.value.trim(),
+					},
+					content: {
+						EN: enSnippets,
+						AR: arSnippets,
+					}
+				});
+			}
+			updateCourse({
+				id: payload['id'],
+				title: {
+					EN: enNameField.value,
+					AR: arNameField.value,
+				},
+				bio: {
+					EN: enBioField.value,
+					AR: arBioField.value,
+				},
+				price: Number.parseFloat(priceField.value),
+				content_list: snippets
+			})
+		} ;
+
+		break;
 	}
 }
 
@@ -462,14 +462,14 @@ const updateCourse= (payload)=> {
 }
 
 const clearCourseInfoFormDialog= ()=> {
-		document.querySelector('.form-dialog#courses-form-dialog #en-title').value = '';
-		document.querySelector('.form-dialog#courses-form-dialog #ar-title').value = '';
-		document.querySelector('.form-dialog#courses-form-dialog #en-bio').value = '';
-		document.querySelector('.form-dialog#courses-form-dialog #ar-bio').value = '';
-		document.querySelector('.form-dialog#courses-form-dialog #price').value= '';
-		document.querySelector('.form-dialog#courses-form-dialog #cover').style.backgroundImage= 'var(--image-placeholder)';
-		cover= undefined;
-		Array.from(document.querySelectorAll('.form-dialog#courses-form-dialog .content-snippet')).map(element => {document.querySelector('.form-dialog#courses-form-dialog .body').removeChild(element)});
+	document.querySelector('.form-dialog#courses-form-dialog #en-title').value = '';
+	document.querySelector('.form-dialog#courses-form-dialog #ar-title').value = '';
+	document.querySelector('.form-dialog#courses-form-dialog #en-bio').value = '';
+	document.querySelector('.form-dialog#courses-form-dialog #ar-bio').value = '';
+	document.querySelector('.form-dialog#courses-form-dialog #price').value= '';
+	document.querySelector('.form-dialog#courses-form-dialog #cover').style.backgroundImage= 'var(--image-placeholder)';
+	cover= undefined;
+	Array.from(document.querySelectorAll('.form-dialog#courses-form-dialog .content-snippet')).map(element => {document.querySelector('.form-dialog#courses-form-dialog .body').removeChild(element)});
 }
 
 const closeCourseInfoFormDialog= ()=> {
@@ -492,32 +492,32 @@ const applicationRequestTraffic = async (status, courseId, element) => {
 		openStartPointSelectionDialog(async (startPoint) => {
 			closeStartPointSelectionDialog();
 			const res = await fetch('./applications/', {
-			body: JSON.stringify({
-				status: status,
-				courseId: courseId,
-				startPoint: startPoint,
-				request: {
-					userId: userId,
-					name: name,
-					email: email,
-					phone: phone
-				},
-			}),
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-	});
+				body: JSON.stringify({
+					status: status,
+					courseId: courseId,
+					startPoint: startPoint,
+					request: {
+						userId: userId,
+						name: name,
+						email: email,
+						phone: phone
+					},
+				}),
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
 
-	if (res.status === 200) {
-		element.removeChild(element.querySelector('td#options'))
-		if (status) {
-			document.querySelector('table#students tbody').appendChild(element)
-		}
-	} else {
-		table.appendChild(element)
-		statusMsg.innerHTML = 'Try again later!';
-	}
+			if (res.status === 200) {
+				element.removeChild(element.querySelector('td#options'))
+				if (status) {
+					document.querySelector('table#students tbody').appendChild(element)
+				}
+			} else {
+				table.appendChild(element)
+				statusMsg.innerHTML = 'Try again later!';
+			}
 
 		})
 	} else {		
@@ -568,22 +568,22 @@ const openAccessManagerForm = (courseId, studentsList) => {
 		<td>${application['email']}</td>
 		<td>${application['phone']}</td>
 		<td id="options">
-		  <button
-			class="shadow-button"
-			id="accent"
-			style="color: green"
-			onclick="applicationRequestTraffic(true, ${courseId}, this.parentElement.parentElement)"
-		  >
-			Accept
-		  </button>
-		  <button
-			class="shadow-button"
-			id="Decline"
-			style="color: red"
-			onclick="applicationRequestTraffic(false, ${courseId}, this.parentElement.parentElement)"
-		  >
-			Decline
-		  </button>
+		<button
+		class="shadow-button"
+		id="accent"
+		style="color: green"
+		onclick="applicationRequestTraffic(true, ${courseId}, this.parentElement.parentElement)"
+		>
+		Accept
+		</button>
+		<button
+		class="shadow-button"
+		id="Decline"
+		style="color: red"
+		onclick="applicationRequestTraffic(false, ${courseId}, this.parentElement.parentElement)"
+		>
+		Decline
+		</button>
 
 		`;
 	}
@@ -609,37 +609,55 @@ const closeStartPointSelectionDialog= ()=> {
 }
 
 const selectSession = (session) => {
-    const btn = document.querySelector('button.sessions-dropbtn');
-    selectedSession = session.id;
-    console.log(selectedSession)
-    btn.innerHTML = session.title['EN'];
+	const btn = document.querySelector('button.sessions-dropbtn');
+	selectedSession = session.id;
+	console.log(selectedSession)
+	btn.innerHTML = session.title['EN'];
 }
 
 const pickImage = (container, props) => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.onchange = e => {
-        if (e.target.files.length === 0) {
-            return;
-        }
-        const file_ = e.target.files[0]
-        const reader = new FileReader();
-        reader.onload = () => {
-            container.style.backgroundImage = `url(${reader.result})`;
-            if (props.coverSize) container.style.backgroundSize = 'cover';
-            switch (props.mode) {
-                case 'COVER':
-                    cover = file_;
-                    break;
-                case 'SECTION_COVER':
-                    sectionCovers[props.sectionId] = file_;
-                    break;
-            }
-        }
-        reader.readAsDataURL(file_)
-    }
-    input.click();
+	const input = document.createElement("input");
+	input.setAttribute("type", "file");
+	input.setAttribute("accept", "image/*");
+	input.onchange = e => {
+		if (e.target.files.length === 0) {
+			return;
+		}
+		const file_ = e.target.files[0]
+		const reader = new FileReader();
+		reader.onload = () => {
+			container.style.backgroundImage = `url(${reader.result})`;
+			if (props.coverSize) container.style.backgroundSize = 'cover';
+			switch (props.mode) {
+			case 'COVER':
+				cover = file_;
+				break;
+			case 'SECTION_COVER':
+				sectionCovers[props.sectionId] = file_;
+				break;
+			}
+		}
+		reader.readAsDataURL(file_)
+	}
+	input.click();
+}
+
+const pickVideo = (callback) => {
+	const input = document.createElement("input");
+	input.setAttribute("type", "file");
+	input.setAttribute("accept", "video/*");
+	input.onchange = e => {
+		if (e.target.files.length === 0) {
+			return;
+		}
+		const file_ = e.target.files[0]
+		const reader = new FileReader();
+		reader.onload = () => {
+			callback(file_);
+		}
+		reader.readAsDataURL(file_)
+	}
+	input.click();
 }
 
 const createCourse= (payload)=> {
@@ -681,39 +699,39 @@ const createCourse= (payload)=> {
 const openManageSessionsFormDialog= (course) => {
 	const statusMsg= document.querySelector('div.form-dialog#manage-sessions p#status-msg');
 	document.querySelector('.information-snippet#snippet-one').onclick= () => {
-		// openCreateSessionDialog(async (session)=> {
-		// 	openManageSessionsFormDialog(course);
-		// 	console.log(session);
-		// }, ()=> {
-		// 	closeCreateSessionDialog();
-		// 	openManageSessionsFormDialog(course);
-		// 	statusMsg.innerHTML= 'Creating a session was canceled!';
-		// 	setTimeout(()=> {
-		// 		statusMsg.innerHTML= '';
-		// 	}, 3000);
-		// });
+		openCreateSessionDialog(async (session)=> {
+			openManageSessionsFormDialog(course);
+			console.log(session);
+		}, ()=> {
+			closeCreateSessionDialog();
+			openManageSessionsFormDialog(course);
+			statusMsg.innerHTML= 'Creating a session was canceled!';
+			setTimeout(()=> {
+				statusMsg.innerHTML= '';
+			}, 3000);
+		});
 	}
 
 	document.querySelector('.information-snippet#snippet-two').onclick= () => {
-		// openCreateTestDialog(async (test)=> {
-		// 	openManageSessionsFormDialog(course);
-		// 	console.log(test);
-		// }, ()=> {
-		// 	openManageSessionsFormDialog(course);
-		// 	statusMsg.innerHTML= 'Creating a test was canceled!';
-		// });
+		openCreateTestDialog(async (test)=> {
+			openManageSessionsFormDialog(course);
+			console.log(test);
+		}, ()=> {
+			openManageSessionsFormDialog(course);
+			statusMsg.innerHTML= 'Creating a test was canceled!';
+		});
 	}
 	document.querySelector('div.form-dialog#manage-sessions div#sessions').innerHTML= `
 	${Array.from(Object.values(course.sessions)).map(session => `
-          <div class="session-row" id="sess-${session.id}"
-          >
-            <h3>${session['title']['EN']}</h3>
-            <p id="bio">${session['bio']['EN']}</p>
-            <p id="type">Type: ${session['type']}</p>
-            <div class="options">
-            	<button class="shadow-button" style="color: red;">Delete</button>
-            </div>
-          </div>
+		<div class="session-row" id="sess-${session.id}"
+		>
+		<h3>${session['title']['EN']}</h3>
+		<p id="bio">${session['bio']['EN']}</p>
+		<p id="type">Type: ${session['type']}</p>
+		<div class="options">
+		<button class="shadow-button" style="color: red;">Delete</button>
+		</div>
+		</div>
 		</div>
 		`).toString().replaceAll(',', '')}
 	`;
@@ -737,21 +755,144 @@ const openCreateSessionDialog= async (callback, cancelCallback) => {
 	Array.from(document.querySelectorAll('.form-dialog .fragments-controllers div')).forEach(controller => {
 		controller.onclick= ()=> {
 			if (controller.classList.contains('active')) return;
-				document.querySelector('.form-dialog .fragments-controllers div.active').classList.remove('active');
-				document.querySelector('.form-dialog .fragments div.active').classList.remove('active');
-				controller.classList.add('active');
-				document.querySelector(`.fragments div#${controller.id}`).classList.add('active');
-			}
+			document.querySelector('.form-dialog .fragments-controllers div.active').classList.remove('active');
+			document.querySelector('.form-dialog .fragments div.active').classList.remove('active');
+			controller.classList.add('active');
+			document.querySelector(`.fragments div#${controller.id}`).classList.add('active');
+		}
 	});
-	const payload= {};
+	let video
+	const enTitleField= document.querySelector('div.form-dialog#create-session div.body input#en-title');
+	const arTitleField= document.querySelector('div.form-dialog#create-session div.body input#ar-title');
+	const enBioField= document.querySelector('div.form-dialog#create-session div.body textarea#en-bio');
+	const arBioField= document.querySelector('div.form-dialog#create-session div.body textarea#en-bio');
+	const videoPickerTitle= document.querySelector('div.form-dialog#create-session div.body p.title');
+	const videoPicker= document.querySelector('div.form-dialog#create-session div.body div.image-picker');
+	videoPicker.onclick= () => {
+		pickVideo((video_) => {
+			video= video_;
+			videoPickerTitle.innerHTML= video.filename;
+		});
+	}
+	const activeFragment= document.querySelector('.form-dialog#create-session div.fragments div.active');
 
+	const statusMsg= document.querySelector('.form-dialog#create-session div.options p#status-msg')
+	const submitBtn= document.querySelector('div.form-dialog#create-session div.options button.main-button');
+	submitBtn.onclick= async () => {
+		if (enTitleField.value.trim().length < 8) {
+			statusMsg.innerHTML= 'Please, Enter a valid Session English Title!';
+			enTitleField.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		enTitleField.style.border= 'none';
+
+		if (arTitleField.value.trim().length < 8) {
+			statusMsg.innerHTML= 'Please, Enter a valid Session Arabic Title!';
+			arTitleField.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		arTitleField.style.border= 'none';
+
+		if (enBioField.value.trim().length < 32) {
+			statusMsg.innerHTML= 'Please, Enter a valid Session English Bio!';
+			enBioField.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		enBioField.style.border= 'none';
+
+		if (arBioField.value.trim().length < 32) {
+			statusMsg.innerHTML= 'Please, Enter a valid Session Arabic Bio!';
+			arBioField.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		arBioField.style.border= 'none';
+	}
+
+	if (activeFragment === undefined) {
+		statusMsg.innerHTML= 'Please, Select the session material';
+		return;
+	}
+	statusMsg.innerHTML= '';
+
+	switch(activeFragment.id) {
+	case 'video':
+		if (video === undefined) {
+			statusMsg.innerHTML= 'Please, Select Video First';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		break;
+	default:
+	case 'blog':
+		const enBlogTitle= document.querySelector('input.single-line-field#blog-en-title');
+		const arBlogTitle= document.querySelector('input.single-line-field#blog-ar-title');
+		const enBlogBio= document.querySelector('input.single-line-field#blog-en-bio');
+		const arBlogBio= document.querySelector('input.single-line-field#blog-ar-bio');
+
+		if (enBlogTitle.value.trim().length < 8) {
+			statusMsg.innerHTML= 'Please, Enter a valid Blog English Title!';
+			enBlogTitle.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		enBlogTitle.style.border= 'none';
+
+		if (arBlogTitle.value.trim().length < 8) {
+			statusMsg.innerHTML= 'Please, Enter a valid Blog Arabic Title!';
+			arBlogTitle.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		arBlogTitle.style.border= 'none';
+
+		if (enBlogBio.value.trim().length < 32) {
+			statusMsg.innerHTML= 'Please, Enter a valid Blog English Bio!';
+			enBlogBio.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		enBlogBio.style.border= 'none';
+
+		if (arBlogBio.value.trim().length < 32) {
+			statusMsg.innerHTML= 'Please, Enter a valid Blog Arabic Bio!';
+			arBlogBio.style.border= '2px red solid';
+			return;
+		}
+		statusMsg.innerHTML= '';
+		arBlogBio.style.border= 'none';
+		break;
+	}
+
+	const payload= {
+		title: {
+			EN: enTitleField.value.trim(),
+			AR: arTitleField.value.trim(),
+		},
+		bio: {
+			EN: enBioField.value.trim(),
+			AR: arBioField.value.trim()
+		},
+		type: activeFragment.id,
+		content: activeFragment != 'blog' ? video : {
+			title: {
+				EN: enBlogTitle.value.trim(),
+				ar: arBlogTitle.value.trim(),
+			},
+			bio: {
+				EN: enBlogBio.value.trim(),
+				AR: arBlogBio.value.trim(),
+			}
+		}
+	};
 	await callback(payload);
+	
 }
 const openCreateTestDialog= async (callback, cancelCallback) => {
-	closeManageSessionsFormDialog();
-	const payload= {};
 
-	await callback(payload);
 }
 
 const closeCreateSessionDialog= ()=> {

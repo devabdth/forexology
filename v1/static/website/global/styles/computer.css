@@ -1,4 +1,18 @@
 @font-face {
+    font-family: 'Shorooq_N1';
+    src: url('./fonts/ArbFONTS-Shorooq_N1.ttf') format('truetype'); 
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Shorooq_N1';
+    src: url('./fonts/ArbFONTS-100-Shorooq_N1.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
   font-family: "Neue Haas Grotesk Display Pro";
   src: url("/static/website/global/styles/fonts/NeueHaasDisplay/NeueHaasDisplay-Mediu.eot");
   src: local("NeueHaasDisplay-Mediu"),

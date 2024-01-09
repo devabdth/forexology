@@ -846,7 +846,7 @@
   }
 
   .article-dialogs#listen-dialog .listen-tab.active {
-      background-color: var(--accentColor);
+    background-color: var(--accentColor);
   }
 
   .article-dialogs#listen-dialog .listen-tab.active strong{

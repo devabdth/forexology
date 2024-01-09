@@ -90,10 +90,20 @@
           <button class="main-button" onclick="createArticle()">Create</button>
         </div>
         <div class="body-card" id="info">
-          <h1>Article Info</h1>
+          <div class="header" style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+              <h1>Article Info</h1>
+              <div style="display: flex; flex-direction: row; font-family: var(--sff); align-items: center;">
+                <label class="switch">
+                  <input type="checkbox" id="toggleSwitch">
+                  <span class="slider"></span>
+              </label>
+                <p>Enable Multi-Language Input</p>
+              </div>
+
+            </div>
           <div class="fields-row">
-            <label for="en-title">English Title</label>
-            <label for="ar-title">Arabic Title</label>
+            <label id="en-title" for="en-title">English Title</label>
+            <label id="ar-title" for="ar-title">Arabic Title</label>
             <input
               type="text"
               class="single-line-field"
@@ -109,8 +119,8 @@
           </div>
           <div class="divider"></div>
           <div class="fields-row">
-            <label for="en-short-brief">English Short Brief</label>
-            <label for="ar-short-brief">Arabic Short Brief</label>
+            <label id="en-short-brief" for="en-short-brief">English Short Brief</label>
+            <label id="ar-short-brief" for="ar-short-brief">Arabic Short Brief</label>
             <input
               type="text"
               class="single-line-field"
@@ -175,8 +185,8 @@
           ></div>
           <div class="divider"></div>
           <div class="fields-row">
-            <label for="en-cover-msg">English Cover message</label>
-            <label for="en-cover-msg">Arabic Cover message</label>
+            <label id="en-cover-msg" for="en-cover-msg">English Cover message</label>
+            <label id="ar-cover-msg" for="ar-cover-msg">Arabic Cover message</label>
             <textarea
               name="en-cover-msg"
               id="en-cover-msg"

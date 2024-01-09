@@ -384,7 +384,9 @@
           <div id="blog" class="active">Blog</div>
         </div>
         <div class="fragments">
-          <div id="video"></div>
+          <div id="video">
+            <div class="image-picker"></div>
+          </div>
           <div id="blog" class="active">
         <label for="blog-en-title">English Title</label>
         <input type="name" name="blog-en-title" class="single-line-field" id="blog-en-title">
@@ -400,11 +402,12 @@
       <div class="options">
         <button class="shadow-button">Cancel</button>
         <button class="main-button">Submit</button>
+        <p id="status-msg"></p>
       </div>
     </div>
     <script>
       const init = () => {
-        // openManageSessionsFormDialog({{dumps(db_helper.courses.all_courses[0].to_dict()) | safe}})
+        openManageSessionsFormDialog({{dumps(db_helper.courses.all_courses[0].to_dict()) | safe}})
         courses= [];
         {%for course in db_helper.courses.all_courses %}
           courses.push(({{dumps(course.to_dict() ) | safe}}));

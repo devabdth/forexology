@@ -94,7 +94,8 @@ class CoursesDatabaseHelper:
 			self.load_courses()
 			course= self.get_course_by_id(course)
 			applications_list= course.applications_list
-			applications_df= DataFrame(applications_list, columns=['name', 'email', 'phone'])
+			applications_df= DataFrame(applications_list, columns=['name', 'email', 'phone', "userId"])
+			applications_df= applications_df.loc[applications_df['userId'] == current_user_id]
 			applications_df= applications_df.loc[applications_df['name'] == application['name']]
 			applications_df= applications_df.loc[applications_df['email'] == application['email']]
 			applications_df= applications_df.loc[applications_df['phone'] == application['phone']]

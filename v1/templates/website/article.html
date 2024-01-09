@@ -20,12 +20,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{url_for('static', filename='website/article/styles/largeTablets.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{url_for('static', filename='website/article/styles/smallTablets.css')}}"
+      href="{{url_for('static', filename='website/article/styles/tablets.css')}}"
     />
     <link
       rel="stylesheet"
@@ -70,7 +65,7 @@
     <style type="text/css">
       {% if lang == 'AR' %}
       :root {
-        --pff: "Neue Haas Grotesk Display Pro";
+        --pff: "Shorooq_N1";
         --sff: sans-serif;
       }
       {% else %}
@@ -230,7 +225,7 @@
               <p>{{content.actions[lang]['share']}}<br><span>{{content.global_[lang]['shareMsg']}}</p>
             </button>
             |
-            <button class="option" onclick="openArticleDialogs('commet');">
+            <button class="option" onclick='document.querySelector("section#commenting").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});'>
               <div class="icon shadow-icon-button"><i class="comment"></i></div>
               <p>{{content.actions[lang]['comment']}}<br><span>{{content.global_[lang]['commentMsg']}}</p>
             </button>

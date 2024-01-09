@@ -59,6 +59,9 @@ class EmailPlugin:
 
 
     <div class="container">
+    	<div class="header">
+    		<h1>Forexology - فوركسلوجي</h1>
+    	</div>
         <h1>OTP Code for Verification</h1>
         <p>Dear '''+ name +''',</p>
         <p>Your OTP code for verification is:</p>
@@ -71,6 +74,12 @@ class EmailPlugin:
 
         <div class="footer">
             <p>This email was sent by Your Forexology Inc.</p>
+            <div ckass="social-media-links>
+            	<i></i>
+            	<i></i>
+            	<i></i>
+            	<i></i>
+            </div>
         </div>
     </div></body></html>'''
     

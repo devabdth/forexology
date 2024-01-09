@@ -5,6 +5,24 @@
     <html dir="LTR">
 {% endif %}
   <head>
+
+    <!-- Cross-Origin Resource Sharing (CORS) -->
+    <!-- Configure your server to include proper CORS headers -->
+
+    <!-- Frame Options -->
+    <!-- <meta http-equiv="X-Frame-Options" content="DENY"> -->
+
+    <!-- Referrer Policy -->
+    <meta name="referrer" content="no-referrer">
+
+    <!-- HTTP Strict Transport Security (HSTS) -->
+    <!-- Adjust max-age based on your requirements -->
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+
+    <!-- Secure Cookies -->
+    <!-- Ensure your server sets the Secure attribute on cookies -->
+    <!-- Example: Set-Cookie: mycookie=value; Secure; -->
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
@@ -66,7 +84,7 @@
     <style type="text/css">
       {% if lang == 'AR' %}
       :root {
-        --pff: "Neue Haas Grotesk Display Pro";
+        --pff: "Shorooq_N1";
         --sff: sans-serif;
       }
       {% else %}
@@ -194,9 +212,7 @@
           {%for session in course.sessions.values() %}
           {%if (user_data.courses[course.id]["sessions_schdule"][session.id] | float) < (current_time| float)%}
           <div class="session-row" id="sess-{{session.id}}"
-          {% if session['id'] in user_data['courses'][course.id]['completed_sessions'] %}
             onclick="openSessionsDialog('{{session.id}}')" 
-          {%endif%}
           >
             <h3>{{session['title'][lang]}}</h3>
             <p>{{session['bio'][lang]}}</p>

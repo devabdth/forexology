@@ -5,7 +5,7 @@ from plugins.utils import Utils
 from plugins.consts import Consts
 from plugins.content import Content
 from plugins.config import Config
-from flask import Flask, session, render_template, url_for, send_file, request, redirect
+from flask import Flask, session, render_template, url_for, send_file, request, redirect, make_response
 from json import dumps, loads
 from sys import path
 path.insert(0, '../')
@@ -131,7 +131,7 @@ class CoursesRouter:
                 if user_data is None or course_id not in list(user_data.courses.keys()):
                     return redirect(f'{self.consts.course_route.replace("<course_id>", course_id)}')
 
-                return render_template(
+                res= make_response(render_template(
                     '/website/courseDashboard.html',
                     course= course,
                     user_data= user_data,
@@ -146,7 +146,9 @@ class CoursesRouter:
                     dumps=dumps,
                     current_time= (datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000,
                     convert_date= lambda x: datetime.datetime.utcfromtimestamp(x/1000.0)
-                )
+                ))
+                res.set_cookie('USER_ID', current_user_id, max_age= 7200)
+                return res
                 
             
             
